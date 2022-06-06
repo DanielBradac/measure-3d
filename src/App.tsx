@@ -1,23 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import { extend, ReactThreeFiber } from '@react-three/fiber';
+import * as THREE from "three";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './App.css';
+import VisualModel from './visual-model/VisualModel';
 
-function App() {
+// Global JSX declarations
+extend({ Line_: THREE.Line })
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      orbitControls: ReactThreeFiber.Object3DNode<OrbitControls, typeof OrbitControls>,
+      line_: ReactThreeFiber.Object3DNode<THREE.Line, typeof THREE.Line>
+    }
+  }
+}
+
+const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello React!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <VisualModel />
       </header>
     </div>
   );
