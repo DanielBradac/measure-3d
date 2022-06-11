@@ -3,18 +3,22 @@ import { useLayoutEffect, useRef } from 'react';
 import { Color } from "three";
 
 interface LineProps {
-    start: number[],
-    end: number[],
+    start: number[]
+    end: number[]
     color: string | Color
 }
 
-const Line = ({ start, end, color }: LineProps) => {
-    const line = useRef<THREE.Line>(null);
+const LineComp = ({ start, end, color }: LineProps) => {
+    const line = useRef<THREE.Line>(null)
+
+    
+
     useLayoutEffect(() => {
         if (line.current){
             line.current.geometry.setFromPoints([start, end].map((point) => new THREE.Vector3(...point)))
         }
-    }, [start, end])
+    }, [start, end, color])
+
 
     // Render
     return (
@@ -25,4 +29,4 @@ const Line = ({ start, end, color }: LineProps) => {
     )
 }
 
-export default Line
+export default LineComp
