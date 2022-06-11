@@ -1,12 +1,12 @@
-import LineComp from "../visual-components/Line"
-import PointComp from "../visual-components/PointComp"
+import LineComp from "../visual-components/LineComponent"
+import PointComp from "../visual-components/PointComponent"
 
 export interface Drawable {
     draw(key: number): JSX.Element
 }
 
 export class Vector implements Drawable {
-    constructor(private _from: Point, private _to: Point, private _color: string) { }
+    constructor(private _from: Point, private _to: Point, private _color: string = 'black') { }
 
     draw(key: number): JSX.Element {
         return <LineComp start={[this._from.x, this._from.y, this._from.z]} end={[this._to.x, this._to.y, this._to.z]} color={this._color} key = {key} />
@@ -14,7 +14,7 @@ export class Vector implements Drawable {
 }
 
 export class Point implements Drawable {
-    constructor(private _x: number, private _y: number, private _z: number, private _color: string) { }
+    constructor(private _x: number, private _y: number, private _z: number, private _color: string = 'black') { }
 
     get x(): number { return this._x }
     get y(): number { return this._y }

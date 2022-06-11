@@ -1,5 +1,5 @@
 .changeEnviromentButton {
-    margin: 30px;
+    margin: 15px;
     font-size: 18px;
     height: 65px;
     width: 250px;
@@ -9,3 +9,5 @@
     background: rgb(141, 217, 252);
     cursor: pointer;
 }
+
+.controlPanel {}
