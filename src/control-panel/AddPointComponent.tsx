@@ -1,46 +1,52 @@
-import {useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Drawable, Point } from '../data-model/Drawable'
 
 type FormData = {
     x: number
     y: number
-    z:number
+    z: number
+    tag: string
 }
 
 interface AddPointProps {
-    onAddElement: (newElement: Drawable) => void
+    onAddPoint: (newPoint: Point[]) => void
 }
 
-const AddPoint = ({onAddElement}: AddPointProps) => {
+const AddPoint = ({ onAddPoint }: AddPointProps) => {
 
-    const {register, handleSubmit, reset} = useForm({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
         defaultValues: {
             x: 0,
             y: 0,
-            z: 0
-          }
+            z: 0,
+            tag: ''
+        }
     })
 
-    let y = 0;
-    let z = 0; 
     // Render
 
     const addPoint = handleSubmit((data) => {
-        onAddElement(new Point(data.x, data.y, data.z))
+        onAddPoint([new Point(data.x, data.y, data.z, data.tag)])
         reset()
     })
-
-
+        
     return (
         <form onSubmit={addPoint}>
             <label htmlFor='X'>X:</label>
-            <input {...register('x')} type='number' id='x' step="0.1"/>
+
+            <input {...register('x', { required: true})} type='number' id='x' step="0.001" />
+            {errors.x && errors.x.type === "required" && <span>This is required</span>}
 
             <label htmlFor='Y'>Y:</label>
-            <input {...register('y')} type='number' id='y'/>
+            <input {...register('y', { required: true})} type='number' id='y' step="0.001" />
+            {errors.y && errors.y.type === "required" && <span>This is required</span>}
 
             <label htmlFor='Z'>Z:</label>
-            <input {...register('z')} type='number' id='z'/>
+            <input {...register('z', { required: true})} type='number' id='z' step="0.001" />
+            {errors.z && errors.z.type === "required" && <span>This is required</span>}
+
+            <label htmlFor='tag'>Tag:</label>
+            <input {...register('tag')} type='string' id='tag' />
 
             <button type="submit">Add point</button>
         </form>

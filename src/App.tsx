@@ -25,17 +25,24 @@ function randomIntFromInterval(min: number, max: number) { // min and max includ
 
 const App = () => {
 
-  const [elements, setElements] = useState<Drawable[]>([new Point(1, 0, 0, 'black')])
+  const [points, setPoints] = useState<Point[]>([])
+  const [vectors, setVectors] = useState<Vector[]>([])
 
-  const onAddElement = (newElem: Drawable) => {
-    setElements([...elements, newElem])
+  const onAddPoint = (newPoint: Point[]) => {
+    setPoints([...points, ...newPoint])
   }
+
+  const onAddVecor = (newVector: Vector[]) => {
+    setVectors([...vectors, ...newVector])
+  }
+
+  const elements: Drawable[] = [...points, ...vectors]
 
   return (
     <div className="App">
       <header className="App-header">
         <VisualModel elements={elements} />
-        <ControlPanel elements={elements} onAddElement={onAddElement} />
+        <ControlPanel points={points} vectors={vectors} onAddPoint={onAddPoint} onAddVector = {onAddVecor} />
       </header>
     </div>
   );

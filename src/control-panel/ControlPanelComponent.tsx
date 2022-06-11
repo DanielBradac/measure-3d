@@ -1,20 +1,22 @@
-import { Drawable } from '../data-model/Drawable';
+import { Drawable, Point, Vector } from '../data-model/Drawable';
 import AddPoint from './AddPointComponent';
+import AddVector from './AddVectorComponent';
 import './ControlPanelComponent.css';
 
 interface ControlPanelProps {
-    elements: Drawable[]
-    onAddElement: (newElement: Drawable) => void
+    points: Point[]
+    vectors: Vector[]
+    onAddPoint: (newPoint: Point[]) => void
+    onAddVector: (newVector: Vector[]) => void
 }
 
-const ControlPanel = ({ onAddElement, elements }: ControlPanelProps) => {
-
-    
+const ControlPanel = ({ onAddPoint, onAddVector, points, vectors }: ControlPanelProps) => {
 
     // Render
     return (
         <>
-            <AddPoint onAddElement={onAddElement}/>
+            <AddPoint onAddPoint={onAddPoint}/>
+            <AddVector onAddPoint={onAddPoint} onAddVector = {onAddVector}/>
         </>
     )
 }
