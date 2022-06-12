@@ -24,7 +24,7 @@ export class Point implements Drawable {
     get z(): number { return this._z }
 
     draw(key: number): JSX.Element {
-        return <PointComp center={[this._x, this._y, this._z]} radius={0.1} color={this._color} key = {key} tag = {this._tag}/>
+        return <PointComp center={[this._x, this._y, this._z]} radius={0.025} color={this._color} key = {key} tag = {this._tag}/>
     }
 
     toString(): string {

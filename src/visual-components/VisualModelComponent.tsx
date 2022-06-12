@@ -2,9 +2,11 @@ import { Canvas, extend, useThree, useFrame } from '@react-three/fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { Drawable, Point, Vector } from '../data-model/Drawable'
 import './VisualModelComponent.css';
+import { Box, Drawer } from '@mui/material';
 
 import React, { useRef, useState } from 'react';
 import * as THREE from 'three';
+import SettingsMenu from '../drawer/SettingsMenu';
 
 interface VisualModelProps {
     elements: Drawable[]
@@ -36,17 +38,11 @@ const VisualModel = ({ elements }: VisualModelProps) => {
     const toRender = elements.map((currElement, index) => currElement.draw(index))
     const axis = axisToggled ? <primitive object={new THREE.AxesHelper(axisSize)} /> : ""
     return (
-        <>
-            <span>
-                <label>Axis size:</label>
-                <input
-                    type="range"
-                    min="0" max="10"
-                    value={axisSize}
-                    onChange={handleAxisChange}
-                    step="0.1" />
-                <button onClick={() => { setAxisToggled(!axisToggled) }}>Toggle axis</button>
-            </span>
+        <div className='visual-model' >
+            <div className="settings">
+                <SettingsMenu toggleAxis={() => { setAxisToggled(!axisToggled) }} handleAxisChange={handleAxisChange} />
+            </div>
+
             <div className="canvas">
                 <Canvas>
                     {axis}
@@ -54,7 +50,7 @@ const VisualModel = ({ elements }: VisualModelProps) => {
                     {toRender}
                 </Canvas>
             </div>
-        </>
+        </div>
     )
 }
 
