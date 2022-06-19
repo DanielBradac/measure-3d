@@ -1,3 +1,5 @@
+import { Box, Tab, Tabs, Typography } from '@mui/material'
+import React, { ReactNode } from 'react'
 import { Drawable, Point, Vector } from '../data-model/Drawable'
 import AddPoint from './AddPointComponent'
 import AddVector from './AddVectorComponent'
@@ -10,18 +12,48 @@ interface ControlPanelProps {
   onAddVector: (newVector: Vector[]) => void
 }
 
+interface TabPanelProps {
+  value: number
+  index: number
+  children: ReactNode
+}
+
+const TabPanel = ({ value, children, index }: TabPanelProps) => {
+  return (
+    <Typography component='div' role='tabpanel' hidden={value !== index}>
+      {children}
+    </Typography>
+  )
+}
+
 const ControlPanel = ({
   onAddPoint,
   onAddVector,
   points,
   vectors,
 }: ControlPanelProps) => {
+  const [tabValue, setTabValue] = React.useState(0)
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setTabValue(newValue)
+  }
+
   // Render
   return (
-    <>
-      <AddPoint onAddPoint={onAddPoint} />
-      <AddVector onAddPoint={onAddPoint} onAddVector={onAddVector} />
-    </>
+    <div className=''>
+      <Tabs value={tabValue} onChange={handleChange}>
+        <Tab label='Add elements' value={0} />
+        <Tab label='Measure' value={1} />
+      </Tabs>
+      <TabPanel value={tabValue} index={0}>
+        <AddPoint onAddPoint={onAddPoint} />
+        <AddVector onAddPoint={onAddPoint} onAddVector={onAddVector} />
+      </TabPanel>
+      <TabPanel value={tabValue} index={1}>
+        Coming Soon...
+      </TabPanel>
+    </div>
   )
 }
 

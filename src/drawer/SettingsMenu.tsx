@@ -1,6 +1,7 @@
 import { Drawer, IconButton, Typography } from '@mui/material'
 import { useState } from 'react'
 import { Settings } from '@mui/icons-material'
+import './SettingsMenu.css'
 
 interface SettingsMenuProps {
   toggleAxis: () => void
@@ -12,13 +13,8 @@ const SettingsMenu = ({ toggleAxis, handleAxisChange }: SettingsMenuProps) => {
 
   return (
     <>
-      <IconButton
-        onClick={() => setIsOpen(true)}
-        size='large'
-        edge='start'
-        color='inherit'
-      >
-        <Settings />
+      <IconButton onClick={() => setIsOpen(true)} size='large' edge='start'>
+        <Settings className='iconPrimary' />
       </IconButton>
       <Drawer anchor='left' open={isOpen} onClose={() => setIsOpen(false)}>
         <div>

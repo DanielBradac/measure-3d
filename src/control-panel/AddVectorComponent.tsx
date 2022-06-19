@@ -74,7 +74,9 @@ const AddVector = ({ onAddVector, onAddPoint }: AddVectorProps) => {
         <input {...register('tagTo')} type='string' id='tag' />
       </div>
 
-      <button type='submit'>Add vector</button>
+      <button type='submit' className='buttonPrimary'>
+        Add vector
+      </button>
     </form>
   )
 }

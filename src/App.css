@@ -1,9 +1,32 @@
+:root {
+    --background: rgb(53, 53, 53);
+    --text-primary: white;
+    --text-secondary: rgb(46, 97, 190);
+    --icon-primary: rgb(46, 97, 190);
+}
+
 .App {
-    background-color: #282c34;
     min-height: 100vh;
     display: flex;
     flex-direction: row;
     align-items: top;
     justify-content: center;
-    color: white;
+    color: var(--text-primary);
+    background-color: var(--background);
+}
+
+.iconPrimary {
+    color: var(--icon-primary);
+}
+
+.buttonPrimary {
+    display: inline-block;
+    padding: 0.3em 1em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 1em;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    background-color: var(--text-secondary);
+    text-align: center;
 }

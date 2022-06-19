@@ -74,7 +74,9 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
       <label htmlFor='tag'>Tag:</label>
       <input {...register('tag')} type='string' id='tag' />
 
-      <button type='submit'>Add point</button>
+      <button type='submit' className='buttonPrimary'>
+        Add point
+      </button>
     </form>
   )
 }
