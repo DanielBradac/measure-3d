@@ -39,7 +39,7 @@ const App = () => {
   return (
     <>
       <div className='header'>
-        <h1>Measure 3D</h1>
+        <h2>Measure 3D</h2>
       </div>
       <div className='App'>
         <VisualModel elements={elements} />

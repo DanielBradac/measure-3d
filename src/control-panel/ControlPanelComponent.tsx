@@ -1,6 +1,6 @@
-import { Box, Tab, Tabs, Typography } from '@mui/material'
+import { Tab, Tabs } from '@mui/material'
 import React, { ReactNode } from 'react'
-import { Drawable, Point, Vector } from '../data-model/Drawable'
+import { Point, Vector } from '../data-model/Drawable'
 import AddPoint from './AddPointComponent'
 import AddVector from './AddVectorComponent'
 import './ControlPanelComponent.css'
@@ -19,11 +19,7 @@ interface TabPanelProps {
 }
 
 const TabPanel = ({ value, children, index }: TabPanelProps) => {
-  return (
-    <Typography component='div' role='tabpanel' hidden={value !== index}>
-      {children}
-    </Typography>
-  )
+  return <div hidden={value !== index}>{children}</div>
 }
 
 const ControlPanel = ({

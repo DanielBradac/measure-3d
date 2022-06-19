@@ -37,7 +37,7 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
   })
 
   return (
-    <form onSubmit={addPoint} className='formPrimary'>
+    <form onSubmit={addPoint}>
       <label htmlFor='X'>X:</label>
 
       <input

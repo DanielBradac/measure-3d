@@ -36,12 +36,8 @@
     margin: 0 0.3em 0.3em 0;
     border-radius: 1em;
     box-sizing: border-box;
-    text-transform: uppercase;
     color: var(--text-primary);
+    text-transform: uppercase;
     background-color: var(--text-secondary);
     text-align: center;
-}
-
-.formPrimary {
-    font-family: var(--font-family-primary);
 }
