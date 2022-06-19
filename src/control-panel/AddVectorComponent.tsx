@@ -43,7 +43,7 @@ const AddVector = ({ onAddVector, onAddPoint }: AddVectorProps) => {
   })
 
   return (
-    <form onSubmit={addVector}>
+    <form onSubmit={addVector} className='formPrimary'>
       <div>
         <p>Point from:</p>
         <label htmlFor='xFrom'>X:</label>

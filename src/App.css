@@ -1,8 +1,10 @@
 :root {
     --background: rgb(53, 53, 53);
+    --background-secondary: rgb(99, 99, 99);
     --text-primary: white;
     --text-secondary: rgb(46, 97, 190);
     --icon-primary: rgb(46, 97, 190);
+    --font-family-primary: 'Roboto Mono', monospace;
 }
 
 .App {
@@ -13,6 +15,15 @@
     justify-content: center;
     color: var(--text-primary);
     background-color: var(--background);
+    font-family: var(--font-family-primary);
+}
+
+.header {
+    color: var(--text-primary);
+    background-color: var(--background-secondary);
+    display: flex;
+    justify-content: center;
+    font-family: var(--font-family-primary);
 }
 
 .iconPrimary {
@@ -29,4 +40,8 @@
     color: var(--text-primary);
     background-color: var(--text-secondary);
     text-align: center;
+}
+
+.formPrimary {
+    font-family: var(--font-family-primary);
 }

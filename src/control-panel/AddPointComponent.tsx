@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Point } from '../data-model/Drawable'
+import './AddPointComponent.css'
 
 type FormData = {
   x: number
@@ -36,7 +37,7 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
   })
 
   return (
-    <form onSubmit={addPoint}>
+    <form onSubmit={addPoint} className='formPrimary'>
       <label htmlFor='X'>X:</label>
 
       <input

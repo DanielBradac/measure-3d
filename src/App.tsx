@@ -37,15 +37,20 @@ const App = () => {
   const elements: Drawable[] = [...points, ...vectors]
 
   return (
-    <div className='App'>
-      <VisualModel elements={elements} />
-      <ControlPanel
-        points={points}
-        vectors={vectors}
-        onAddPoint={onAddPoint}
-        onAddVector={onAddVecor}
-      />
-    </div>
+    <>
+      <div className='header'>
+        <h1>Measure 3D</h1>
+      </div>
+      <div className='App'>
+        <VisualModel elements={elements} />
+        <ControlPanel
+          points={points}
+          vectors={vectors}
+          onAddPoint={onAddPoint}
+          onAddVector={onAddVecor}
+        />
+      </div>
+    </>
   )
 }
 

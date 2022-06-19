@@ -28,7 +28,9 @@ const SettingsMenu = ({ toggleAxis, handleAxisChange }: SettingsMenuProps) => {
               onChange={handleAxisChange}
               step='0.1'
             />
-            <button onClick={toggleAxis}>Toggle axis</button>
+            <button onClick={toggleAxis} className='buttonPrimary'>
+              Toggle axis
+            </button>
           </Typography>
         </div>
       </Drawer>

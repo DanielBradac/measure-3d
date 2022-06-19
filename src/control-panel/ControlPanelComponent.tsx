@@ -41,7 +41,7 @@ const ControlPanel = ({
 
   // Render
   return (
-    <div className=''>
+    <div className='controlPanel'>
       <Tabs value={tabValue} onChange={handleChange}>
         <Tab label='Add elements' value={0} />
         <Tab label='Measure' value={1} />
