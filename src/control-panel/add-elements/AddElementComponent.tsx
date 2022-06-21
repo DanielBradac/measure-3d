@@ -5,21 +5,14 @@ import AddVector from './AddVectorComponent'
 
 interface AddElementProps {
   points: Point[]
-  vectors: Vector[]
   onAddPoint: (newPoint: Point[]) => void
   onAddVector: (newVector: Vector[]) => void
 }
 
-const AddElement = ({
-  points,
-  vectors,
-  onAddPoint,
-  onAddVector,
-}: AddElementProps) => {
+const AddElement = ({ points, onAddPoint, onAddVector }: AddElementProps) => {
   const [currentPanel, setCurrentPanel] = useState<string>('point')
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.currentTarget.value)
     setCurrentPanel(event.currentTarget.value)
   }
 
@@ -27,7 +20,13 @@ const AddElement = ({
     if (currentPanel === 'point') {
       return <AddPoint onAddPoint={onAddPoint} />
     }
-    return <AddVector onAddPoint={onAddPoint} onAddVector={onAddVector} />
+    return (
+      <AddVector
+        onAddPoint={onAddPoint}
+        onAddVector={onAddVector}
+        points={points}
+      />
+    )
   }
 
   // Render

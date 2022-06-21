@@ -50,6 +50,10 @@ export class Point implements Drawable {
     return this._z
   }
 
+  get tag(): string {
+    return this._tag
+  }
+
   draw(key: number): JSX.Element {
     return (
       <PointComp

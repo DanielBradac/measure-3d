@@ -2,13 +2,6 @@ import { useForm } from 'react-hook-form'
 import { Point } from '../../data-model/Drawable'
 import './AddPointComponent.css'
 
-type FormData = {
-  x: number
-  y: number
-  z: number
-  tag: string
-}
-
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
 }
@@ -38,6 +31,7 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
 
   return (
     <form onSubmit={addPoint}>
+      <h3>New point</h3>
       <label htmlFor='X'>X:</label>
 
       <input

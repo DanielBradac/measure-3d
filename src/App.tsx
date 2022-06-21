@@ -26,10 +26,12 @@ const App = () => {
   const [points, setPoints] = useState<Point[]>([])
   const [vectors, setVectors] = useState<Vector[]>([])
 
+  // TODO bod je identický, když má identické souřadnice a layer - identické body nepřidávat
   const onAddPoint = (newPoint: Point[]) => {
     setPoints([...points, ...newPoint])
   }
 
+  // TODO vektor je identický, když má identický from a to
   const onAddVecor = (newVector: Vector[]) => {
     setVectors([...vectors, ...newVector])
   }
@@ -45,7 +47,6 @@ const App = () => {
         <VisualModel elements={elements} />
         <ControlPanel
           points={points}
-          vectors={vectors}
           onAddPoint={onAddPoint}
           onAddVector={onAddVecor}
         />
