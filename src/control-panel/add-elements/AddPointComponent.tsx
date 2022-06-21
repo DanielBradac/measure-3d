@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { Point } from '../data-model/Drawable'
+import { Point } from '../../data-model/Drawable'
 import './AddPointComponent.css'
 
 type FormData = {

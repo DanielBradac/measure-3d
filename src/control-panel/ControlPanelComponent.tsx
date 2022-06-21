@@ -1,8 +1,9 @@
 import { Tab, Tabs } from '@mui/material'
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { Point, Vector } from '../data-model/Drawable'
-import AddPoint from './AddPointComponent'
-import AddVector from './AddVectorComponent'
+import AddElement from './add-elements/AddElementComponent'
+import AddPoint from './add-elements/AddPointComponent'
+import AddVector from './add-elements/AddVectorComponent'
 import './ControlPanelComponent.css'
 
 interface ControlPanelProps {
@@ -28,7 +29,7 @@ const ControlPanel = ({
   points,
   vectors,
 }: ControlPanelProps) => {
-  const [tabValue, setTabValue] = React.useState(0)
+  const [tabValue, setTabValue] = useState<number>(0)
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -43,8 +44,12 @@ const ControlPanel = ({
         <Tab label='Measure' value={1} />
       </Tabs>
       <TabPanel value={tabValue} index={0}>
-        <AddPoint onAddPoint={onAddPoint} />
-        <AddVector onAddPoint={onAddPoint} onAddVector={onAddVector} />
+        <AddElement
+          points={points}
+          vectors={vectors}
+          onAddPoint={onAddPoint}
+          onAddVector={onAddVector}
+        />
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
         Coming Soon...

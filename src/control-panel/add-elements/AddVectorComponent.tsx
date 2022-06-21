@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { Drawable, Point, Vector } from '../data-model/Drawable'
+import { Point, Vector } from '../../data-model/Drawable'
 
 type FormData = {
   xFrom: number
