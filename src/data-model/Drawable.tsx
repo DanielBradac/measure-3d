@@ -1,9 +1,11 @@
 import LineComp from '../visual-components/LineComponent'
 import PointComp from '../visual-components/PointComponent'
+import { Layer } from './Layer'
 
 export interface Drawable {
   draw(key: number): JSX.Element
   classTag: string
+  layer: Layer
 }
 
 export class Vector implements Drawable {
@@ -12,15 +14,24 @@ export class Vector implements Drawable {
   constructor(
     private _from: Point,
     private _to: Point,
-    private _color: string = 'black'
+    private _layer: Layer,
+    private _color?: string
   ) {}
+
+  get layer() {
+    return this._layer
+  }
+
+  set layer(value: Layer) {
+    this._layer = value
+  }
 
   draw(key: number): JSX.Element {
     return (
       <LineComp
         start={[this._from.x, this._from.y, this._from.z]}
         end={[this._to.x, this._to.y, this._to.z]}
-        color={this._color}
+        color={this._color || this.layer.color}
         key={key}
       />
     )
@@ -35,8 +46,17 @@ export class Point implements Drawable {
     private _y: number,
     private _z: number,
     private _tag: string,
-    private _color: string = 'black'
+    private _layer: Layer,
+    private _color?: string
   ) {}
+
+  get layer() {
+    return this._layer
+  }
+
+  set layer(value: Layer) {
+    this._layer = value
+  }
 
   get x(): number {
     return this._x
@@ -59,7 +79,7 @@ export class Point implements Drawable {
       <PointComp
         center={[this._x, this._y, this._z]}
         radius={0.025}
-        color={this._color}
+        color={this._color || this.layer.color}
         key={key}
         tag={this._tag}
       />
@@ -68,8 +88,8 @@ export class Point implements Drawable {
 
   toString(): string {
     if (this._tag) {
-      return `${this._tag}: [X: ${this.x}; Y: ${this.y}; Z: ${this.z}]`
+      return `${this._tag}: [X: ${this.x}; Y: ${this.y}; Z: ${this.z}] (${this.layer.name})`
     }
-    return `[X: ${this.x}; Y: ${this.y}; Z: ${this.z}]`
+    return `[X: ${this.x}; Y: ${this.y}; Z: ${this.z}] (${this.layer.name})`
   }
 }

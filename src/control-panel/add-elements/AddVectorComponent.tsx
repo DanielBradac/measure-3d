@@ -1,16 +1,24 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { SelectOption } from '../../common/Types'
+import { getPointSelection } from '../../common/Selections'
 import { Point, Vector } from '../../data-model/Drawable'
+import { Layer } from '../../data-model/Layer'
 
 interface AddVectorProps {
   onAddVector: (newVector: Vector[]) => void
   onAddPoint: (newVPoint: Point[]) => void
   points: Point[]
+  layers: Layer[]
 }
 
-const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
-  const { register, handleSubmit, setValue } = useForm({
+// TODO layer select for new points
+const AddVector = ({
+  onAddVector,
+  onAddPoint,
+  points,
+  layers,
+}: AddVectorProps) => {
+  const { register, handleSubmit, setValue, resetField } = useForm({
     defaultValues: {
       xFrom: 0,
       yFrom: 0,
@@ -21,76 +29,73 @@ const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
       yTo: 0,
       zTo: 0,
       tagTo: '',
+
+      pointFrom: 'new',
+      pointTo: 'new',
     },
   })
 
-  const [selectedFrom, setSelectedFrom] = useState<Point | null>(null)
-  const [selectedTo, setSelectedTo] = useState<Point | null>(null)
-
-  // Values for points selection = 'new' and indices of prop 'points', f.e.: ['new', 0, 1, 2, 3]
-  const getOptions = (): JSX.Element[] => {
-    const options: SelectOption[] = [{ value: 'new', label: 'New point' }]
-    points.forEach((p, index) => {
-      options.push({ value: index, label: p.toString() })
-    })
-
-    return options.map(({ label, value }, index) => (
-      <option key={index} value={value}>
-        {label}
-      </option>
-    ))
-  }
+  const [fromDisabled, setFromDisabled] = useState<boolean>(false)
+  const [toDisabled, setToDisabled] = useState<boolean>(false)
 
   const addVector = handleSubmit(data => {
+    // Do we have selected points or a new ones?
     const from =
-      selectedFrom ||
-      new Point(data.xFrom, data.yFrom, data.zFrom, data.tagFrom)
-    const to = selectedTo || new Point(data.xTo, data.yTo, data.zTo, data.tagTo)
-    const newPoints: Point[] = []
+      data.pointFrom === 'new'
+        ? new Point(data.xFrom, data.yFrom, data.zFrom, data.tagFrom, layers[0])
+        : points[parseInt(data.pointFrom)]
 
-    if (!selectedFrom) {
+    const to =
+      data.pointTo === 'new'
+        ? new Point(data.xTo, data.yTo, data.zTo, data.tagTo, layers[0])
+        : points[parseInt(data.pointTo)]
+
+    const newPoints: Point[] = []
+    if (data.pointFrom === 'new') {
       newPoints.push(from)
     }
-    if (!selectedTo) {
+    if (data.pointTo === 'new') {
       newPoints.push(to)
     }
 
     onAddPoint(newPoints)
-    onAddVector([new Vector(from, to)])
+    // Layer is taken from the 'from' point
+    onAddVector([new Vector(from, to, from.layer)])
   })
 
-  // If point select changes, we disable point input, and set it to chosen point
-  const handlePointChange = (
-    input: string,
-    setter: (_: Point | null) => void
-  ): Point | void => {
-    if (input === 'new') {
-      return setter(null)
-    }
-    const selectedPoint = points[parseInt(input)]
-    setter(selectedPoint)
-    return selectedPoint
-  }
-
-  // From point changed
+  // From point selection changed
   const handleChangeFrom = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const point = handlePointChange(event.currentTarget.value, setSelectedFrom)
-    if (point) {
+    if (event.currentTarget.value !== 'new') {
+      const point = points[parseInt(event.currentTarget.value)]
+      setFromDisabled(true)
       setValue('xFrom', point.x)
       setValue('yFrom', point.y)
       setValue('zFrom', point.z)
       setValue('tagFrom', point.tag)
+    } else {
+      setFromDisabled(false)
+      resetField('xFrom')
+      resetField('yFrom')
+      resetField('zFrom')
+      resetField('tagFrom')
     }
   }
 
-  // To point changed
+  // To point selection changed
   const handleChangeTo = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const point = handlePointChange(event.currentTarget.value, setSelectedTo)
-    if (point) {
+    if (event.currentTarget.value !== 'new') {
+      const point = points[parseInt(event.currentTarget.value)]
+      setToDisabled(true)
       setValue('xTo', point.x)
       setValue('yTo', point.y)
       setValue('zTo', point.z)
       setValue('tagTo', point.tag)
+    } else {
+      setToDisabled(false)
+      resetField('xTo')
+      resetField('yTo')
+      resetField('zTo')
+      resetField('tagTo')
     }
   }
 
@@ -100,7 +105,9 @@ const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
       <form onSubmit={addVector}>
         <div>
           <h3>Point from</h3>
-          <select onChange={handleChangeFrom}>{getOptions()}</select>
+          <select {...register('pointFrom')} onChange={handleChangeFrom}>
+            {getPointSelection(points)}
+          </select>
           <br />
 
           <label htmlFor='xFrom'>X:</label>
@@ -109,7 +116,7 @@ const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
             type='number'
             id='xFrom'
             step='0.001'
-            disabled={selectedFrom !== null}
+            disabled={fromDisabled}
           />
 
           <label htmlFor='yFrom'>Y:</label>
@@ -118,7 +125,7 @@ const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
             type='number'
             id='yFrom'
             step='0.001'
-            disabled={selectedFrom !== null}
+            disabled={fromDisabled}
           />
 
           <label htmlFor='zFrom'>Z:</label>
@@ -127,7 +134,7 @@ const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
             type='number'
             id='zFrom'
             step='0.001'
-            disabled={selectedFrom !== null}
+            disabled={fromDisabled}
           />
 
           <label htmlFor='tagFrom'>Tag:</label>
@@ -135,13 +142,15 @@ const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
             {...register('tagFrom')}
             type='string'
             id='tagFrom'
-            disabled={selectedFrom !== null}
+            disabled={fromDisabled}
           />
         </div>
 
         <div>
           <h3>Point to</h3>
-          <select onChange={handleChangeTo}>{getOptions()}</select>
+          <select {...register('pointTo')} onChange={handleChangeTo}>
+            {getPointSelection(points)}
+          </select>
           <br />
 
           <label htmlFor='xTo'>X:</label>
@@ -150,7 +159,7 @@ const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
             type='number'
             id='x'
             step='0.001'
-            disabled={selectedTo !== null}
+            disabled={toDisabled}
           />
 
           <label htmlFor='yTo'>Y:</label>
@@ -159,7 +168,7 @@ const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
             type='number'
             id='y'
             step='0.001'
-            disabled={selectedTo !== null}
+            disabled={toDisabled}
           />
 
           <label htmlFor='zTo'>Z:</label>
@@ -168,7 +177,7 @@ const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
             type='number'
             id='z'
             step='0.001'
-            disabled={selectedTo !== null}
+            disabled={toDisabled}
           />
 
           <label htmlFor='tagTo'>Tag:</label>
@@ -176,7 +185,7 @@ const AddVector = ({ onAddVector, onAddPoint, points }: AddVectorProps) => {
             {...register('tagTo')}
             type='string'
             id='tag'
-            disabled={selectedTo !== null}
+            disabled={toDisabled}
           />
         </div>
 

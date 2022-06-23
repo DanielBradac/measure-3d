@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import './App.css'
 import ControlPanel from './control-panel/ControlPanelComponent'
 import { Drawable, Point, Vector } from './data-model/Drawable'
+import { Layer } from './data-model/Layer'
 import VisualModel from './visual-components/VisualModelComponent'
 
 // Global JSX declarations
@@ -25,6 +26,13 @@ declare global {
 const App = () => {
   const [points, setPoints] = useState<Point[]>([])
   const [vectors, setVectors] = useState<Vector[]>([])
+  const [layers, setLayers] = useState<Layer[]>([
+    new Layer('BaseLayer', 'white'),
+    new Layer('RedLayer', 'red'),
+    new Layer('GreenLayer', 'green'),
+    new Layer('BlackLayer', 'black'),
+    new Layer('OrangeLayer', 'orange'),
+  ])
 
   // TODO bod je identický, když má identické souřadnice a layer - identické body nepřidávat
   const onAddPoint = (newPoint: Point[]) => {
@@ -34,6 +42,11 @@ const App = () => {
   // TODO vektor je identický, když má identický from a to
   const onAddVecor = (newVector: Vector[]) => {
     setVectors([...vectors, ...newVector])
+  }
+
+  // TODO nepůpjde příjdat layer se stejným názvem
+  const onAddLayer = (newLayer: Layer[]) => {
+    setLayers([...layers, ...newLayer])
   }
 
   const elements: Drawable[] = [...points, ...vectors]
@@ -49,6 +62,7 @@ const App = () => {
           points={points}
           onAddPoint={onAddPoint}
           onAddVector={onAddVecor}
+          layers={layers}
         />
       </div>
     </>

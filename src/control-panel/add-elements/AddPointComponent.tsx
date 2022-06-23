@@ -1,16 +1,19 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { getLayerSelection } from '../../common/Selections'
 import { Point } from '../../data-model/Drawable'
+import { Layer } from '../../data-model/Layer'
 import './AddPointComponent.css'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
+  layers: Layer[]
 }
 
-const AddPoint = ({ onAddPoint }: AddPointProps) => {
+const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
   const {
     register,
     handleSubmit,
-
     reset,
     formState: { errors },
   } = useForm({
@@ -19,16 +22,20 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
       y: 0,
       z: 0,
       tag: '',
+
+      layerIndex: 0,
     },
   })
 
-  // Render
-
   const addPoint = handleSubmit(data => {
-    onAddPoint([new Point(data.x, data.y, data.z, data.tag)])
+    onAddPoint([
+      new Point(data.x, data.y, data.z, data.tag, layers[data.layerIndex]),
+    ])
+    alert('created in layer ' + layers[data.layerIndex].name)
     reset()
   })
 
+  // Render
   return (
     <form onSubmit={addPoint}>
       <h3>New point</h3>
@@ -65,9 +72,11 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
       {errors.z && errors.z.type === 'required' && (
         <span>This is required</span>
       )}
-
+      <br />
       <label htmlFor='tag'>Tag:</label>
       <input {...register('tag')} type='string' id='tag' />
+
+      <select {...register('layerIndex')}>{getLayerSelection(layers)}</select>
 
       <button type='submit' className='buttonPrimary'>
         Add point

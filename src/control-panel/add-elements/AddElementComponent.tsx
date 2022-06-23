@@ -1,15 +1,22 @@
 import { useState } from 'react'
 import { Point, Vector } from '../../data-model/Drawable'
+import { Layer } from '../../data-model/Layer'
 import AddPoint from './AddPointComponent'
 import AddVector from './AddVectorComponent'
 
 interface AddElementProps {
   points: Point[]
+  layers: Layer[]
   onAddPoint: (newPoint: Point[]) => void
   onAddVector: (newVector: Vector[]) => void
 }
 
-const AddElement = ({ points, onAddPoint, onAddVector }: AddElementProps) => {
+const AddElement = ({
+  points,
+  onAddPoint,
+  onAddVector,
+  layers,
+}: AddElementProps) => {
   const [currentPanel, setCurrentPanel] = useState<string>('point')
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -18,13 +25,14 @@ const AddElement = ({ points, onAddPoint, onAddVector }: AddElementProps) => {
 
   const getPanel = (): JSX.Element => {
     if (currentPanel === 'point') {
-      return <AddPoint onAddPoint={onAddPoint} />
+      return <AddPoint onAddPoint={onAddPoint} layers={layers} />
     }
     return (
       <AddVector
         onAddPoint={onAddPoint}
         onAddVector={onAddVector}
         points={points}
+        layers={layers}
       />
     )
   }

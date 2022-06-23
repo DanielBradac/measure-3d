@@ -1,11 +1,13 @@
 import { Tab, Tabs } from '@mui/material'
 import React, { ReactNode, useState } from 'react'
 import { Point, Vector } from '../data-model/Drawable'
+import { Layer } from '../data-model/Layer'
 import AddElement from './add-elements/AddElementComponent'
 import './ControlPanelComponent.css'
 
 interface ControlPanelProps {
   points: Point[]
+  layers: Layer[]
   onAddPoint: (newPoint: Point[]) => void
   onAddVector: (newVector: Vector[]) => void
 }
@@ -24,6 +26,7 @@ const ControlPanel = ({
   onAddPoint,
   onAddVector,
   points,
+  layers,
 }: ControlPanelProps) => {
   const [tabValue, setTabValue] = useState<number>(0)
 
@@ -45,6 +48,7 @@ const ControlPanel = ({
           points={points}
           onAddPoint={onAddPoint}
           onAddVector={onAddVector}
+          layers={layers}
         />
       </TabPanel>
       <TabPanel value={tabValue} index={1}>
