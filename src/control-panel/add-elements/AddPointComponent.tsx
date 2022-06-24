@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { getLayerSelection } from '../../common/Selections'
 import { Point } from '../../data-model/Drawable'

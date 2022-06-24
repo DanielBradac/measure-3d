@@ -1,9 +1,8 @@
-import { Settings } from '@mui/icons-material'
-import { IconButton } from '@mui/material'
 import { Point } from '../data-model/Drawable'
 import { Layer } from '../data-model/Layer'
 import { SelectOption } from './Types'
 
+// TODO selecty udělat přes mui material selecty
 // Values for points selection = 'new' and indices of prop 'points', f.e.: ['new', 0, 1, 2, 3]
 export function getPointSelection(points: Point[]): JSX.Element[] {
   const options: SelectOption[] = [{ value: 'new', label: 'New point' }]
@@ -22,7 +21,11 @@ export function getPointSelection(points: Point[]): JSX.Element[] {
 export function getLayerSelection(layers: Layer[]): JSX.Element[] {
   return layers.map((layer, index) => {
     return (
-      <option key={index} value={index} style={{ color: layer.color }}>
+      <option
+        key={index}
+        value={index}
+        style={{ color: layer.color, backgroundColor: 'red' }}
+      >
         {layer.name}
       </option>
     )

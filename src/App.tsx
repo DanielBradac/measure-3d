@@ -44,7 +44,7 @@ const App = () => {
     setVectors([...vectors, ...newVector])
   }
 
-  // TODO nepůpjde příjdat layer se stejným názvem
+  // TODO nepůjde příjdat layer se stejným názvem
   const onAddLayer = (newLayer: Layer[]) => {
     setLayers([...layers, ...newLayer])
   }

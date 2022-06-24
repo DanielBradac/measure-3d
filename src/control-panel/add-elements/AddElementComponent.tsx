@@ -1,3 +1,12 @@
+// eslint-disable-next-line import/named
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  // eslint-disable-next-line import/named
+  SelectChangeEvent,
+} from '@mui/material'
 import { useState } from 'react'
 import { Point, Vector } from '../../data-model/Drawable'
 import { Layer } from '../../data-model/Layer'
@@ -19,8 +28,8 @@ const AddElement = ({
 }: AddElementProps) => {
   const [currentPanel, setCurrentPanel] = useState<string>('point')
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCurrentPanel(event.currentTarget.value)
+  const handleChange = (event: SelectChangeEvent) => {
+    setCurrentPanel(event.target.value)
   }
 
   const getPanel = (): JSX.Element => {
@@ -40,11 +49,14 @@ const AddElement = ({
   // Render
   return (
     <>
-      <select onChange={handleChange}>
-        <option value='point'>Point</option>
-        <option value='vector'>Vector</option>
-      </select>
-      {getPanel()}
+      <FormControl sx={{ m: 2, minWidth: 20 }}>
+        <InputLabel>Element</InputLabel>
+        <Select label='Element' value={currentPanel} onChange={handleChange}>
+          <MenuItem value='point'>Point</MenuItem>
+          <MenuItem value='vector'>Vector</MenuItem>
+        </Select>
+        {getPanel()}
+      </FormControl>
     </>
   )
 }
