@@ -1,7 +1,6 @@
 import { Canvas, extend, useThree, useFrame } from '@react-three/fiber'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { Drawable, Point, Vector } from '../data-model/Drawable'
-import { Box, Drawer } from '@mui/material'
+import { Drawable } from '../data-model/Drawable'
 
 import React, { useRef, useState } from 'react'
 import * as THREE from 'three'

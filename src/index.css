@@ -18,7 +18,7 @@
         @apply font-tag select-none;
     }
     .canvas {
-        @apply bg-gray-500 rounded-md min-h-canvas min-w-canvas max-h-full max-w-full h-4/6 w-full resize overflow-auto;
+        @apply bg-gray-500 min-h-canvas min-w-canvas max-h-full max-w-full h-4/6 w-full resize overflow-auto;
     }
     .controlPanel {
         @apply flex flex-col align-text-top text-black h-screen w-controlPanel bg-slate-500 border-gray-400 border-l-2;
@@ -30,9 +30,15 @@
         @apply bg-slate-600;
     }
     .tab {
-        @apply text-white bg-red-600;
+        @apply text-white;
+    }
+    .tabSelected {
+        @apply bg-blue-600 text-white;
     }
     .tabContent {
-        @apply p-3;
+        @apply p-3 text-black;
+    }
+    .selectPrimary {
+        @apply text-white;
     }
 }

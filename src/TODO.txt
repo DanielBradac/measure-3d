@@ -1,4 +1,6 @@
-Předělat selecty na material select
+Zmigrovat mui na daisyUI
+Odinstalovat mui
+
 Udělat layers picker při vytváření vektoru
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty

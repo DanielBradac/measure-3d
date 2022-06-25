@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/named
 import {
-  FormControl,
   InputLabel,
   MenuItem,
   Select,
@@ -50,7 +49,12 @@ const AddElement = ({
   return (
     <>
       <InputLabel>Element</InputLabel>
-      <Select label='Element' value={currentPanel} onChange={handleChange}>
+      <Select
+        label='Element'
+        value={currentPanel}
+        onChange={handleChange}
+        className='selectPrimary'
+      >
         <MenuItem value='point'>Point</MenuItem>
         <MenuItem value='vector'>Vector</MenuItem>
       </Select>

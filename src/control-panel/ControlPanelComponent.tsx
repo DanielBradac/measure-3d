@@ -37,7 +37,12 @@ const ControlPanel = ({
   // Render
   return (
     <div className='controlPanel'>
-      <Tabs value={tabValue} onChange={handleChange} className='tabRow'>
+      <Tabs
+        value={tabValue}
+        onChange={handleChange}
+        className='tabRow'
+        TabIndicatorProps={{ className: 'tabSelected' }}
+      >
         <Tab label='Add elements' value={0} className='tab' />
         <Tab label='Layers' value={1} className='tab' />
         <Tab label='Measure' value={2} className='tab' />
