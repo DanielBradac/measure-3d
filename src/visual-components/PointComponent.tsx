@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import { Html } from '@react-three/drei'
-import './PointComponent.css'
 
 interface PointCompProps {
   center: number[]

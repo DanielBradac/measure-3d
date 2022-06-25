@@ -1,7 +1,6 @@
 import { Drawer, IconButton, Typography } from '@mui/material'
 import { useState } from 'react'
 import { Settings } from '@mui/icons-material'
-import './SettingsMenu.css'
 
 interface SettingsMenuProps {
   toggleAxis: () => void

@@ -1,9 +1,0 @@
-.controlPanel {
-    background-color: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: top;
-    color: white;
-    height: 100vh;
-    width: 80vw;
-}

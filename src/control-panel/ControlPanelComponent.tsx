@@ -3,7 +3,6 @@ import React, { ReactNode, useState } from 'react'
 import { Point, Vector } from '../data-model/Drawable'
 import { Layer } from '../data-model/Layer'
 import AddElement from './add-elements/AddElementComponent'
-import './ControlPanelComponent.css'
 
 interface ControlPanelProps {
   points: Point[]
@@ -39,7 +38,7 @@ const ControlPanel = ({
   return (
     <div className='controlPanel'>
       <Tabs value={tabValue} onChange={handleChange}>
-        <Tab label='Add elements' value={0} />
+        <Tab label='Add elements' value={0} className='text-white' />
         <Tab label='Layers' value={1} />
         <Tab label='Measure' value={2} />
       </Tabs>

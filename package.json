@@ -52,6 +52,7 @@
     "@types/three": "^0.141.0",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
+    "autoprefixer": "^10.4.7",
     "eslint": "^8.17.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-node": "^4.1.0",
@@ -62,6 +63,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.7.1"
+    "postcss": "^8.4.14",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.4"
   }
 }

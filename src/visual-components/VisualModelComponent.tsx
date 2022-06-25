@@ -1,7 +1,6 @@
 import { Canvas, extend, useThree, useFrame } from '@react-three/fiber'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Drawable, Point, Vector } from '../data-model/Drawable'
-import './VisualModelComponent.css'
 import { Box, Drawer } from '@mui/material'
 
 import React, { useRef, useState } from 'react'
@@ -17,7 +16,7 @@ const VisualModel = ({ elements }: VisualModelProps) => {
     const { camera, gl } = useThree()
 
     useFrame(() => {
-      controls.current!.update()
+      controls.current?.update()
     })
 
     extend({ OrbitControls })
@@ -45,7 +44,7 @@ const VisualModel = ({ elements }: VisualModelProps) => {
   )
   return (
     <div className='visual-model'>
-      <div className='settings'>
+      <div>
         <SettingsMenu
           toggleAxis={() => {
             setAxisToggled(!axisToggled)

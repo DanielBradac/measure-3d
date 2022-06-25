@@ -3,7 +3,6 @@ import { extend, ReactThreeFiber } from '@react-three/fiber'
 import { useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import './App.css'
 import ControlPanel from './control-panel/ControlPanelComponent'
 import { Drawable, Point, Vector } from './data-model/Drawable'
 import { Layer } from './data-model/Layer'
@@ -54,7 +53,7 @@ const App = () => {
   return (
     <>
       <div className='header'>
-        <h2>Measure 3D</h2>
+        <h1>Measure 3D</h1>
       </div>
       <div className='App'>
         <VisualModel elements={elements} />
