@@ -1,4 +1,3 @@
-Migrace na tailwind
 Předělat selecty na material select
 Udělat layers picker při vytváření vektoru
 Udělat layers tab (CRUD operace s layers)

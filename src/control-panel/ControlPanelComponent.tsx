@@ -37,25 +37,27 @@ const ControlPanel = ({
   // Render
   return (
     <div className='controlPanel'>
-      <Tabs value={tabValue} onChange={handleChange}>
-        <Tab label='Add elements' value={0} className='text-white' />
-        <Tab label='Layers' value={1} />
-        <Tab label='Measure' value={2} />
+      <Tabs value={tabValue} onChange={handleChange} className='tabRow'>
+        <Tab label='Add elements' value={0} className='tab' />
+        <Tab label='Layers' value={1} className='tab' />
+        <Tab label='Measure' value={2} className='tab' />
       </Tabs>
-      <TabPanel value={tabValue} index={0}>
-        <AddElement
-          points={points}
-          onAddPoint={onAddPoint}
-          onAddVector={onAddVector}
-          layers={layers}
-        />
-      </TabPanel>
-      <TabPanel value={tabValue} index={1}>
-        Coming Soon...
-      </TabPanel>
-      <TabPanel value={tabValue} index={2}>
-        Coming Soon...
-      </TabPanel>
+      <div className='tabContent'>
+        <TabPanel value={tabValue} index={0}>
+          <AddElement
+            points={points}
+            onAddPoint={onAddPoint}
+            onAddVector={onAddVector}
+            layers={layers}
+          />
+        </TabPanel>
+        <TabPanel value={tabValue} index={1}>
+          Coming Soon...
+        </TabPanel>
+        <TabPanel value={tabValue} index={2}>
+          Coming Soon...
+        </TabPanel>
+      </div>
     </div>
   )
 }

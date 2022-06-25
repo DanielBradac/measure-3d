@@ -55,7 +55,7 @@ const App = () => {
       <div className='header'>
         <h1>Measure 3D</h1>
       </div>
-      <div className='App'>
+      <div className='app'>
         <VisualModel elements={elements} />
         <ControlPanel
           points={points}

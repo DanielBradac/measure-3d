@@ -29,7 +29,6 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
     onAddPoint([
       new Point(data.x, data.y, data.z, data.tag, layers[data.layerIndex]),
     ])
-    alert('created in layer ' + layers[data.layerIndex].name)
     reset()
   })
 

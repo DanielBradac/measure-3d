@@ -49,14 +49,12 @@ const AddElement = ({
   // Render
   return (
     <>
-      <FormControl sx={{ m: 2, minWidth: 20 }}>
-        <InputLabel>Element</InputLabel>
-        <Select label='Element' value={currentPanel} onChange={handleChange}>
-          <MenuItem value='point'>Point</MenuItem>
-          <MenuItem value='vector'>Vector</MenuItem>
-        </Select>
-        {getPanel()}
-      </FormControl>
+      <InputLabel>Element</InputLabel>
+      <Select label='Element' value={currentPanel} onChange={handleChange}>
+        <MenuItem value='point'>Point</MenuItem>
+        <MenuItem value='vector'>Vector</MenuItem>
+      </Select>
+      {getPanel()}
     </>
   )
 }
