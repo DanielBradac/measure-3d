@@ -73,7 +73,9 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
       <label htmlFor='tag'>Tag:</label>
       <input {...register('tag')} type='string' id='tag' />
 
-      <select {...register('layerIndex')}>{getLayerSelection(layers)}</select>
+      <select className='select' {...register('layerIndex')}>
+        {getLayerSelection(layers)}
+      </select>
 
       <button type='submit' className='buttonPrimary'>
         Add point

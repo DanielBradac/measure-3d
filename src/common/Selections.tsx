@@ -2,7 +2,6 @@ import { Point } from '../data-model/Drawable'
 import { Layer } from '../data-model/Layer'
 import { SelectOption } from './Types'
 
-// TODO selecty udělat přes mui material selecty
 // Values for points selection = 'new' and indices of prop 'points', f.e.: ['new', 0, 1, 2, 3]
 export function getPointSelection(points: Point[]): JSX.Element[] {
   const options: SelectOption[] = [{ value: 'new', label: 'New point' }]

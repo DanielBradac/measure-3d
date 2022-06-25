@@ -105,7 +105,11 @@ const AddVector = ({
       <form onSubmit={addVector}>
         <div>
           <h3>Point from</h3>
-          <select {...register('pointFrom')} onChange={handleChangeFrom}>
+          <select
+            className='select'
+            {...register('pointFrom')}
+            onChange={handleChangeFrom}
+          >
             {getPointSelection(points)}
           </select>
           <br />
@@ -148,7 +152,11 @@ const AddVector = ({
 
         <div>
           <h3>Point to</h3>
-          <select {...register('pointTo')} onChange={handleChangeTo}>
+          <select
+            className='select'
+            {...register('pointTo')}
+            onChange={handleChangeTo}
+          >
             {getPointSelection(points)}
           </select>
           <br />

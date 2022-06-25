@@ -1,11 +1,3 @@
-// eslint-disable-next-line import/named
-import {
-  InputLabel,
-  MenuItem,
-  Select,
-  // eslint-disable-next-line import/named
-  SelectChangeEvent,
-} from '@mui/material'
 import { useState } from 'react'
 import { Point, Vector } from '../../data-model/Drawable'
 import { Layer } from '../../data-model/Layer'
@@ -25,14 +17,14 @@ const AddElement = ({
   onAddVector,
   layers,
 }: AddElementProps) => {
-  const [currentPanel, setCurrentPanel] = useState<string>('point')
+  const [currentPanel, setCurrentPanel] = useState<string>('Point')
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setCurrentPanel(event.target.value)
+  const onChangeElement = (event: React.FormEvent<HTMLSelectElement>) => {
+    setCurrentPanel(event.currentTarget.value)
   }
 
   const getPanel = (): JSX.Element => {
-    if (currentPanel === 'point') {
+    if (currentPanel === 'Point') {
       return <AddPoint onAddPoint={onAddPoint} layers={layers} />
     }
     return (
@@ -48,16 +40,10 @@ const AddElement = ({
   // Render
   return (
     <>
-      <InputLabel>Element</InputLabel>
-      <Select
-        label='Element'
-        value={currentPanel}
-        onChange={handleChange}
-        className='selectPrimary'
-      >
-        <MenuItem value='point'>Point</MenuItem>
-        <MenuItem value='vector'>Vector</MenuItem>
-      </Select>
+      <select className='select' onChange={onChangeElement}>
+        <option>Point</option>
+        <option>Vector</option>
+      </select>
       {getPanel()}
     </>
   )
