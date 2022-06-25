@@ -1,5 +1,5 @@
 module.exports = {
-    important: '#root',
+
     content: ["./src/**/*.{js,jsx,ts,tsx}"],
     theme: {
         extend: {
@@ -21,5 +21,5 @@ module.exports = {
             }
         }
     },
-    plugins: []
+    plugins: [require("daisyui")]
 }

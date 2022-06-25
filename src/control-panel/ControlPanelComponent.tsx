@@ -1,5 +1,4 @@
-import { Tab, Tabs } from '@mui/material'
-import React, { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { Point, Vector } from '../data-model/Drawable'
 import { Layer } from '../data-model/Layer'
 import AddElement from './add-elements/AddElementComponent'
@@ -11,16 +10,6 @@ interface ControlPanelProps {
   onAddVector: (newVector: Vector[]) => void
 }
 
-interface TabPanelProps {
-  value: number
-  index: number
-  children: ReactNode
-}
-
-const TabPanel = ({ value, children, index }: TabPanelProps) => {
-  return <div hidden={value !== index}>{children}</div>
-}
-
 const ControlPanel = ({
   onAddPoint,
   onAddVector,
@@ -29,40 +18,58 @@ const ControlPanel = ({
 }: ControlPanelProps) => {
   const [tabValue, setTabValue] = useState<number>(0)
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setTabValue(newValue)
+  const getClasses = (tabIndex: number): string => {
+    return tabValue === tabIndex ? 'tab tab-active' : 'tab'
   }
 
-  // Render
-  return (
-    <div className='controlPanel'>
-      <Tabs
-        value={tabValue}
-        onChange={handleChange}
-        className='tabRow'
-        TabIndicatorProps={{ className: 'tabSelected' }}
-      >
-        <Tab label='Add elements' value={0} className='tab' />
-        <Tab label='Layers' value={1} className='tab' />
-        <Tab label='Measure' value={2} className='tab' />
-      </Tabs>
-      <div className='tabContent'>
-        <TabPanel value={tabValue} index={0}>
+  const getTabContent = (): JSX.Element => {
+    switch (tabValue) {
+      case 0: {
+        return (
           <AddElement
             points={points}
             onAddPoint={onAddPoint}
             onAddVector={onAddVector}
             layers={layers}
           />
-        </TabPanel>
-        <TabPanel value={tabValue} index={1}>
-          Coming Soon...
-        </TabPanel>
-        <TabPanel value={tabValue} index={2}>
-          Coming Soon...
-        </TabPanel>
+        )
+      }
+      default: {
+        return <>Coming soon...</>
+      }
+    }
+  }
+
+  // Render
+  return (
+    <div className='controlPanel'>
+      <div className='tabs tabs-boxed'>
+        <a
+          className={getClasses(0)}
+          onClick={() => {
+            setTabValue(0)
+          }}
+        >
+          Add elements
+        </a>
+        <a
+          className={getClasses(1)}
+          onClick={() => {
+            setTabValue(1)
+          }}
+        >
+          AddLayers
+        </a>
+        <a
+          className={getClasses(2)}
+          onClick={() => {
+            setTabValue(2)
+          }}
+        >
+          Measure
+        </a>
       </div>
+      <div className='tabContent'>{getTabContent()}</div>
     </div>
   )
 }
