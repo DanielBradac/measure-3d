@@ -58,31 +58,29 @@ const App = () => {
   }
 
   return (
-    <div>
+    <>
       <h1 className='header'>Measure 3D</h1>
-      <div className='app'>
-        <DrawerPage
-          toggleAxis={() => {
-            setAxisToggled(!axisToggled)
-          }}
-          handleAxisChange={handleAxisChange}
-        >
-          <div className='flex flex-row align-top justify-center text-blue-600 bg-slate-600 font-main'>
-            <VisualModel
-              elements={elements}
-              axisToggled={axisToggled}
-              axisSize={axisSize}
-            />
-            <ControlPanel
-              points={points}
-              onAddPoint={onAddPoint}
-              onAddVector={onAddVecor}
-              layers={layers}
-            />
-          </div>
-        </DrawerPage>
-      </div>
-    </div>
+      <DrawerPage
+        toggleAxis={() => {
+          setAxisToggled(!axisToggled)
+        }}
+        handleAxisChange={handleAxisChange}
+      >
+        <div className='pageContent'>
+          <VisualModel
+            elements={elements}
+            axisToggled={axisToggled}
+            axisSize={axisSize}
+          />
+          <ControlPanel
+            points={points}
+            onAddPoint={onAddPoint}
+            onAddVector={onAddVecor}
+            layers={layers}
+          />
+        </div>
+      </DrawerPage>
+    </>
   )
 }
 

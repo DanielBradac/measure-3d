@@ -17,9 +17,10 @@ const DrawerPage = ({
 
       <div className='drawer-side'>
         <label htmlFor='drawer' className='drawer-overlay'></label>
-        <div className='menu p-4 overflow-y-auto bg-base-100 text-base-content w-1/4'>
-          <div>
-            <label>Axis size:</label>
+        <div className='settings'>
+          <h2 className='settingsHeader'>Settings</h2>
+          <div className='settingsContent'>
+            <label className='mr-3 self-center'>Axis size:</label>
             <input
               type='range'
               min='0'
@@ -27,8 +28,12 @@ const DrawerPage = ({
               defaultValue={1}
               onChange={handleAxisChange}
               step='0.1'
+              className='mr-3 mt-1.5'
             />
-            <button onClick={toggleAxis} className='buttonPrimary'>
+            <button
+              onClick={toggleAxis}
+              className='buttonPrimary text-sm mt-1.5'
+            >
               Toggle axis
             </button>
           </div>

@@ -3,7 +3,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Drawable } from '../data-model/Drawable'
 
 import { useRef } from 'react'
-import { FaBeer } from 'react-icons/fa'
 import * as THREE from 'three'
 import { RiSettings3Fill } from 'react-icons/ri'
 
@@ -41,7 +40,7 @@ const VisualModel = ({ elements, axisToggled, axisSize }: VisualModelProps) => {
   return (
     <div className='visual-model'>
       <label htmlFor='drawer' className='drawer-button'>
-        <RiSettings3Fill className='iconPrimary clickable' size={32} />
+        <RiSettings3Fill className='text-blue-500 m-2 clickable' size={32} />
       </label>
 
       <div className='canvas'>
