@@ -43,6 +43,7 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
         type='number'
         id='x'
         step='0.001'
+        className='input input-bordered input-sm'
       />
       {errors.x && errors.x.type === 'required' && (
         <span>This is required</span>
@@ -54,6 +55,7 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
         type='number'
         id='y'
         step='0.001'
+        className='input input-bordered input-sm'
       />
       {errors.y && errors.y.type === 'required' && (
         <span>This is required</span>
@@ -65,15 +67,24 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
         type='number'
         id='z'
         step='0.001'
+        className='input input-bordered input-sm'
       />
       {errors.z && errors.z.type === 'required' && (
         <span>This is required</span>
       )}
       <br />
       <label htmlFor='tag'>Tag:</label>
-      <input {...register('tag')} type='string' id='tag' />
+      <input
+        {...register('tag')}
+        type='string'
+        id='tag'
+        className='input input-bordered input-sm'
+      />
 
-      <select className='select' {...register('layerIndex')}>
+      <select
+        className='select select-bordered select-sm'
+        {...register('layerIndex')}
+      >
         {getLayerSelection(layers)}
       </select>
 

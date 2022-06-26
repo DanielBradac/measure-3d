@@ -40,7 +40,10 @@ const AddElement = ({
   // Render
   return (
     <>
-      <select className='select' onChange={onChangeElement}>
+      <select
+        className='select select-bordered w-full max-w-xs'
+        onChange={onChangeElement}
+      >
         <option>Point</option>
         <option>Vector</option>
       </select>

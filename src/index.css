@@ -38,9 +38,6 @@
     .tabs-boxed .tab-active {
         @apply text-white bg-blue-600;
     }
-    .select {
-        @apply border-2 border-gray-400 border-spacing-0;
-    }
     .settings {
         @apply menu overflow-y-auto bg-base-100 text-base-content w-1/4 p-4;
     }

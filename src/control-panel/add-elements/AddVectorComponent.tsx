@@ -106,7 +106,7 @@ const AddVector = ({
         <div>
           <h3>Point from</h3>
           <select
-            className='select'
+            className='select select-bordered select-sm'
             {...register('pointFrom')}
             onChange={handleChangeFrom}
           >
@@ -121,6 +121,7 @@ const AddVector = ({
             id='xFrom'
             step='0.001'
             disabled={fromDisabled}
+            className='input input-bordered input-sm'
           />
 
           <label htmlFor='yFrom'>Y:</label>
@@ -130,6 +131,7 @@ const AddVector = ({
             id='yFrom'
             step='0.001'
             disabled={fromDisabled}
+            className='input input-bordered input-sm'
           />
 
           <label htmlFor='zFrom'>Z:</label>
@@ -139,6 +141,7 @@ const AddVector = ({
             id='zFrom'
             step='0.001'
             disabled={fromDisabled}
+            className='input input-bordered input-sm'
           />
 
           <label htmlFor='tagFrom'>Tag:</label>
@@ -147,13 +150,14 @@ const AddVector = ({
             type='string'
             id='tagFrom'
             disabled={fromDisabled}
+            className='input input-bordered input-sm'
           />
         </div>
 
         <div>
           <h3>Point to</h3>
           <select
-            className='select'
+            className='select select-bordered select-sm'
             {...register('pointTo')}
             onChange={handleChangeTo}
           >
@@ -168,6 +172,7 @@ const AddVector = ({
             id='x'
             step='0.001'
             disabled={toDisabled}
+            className='input input-bordered input-sm'
           />
 
           <label htmlFor='yTo'>Y:</label>
@@ -177,6 +182,7 @@ const AddVector = ({
             id='y'
             step='0.001'
             disabled={toDisabled}
+            className='input input-bordered input-sm'
           />
 
           <label htmlFor='zTo'>Z:</label>
@@ -186,6 +192,7 @@ const AddVector = ({
             id='z'
             step='0.001'
             disabled={toDisabled}
+            className='input input-bordered input-sm'
           />
 
           <label htmlFor='tagTo'>Tag:</label>
@@ -194,6 +201,7 @@ const AddVector = ({
             type='string'
             id='tag'
             disabled={toDisabled}
+            className='input input-bordered input-sm'
           />
         </div>
 
