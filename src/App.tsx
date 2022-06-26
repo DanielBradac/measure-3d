@@ -65,6 +65,7 @@ const App = () => {
           setAxisToggled(!axisToggled)
         }}
         handleAxisChange={handleAxisChange}
+        axisToggled={axisToggled}
       >
         <div className='pageContent'>
           <VisualModel
