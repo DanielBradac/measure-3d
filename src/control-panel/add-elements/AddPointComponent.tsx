@@ -33,60 +33,64 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
   })
 
   // Render
+  // TODO předělat tak, aby se to poskládalo pod sebe, když se to zmenší
   return (
-    <form onSubmit={addPoint}>
-      <h3>New point</h3>
-      <label htmlFor='X'>X:</label>
+    <form onSubmit={addPoint} className='inputForm'>
+      <table>
+        <tr>
+          <td>
+            <label className='p-2'>X:</label>
+            <input
+              {...register('x', { required: true })}
+              type='number'
+              id='x'
+              step='0.001'
+              className='input input-bordered input-sm'
+            />
+          </td>
+          <td>
+            <label className='p-2'>Y:</label>
+            <input
+              {...register('y', { required: true })}
+              type='number'
+              id='y'
+              step='0.001'
+              className='input input-bordered input-sm'
+            />
+          </td>
+          <td>
+            <label className='p-2'>Z:</label>
+            <input
+              {...register('z', { required: true })}
+              type='number'
+              id='x'
+              step='0.001'
+              className='input input-bordered input-sm'
+            />
+          </td>
+        </tr>
 
-      <input
-        {...register('x', { required: true })}
-        type='number'
-        id='x'
-        step='0.001'
-        className='input input-bordered input-sm'
-      />
-      {errors.x && errors.x.type === 'required' && (
-        <span>This is required</span>
-      )}
-
-      <label htmlFor='Y'>Y:</label>
-      <input
-        {...register('y', { required: true })}
-        type='number'
-        id='y'
-        step='0.001'
-        className='input input-bordered input-sm'
-      />
-      {errors.y && errors.y.type === 'required' && (
-        <span>This is required</span>
-      )}
-
-      <label htmlFor='Z'>Z:</label>
-      <input
-        {...register('z', { required: true })}
-        type='number'
-        id='z'
-        step='0.001'
-        className='input input-bordered input-sm'
-      />
-      {errors.z && errors.z.type === 'required' && (
-        <span>This is required</span>
-      )}
-      <br />
-      <label htmlFor='tag'>Tag:</label>
-      <input
-        {...register('tag')}
-        type='string'
-        id='tag'
-        className='input input-bordered input-sm'
-      />
-
-      <select
-        className='select select-bordered select-sm'
-        {...register('layerIndex')}
-      >
-        {getLayerSelection(layers)}
-      </select>
+        <tr>
+          <td>
+            <label className='p-2'>Tag:</label>
+            <input
+              {...register('tag')}
+              type='string'
+              id='tag'
+              className='input input-bordered input-sm'
+            />
+          </td>
+          <td>
+            <label className='p-2'>Layer:</label>
+            <select
+              className='select select-bordered select-sm'
+              {...register('layerIndex')}
+            >
+              {getLayerSelection(layers)}
+            </select>
+          </td>
+        </tr>
+      </table>
 
       <button type='submit' className='buttonPrimary'>
         Add point

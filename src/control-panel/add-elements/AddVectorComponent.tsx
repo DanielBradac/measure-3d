@@ -102,7 +102,7 @@ const AddVector = ({
   // Render
   return (
     <>
-      <form onSubmit={addVector}>
+      <form onSubmit={addVector} className='inputForm'>
         <div>
           <h3>Point from</h3>
           <select
