@@ -11,9 +11,6 @@
     .clickable {
         @apply cursor-pointer;
     }
-    .buttonPrimary {
-        @apply inline-block p-1 rounded-2xl text-white bg-blue-600 content-center border-2 border-gray-400 cursor-pointer;
-    }
     .tag {
         @apply font-tag select-none;
     }
@@ -46,5 +43,12 @@
     }
     .settingsContent {
         @apply border-t-2 border-blue-300 pt-2 text-lg flex flex-row;
+    }
+    .buttonPrimary {
+        @apply btn btn-sm btn-outline text-blue-800 border-2;
+    }
+    .buttonPrimary:hover,
+    .buttonPrimary-active {
+        @apply bg-blue-600 border-blue-800;
     }
 }
