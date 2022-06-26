@@ -9,10 +9,13 @@
         @apply bg-slate-500 flex justify-center text-white font-main text-3xl p-6 border-2 border-gray-400;
     }
     .iconPrimary {
-        @apply text-blue-500;
+        @apply text-blue-500 m-2;
+    }
+    .clickable {
+        @apply cursor-pointer;
     }
     .buttonPrimary {
-        @apply inline-block p-1 m-1 rounded-2xl text-white bg-blue-600 content-center border-2 border-gray-400;
+        @apply inline-block p-1 m-1 rounded-2xl text-white bg-blue-600 content-center border-2 border-gray-400 cursor-pointer;
     }
     .tag {
         @apply font-tag select-none;

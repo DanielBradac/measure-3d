@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import ControlPanel from './control-panel/ControlPanelComponent'
 import { Drawable, Point, Vector } from './data-model/Drawable'
 import { Layer } from './data-model/Layer'
+import DrawerPage from './drawer/DrawerPageComponent'
 import VisualModel from './visual-components/VisualModelComponent'
 
 // Global JSX declarations
@@ -50,21 +51,38 @@ const App = () => {
 
   const elements: Drawable[] = [...points, ...vectors]
 
+  const [axisToggled, setAxisToggled] = useState<boolean>(false)
+  const [axisSize, setAxisSize] = useState<number>(1)
+  const handleAxisChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setAxisSize(event.currentTarget.valueAsNumber)
+  }
+
   return (
-    <>
-      <div className='header'>
-        <h1>Measure 3D</h1>
-      </div>
+    <div>
+      <h1 className='header'>Measure 3D</h1>
       <div className='app'>
-        <VisualModel elements={elements} />
-        <ControlPanel
-          points={points}
-          onAddPoint={onAddPoint}
-          onAddVector={onAddVecor}
-          layers={layers}
-        />
+        <DrawerPage
+          toggleAxis={() => {
+            setAxisToggled(!axisToggled)
+          }}
+          handleAxisChange={handleAxisChange}
+        >
+          <div className='flex flex-row align-top justify-center text-blue-600 bg-slate-600 font-main'>
+            <VisualModel
+              elements={elements}
+              axisToggled={axisToggled}
+              axisSize={axisSize}
+            />
+            <ControlPanel
+              points={points}
+              onAddPoint={onAddPoint}
+              onAddVector={onAddVecor}
+              layers={layers}
+            />
+          </div>
+        </DrawerPage>
       </div>
-    </>
+    </div>
   )
 }
 

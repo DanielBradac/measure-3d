@@ -2,14 +2,17 @@ import { Canvas, extend, useThree, useFrame } from '@react-three/fiber'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Drawable } from '../data-model/Drawable'
 
-import React, { useRef, useState } from 'react'
+import { useRef } from 'react'
+import { FaBeer } from 'react-icons/fa'
 import * as THREE from 'three'
-import SettingsMenu from '../drawer/SettingsMenu'
+import { RiSettings3Fill } from 'react-icons/ri'
 
 interface VisualModelProps {
   elements: Drawable[]
+  axisToggled: boolean
+  axisSize: number
 }
-const VisualModel = ({ elements }: VisualModelProps) => {
+const VisualModel = ({ elements, axisToggled, axisSize }: VisualModelProps) => {
   const Controls = () => {
     const controls = useRef<OrbitControls>(null)
     const { camera, gl } = useThree()
@@ -28,12 +31,6 @@ const VisualModel = ({ elements }: VisualModelProps) => {
     )
   }
 
-  const [axisToggled, setAxisToggled] = useState<boolean>(false)
-  const [axisSize, setAxisSize] = useState<number>(1)
-  const handleAxisChange = (event: React.FormEvent<HTMLInputElement>) => {
-    setAxisSize(event.currentTarget.valueAsNumber)
-  }
-
   // Render
   const toRender = elements.map((currElement, index) => currElement.draw(index))
   const axis = axisToggled ? (
@@ -43,14 +40,9 @@ const VisualModel = ({ elements }: VisualModelProps) => {
   )
   return (
     <div className='visual-model'>
-      <div>
-        <SettingsMenu
-          toggleAxis={() => {
-            setAxisToggled(!axisToggled)
-          }}
-          handleAxisChange={handleAxisChange}
-        />
-      </div>
+      <label htmlFor='drawer' className='drawer-button'>
+        <RiSettings3Fill className='iconPrimary clickable' size={32} />
+      </label>
 
       <div className='canvas'>
         <Canvas>
