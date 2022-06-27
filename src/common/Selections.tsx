@@ -24,7 +24,6 @@ export function getLayerSelection(layers: Layer[]): JSX.Element[] {
       <>
         <option key={index} value={index}>
           {layer.name}
-          <BsFillGearFill className='text-blue-500 m-2 clickable' size={5} />
         </option>
       </>
     )

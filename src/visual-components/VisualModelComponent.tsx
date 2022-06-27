@@ -40,7 +40,7 @@ const VisualModel = ({ elements, axisToggled, axisSize }: VisualModelProps) => {
   return (
     <div className='visual-model'>
       <label htmlFor='drawer' className='drawer-button'>
-        <BsFillGearFill className='text-blue-500 m-2 clickable' size={32} />
+        <BsFillGearFill className='text-secondary m-2 clickable' size={32} />
       </label>
 
       <div className='canvas'>
