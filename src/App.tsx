@@ -3,6 +3,7 @@ import { extend, ReactThreeFiber } from '@react-three/fiber'
 import { useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import Settings from './common/Settings'
 import ControlPanel from './control-panel/ControlPanelComponent'
 import { Drawable, Point, Vector } from './data-model/Drawable'
 import { Layer } from './data-model/Layer'
@@ -50,28 +51,39 @@ const App = () => {
   }
 
   const elements: Drawable[] = [...points, ...vectors]
+  const [settings, setSettings] = useState<Settings>(new Settings())
 
-  const [axisToggled, setAxisToggled] = useState<boolean>(false)
-  const [axisSize, setAxisSize] = useState<number>(1)
   const handleAxisChange = (event: React.FormEvent<HTMLInputElement>) => {
-    setAxisSize(event.currentTarget.valueAsNumber)
+    setSettings((prevSettings: Settings) => {
+      if (event.currentTarget) {
+        return prevSettings
+          .copy()
+          .setAxisSize(event.currentTarget.valueAsNumber)
+      }
+      return prevSettings
+    })
   }
 
+  const toggleAxis = () => {
+    setSettings((prevSettings: Settings) => {
+      return prevSettings.copy().setAxisToggled(!prevSettings.axisToggled)
+    })
+  }
   return (
     <>
       <h1 className='header'>Measure 3D</h1>
       <DrawerPage
         toggleAxis={() => {
-          setAxisToggled(!axisToggled)
+          toggleAxis()
         }}
         handleAxisChange={handleAxisChange}
-        axisToggled={axisToggled}
+        axisToggled={settings.axisToggled}
       >
         <div className='pageContent'>
           <VisualModel
             elements={elements}
-            axisToggled={axisToggled}
-            axisSize={axisSize}
+            axisToggled={settings.axisToggled}
+            axisSize={settings.axisSize}
           />
           <ControlPanel
             points={points}
