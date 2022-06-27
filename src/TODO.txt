@@ -1,6 +1,5 @@
 formuláře předělat tak, aby se to poskládalo pod sebe, když se to zmenší
+settings v levém menu udělat jako samostatnou třídu
 Udělat layers picker při vytváření vektoru
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty
-    
-levé menu není persistentní - axis size se resetuje, asi to bude chtít nějakou třídu Settings s nastavením

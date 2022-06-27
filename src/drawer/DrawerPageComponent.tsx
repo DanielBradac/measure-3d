@@ -25,7 +25,7 @@ const DrawerPage = ({
             <table>
               <tr>
                 <td>
-                  <label className='self-center'>Toggle axis:</label>
+                  <label className='settingsLabel'>Toggle axis:</label>
                 </td>
                 <td>
                   <input
@@ -39,7 +39,7 @@ const DrawerPage = ({
 
               <tr>
                 <td>
-                  <label className='self-center'>Axis size:</label>
+                  <label className='settingsLabel'>Axis size:</label>
                 </td>
                 <td>
                   <input

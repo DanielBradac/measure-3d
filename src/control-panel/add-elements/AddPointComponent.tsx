@@ -33,7 +33,7 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
   })
 
   // Render
-  // TODO předělat tak, aby se to poskládalo pod sebe, když se to zmenší
+  // TODO předělat tak, aby se to poskládalo pod sebe, když se to zmenší - bude se muset zrušit tabulka a nějak udělat flexbox
   return (
     <form onSubmit={addPoint} className='inputForm'>
       <table>
