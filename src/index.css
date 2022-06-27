@@ -33,7 +33,7 @@
         @apply text-black bg-inherit;
     }
     .tabs-boxed .tab-active {
-        @apply text-white bg-blue-600;
+        @apply text-white;
     }
     .settings {
         @apply menu overflow-y-auto bg-base-100 text-base-content w-fit p-4 font-main;
@@ -42,25 +42,22 @@
         @apply text-2xl mb-2 ml-1;
     }
     .settingsContent {
-        @apply border-t-2 border-blue-300 pt-2 text-lg flex flex-col;
+        @apply border-t-2 border-secondary pt-2 text-lg flex flex-col;
     }
     .settingsLabel {
         @apply self-center mr-4;
     }
     .settingsToggle {
-        @apply toggle mt-3;
+        @apply toggle mt-3 toggle-primary;
     }
-    .settingsToggle:checked {
-        @apply bg-blue-600 border-blue-800;
-    }
-    .buttonPrimary {
+    .buttonOutline {
         @apply btn btn-sm btn-outline text-blue-800 border-2;
     }
-    .buttonPrimary:hover,
-    .buttonPrimary-active {
-        @apply bg-blue-600 border-blue-800;
+    .buttonOutline:hover,
+    .buttonOutline-active {
+        @apply bg-primary border-blue-800;
     }
     .inputForm {
-        @apply border-2 border-blue-300 p-4 rounded-lg mt-5;
+        @apply border-2 border-secondary p-4 rounded-lg mt-5;
     }
 }

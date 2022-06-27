@@ -1,6 +1,7 @@
 import { Point } from '../data-model/Drawable'
 import { Layer } from '../data-model/Layer'
 import { SelectOption } from './Types'
+import { BsFillGearFill } from 'react-icons/bs'
 
 // Values for points selection = 'new' and indices of prop 'points', f.e.: ['new', 0, 1, 2, 3]
 export function getPointSelection(points: Point[]): JSX.Element[] {
@@ -20,9 +21,12 @@ export function getPointSelection(points: Point[]): JSX.Element[] {
 export function getLayerSelection(layers: Layer[]): JSX.Element[] {
   return layers.map((layer, index) => {
     return (
-      <option key={index} value={index} style={{ color: layer.color }}>
-        {layer.name}
-      </option>
+      <>
+        <option key={index} value={index}>
+          {layer.name}
+          <BsFillGearFill className='text-blue-500 m-2 clickable' size={5} />
+        </option>
+      </>
     )
   })
 }

@@ -92,7 +92,7 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
         </tr>
       </table>
 
-      <button type='submit' className='buttonPrimary'>
+      <button type='submit' className='buttonOutline'>
         Add point
       </button>
     </form>

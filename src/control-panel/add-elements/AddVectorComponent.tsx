@@ -205,7 +205,7 @@ const AddVector = ({
           />
         </div>
 
-        <button type='submit' className='buttonPrimary'>
+        <button type='submit' className='buttonOutline'>
           Add vector
         </button>
       </form>
