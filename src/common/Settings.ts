@@ -24,6 +24,6 @@ export default class Settings {
   }
 
   copy(): Settings {
-    return new Settings(this._axisToggled, this._axisSize);
+    return new Settings(this._axisToggled, this._axisSize)
   }
 }
