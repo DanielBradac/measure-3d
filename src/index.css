@@ -60,16 +60,13 @@
     .inputForm {
         @apply border-2 border-secondary p-4 rounded-lg mt-5 flex flex-wrap;
     }
-    .inputItem {
-        @apply table-row;
-    }
-    .inputColumn {
-        @apply table-column border-spacing-3;
+    .inputBlock {
+        @apply border-spacing-3;
     }
     .inputLabel {
-        @apply px-3;
+        @apply pr-3;
     }
     .submitButton {
-        @apply pl-5 py-4 w-full;
+        @apply pl-3 py-4 w-full;
     }
 }

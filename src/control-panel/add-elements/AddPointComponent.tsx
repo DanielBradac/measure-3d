@@ -36,8 +36,8 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
 
   return (
     <form onSubmit={addPoint} className='inputForm'>
-      <div className='inputColumn'>
-        <div className='inputItem'>
+      <div className='table-column inputBlock'>
+        <div className='table-row'>
           <label className='table-cell inputLabel'>X:</label>
           <input
             {...register('x', { required: true })}
@@ -48,7 +48,7 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
           />
         </div>
 
-        <div className='inputItem'>
+        <div className='table-row'>
           <label className='table-cell inputLabel'>Y:</label>
           <input
             {...register('y', { required: true })}
@@ -59,7 +59,7 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
           />
         </div>
 
-        <div className='inputItem'>
+        <div className='table-row'>
           <label className='table-cell inputLabel'>Z:</label>
           <input
             {...register('z', { required: true })}
@@ -70,7 +70,7 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
           />
         </div>
 
-        <div className='inputItem'>
+        <div className='table-row'>
           <label className='table-cell inputLabel'>Tag:</label>
 
           <input
@@ -81,7 +81,7 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
           />
         </div>
 
-        <div className='inputItem'>
+        <div className='table-row'>
           <label className='table-cell inputLabel'>Layer:</label>
 
           <select

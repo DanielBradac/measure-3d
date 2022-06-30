@@ -103,111 +103,121 @@ const AddVector = ({
   return (
     <>
       <form onSubmit={addVector} className='inputForm'>
-        <div>
-          <h3>Point from</h3>
+        <div className='table-column inputBlock mr-8'>
+          <span className='table-row'>Point from</span>
           <select
-            className='select select-bordered select-sm'
+            className='table-row select select-bordered select-sm'
             {...register('pointFrom')}
             onChange={handleChangeFrom}
           >
             {getPointSelection(points)}
           </select>
-          <br />
 
-          <label htmlFor='xFrom'>X:</label>
-          <input
-            {...register('xFrom')}
-            type='number'
-            id='xFrom'
-            step='0.001'
-            disabled={fromDisabled}
-            className='input input-bordered input-sm'
-          />
-
-          <label htmlFor='yFrom'>Y:</label>
-          <input
-            {...register('yFrom')}
-            type='number'
-            id='yFrom'
-            step='0.001'
-            disabled={fromDisabled}
-            className='input input-bordered input-sm'
-          />
-
-          <label htmlFor='zFrom'>Z:</label>
-          <input
-            {...register('zFrom')}
-            type='number'
-            id='zFrom'
-            step='0.001'
-            disabled={fromDisabled}
-            className='input input-bordered input-sm'
-          />
-
-          <label htmlFor='tagFrom'>Tag:</label>
-          <input
-            {...register('tagFrom')}
-            type='string'
-            id='tagFrom'
-            disabled={fromDisabled}
-            className='input input-bordered input-sm'
-          />
+          <div className='table-row'>
+            <label className='table-cell inputLabel'>X:</label>
+            <input
+              {...register('xFrom')}
+              type='number'
+              id='xFrom'
+              step='0.001'
+              disabled={fromDisabled}
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
+          <div className='table-row'>
+            <label className='table-cell inputLabel'>Y:</label>
+            <input
+              {...register('yFrom')}
+              type='number'
+              id='yFrom'
+              step='0.001'
+              disabled={fromDisabled}
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
+          <div className='table-row'>
+            <label className='table-cell inputLabel'>Z:</label>
+            <input
+              {...register('zFrom')}
+              type='number'
+              id='zFrom'
+              step='0.001'
+              disabled={fromDisabled}
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
+          <div className='table-row'>
+            <label className='table-cell inputLabel'>Tag:</label>
+            <input
+              {...register('tagFrom')}
+              type='string'
+              id='tagFrom'
+              disabled={fromDisabled}
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
         </div>
 
-        <div>
-          <h3>Point to</h3>
+        <div className='table-column inputBlock'>
+          <h3 className='table-row'>Point to</h3>
           <select
-            className='select select-bordered select-sm'
+            className='table-row select select-bordered select-sm'
             {...register('pointTo')}
             onChange={handleChangeTo}
           >
             {getPointSelection(points)}
           </select>
-          <br />
 
-          <label htmlFor='xTo'>X:</label>
-          <input
-            {...register('xTo')}
-            type='number'
-            id='x'
-            step='0.001'
-            disabled={toDisabled}
-            className='input input-bordered input-sm'
-          />
-
-          <label htmlFor='yTo'>Y:</label>
-          <input
-            {...register('yTo')}
-            type='number'
-            id='y'
-            step='0.001'
-            disabled={toDisabled}
-            className='input input-bordered input-sm'
-          />
-
-          <label htmlFor='zTo'>Z:</label>
-          <input
-            {...register('zTo')}
-            type='number'
-            id='z'
-            step='0.001'
-            disabled={toDisabled}
-            className='input input-bordered input-sm'
-          />
-
-          <label htmlFor='tagTo'>Tag:</label>
-          <input
-            {...register('tagTo')}
-            type='string'
-            id='tag'
-            disabled={toDisabled}
-            className='input input-bordered input-sm'
-          />
+          <div className='table-row'>
+            <label className='table-cell inputLabel'>X:</label>
+            <input
+              {...register('xTo')}
+              type='number'
+              id='x'
+              step='0.001'
+              disabled={toDisabled}
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
+          <div className='table-row'>
+            <label className='table-cell inputLabel'>Y:</label>
+            <input
+              {...register('yTo')}
+              type='number'
+              id='y'
+              step='0.001'
+              disabled={toDisabled}
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
+          <div className='table-row'>
+            <label className='table-cell inputLabel'>Z:</label>
+            <input
+              {...register('zTo')}
+              type='number'
+              id='z'
+              step='0.001'
+              disabled={toDisabled}
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
+          <div className='table-row'>
+            <label className='table-cell inputLabel'>Tag:</label>
+            <input
+              {...register('tagTo')}
+              type='string'
+              id='tag'
+              disabled={toDisabled}
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
         </div>
 
-        <button type='submit' className='buttonOutline'>
-          Add vector
-        </button>
+        <div className='submitButton'>
+          <button type='submit' className='buttonOutline'>
+            Add vector
+          </button>
+        </div>
       </form>
     </>
   )
