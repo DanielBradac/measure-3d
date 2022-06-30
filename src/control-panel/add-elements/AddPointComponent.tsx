@@ -33,44 +33,43 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
   })
 
   // Render
-  // TODO předělat tak, aby se to poskládalo pod sebe, když se to zmenší - bude se muset zrušit tabulka a nějak udělat flexbox
+
   return (
     <form onSubmit={addPoint} className='inputForm'>
       <div className='inputColumn'>
         <div className='inputItem'>
-          <label className='inputLabel'>X:</label>
+          <label className='table-cell inputLabel'>X:</label>
           <input
             {...register('x', { required: true })}
             type='number'
             id='x'
             step='0.001'
-            className='input input-bordered input-sm'
+            className='table-cell input input-bordered input-sm'
           />
         </div>
 
         <div className='inputItem'>
-          <label className='inputLabel'>Y:</label>
+          <label className='table-cell inputLabel'>Y:</label>
           <input
             {...register('y', { required: true })}
             type='number'
             id='y'
             step='0.001'
-            className='input input-bordered input-sm'
+            className='table-cell input input-bordered input-sm'
           />
         </div>
 
         <div className='inputItem'>
-          <label className='inputLabel'>Z:</label>
+          <label className='table-cell inputLabel'>Z:</label>
           <input
             {...register('z', { required: true })}
             type='number'
             id='x'
             step='0.001'
-            className='input input-bordered input-sm'
+            className='table-cell input input-bordered input-sm'
           />
         </div>
-      </div>
-      <div className='inputColumn'>
+
         <div className='inputItem'>
           <label className='table-cell inputLabel'>Tag:</label>
 
