@@ -2,62 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 @layer components {
-  .pageContent {
-    @apply flex flex-row align-top text-black bg-slate-600 font-main text-lg;
-  }
-  .header {
-    @apply bg-slate-500 flex justify-center text-white font-main text-3xl p-6 border-b-2 border-gray-400;
-  }
-  .clickable {
-    @apply cursor-pointer;
-  }
-  .tag {
-    @apply font-tag select-none;
-  }
-  .canvas {
-    @apply bg-gray-500 min-h-canvas min-w-canvas max-h-full max-w-full h-4/6 w-full resize overflow-auto;
-  }
-  .controlPanel {
-    @apply flex flex-col align-text-top h-screen w-controlPanel bg-slate-500 border-gray-400 border-l-2;
-  }
-  .visual-model {
-    @apply flex flex-col w-controlPanel h-screen items-start;
-  }
-  .tabContent {
-    @apply p-3 text-black;
-  }
-  .tabs {
-    @apply bg-slate-600 py-2 px-3 rounded-none;
-  }
-  .tab {
-    @apply text-black bg-inherit;
-  }
-  .tabs-boxed .tab-active {
-    @apply text-white;
-  }
-  .settings {
-    @apply menu overflow-y-auto bg-base-100 text-base-content w-fit p-4 font-main;
-  }
-  .settingsHeader {
-    @apply text-2xl mb-2 ml-1;
-  }
-  .settingsContent {
-    @apply border-t-2 border-secondary pt-2 text-lg flex flex-col;
-  }
-  .settingsLabel {
-    @apply self-center mr-4;
-  }
-  .settingsToggle {
-    @apply toggle mt-3 toggle-primary;
-  }
-  .buttonOutline {
-    @apply btn btn-sm btn-outline text-blue-800 border-2;
-  }
-  .buttonOutline:hover,
-  .buttonOutline-active {
-    @apply bg-primary border-blue-800;
-  }
-  .inputForm {
-    @apply border-2 border-secondary p-4 rounded-lg mt-5;
-  }
+    .pageContent {
+        @apply flex flex-row align-top text-black bg-slate-600 font-main text-lg;
+    }
+    .header {
+        @apply bg-slate-500 flex justify-center text-white font-main text-3xl p-6 border-b-2 border-gray-400;
+    }
+    .clickable {
+        @apply cursor-pointer;
+    }
+    .tag {
+        @apply font-tag select-none;
+    }
+    .canvas {
+        @apply bg-gray-500 min-h-canvas min-w-canvas max-h-full max-w-full h-4/6 w-full resize overflow-auto;
+    }
+    .controlPanel {
+        @apply flex flex-col align-text-top h-screen w-controlPanel bg-slate-500 border-gray-400 border-l-2;
+    }
+    .visual-model {
+        @apply flex flex-col w-controlPanel h-screen items-start;
+    }
+    .tabContent {
+        @apply p-3 text-black;
+    }
+    .tabs {
+        @apply bg-slate-600 py-2 px-3 rounded-none;
+    }
+    .tab {
+        @apply text-black bg-inherit;
+    }
+    .tabs-boxed .tab-active {
+        @apply text-white;
+    }
+    .settings {
+        @apply menu overflow-y-auto bg-base-100 text-base-content w-fit p-4 font-main;
+    }
+    .settingsHeader {
+        @apply text-2xl mb-2 ml-1;
+    }
+    .settingsContent {
+        @apply border-t-2 border-secondary pt-2 text-lg flex flex-col;
+    }
+    .settingsLabel {
+        @apply self-center mr-4;
+    }
+    .settingsToggle {
+        @apply toggle mt-3 toggle-primary;
+    }
+    .buttonOutline {
+        @apply btn btn-sm btn-outline text-blue-800 border-2;
+    }
+    .buttonOutline:hover,
+    .buttonOutline-active {
+        @apply bg-primary border-blue-800;
+    }
+    .inputForm {
+        @apply border-2 border-secondary p-4 rounded-lg mt-5 flex flex-wrap;
+    }
+    .inputItem {
+        @apply table-row;
+    }
+    .inputColumn {
+        @apply table-column border-spacing-3;
+    }
+    .inputLabel {
+        @apply px-3;
+    }
+    .submitButton {
+        @apply pl-5 py-4 w-full;
+    }
 }

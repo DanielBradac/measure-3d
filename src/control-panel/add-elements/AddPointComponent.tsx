@@ -36,65 +36,69 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
   // TODO předělat tak, aby se to poskládalo pod sebe, když se to zmenší - bude se muset zrušit tabulka a nějak udělat flexbox
   return (
     <form onSubmit={addPoint} className='inputForm'>
-      <table>
-        <tr>
-          <td>
-            <label className='p-2'>X:</label>
-            <input
-              {...register('x', { required: true })}
-              type='number'
-              id='x'
-              step='0.001'
-              className='input input-bordered input-sm'
-            />
-          </td>
-          <td>
-            <label className='p-2'>Y:</label>
-            <input
-              {...register('y', { required: true })}
-              type='number'
-              id='y'
-              step='0.001'
-              className='input input-bordered input-sm'
-            />
-          </td>
-          <td>
-            <label className='p-2'>Z:</label>
-            <input
-              {...register('z', { required: true })}
-              type='number'
-              id='x'
-              step='0.001'
-              className='input input-bordered input-sm'
-            />
-          </td>
-        </tr>
+      <div className='inputColumn'>
+        <div className='inputItem'>
+          <label className='inputLabel'>X:</label>
+          <input
+            {...register('x', { required: true })}
+            type='number'
+            id='x'
+            step='0.001'
+            className='input input-bordered input-sm'
+          />
+        </div>
 
-        <tr>
-          <td>
-            <label className='p-2'>Tag:</label>
-            <input
-              {...register('tag')}
-              type='string'
-              id='tag'
-              className='input input-bordered input-sm'
-            />
-          </td>
-          <td>
-            <label className='p-2'>Layer:</label>
-            <select
-              className='select select-bordered select-sm'
-              {...register('layerIndex')}
-            >
-              {getLayerSelection(layers)}
-            </select>
-          </td>
-        </tr>
-      </table>
+        <div className='inputItem'>
+          <label className='inputLabel'>Y:</label>
+          <input
+            {...register('y', { required: true })}
+            type='number'
+            id='y'
+            step='0.001'
+            className='input input-bordered input-sm'
+          />
+        </div>
 
-      <button type='submit' className='buttonOutline'>
-        Add point
-      </button>
+        <div className='inputItem'>
+          <label className='inputLabel'>Z:</label>
+          <input
+            {...register('z', { required: true })}
+            type='number'
+            id='x'
+            step='0.001'
+            className='input input-bordered input-sm'
+          />
+        </div>
+      </div>
+      <div className='inputColumn'>
+        <div className='inputItem'>
+          <label className='table-cell inputLabel'>Tag:</label>
+
+          <input
+            {...register('tag')}
+            type='string'
+            id='tag'
+            className='table-cell input input-bordered input-sm'
+          />
+        </div>
+
+        <div className='inputItem'>
+          <label className='table-cell inputLabel'>Layer:</label>
+
+          <select
+            className='table-cell select select-bordered select-sm'
+            {...register('layerIndex')}
+          >
+            {getLayerSelection(layers)}
+          </select>
+        </div>
+      </div>
+
+      <div className='submitButton'>
+        <button type='submit' className='buttonOutline'>
+          Add point
+        </button>
+      </div>
     </form>
   )
 }
