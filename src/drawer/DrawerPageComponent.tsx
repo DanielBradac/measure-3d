@@ -31,7 +31,7 @@ const DrawerPage = ({
                   type='checkbox'
                   className='settingsToggle align-middle'
                   checked={axisToggled}
-                  onClick={toggleAxis}
+                  onChange={toggleAxis}
                 />
               </div>
             </div>

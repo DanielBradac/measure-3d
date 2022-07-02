@@ -20,11 +20,9 @@ export function getPointSelection(points: Point[]): JSX.Element[] {
 export function getLayerSelection(layers: Layer[]): JSX.Element[] {
   return layers.map((layer, index) => {
     return (
-      <>
-        <option key={index} value={index}>
-          {layer.name}
-        </option>
-      </>
+      <option key={layer.name} value={index}>
+        {layer.name}
+      </option>
     )
   })
 }

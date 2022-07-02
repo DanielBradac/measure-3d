@@ -1,6 +1,6 @@
 dokončit stylování add vectoru
 odstranit chyby co hlásí konzole
-odstranit tabulky - přejít na flex itemy
+popisek bodu by to chtělo přesunou blíž k samotným bodům 
 
 kouknout na react split screen
 
