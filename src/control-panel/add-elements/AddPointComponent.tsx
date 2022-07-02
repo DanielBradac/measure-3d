@@ -32,6 +32,23 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
     reset()
   })
 
+  const generateRandomPoints = () => {
+    const newPoints: Point[] = []
+    for (let x = 0; x < 10; x++) {
+      Math.floor(Math.random() * 11)
+      newPoints.push(
+        new Point(
+          Math.floor(Math.random() * 11),
+          Math.floor(Math.random() * 11),
+          Math.floor(Math.random() * 11),
+          x.toString(),
+          layers[0]
+        )
+      )
+    }
+    onAddPoint(newPoints)
+  }
+
   // Render
 
   return (
@@ -96,6 +113,15 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
       <div className='submitButton'>
         <button type='submit' className='buttonOutline'>
           Add point
+        </button>
+      </div>
+      <div>
+        <button
+          type='button'
+          className='buttonOutline'
+          onClick={generateRandomPoints}
+        >
+          10 random points
         </button>
       </div>
     </form>

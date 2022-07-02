@@ -1,6 +1,5 @@
 dokončit stylování add vectoru
-odstranit chyby co hlásí konzole
-popisek bodu by to chtělo přesunou blíž k samotným bodům 
+udělat v levém menu toggle na popisky bodů a na velikost popisků bodů
 
 kouknout na react split screen
 

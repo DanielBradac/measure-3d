@@ -43,7 +43,7 @@ const DrawerPage = ({
               <input
                 type='range'
                 min='0'
-                max='10'
+                max='50'
                 defaultValue={1}
                 onChange={handleAxisChange}
                 step='0.1'

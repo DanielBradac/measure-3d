@@ -14,8 +14,8 @@ const PointComp = ({ center, radius, color, tag }: PointCompProps) => (
     <sphereBufferGeometry args={[radius, 50, 50]} />
     <meshBasicMaterial color={color} />
 
-    <Html distanceFactor={20}>
-      <div className='tag' style={{ fontSize: radius * 220, color: color }}>
+    <Html distanceFactor={5}>
+      <div className='tag' style={{ fontSize: radius * 800, color: color }}>
         {tag}
       </div>
     </Html>
