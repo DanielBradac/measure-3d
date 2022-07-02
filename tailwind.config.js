@@ -42,6 +42,9 @@ module.exports = {
             },
             alignItems: {
                 'top': 'top'
+            },
+            display: {
+                'displatTable': 'table'
             }
         }
     }

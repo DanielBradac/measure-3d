@@ -35,6 +35,9 @@
     .tabs-boxed .tab-active {
         @apply text-white;
     }
+    .itemLabel {
+        @apply pr-4;
+    }
     .settings {
         @apply menu overflow-y-auto bg-base-100 text-base-content w-fit p-4 font-main;
     }
@@ -42,13 +45,10 @@
         @apply text-2xl mb-2 ml-1;
     }
     .settingsContent {
-        @apply border-t-2 border-secondary pt-2 text-lg flex flex-col;
-    }
-    .settingsLabel {
-        @apply self-center mr-4;
+        @apply border-t-2 border-secondary pt-2 text-lg flex flex-col table border-spacing-x-1 border-spacing-y-5;
     }
     .settingsToggle {
-        @apply toggle mt-3 toggle-primary;
+        @apply toggle toggle-primary;
     }
     .buttonOutline {
         @apply btn btn-sm btn-outline text-blue-800 border-2;
@@ -62,9 +62,6 @@
     }
     .inputBlock {
         @apply border-spacing-3;
-    }
-    .inputLabel {
-        @apply pr-3;
     }
     .submitButton {
         @apply pl-3 py-4 w-full;

@@ -22,38 +22,34 @@ const DrawerPage = ({
         <div className='settings'>
           <h2 className='settingsHeader'>Settings</h2>
           <div className='settingsContent'>
-            <table>
-              <tr>
-                <td>
-                  <label className='settingsLabel'>Toggle axis:</label>
-                </td>
-                <td>
-                  <input
-                    type='checkbox'
-                    className='settingsToggle'
-                    checked={axisToggled}
-                    onClick={toggleAxis}
-                  />
-                </td>
-              </tr>
+            <div className='table-row'>
+              <label className='itemLabel table-cell align-middle'>
+                Toggle axis:
+              </label>
+              <div className='table-cell'>
+                <input
+                  type='checkbox'
+                  className='settingsToggle align-middle'
+                  checked={axisToggled}
+                  onClick={toggleAxis}
+                />
+              </div>
+            </div>
 
-              <tr>
-                <td>
-                  <label className='settingsLabel'>Axis size:</label>
-                </td>
-                <td>
-                  <input
-                    type='range'
-                    min='0'
-                    max='10'
-                    defaultValue={1}
-                    onChange={handleAxisChange}
-                    step='0.1'
-                    className='mt-2.5'
-                  />
-                </td>
-              </tr>
-            </table>
+            <div className='table-row'>
+              <label className='itemLabel table-cell align-middle'>
+                Axis size:
+              </label>
+              <input
+                type='range'
+                min='0'
+                max='10'
+                defaultValue={1}
+                onChange={handleAxisChange}
+                step='0.1'
+                className='table-cell align-middle'
+              />
+            </div>
           </div>
         </div>
       </div>

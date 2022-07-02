@@ -114,7 +114,7 @@ const AddVector = ({
           </select>
 
           <div className='table-row'>
-            <label className='table-cell inputLabel'>X:</label>
+            <label className='table-cell label'>X:</label>
             <input
               {...register('xFrom')}
               type='number'
@@ -125,7 +125,7 @@ const AddVector = ({
             />
           </div>
           <div className='table-row'>
-            <label className='table-cell inputLabel'>Y:</label>
+            <label className='table-cell label'>Y:</label>
             <input
               {...register('yFrom')}
               type='number'
@@ -136,7 +136,7 @@ const AddVector = ({
             />
           </div>
           <div className='table-row'>
-            <label className='table-cell inputLabel'>Z:</label>
+            <label className='table-cell label'>Z:</label>
             <input
               {...register('zFrom')}
               type='number'
@@ -147,7 +147,7 @@ const AddVector = ({
             />
           </div>
           <div className='table-row'>
-            <label className='table-cell inputLabel'>Tag:</label>
+            <label className='table-cell label'>Tag:</label>
             <input
               {...register('tagFrom')}
               type='string'
@@ -169,7 +169,7 @@ const AddVector = ({
           </select>
 
           <div className='table-row'>
-            <label className='table-cell inputLabel'>X:</label>
+            <label className='table-cell label'>X:</label>
             <input
               {...register('xTo')}
               type='number'
@@ -180,7 +180,7 @@ const AddVector = ({
             />
           </div>
           <div className='table-row'>
-            <label className='table-cell inputLabel'>Y:</label>
+            <label className='table-cell label'>Y:</label>
             <input
               {...register('yTo')}
               type='number'
@@ -191,7 +191,7 @@ const AddVector = ({
             />
           </div>
           <div className='table-row'>
-            <label className='table-cell inputLabel'>Z:</label>
+            <label className='table-cell label'>Z:</label>
             <input
               {...register('zTo')}
               type='number'
@@ -202,7 +202,7 @@ const AddVector = ({
             />
           </div>
           <div className='table-row'>
-            <label className='table-cell inputLabel'>Tag:</label>
+            <label className='table-cell label'>Tag:</label>
             <input
               {...register('tagTo')}
               type='string'

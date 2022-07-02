@@ -2,6 +2,8 @@ dokončit stylování add vectoru
 odstranit chyby co hlásí konzole
 odstranit tabulky - přejít na flex itemy
 
+kouknout na react split screen
+
 Udělat layers picker při vytváření vektoru
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty
