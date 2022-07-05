@@ -3,7 +3,7 @@ export default class Settings {
     private _axisToggled: boolean = true,
     private _axisSize: number = 3,
     private _pointTagsToggled: boolean = true,
-    private _pointTagsSize: number = 8,
+    private _pointTagsSize: number = 15,
     private _pointSize: number = 0.025
   ) {}
 

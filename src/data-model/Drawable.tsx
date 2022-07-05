@@ -1,11 +1,10 @@
-import { useContext } from 'react'
-import { SettingsContext } from '../App'
+import Settings from '../context/Settings'
 import LineComp from '../visual-components/LineComponent'
 import PointComp from '../visual-components/PointComponent'
 import { Layer } from './Layer'
 
 export interface Drawable {
-  draw(key: number): JSX.Element
+  draw(key: number, ctx?: Settings): JSX.Element
   classTag: string
   layer: Layer
 }
@@ -76,10 +75,9 @@ export class Point implements Drawable {
     return this._tag
   }
 
-  draw(key: number): JSX.Element {
+  draw(key: number, ctx: Settings): JSX.Element {
     // Import global settings
-    const { pointTagsToggled, pointTagsSize, pointSize } =
-      useContext(SettingsContext)
+    const { pointTagsToggled, pointTagsSize, pointSize } = ctx
     return (
       <PointComp
         center={[this._x, this._y, this._z]}

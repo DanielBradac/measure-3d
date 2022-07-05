@@ -19,7 +19,8 @@ const DrawerPage = ({
   children,
 }: DrawerPageProps) => {
   // Import global settings
-  const { axisToggled, pointTagsToggled } = useContext(SettingsContext)
+  const { axisToggled, pointTagsToggled, pointSize, axisSize, pointTagsSize } =
+    useContext(SettingsContext)
   // Render
   return (
     <div className='drawer'>
@@ -53,7 +54,7 @@ const DrawerPage = ({
                 type='range'
                 min='0'
                 max='50'
-                defaultValue={5}
+                defaultValue={axisSize}
                 onChange={handleAxisChange}
                 step='0.1'
                 className='table-cell align-middle'
@@ -81,8 +82,8 @@ const DrawerPage = ({
               <input
                 type='range'
                 min='1'
-                max='100'
-                defaultValue={8}
+                max='150'
+                defaultValue={pointTagsSize}
                 onChange={handleTagSizeChange}
                 step='0.5'
                 className='table-cell align-middle'
@@ -97,7 +98,7 @@ const DrawerPage = ({
                 type='range'
                 min='0.00001'
                 max='0.25'
-                defaultValue={0.025}
+                defaultValue={pointSize}
                 onChange={handlePointSizeChange}
                 step='0.005'
                 className='table-cell align-middle'

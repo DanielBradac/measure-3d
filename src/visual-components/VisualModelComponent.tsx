@@ -10,7 +10,9 @@ import { SettingsContext } from '../App'
 interface VisualModelProps {
   elements: Drawable[]
 }
+
 const VisualModel = ({ elements }: VisualModelProps) => {
+  console.log('rendered')
   const Controls = () => {
     const controls = useRef<OrbitControls>(null)
     const { camera, gl } = useThree()
@@ -30,11 +32,15 @@ const VisualModel = ({ elements }: VisualModelProps) => {
   }
 
   // Import global settings
-  const { axisToggled, axisSize } = useContext(SettingsContext)
+  const settings = useContext(SettingsContext)
+
   // Render
-  const toRender = elements.map((currElement, index) => currElement.draw(index))
-  const axis = axisToggled ? (
-    <primitive object={new THREE.AxesHelper(axisSize)} />
+  const toRender = elements.map((currElement, index) =>
+    currElement.draw(index, settings)
+  )
+
+  const axis = settings.axisToggled ? (
+    <primitive object={new THREE.AxesHelper(settings.axisSize)} />
   ) : (
     ''
   )

@@ -18,7 +18,6 @@ const PointComp = ({
   showTag,
   tagSize,
 }: PointCompProps) => {
-  console.log(radius * 100 + tagSize)
   return (
     // Render
     <mesh position={new THREE.Vector3(...center)}>
