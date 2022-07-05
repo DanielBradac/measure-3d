@@ -6,6 +6,7 @@ interface DrawerPageProps {
   handleAxisChange: (event: React.FormEvent<HTMLInputElement>) => void
   toggleTags: () => void
   handleTagSizeChange: (event: React.FormEvent<HTMLInputElement>) => void
+  handlePointSizeChange: (event: React.FormEvent<HTMLInputElement>) => void
   children?: React.ReactNode
 }
 
@@ -14,6 +15,7 @@ const DrawerPage = ({
   handleAxisChange,
   toggleTags,
   handleTagSizeChange,
+  handlePointSizeChange,
   children,
 }: DrawerPageProps) => {
   // Import global settings
@@ -83,6 +85,21 @@ const DrawerPage = ({
                 defaultValue={8}
                 onChange={handleTagSizeChange}
                 step='0.5'
+                className='table-cell align-middle'
+              />
+            </div>
+
+            <div className='table-row'>
+              <label className='itemLabel table-cell align-middle'>
+                Point size:
+              </label>
+              <input
+                type='range'
+                min='0.00001'
+                max='0.25'
+                defaultValue={0.025}
+                onChange={handlePointSizeChange}
+                step='0.005'
                 className='table-cell align-middle'
               />
             </div>

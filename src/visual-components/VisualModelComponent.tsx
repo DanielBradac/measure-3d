@@ -2,7 +2,7 @@ import { Canvas, extend, useThree, useFrame } from '@react-three/fiber'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Drawable } from '../data-model/Drawable'
 
-import { useContext, useRef, useState } from 'react'
+import { useContext, useRef } from 'react'
 import * as THREE from 'three'
 import { BsFillGearFill } from 'react-icons/bs'
 import { SettingsContext } from '../App'

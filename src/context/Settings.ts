@@ -4,6 +4,7 @@ export default class Settings {
     private _axisSize: number = 3,
     private _pointTagsToggled: boolean = true,
     private _pointTagsSize: number = 8,
+    private _pointSize: number = 0.025
   ) {}
 
   get axisToggled(): boolean {
@@ -44,7 +45,16 @@ export default class Settings {
     return this
   }
 
+  get pointSize(): number {
+    return this._pointSize
+  }
+
+  setPointSize(value: number): Settings {
+    this._pointSize = value
+    return this
+  }
+
   copy(): Settings {
-    return new Settings(this._axisToggled, this._axisSize, this._pointTagsToggled, this._pointTagsSize)
+    return new Settings(this._axisToggled, this._axisSize, this._pointTagsToggled, this._pointTagsSize, this._pointSize)
   }
 }

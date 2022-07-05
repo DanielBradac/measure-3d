@@ -78,11 +78,12 @@ export class Point implements Drawable {
 
   draw(key: number): JSX.Element {
     // Import global settings
-    const { pointTagsToggled, pointTagsSize } = useContext(SettingsContext)
+    const { pointTagsToggled, pointTagsSize, pointSize } =
+      useContext(SettingsContext)
     return (
       <PointComp
         center={[this._x, this._y, this._z]}
-        radius={0.025}
+        radius={pointSize}
         color={this._color || this.layer.color}
         key={key}
         tag={this._tag}

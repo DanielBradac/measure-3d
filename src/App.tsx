@@ -1,6 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
-import Settings from './common/Settings'
+import React, { useState } from 'react'
+import Settings from './context/Settings'
 import ControlPanel from './control-panel/ControlPanelComponent'
 import { Drawable, Point, Vector } from './data-model/Drawable'
 import { Layer } from './data-model/Layer'
@@ -75,6 +74,17 @@ const App = () => {
     })
   }
 
+  const handlePointSizeChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setSettings((prevSettings: Settings) => {
+      if (event.currentTarget) {
+        return prevSettings
+          .copy()
+          .setPointSize(event.currentTarget.valueAsNumber)
+      }
+      return prevSettings
+    })
+  }
+
   // Render
   return (
     <SettingsContext.Provider value={settings}>
@@ -84,6 +94,7 @@ const App = () => {
         handleAxisChange={handleAxisChange}
         toggleTags={toggleTags}
         handleTagSizeChange={handleTagSizeChange}
+        handlePointSizeChange={handlePointSizeChange}
       >
         <div className='pageContent'>
           <VisualModel elements={elements} />

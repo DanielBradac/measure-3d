@@ -18,6 +18,7 @@ const PointComp = ({
   showTag,
   tagSize,
 }: PointCompProps) => {
+  console.log(radius * 100 + tagSize)
   return (
     // Render
     <mesh position={new THREE.Vector3(...center)}>
@@ -27,7 +28,11 @@ const PointComp = ({
         <Html distanceFactor={5}>
           <div
             className='tag'
-            style={{ fontSize: radius * tagSize * 100, color: color }}
+            style={{
+              fontSize: tagSize,
+              color: color,
+              padding: radius * 200,
+            }}
           >
             {tag}
           </div>
