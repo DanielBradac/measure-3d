@@ -82,7 +82,7 @@ const DrawerPage = ({
               <input
                 type='range'
                 min='1'
-                max='150'
+                max='300'
                 defaultValue={pointTagsSize}
                 onChange={handleTagSizeChange}
                 step='0.5'
@@ -97,7 +97,7 @@ const DrawerPage = ({
               <input
                 type='range'
                 min='0.00001'
-                max='0.25'
+                max='0.5'
                 defaultValue={pointSize}
                 onChange={handlePointSizeChange}
                 step='0.005'

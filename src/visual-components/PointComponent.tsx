@@ -18,13 +18,15 @@ const PointComp = ({
   showTag,
   tagSize,
 }: PointCompProps) => {
+  // [0,0,0] behaves differently, so this workaround is needed
+
   return (
     // Render
     <mesh position={new THREE.Vector3(...center)}>
       <sphereBufferGeometry args={[radius, 50, 50]} />
       <meshBasicMaterial color={color} />
       {showTag && (
-        <Html distanceFactor={5}>
+        <Html distanceFactor={5} position={[0.1, 0.1, 0]}>
           <div
             className='tag'
             style={{
