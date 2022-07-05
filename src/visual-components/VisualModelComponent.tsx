@@ -2,16 +2,15 @@ import { Canvas, extend, useThree, useFrame } from '@react-three/fiber'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Drawable } from '../data-model/Drawable'
 
-import { useRef } from 'react'
+import { useContext, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { BsFillGearFill } from 'react-icons/bs'
+import { SettingsContext } from '../App'
 
 interface VisualModelProps {
   elements: Drawable[]
-  axisToggled: boolean
-  axisSize: number
 }
-const VisualModel = ({ elements, axisToggled, axisSize }: VisualModelProps) => {
+const VisualModel = ({ elements }: VisualModelProps) => {
   const Controls = () => {
     const controls = useRef<OrbitControls>(null)
     const { camera, gl } = useThree()
@@ -30,6 +29,8 @@ const VisualModel = ({ elements, axisToggled, axisSize }: VisualModelProps) => {
     )
   }
 
+  // Import global settings
+  const { axisToggled, axisSize } = useContext(SettingsContext)
   // Render
   const toRender = elements.map((currElement, index) => currElement.draw(index))
   const axis = axisToggled ? (

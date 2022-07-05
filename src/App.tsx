@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState } from 'react'
 import Settings from './common/Settings'
 import ControlPanel from './control-panel/ControlPanelComponent'
@@ -5,6 +6,9 @@ import { Drawable, Point, Vector } from './data-model/Drawable'
 import { Layer } from './data-model/Layer'
 import DrawerPage from './drawer/DrawerPageComponent'
 import VisualModel from './visual-components/VisualModelComponent'
+
+// Context
+export const SettingsContext = React.createContext(new Settings())
 
 const App = () => {
   const [points, setPoints] = useState<Point[]>([])
@@ -16,6 +20,7 @@ const App = () => {
     new Layer('BlackLayer', 'black'),
     new Layer('OrangeLayer', 'orange'),
   ])
+  const elements: Drawable[] = [...points, ...vectors]
 
   // TODO bod je identický, když má identické souřadnice a layer - identické body nepřidávat
   const onAddPoint = (newPoint: Point[]) => {
@@ -32,9 +37,8 @@ const App = () => {
     setLayers([...layers, ...newLayer])
   }
 
-  const elements: Drawable[] = [...points, ...vectors]
+  // Left menu settings
   const [settings, setSettings] = useState<Settings>(new Settings())
-
   const handleAxisChange = (event: React.FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
@@ -52,23 +56,37 @@ const App = () => {
     })
   }
 
+  const handleTagSizeChange = (event: React.FormEvent<HTMLInputElement>) => {
+    setSettings((prevSettings: Settings) => {
+      if (event.currentTarget) {
+        return prevSettings
+          .copy()
+          .setPointTagsSize(event.currentTarget.valueAsNumber)
+      }
+      return prevSettings
+    })
+  }
+
+  const toggleTags = () => {
+    setSettings((prevSettings: Settings) => {
+      return prevSettings
+        .copy()
+        .setPointTagsToggled(!prevSettings.pointTagsToggled)
+    })
+  }
+
   // Render
   return (
-    <>
+    <SettingsContext.Provider value={settings}>
       <h1 className='header'>Measure 3D</h1>
       <DrawerPage
-        toggleAxis={() => {
-          toggleAxis()
-        }}
+        toggleAxis={toggleAxis}
         handleAxisChange={handleAxisChange}
-        axisToggled={settings.axisToggled}
+        toggleTags={toggleTags}
+        handleTagSizeChange={handleTagSizeChange}
       >
         <div className='pageContent'>
-          <VisualModel
-            elements={elements}
-            axisToggled={settings.axisToggled}
-            axisSize={settings.axisSize}
-          />
+          <VisualModel elements={elements} />
           <ControlPanel
             points={points}
             onAddPoint={onAddPoint}
@@ -77,7 +95,7 @@ const App = () => {
           />
         </div>
       </DrawerPage>
-    </>
+    </SettingsContext.Provider>
   )
 }
 

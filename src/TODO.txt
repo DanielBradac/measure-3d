@@ -1,8 +1,7 @@
 dokončit stylování add vectoru
-udělat v levém menu toggle na popisky bodů a na velikost popisků bodů
+Udělat layers picker při vytváření vektoru
 
 kouknout na react split screen
 
-Udělat layers picker při vytváření vektoru
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty

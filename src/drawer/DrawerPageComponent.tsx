@@ -1,16 +1,23 @@
+import { useContext } from 'react'
+import { SettingsContext } from '../App'
+
 interface DrawerPageProps {
   toggleAxis: () => void
   handleAxisChange: (event: React.FormEvent<HTMLInputElement>) => void
-  axisToggled: boolean
+  toggleTags: () => void
+  handleTagSizeChange: (event: React.FormEvent<HTMLInputElement>) => void
   children?: React.ReactNode
 }
 
 const DrawerPage = ({
   toggleAxis,
   handleAxisChange,
-  axisToggled,
+  toggleTags,
+  handleTagSizeChange,
   children,
 }: DrawerPageProps) => {
+  // Import global settings
+  const { axisToggled, pointTagsToggled } = useContext(SettingsContext)
   // Render
   return (
     <div className='drawer'>
@@ -24,7 +31,7 @@ const DrawerPage = ({
           <div className='settingsContent'>
             <div className='table-row'>
               <label className='itemLabel table-cell align-middle'>
-                Toggle axis:
+                Show axis:
               </label>
               <div className='table-cell'>
                 <input
@@ -44,9 +51,38 @@ const DrawerPage = ({
                 type='range'
                 min='0'
                 max='50'
-                defaultValue={1}
+                defaultValue={5}
                 onChange={handleAxisChange}
                 step='0.1'
+                className='table-cell align-middle'
+              />
+            </div>
+
+            <div className='table-row'>
+              <label className='itemLabel table-cell align-middle'>
+                Show point tags:
+              </label>
+              <div className='table-cell'>
+                <input
+                  type='checkbox'
+                  className='settingsToggle align-middle'
+                  checked={pointTagsToggled}
+                  onChange={toggleTags}
+                />
+              </div>
+            </div>
+
+            <div className='table-row'>
+              <label className='itemLabel table-cell align-middle'>
+                Point tags size:
+              </label>
+              <input
+                type='range'
+                min='1'
+                max='100'
+                defaultValue={8}
+                onChange={handleTagSizeChange}
+                step='0.5'
                 className='table-cell align-middle'
               />
             </div>
