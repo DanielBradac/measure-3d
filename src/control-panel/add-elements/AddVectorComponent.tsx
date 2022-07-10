@@ -11,7 +11,6 @@ interface AddVectorProps {
   layers: Layer[]
 }
 
-// TODO layer select for new points
 const AddVector = ({
   onAddVector,
   onAddPoint,
@@ -44,12 +43,24 @@ const AddVector = ({
     // Do we have selected points or a new ones?
     const from =
       data.pointFrom === 'new'
-        ? new Point(data.xFrom, data.yFrom, data.zFrom, data.tagFrom, layers[0])
+        ? new Point(
+            data.xFrom,
+            data.yFrom,
+            data.zFrom,
+            data.tagFrom,
+            layers[data.layerIndexFrom]
+          )
         : points[parseInt(data.pointFrom)]
 
     const to =
       data.pointTo === 'new'
-        ? new Point(data.xTo, data.yTo, data.zTo, data.tagTo, layers[0])
+        ? new Point(
+            data.xTo,
+            data.yTo,
+            data.zTo,
+            data.tagTo,
+            layers[data.layerIndexTo]
+          )
         : points[parseInt(data.pointTo)]
 
     const newPoints: Point[] = []

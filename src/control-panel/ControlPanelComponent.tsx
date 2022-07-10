@@ -50,7 +50,7 @@ const ControlPanel = ({
             setTabValue(0)
           }}
         >
-          Add elements
+          Elements
         </a>
         <a
           className={getClasses(1)}
@@ -58,7 +58,7 @@ const ControlPanel = ({
             setTabValue(1)
           }}
         >
-          AddLayers
+          Layers
         </a>
         <a
           className={getClasses(2)}
