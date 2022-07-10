@@ -1,7 +1,13 @@
-dokončit stylování add vectoru
-Udělat layers picker při vytváření vektoru
 
 kouknout na react split screen
 
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty
+
+začít s measure
+    nějakým způsobem umět vykreslit uzavřené 2D a 3D objekty - existuje v teorii lineárních modelů nějaký algoritmus na identifikaci?
+        2D - minimální objekt je trojúhelník
+            odpovídá algoritmu pro identifikaci všech kružnic v neorientovaném grafu!!
+
+        3D - minimálníé objekt je jehlan
+            část 3D objektu musí sdílet právě 2 body - vytvoří tím roh dvou stěn

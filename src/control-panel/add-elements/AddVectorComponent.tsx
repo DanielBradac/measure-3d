@@ -73,7 +73,7 @@ const AddVector = ({
 
     onAddPoint(newPoints)
     // Layer is taken from the 'from' point
-    onAddVector([new Vector(from, to, from.layer)])
+    onAddVector([new Vector(from, to)])
   })
 
   // From point selection changed

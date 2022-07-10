@@ -15,16 +15,11 @@ export class Vector implements Drawable {
   constructor(
     private _from: Point,
     private _to: Point,
-    private _layer: Layer,
     private _color?: string
   ) {}
 
-  get layer() {
-    return this._layer
-  }
-
-  set layer(value: Layer) {
-    this._layer = value
+  get layer(): Layer {
+    return this._from.layer
   }
 
   draw(key: number): JSX.Element {
