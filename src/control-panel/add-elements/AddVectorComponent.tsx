@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { getPointSelection } from '../../common/Selections'
+import { getLayerSelection, getPointSelection } from '../../common/Selections'
 import { Point, Vector } from '../../data-model/Drawable'
 import { Layer } from '../../data-model/Layer'
 
@@ -24,11 +24,13 @@ const AddVector = ({
       yFrom: 0,
       zFrom: 0,
       tagFrom: '',
+      layerIndexFrom: 0,
 
       xTo: 0,
       yTo: 0,
       zTo: 0,
       tagTo: '',
+      layerIndexTo: 0,
 
       pointFrom: 'new',
       pointTo: 'new',
@@ -72,12 +74,15 @@ const AddVector = ({
       setValue('yFrom', point.y)
       setValue('zFrom', point.z)
       setValue('tagFrom', point.tag)
+      const layerIndex = point.layer.indexIn(layers)
+      setValue('layerIndexFrom', layerIndex === -1 ? 0 : layerIndex)
     } else {
       setFromDisabled(false)
       resetField('xFrom')
       resetField('yFrom')
       resetField('zFrom')
       resetField('tagFrom')
+      resetField('layerIndexFrom')
     }
   }
 
@@ -90,6 +95,8 @@ const AddVector = ({
       setValue('yTo', point.y)
       setValue('zTo', point.z)
       setValue('tagTo', point.tag)
+      const layerIndex = point.layer.indexIn(layers)
+      setValue('layerIndexTo', layerIndex === -1 ? 0 : layerIndex)
     } else {
       setToDisabled(false)
       resetField('xTo')
@@ -156,6 +163,16 @@ const AddVector = ({
               className='table-cell input input-bordered input-sm'
             />
           </div>
+          <div className='table-row'>
+            <label className='table-cell itemLabel'>Layer:</label>
+            <select
+              className='table-cell select select-bordered select-sm'
+              {...register('layerIndexFrom')}
+              disabled={fromDisabled}
+            >
+              {getLayerSelection(layers)}
+            </select>
+          </div>
         </div>
 
         <div className='table-column inputBlock'>
@@ -210,6 +227,16 @@ const AddVector = ({
               disabled={toDisabled}
               className='table-cell input input-bordered input-sm'
             />
+          </div>
+          <div className='table-row'>
+            <label className='table-cell itemLabel'>Layer:</label>
+            <select
+              className='table-cell select select-bordered select-sm'
+              {...register('layerIndexTo')}
+              disabled={toDisabled}
+            >
+              {getLayerSelection(layers)}
+            </select>
           </div>
         </div>
 
