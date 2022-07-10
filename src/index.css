@@ -35,8 +35,14 @@
     .tabs-boxed .tab-active {
         @apply text-white;
     }
+    .formHeader {
+        @apply text-xl;
+    }
     .itemLabel {
         @apply pr-4;
+    }
+    .noLabelSelect {
+        @apply pl-2 pr-6;
     }
     .settings {
         @apply menu overflow-y-auto bg-base-100 text-base-content w-fit p-4 font-main;

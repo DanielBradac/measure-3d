@@ -122,9 +122,9 @@ const AddVector = ({
     <>
       <form onSubmit={addVector} className='inputForm'>
         <div className='table-column inputBlock mr-8'>
-          <span className='table-row'>Point from</span>
+          <span className='table-row formHeader'>Point from</span>
           <select
-            className='table-row select select-bordered select-sm'
+            className='table-row select select-bordered select-sm noLabelSelect'
             {...register('pointFrom')}
             onChange={handleChangeFrom}
           >
@@ -187,9 +187,9 @@ const AddVector = ({
         </div>
 
         <div className='table-column inputBlock'>
-          <h3 className='table-row'>Point to</h3>
+          <h3 className='table-row formHeader'>Point to</h3>
           <select
-            className='table-row select select-bordered select-sm'
+            className='table-row select select-bordered select-sm noLabelSelect'
             {...register('pointTo')}
             onChange={handleChangeTo}
           >
