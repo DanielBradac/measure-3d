@@ -1,3 +1,5 @@
+budou nám přibývat nové Drawable objekty - udělat nějaký context pro datový model
+
 
 kouknout na react split screen
 

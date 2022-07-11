@@ -23,7 +23,7 @@ const LineComp = ({ start, end, color }: LineProps) => {
   return (
     <line_ ref={line}>
       <bufferGeometry />
-      <lineBasicMaterial color={color} vertexColors={true} />
+      <lineBasicMaterial color={color} />
     </line_>
   )
 }

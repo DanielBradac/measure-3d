@@ -2,6 +2,7 @@ import Settings from '../context/Settings'
 import PointComp from '../visual-components/PointComponent'
 import { Drawable } from './Interfaces'
 import { Layer } from './Layer'
+import { Vector } from './Vector'
 
 export class Point implements Drawable {
   classTag = 'Point'
@@ -14,6 +15,8 @@ export class Point implements Drawable {
     private _layer: Layer,
     private _color?: string
   ) {}
+
+  private _vectors: Set<Vector> = new Set<Vector>()
 
   get layer() {
     return this._layer
@@ -37,6 +40,18 @@ export class Point implements Drawable {
 
   get tag(): string {
     return this._tag
+  }
+
+  get vectors(): Set<Vector> {
+    return this._vectors
+  }
+
+  addVector(newVector: Vector) {
+    this._vectors.add(newVector)
+  }
+
+  removeVector(toRemove: Vector) {
+    this._vectors.delete(toRemove)
   }
 
   draw(key: number, ctx: Settings): JSX.Element {

@@ -11,7 +11,6 @@ interface VisualModelProps {
 }
 
 const VisualModel = ({ elements }: VisualModelProps) => {
-  console.log('rendered')
   const Controls = () => {
     const controls = useRef<OrbitControls>(null)
     const { camera, gl } = useThree()

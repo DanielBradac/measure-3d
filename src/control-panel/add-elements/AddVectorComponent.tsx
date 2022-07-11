@@ -71,10 +71,12 @@ const AddVector = ({
     if (data.pointTo === 'new') {
       newPoints.push(to)
     }
-
+    // Create new vector, add it to point's vector set and let parent know
+    const newVector = new Vector(from, to)
+    from.addVector(newVector)
+    to.addVector(newVector)
     onAddPoint(newPoints)
-    // Layer is taken from the 'from' point
-    onAddVector([new Vector(from, to)])
+    onAddVector([newVector])
   })
 
   // From point selection changed
