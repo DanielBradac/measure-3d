@@ -15,7 +15,7 @@ začít s measure
                 najdou se všechny vektory, po kterých se dá jít z nového vektoru
                 pokud vzniknout nějaké kružnice, tak se zkontroluje, že jsou v jedné rovině
                 přidá se nová 2D plocha pokud ještě neexistuje
-                pokud se větší 2D plocha rozdělila na menší, tak se nechá vždy jen ta největší
+                pokud se větší 2D plocha rozdělila na menší, tak se nechá větší a vytvoří se k ní ty menší - necháváme všechny, aby se s nimi dalo potom počítat
             
             při každém přidání/oddělání 2D plochy se musí řešit 3D plochy
             
