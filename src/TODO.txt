@@ -6,8 +6,10 @@ Udělat layers tab (CRUD operace s layers)
 
 začít s measure
     nějakým způsobem umět vykreslit uzavřené 2D a 3D objekty - existuje v teorii lineárních modelů nějaký algoritmus na identifikaci?
-        2D - minimální objekt je trojúhelník
-            odpovídá algoritmu pro identifikaci všech kružnic v neorientovaném grafu!!
+        2D - návrh algoritmu:
+            1. najít všechny kružnice v neorientovaném grafu
+            2. zjistit jestli leží kružnice v jedné rovině pomocí normálového vektoru
+            To bude relativně náročný algoritmus, možná to půjde optimalizovat tak, že se ten normálový vektor stanový už při nalezení prvních dvou vektorů
 
         3D - minimálníé objekt je jehlan
             část 3D objektu musí sdílet právě 2 body - vytvoří tím roh dvou stěn
