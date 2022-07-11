@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Point, Vector } from '../data-model/Drawable'
 import { Layer } from '../data-model/Layer'
+import { Point } from '../data-model/Point'
+import { Vector } from '../data-model/Vector'
 import AddElement from './add-elements/AddElementComponent'
 
 interface ControlPanelProps {

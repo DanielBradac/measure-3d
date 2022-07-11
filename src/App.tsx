@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import Settings from './context/Settings'
 import ControlPanel from './control-panel/ControlPanelComponent'
-import { Drawable, Point, Vector } from './data-model/Drawable'
+import { Drawable } from './data-model/Interfaces'
 import { Layer } from './data-model/Layer'
+import { Point } from './data-model/Point'
+import { Vector } from './data-model/Vector'
 import DrawerPage from './drawer/DrawerPageComponent'
 import VisualModel from './visual-components/VisualModelComponent'
 

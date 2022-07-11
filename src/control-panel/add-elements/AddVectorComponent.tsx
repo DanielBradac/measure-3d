@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { getLayerSelection, getPointSelection } from '../../common/Selections'
-import { Point, Vector } from '../../data-model/Drawable'
 import { Layer } from '../../data-model/Layer'
+import { Point } from '../../data-model/Point'
+import { Vector } from '../../data-model/Vector'
 
 interface AddVectorProps {
   onAddVector: (newVector: Vector[]) => void

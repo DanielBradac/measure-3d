@@ -1,4 +1,4 @@
-import { Comparable } from './Comparable'
+import { Comparable } from './Interfaces'
 
 export class Layer implements Comparable {
   constructor(private _name: string, private _color: string) {}

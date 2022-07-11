@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { getLayerSelection } from '../../common/Selections'
-import { Point } from '../../data-model/Drawable'
 import { Layer } from '../../data-model/Layer'
+import { Point } from '../../data-model/Point'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
