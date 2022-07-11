@@ -10,6 +10,14 @@ začít s measure
             1. najít všechny kružnice v neorientovaném grafu
             2. zjistit jestli leží kružnice v jedné rovině pomocí normálového vektoru
             To bude relativně náročný algoritmus, možná to půjde optimalizovat tak, že se ten normálový vektor stanový už při nalezení prvních dvou vektorů
-
+            
+            při každém přidání vektoru se zjistí jestli se neutvořila nová 2D plocha
+                najdou se všechny vektory, po kterých se dá jít z nového vektoru
+                pokud vzniknout nějaké kružnice, tak se zkontroluje, že jsou v jedné rovině
+                přidá se nová 2D plocha pokud ještě neexistuje
+                pokud se větší 2D plocha rozdělila na menší, tak se nechá vždy jen ta největší
+            
+            při každém přidání/oddělání 2D plochy se musí řešit 3D plochy
+            
         3D - minimálníé objekt je jehlan
             část 3D objektu musí sdílet právě 2 body - vytvoří tím roh dvou stěn
