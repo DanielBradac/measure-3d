@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { getLayerSelection, getPointSelection } from '../../common/Selections'
 import { Layer } from '../../data-model/Layer'
@@ -9,6 +9,7 @@ interface AddVectorProps {
   onAddVector: (newVector: Vector[]) => void
   onAddPoint: (newVPoint: Point[]) => void
   points: Point[]
+  vectors: Vector[]
   layers: Layer[]
 }
 
@@ -16,9 +17,10 @@ const AddVector = ({
   onAddVector,
   onAddPoint,
   points,
+  vectors,
   layers,
 }: AddVectorProps) => {
-  const { register, handleSubmit, setValue, resetField } = useForm({
+  const { register, handleSubmit, setValue, resetField, reset } = useForm({
     defaultValues: {
       xFrom: 0,
       yFrom: 0,
@@ -40,7 +42,45 @@ const AddVector = ({
   const [fromDisabled, setFromDisabled] = useState<boolean>(false)
   const [toDisabled, setToDisabled] = useState<boolean>(false)
 
-  const addVector = handleSubmit(data => {
+  // Create new vector, add it to point's vector set and let parent know
+  const createVector = (from: Point, to: Point) => {
+    const newVector = new Vector(from, to)
+    from.addVector(newVector)
+    to.addVector(newVector)
+    onAddVector([newVector])
+  }
+
+  // Set points in form from an existing point
+  const setFromPoint = (blueprint: Point) => {
+    setFromDisabled(true)
+    setValue('xFrom', blueprint.x)
+    setValue('yFrom', blueprint.y)
+    setValue('zFrom', blueprint.z)
+    setValue('tagFrom', blueprint.tag)
+    const layerIndex = blueprint.layer.indexIn(layers)
+    setValue('layerIndexFrom', layerIndex === -1 ? 0 : layerIndex)
+  }
+
+  const setToPoint = (blueprint: Point) => {
+    setToDisabled(true)
+    setValue('xTo', blueprint.x)
+    setValue('yTo', blueprint.y)
+    setValue('zTo', blueprint.z)
+    setValue('tagTo', blueprint.tag)
+    const layerIndex = blueprint.layer.indexIn(layers)
+    setValue('layerIndexFrom', layerIndex === -1 ? 0 : layerIndex)
+  }
+
+  // From point is 'to' point of last added vector by default
+  useEffect(() => {
+    if (vectors.length > 0) {
+      const point = vectors[vectors.length - 1].to
+      setFromPoint(point)
+      setValue('pointFrom', points.indexOf(point).toString())
+    }
+  }, [points, vectors])
+
+  const submitVector = handleSubmit(data => {
     // Do we have selected points or a new ones?
     const from =
       data.pointFrom === 'new'
@@ -71,25 +111,20 @@ const AddVector = ({
     if (data.pointTo === 'new') {
       newPoints.push(to)
     }
-    // Create new vector, add it to point's vector set and let parent know
-    const newVector = new Vector(from, to)
-    from.addVector(newVector)
-    to.addVector(newVector)
+    // Create new points and new vector, if there aren't any, rerender will not be called
     onAddPoint(newPoints)
-    onAddVector([newVector])
+    createVector(from, to)
+
+    // Reset the form
+    reset()
+    setToDisabled(false)
+    setFromDisabled(false)
   })
 
   // From point selection changed
   const handleChangeFrom = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (event.currentTarget.value !== 'new') {
-      const point = points[parseInt(event.currentTarget.value)]
-      setFromDisabled(true)
-      setValue('xFrom', point.x)
-      setValue('yFrom', point.y)
-      setValue('zFrom', point.z)
-      setValue('tagFrom', point.tag)
-      const layerIndex = point.layer.indexIn(layers)
-      setValue('layerIndexFrom', layerIndex === -1 ? 0 : layerIndex)
+      setFromPoint(points[parseInt(event.currentTarget.value)])
     } else {
       setFromDisabled(false)
       resetField('xFrom')
@@ -103,14 +138,7 @@ const AddVector = ({
   // To point selection changed
   const handleChangeTo = (event: React.ChangeEvent<HTMLSelectElement>) => {
     if (event.currentTarget.value !== 'new') {
-      const point = points[parseInt(event.currentTarget.value)]
-      setToDisabled(true)
-      setValue('xTo', point.x)
-      setValue('yTo', point.y)
-      setValue('zTo', point.z)
-      setValue('tagTo', point.tag)
-      const layerIndex = point.layer.indexIn(layers)
-      setValue('layerIndexTo', layerIndex === -1 ? 0 : layerIndex)
+      setToPoint(points[parseInt(event.currentTarget.value)])
     } else {
       setToDisabled(false)
       resetField('xTo')
@@ -123,7 +151,7 @@ const AddVector = ({
   // Render
   return (
     <>
-      <form onSubmit={addVector} className='inputForm'>
+      <form onSubmit={submitVector} className='inputForm'>
         <div className='table-column inputBlock mr-8'>
           <span className='table-row formHeader'>Point from</span>
           <select

@@ -7,6 +7,7 @@ import AddVector from './AddVectorComponent'
 
 interface AddElementProps {
   points: Point[]
+  vectors: Vector[]
   layers: Layer[]
   onAddPoint: (newPoint: Point[]) => void
   onAddVector: (newVector: Vector[]) => void
@@ -14,6 +15,7 @@ interface AddElementProps {
 
 const AddElement = ({
   points,
+  vectors,
   onAddPoint,
   onAddVector,
   layers,
@@ -33,6 +35,7 @@ const AddElement = ({
         onAddPoint={onAddPoint}
         onAddVector={onAddVector}
         points={points}
+        vectors={vectors}
         layers={layers}
       />
     )

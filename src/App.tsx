@@ -28,7 +28,7 @@ const App = () => {
     setPoints([...points, ...newPoint])
   }
 
-  // TODO vektor je identický, když má identický from a to
+  // TODO vektor je identický, když má identický from a to nebo obráceně
   const onAddVecor = (newVector: Vector[]) => {
     setVectors([...vectors, ...newVector])
   }
@@ -102,6 +102,7 @@ const App = () => {
           <VisualModel elements={elements} />
           <ControlPanel
             points={points}
+            vectors={vectors}
             onAddPoint={onAddPoint}
             onAddVector={onAddVecor}
             layers={layers}

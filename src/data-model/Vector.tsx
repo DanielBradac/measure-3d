@@ -16,6 +16,14 @@ export class Vector implements Drawable {
     return this._from.layer
   }
 
+  get from(): Point {
+    return this._from
+  }
+
+  get to(): Point {
+    return this._to
+  }
+
   draw(key: number): JSX.Element {
     return (
       <LineComp

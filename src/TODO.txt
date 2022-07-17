@@ -1,7 +1,9 @@
-budou nám přibývat nové Drawable objekty - udělat nějaký context pro datový model
-
-
 kouknout na react split screen
+    máme místo na konci obrazovky, tak jako je ve screenshotu v poslední issue - pokud to nevyřešil split screen
+
+udělat TODOčka v kódu - udělat errory pro přidávání již existujících nebo jinak chybných elementů
+
+budou nám přibývat nové Drawable objekty - udělat nějaký context pro datový model
 
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty

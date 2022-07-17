@@ -6,6 +6,7 @@ import AddElement from './add-elements/AddElementComponent'
 
 interface ControlPanelProps {
   points: Point[]
+  vectors: Vector[]
   layers: Layer[]
   onAddPoint: (newPoint: Point[]) => void
   onAddVector: (newVector: Vector[]) => void
@@ -15,6 +16,7 @@ const ControlPanel = ({
   onAddPoint,
   onAddVector,
   points,
+  vectors,
   layers,
 }: ControlPanelProps) => {
   const [tabValue, setTabValue] = useState<number>(0)
@@ -29,6 +31,7 @@ const ControlPanel = ({
         return (
           <AddElement
             points={points}
+            vectors={vectors}
             onAddPoint={onAddPoint}
             onAddVector={onAddVector}
             layers={layers}
