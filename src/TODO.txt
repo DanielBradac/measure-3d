@@ -1,4 +1,7 @@
 budou nám přibývat nové Drawable objekty - udělat nějaký context pro datový model
+    uděláme obecné rozhraní pro kontext - předepíše copy funkci
+    settery v kontextu nebudou obyčejné settery, ale vyrobí nám kopii s nově nastanevou vlastností
+        radši ať se to nejmenuje setABC, aby to nebylo matoucí, ať se to jmenuje třeba updateABC
 
 kouknout na react split screen
     máme místo na konci obrazovky, tak jako je ve screenshotu v poslední issue - pokud to nevyřešil split screen
