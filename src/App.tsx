@@ -43,9 +43,7 @@ const App = () => {
   const handleAxisChange = (event: React.FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
-        return prevSettings
-          .copy()
-          .setAxisSize(event.currentTarget.valueAsNumber)
+        return prevSettings.updateAxisSize(event.currentTarget.valueAsNumber)
       }
       return prevSettings
     })
@@ -53,16 +51,16 @@ const App = () => {
 
   const toggleAxis = () => {
     setSettings((prevSettings: Settings) => {
-      return prevSettings.copy().setAxisToggled(!prevSettings.axisToggled)
+      return prevSettings.updateAxisToggled(!prevSettings.axisToggled)
     })
   }
 
   const handleTagSizeChange = (event: React.FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
-        return prevSettings
-          .copy()
-          .setPointTagsSize(event.currentTarget.valueAsNumber)
+        return prevSettings.updatePointTagsSize(
+          event.currentTarget.valueAsNumber
+        )
       }
       return prevSettings
     })
@@ -70,18 +68,14 @@ const App = () => {
 
   const toggleTags = () => {
     setSettings((prevSettings: Settings) => {
-      return prevSettings
-        .copy()
-        .setPointTagsToggled(!prevSettings.pointTagsToggled)
+      return prevSettings.updatePointTagsToggled(!prevSettings.pointTagsToggled)
     })
   }
 
   const handlePointSizeChange = (event: React.FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
-        return prevSettings
-          .copy()
-          .setPointSize(event.currentTarget.valueAsNumber)
+        return prevSettings.updatePointSize(event.currentTarget.valueAsNumber)
       }
       return prevSettings
     })
