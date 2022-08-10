@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { getLayerSelection, getPointSelection } from '../../common/Selections'
+import { indexOf } from '../../data-model/Interfaces'
 import { Layer } from '../../data-model/Layer'
 import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
@@ -50,25 +51,28 @@ const AddVector = ({
     onAddVector([newVector])
   }
 
-  // Set points in form from an existing point
+  // Set FROM point values form an existing point
   const setFromPoint = (blueprint: Point) => {
     setFromDisabled(true)
     setValue('xFrom', blueprint.x)
     setValue('yFrom', blueprint.y)
     setValue('zFrom', blueprint.z)
     setValue('tagFrom', blueprint.tag)
-    const layerIndex = blueprint.layer.indexIn(layers)
+    const layerIndex = indexOf(layers, blueprint.layer)
+    console.log('From index:' + layerIndex)
     setValue('layerIndexFrom', layerIndex === -1 ? 0 : layerIndex)
   }
 
+  // Set TO point values form an existing point
   const setToPoint = (blueprint: Point) => {
     setToDisabled(true)
     setValue('xTo', blueprint.x)
     setValue('yTo', blueprint.y)
     setValue('zTo', blueprint.z)
     setValue('tagTo', blueprint.tag)
-    const layerIndex = blueprint.layer.indexIn(layers)
-    setValue('layerIndexFrom', layerIndex === -1 ? 0 : layerIndex)
+    const layerIndex = indexOf(layers, blueprint.layer)
+    console.log('To index:' + layerIndex)
+    setValue('layerIndexTo', layerIndex === -1 ? 0 : layerIndex)
   }
 
   // From point is 'to' point of last added vector by default
@@ -81,7 +85,7 @@ const AddVector = ({
   }, [points, vectors])
 
   const submitVector = handleSubmit(data => {
-    // Do we have selected points or a new ones?
+    // Do we have selected existing points or a new ones?
     const from =
       data.pointFrom === 'new'
         ? new Point(

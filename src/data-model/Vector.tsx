@@ -4,8 +4,6 @@ import { Layer } from './Layer'
 import { Point } from './Point'
 
 export class Vector implements Drawable {
-  classTag = 'Vector'
-
   constructor(
     private _from: Point,
     private _to: Point,

@@ -1,12 +1,10 @@
 import Settings from '../context/Settings'
 import PointComp from '../visual-components/PointComponent'
-import { Drawable } from './Interfaces'
+import { Comparable, Drawable } from './Interfaces'
 import { Layer } from './Layer'
 import { Vector } from './Vector'
 
-export class Point implements Drawable {
-  classTag = 'Point'
-
+export class Point implements Drawable, Comparable {
   constructor(
     private _x: number,
     private _y: number,
@@ -15,6 +13,20 @@ export class Point implements Drawable {
     private _layer: Layer,
     private _color?: string
   ) {}
+
+  compareTo(other: Comparable): number {
+    if (!(other instanceof Point)) {
+      return -1
+    }
+
+    if (this.x === other.x && this.y === other.y && this.z === other.z) {
+      return 0
+    }
+
+    if (this.x !== other.x) return this.x - other.x
+    if (this.y !== other.y) return this.y - other.y
+    return this.z - other.z
+  }
 
   private _vectors: Set<Vector> = new Set<Vector>()
 
