@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { ModelContext } from '../../App'
 import { getLayerSelection, getPointSelection } from '../../common/Selections'
 import { indexOf } from '../../data-model/Interfaces'
 import { Layer } from '../../data-model/Layer'
@@ -9,18 +10,9 @@ import { Vector } from '../../data-model/Vector'
 interface AddVectorProps {
   onAddVector: (newVector: Vector[]) => void
   onAddPoint: (newVPoint: Point[]) => void
-  points: Point[]
-  vectors: Vector[]
-  layers: Layer[]
 }
 
-const AddVector = ({
-  onAddVector,
-  onAddPoint,
-  points,
-  vectors,
-  layers,
-}: AddVectorProps) => {
+const AddVector = ({ onAddVector, onAddPoint }: AddVectorProps) => {
   const { register, handleSubmit, setValue, resetField, reset } = useForm({
     defaultValues: {
       xFrom: 0,
@@ -39,6 +31,8 @@ const AddVector = ({
       pointTo: 'new',
     },
   })
+
+  const { points, layers, vectors } = useContext(ModelContext)
 
   const [fromDisabled, setFromDisabled] = useState<boolean>(false)
   const [toDisabled, setToDisabled] = useState<boolean>(false)

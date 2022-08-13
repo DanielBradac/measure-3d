@@ -64,7 +64,6 @@ export class Model implements Context {
       const index = indexOf(this.vectors, vector)
       if (index === -1) {
         newVectors.push(vector)
-        console.log(`Adding vector with length ${vector.length()}`)
       } else {
         error += `\n Vector ${vector.toString()} already exists, index: ${index}`
       }

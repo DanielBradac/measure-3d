@@ -11,53 +11,40 @@ import VisualModel from './visual-components/VisualModelComponent'
 
 // Context
 export const SettingsContext = React.createContext(new Settings())
-export const ModelContext = React.createContext(
-  new Model(
-    [],
-    [],
-    [
-      new Layer('BaseLayer', 'white'),
-      new Layer('RedLayer', 'red'),
-      new Layer('GreenLayer', 'green'),
-      new Layer('BlackLayer', 'black'),
-      new Layer('OrangeLayer', 'orange'),
-    ]
-  )
-)
+export const ModelContext = React.createContext(new Model())
 
 const App = () => {
-  const [points, setPoints] = useState<Point[]>([])
-  const [vectors, setVectors] = useState<Vector[]>([])
-  const [layers, setLayers] = useState<Layer[]>([
-    new Layer('BaseLayer', 'white'),
-    new Layer('RedLayer', 'red'),
-    new Layer('GreenLayer', 'green'),
-    new Layer('BlackLayer', 'black'),
-    new Layer('OrangeLayer', 'orange'),
-  ])
-
   // Data model - all entities are stored here
-  const [model, setModel] = useState<Model>(new Model())
+  const [model, setModel] = useState<Model>(
+    new Model(
+      [],
+      [],
+      [
+        new Layer('BaseLayer', 'white'),
+        new Layer('RedLayer', 'red'),
+        new Layer('GreenLayer', 'green'),
+        new Layer('BlackLayer', 'black'),
+        new Layer('OrangeLayer', 'orange'),
+      ]
+    )
+  )
 
   const elements: Drawable[] = [...model.points, ...model.vectors]
 
   // TODO chytat exceptiony a dát to do nějaké hezké chybové hlášky
   const onAddPoint = (newPoints: Point[]) => {
-    setPoints([...points, ...newPoints])
     setModel((prevModel: Model) => {
       return prevModel.addPoints(newPoints)
     })
   }
 
   const onAddVecor = (newVector: Vector[]) => {
-    setVectors([...vectors, ...newVector])
     setModel((prevModel: Model) => {
       return prevModel.addVectors(newVector)
     })
   }
 
   const onAddLayer = (newLayer: Layer[]) => {
-    setLayers([...layers, ...newLayer])
     setModel((prevModel: Model) => {
       return prevModel.addLayer(newLayer)
     })
@@ -120,13 +107,7 @@ const App = () => {
         >
           <div className='pageContent'>
             <VisualModel elements={elements} />
-            <ControlPanel
-              points={points}
-              vectors={vectors}
-              onAddPoint={onAddPoint}
-              onAddVector={onAddVecor}
-              layers={layers}
-            />
+            <ControlPanel onAddPoint={onAddPoint} onAddVector={onAddVecor} />
           </div>
         </DrawerPage>
       </ModelContext.Provider>

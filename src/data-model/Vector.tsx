@@ -14,8 +14,6 @@ export class Vector implements Drawable, Comparable {
     if (!(other instanceof Vector)) {
       return -1
     }
-    console.log(`Comparing from: ${this._from.compareTo(other._from)}`)
-    console.log(`Comparing to: ${this._to.compareTo(other._to)}`)
     if (
       this._from.compareTo(other._from) === 0 &&
       this._to.compareTo(other._to) === 0

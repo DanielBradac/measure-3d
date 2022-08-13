@@ -1,24 +1,14 @@
 import { useState } from 'react'
-import { Layer } from '../data-model/Layer'
 import { Point } from '../data-model/Point'
 import { Vector } from '../data-model/Vector'
 import AddElement from './add-elements/AddElementComponent'
 
 interface ControlPanelProps {
-  points: Point[]
-  vectors: Vector[]
-  layers: Layer[]
   onAddPoint: (newPoint: Point[]) => void
   onAddVector: (newVector: Vector[]) => void
 }
 
-const ControlPanel = ({
-  onAddPoint,
-  onAddVector,
-  points,
-  vectors,
-  layers,
-}: ControlPanelProps) => {
+const ControlPanel = ({ onAddPoint, onAddVector }: ControlPanelProps) => {
   const [tabValue, setTabValue] = useState<number>(0)
 
   const getClasses = (tabIndex: number): string => {
@@ -28,15 +18,7 @@ const ControlPanel = ({
   const getTabContent = (): JSX.Element => {
     switch (tabValue) {
       case 0: {
-        return (
-          <AddElement
-            points={points}
-            vectors={vectors}
-            onAddPoint={onAddPoint}
-            onAddVector={onAddVector}
-            layers={layers}
-          />
-        )
+        return <AddElement onAddPoint={onAddPoint} onAddVector={onAddVector} />
       }
       default: {
         return <>Coming soon...</>

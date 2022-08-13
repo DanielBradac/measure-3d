@@ -1,14 +1,15 @@
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
+import { ModelContext } from '../../App'
 import { getLayerSelection } from '../../common/Selections'
-import { Layer } from '../../data-model/Layer'
+import { indexOf } from '../../data-model/Interfaces'
 import { Point } from '../../data-model/Point'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
-  layers: Layer[]
 }
 
-const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
+const AddPoint = ({ onAddPoint }: AddPointProps) => {
   const {
     register,
     handleSubmit,
@@ -25,6 +26,8 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
     },
   })
 
+  const { layers, points } = useContext(ModelContext)
+
   const addPoint = handleSubmit(data => {
     onAddPoint([
       new Point(data.x, data.y, data.z, data.tag, layers[data.layerIndex]),
@@ -35,16 +38,16 @@ const AddPoint = ({ onAddPoint, layers }: AddPointProps) => {
   const generateRandomPoints = () => {
     const newPoints: Point[] = []
     for (let x = 0; x < 10; x++) {
-      Math.floor(Math.random() * 11)
-      newPoints.push(
-        new Point(
-          Math.floor(Math.random() * 11),
-          Math.floor(Math.random() * 11),
-          Math.floor(Math.random() * 11),
-          x.toString(),
-          layers[0]
-        )
+      const newPoint = new Point(
+        Math.floor(Math.random() * 20),
+        Math.floor(Math.random() * 20),
+        Math.floor(Math.random() * 20),
+        x.toString(),
+        layers[0]
       )
+      if (indexOf(points, newPoint) === -1) {
+        newPoints.push(newPoint)
+      }
     }
     onAddPoint(newPoints)
   }
