@@ -26,4 +26,8 @@ export class Layer implements Comparable {
   set name(value: string) {
     this._name = value
   }
+
+  toString(): string {
+    return this._name
+  }
 }

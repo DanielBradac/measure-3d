@@ -59,7 +59,6 @@ const AddVector = ({
     setValue('zFrom', blueprint.z)
     setValue('tagFrom', blueprint.tag)
     const layerIndex = indexOf(layers, blueprint.layer)
-    console.log('From index:' + layerIndex)
     setValue('layerIndexFrom', layerIndex === -1 ? 0 : layerIndex)
   }
 
@@ -71,7 +70,6 @@ const AddVector = ({
     setValue('zTo', blueprint.z)
     setValue('tagTo', blueprint.tag)
     const layerIndex = indexOf(layers, blueprint.layer)
-    console.log('To index:' + layerIndex)
     setValue('layerIndexTo', layerIndex === -1 ? 0 : layerIndex)
   }
 
