@@ -1,5 +1,3 @@
-na ten předěl udělat nějaký css split screen - netahat kvůli tomu dependenci, ať nás to později nepotopí
-
 udělat fajnovou chybovou hlášku, když se pokusíme přidat to stejné
 
 uprava dat. modelu

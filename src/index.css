@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer components {
     .page {
-        @apply flex flex-col h-fullScreen;
+        @apply flex flex-col h-screen;
     }
     .pageContent {
         @apply flex flex-row align-top text-black bg-slate-600 font-main text-lg;
@@ -18,13 +18,13 @@
         @apply font-tag select-none;
     }
     .canvas {
-        @apply bg-gray-500 min-h-canvas min-w-canvas max-h-full max-w-full h-4/6 w-full resize overflow-auto;
+        @apply bg-gray-500 w-halfScreen h-4/6 min-h-canvas min-w-canvas max-w-canvas max-h-canvas resize overflow-auto;
     }
     .controlPanel {
-        @apply flex flex-col align-text-top h-screen w-controlPanel bg-slate-500 border-gray-400 border-l-2;
+        @apply align-text-top flex flex-col w-full h-screen bg-slate-500 border-gray-400 border-l-2;
     }
     .visual-model {
-        @apply flex flex-col w-controlPanel h-screen items-start;
+        @apply flex flex-col items-start;
     }
     .tabContent {
         @apply p-3 text-black;

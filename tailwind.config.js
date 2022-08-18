@@ -31,23 +31,23 @@ module.exports = {
                 'main': ["'Roboto Mono', monospace"],
                 'tag': ["'Courier New', Courier, monospace"]
             },
-            minHeight: {
-                'canvas': '35%'
+            width: {
+                'halfScreen': '50vw'
             },
             minWidth: {
-                'canvas': '35%'
+                'canvas': '25vw'
             },
-            width: {
-                'controlPanel': '80vw'
+            maxWidth: {
+                'canvas': '75vw'
             },
-            height: {
-                'fullScreen': '100vh'
+            minHeight: {
+                'canvas': '35vh'
+            },
+            maxHeight: {
+                'canvas': '86vh'
             },
             alignItems: {
                 'top': 'top'
-            },
-            display: {
-                'displatTable': 'table'
             }
         }
     }
