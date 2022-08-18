@@ -40,6 +40,9 @@ module.exports = {
             width: {
                 'controlPanel': '80vw'
             },
+            height: {
+                'fullScreen': '100vh'
+            },
             alignItems: {
                 'top': 'top'
             },

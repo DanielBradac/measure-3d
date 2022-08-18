@@ -97,19 +97,21 @@ const App = () => {
   return (
     <SettingsContext.Provider value={settings}>
       <ModelContext.Provider value={model}>
-        <h1 className='header'>Measure 3D</h1>
-        <DrawerPage
-          toggleAxis={toggleAxis}
-          handleAxisChange={handleAxisChange}
-          toggleTags={toggleTags}
-          handleTagSizeChange={handleTagSizeChange}
-          handlePointSizeChange={handlePointSizeChange}
-        >
-          <div className='pageContent'>
-            <VisualModel elements={elements} />
-            <ControlPanel onAddPoint={onAddPoint} onAddVector={onAddVecor} />
-          </div>
-        </DrawerPage>
+        <div className='page'>
+          <h1 className='header'>Measure 3D</h1>
+          <DrawerPage
+            toggleAxis={toggleAxis}
+            handleAxisChange={handleAxisChange}
+            toggleTags={toggleTags}
+            handleTagSizeChange={handleTagSizeChange}
+            handlePointSizeChange={handlePointSizeChange}
+          >
+            <div className='pageContent'>
+              <VisualModel elements={elements} />
+              <ControlPanel onAddPoint={onAddPoint} onAddVector={onAddVecor} />
+            </div>
+          </DrawerPage>
+        </div>
       </ModelContext.Provider>
     </SettingsContext.Provider>
   )
