@@ -28,7 +28,7 @@ const ControlPanel = ({ onAddPoint, onAddVector }: ControlPanelProps) => {
 
   // Render
   return (
-    <div className='controlPanel'>
+    <>
       <div className='tabs tabs-boxed'>
         <a
           className={getClasses(0)}
@@ -56,7 +56,7 @@ const ControlPanel = ({ onAddPoint, onAddVector }: ControlPanelProps) => {
         </a>
       </div>
       <div className='tabContent'>{getTabContent()}</div>
-    </div>
+    </>
   )
 }
 

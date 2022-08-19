@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Alert from './common-components/AlertComponent'
+import { AlertMes, AlertType } from './common/Types'
 import { Model } from './context/Model'
 import Settings from './context/Settings'
 import ControlPanel from './control-panel/ControlPanelComponent'
@@ -31,22 +33,47 @@ const App = () => {
 
   const elements: Drawable[] = [...model.points, ...model.vectors]
 
+  // Alerts
+  const [alert, setAlert] = useState<AlertMes | null>(null)
+  // Clear alert after 3 sec
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAlert(null)
+    }, 5000)
+    // To keep only one timeout running
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [alert])
+
+  const runModelChange = (prevModel: Model, setter: () => Model) => {
+    try {
+      return setter()
+    } catch (e: unknown) {
+      setAlert({
+        type: AlertType.ERROR,
+        message: e instanceof Error ? e.message : 'Unknown error occured',
+      })
+      return prevModel
+    }
+  }
+
   // TODO chytat exceptiony a dát to do nějaké hezké chybové hlášky
   const onAddPoint = (newPoints: Point[]) => {
     setModel((prevModel: Model) => {
-      return prevModel.addPoints(newPoints)
+      return runModelChange(prevModel, () => prevModel.addPoints(newPoints))
     })
   }
 
   const onAddVecor = (newVector: Vector[]) => {
     setModel((prevModel: Model) => {
-      return prevModel.addVectors(newVector)
+      return runModelChange(prevModel, () => prevModel.addVectors(newVector))
     })
   }
 
   const onAddLayer = (newLayer: Layer[]) => {
     setModel((prevModel: Model) => {
-      return prevModel.addLayer(newLayer)
+      return runModelChange(prevModel, () => prevModel.addLayer(newLayer))
     })
   }
 
@@ -99,6 +126,7 @@ const App = () => {
       <ModelContext.Provider value={model}>
         <div className='page'>
           <h1 className='header'>Measure 3D</h1>
+
           <DrawerPage
             toggleAxis={toggleAxis}
             handleAxisChange={handleAxisChange}
@@ -107,8 +135,19 @@ const App = () => {
             handlePointSizeChange={handlePointSizeChange}
           >
             <div className='pageContent'>
-              <VisualModel elements={elements} />
-              <ControlPanel onAddPoint={onAddPoint} onAddVector={onAddVecor} />
+              <div className='leftSide'>
+                <VisualModel elements={elements} />
+              </div>
+
+              <div className='rightSide'>
+                <ControlPanel
+                  onAddPoint={onAddPoint}
+                  onAddVector={onAddVecor}
+                />
+                <div className='ml-3'>
+                  {alert && <Alert type={alert.type} message={alert.message} />}
+                </div>
+              </div>
             </div>
           </DrawerPage>
         </div>

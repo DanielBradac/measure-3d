@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Layer } from '../../data-model/Layer'
 import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
 import AddPoint from './AddPointComponent'

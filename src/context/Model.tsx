@@ -38,7 +38,7 @@ export class Model implements Context {
       if (index === -1) {
         newPoints.push(point)
       } else {
-        error += `\n Point ${point.toString()} already exists, index: ${index}`
+        error += `\n Point ${point.toString()} already exists!`
       }
     })
 
@@ -65,7 +65,7 @@ export class Model implements Context {
       if (index === -1) {
         newVectors.push(vector)
       } else {
-        error += `\n Vector ${vector.toString()} already exists, index: ${index}`
+        error += `\n Vector ${vector.toString()} already exists!`
       }
     })
 
@@ -92,7 +92,7 @@ export class Model implements Context {
       if (index === -1) {
         newLayers.push(layer)
       } else {
-        error += `\n Layer ${layer.toString()} already exists, index: ${index}`
+        error += `\n Layer ${layer.toString()} already exists!`
       }
     })
 

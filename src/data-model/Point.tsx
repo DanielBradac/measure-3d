@@ -84,8 +84,8 @@ export class Point implements Drawable, Comparable {
 
   toString(): string {
     if (this._tag) {
-      return `${this._tag}: [X: ${this.x}; Y: ${this.y}; Z: ${this.z}] (${this.layer.name})`
+      return `${this._tag}: [X: ${this.x}; Y: ${this.y}; Z: ${this.z}]`
     }
-    return `[X: ${this.x}; Y: ${this.y}; Z: ${this.z}] (${this.layer.name})`
+    return `[X: ${this.x}; Y: ${this.y}; Z: ${this.z}]`
   }
 }

@@ -20,10 +20,10 @@
     .canvas {
         @apply bg-gray-500 w-halfScreen h-4/6 min-h-canvas min-w-canvas max-w-canvas max-h-canvas resize overflow-auto;
     }
-    .controlPanel {
+    .rightSide {
         @apply align-text-top flex flex-col w-full h-screen bg-slate-500 border-gray-400 border-l-2;
     }
-    .visual-model {
+    .leftSide {
         @apply flex flex-col items-start;
     }
     .tabContent {

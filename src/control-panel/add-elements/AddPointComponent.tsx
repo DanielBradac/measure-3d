@@ -1,7 +1,9 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModelContext } from '../../App'
+import Alert from '../../common-components/AlertComponent'
 import { getLayerSelection } from '../../common/Selections'
+import { AlertMes, AlertType } from '../../common/Types'
 import { indexOf } from '../../data-model/Interfaces'
 import { Point } from '../../data-model/Point'
 
@@ -53,81 +55,82 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
   }
 
   // Render
-
   return (
-    <form onSubmit={addPoint} className='inputForm'>
-      <div className='table-column inputBlock'>
-        <div className='table-row'>
-          <label className='table-cell itemLabel'>X:</label>
-          <input
-            {...register('x', { required: true })}
-            type='number'
-            id='x'
-            step='0.001'
-            className='table-cell input input-bordered input-sm'
-          />
+    <>
+      <form onSubmit={addPoint} className='inputForm'>
+        <div className='table-column inputBlock'>
+          <div className='table-row'>
+            <label className='table-cell itemLabel'>X:</label>
+            <input
+              {...register('x', { required: true })}
+              type='number'
+              id='x'
+              step='0.001'
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
+
+          <div className='table-row'>
+            <label className='table-cell itemLabel'>Y:</label>
+            <input
+              {...register('y', { required: true })}
+              type='number'
+              id='y'
+              step='0.001'
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
+
+          <div className='table-row'>
+            <label className='table-cell itemLabel'>Z:</label>
+            <input
+              {...register('z', { required: true })}
+              type='number'
+              id='x'
+              step='0.001'
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
+
+          <div className='table-row'>
+            <label className='table-cell itemLabel'>Tag:</label>
+
+            <input
+              {...register('tag')}
+              type='string'
+              id='tag'
+              className='table-cell input input-bordered input-sm'
+            />
+          </div>
+
+          <div className='table-row'>
+            <label className='table-cell itemLabel'>Layer:</label>
+
+            <select
+              className='table-cell select select-bordered select-sm'
+              {...register('layerIndex')}
+            >
+              {getLayerSelection(layers)}
+            </select>
+          </div>
         </div>
 
-        <div className='table-row'>
-          <label className='table-cell itemLabel'>Y:</label>
-          <input
-            {...register('y', { required: true })}
-            type='number'
-            id='y'
-            step='0.001'
-            className='table-cell input input-bordered input-sm'
-          />
+        <div className='submitButton'>
+          <button type='submit' className='buttonOutline'>
+            Add point
+          </button>
         </div>
-
-        <div className='table-row'>
-          <label className='table-cell itemLabel'>Z:</label>
-          <input
-            {...register('z', { required: true })}
-            type='number'
-            id='x'
-            step='0.001'
-            className='table-cell input input-bordered input-sm'
-          />
-        </div>
-
-        <div className='table-row'>
-          <label className='table-cell itemLabel'>Tag:</label>
-
-          <input
-            {...register('tag')}
-            type='string'
-            id='tag'
-            className='table-cell input input-bordered input-sm'
-          />
-        </div>
-
-        <div className='table-row'>
-          <label className='table-cell itemLabel'>Layer:</label>
-
-          <select
-            className='table-cell select select-bordered select-sm'
-            {...register('layerIndex')}
+        <div>
+          <button
+            type='button'
+            className='buttonOutline'
+            onClick={generateRandomPoints}
           >
-            {getLayerSelection(layers)}
-          </select>
+            10 random points
+          </button>
         </div>
-      </div>
-
-      <div className='submitButton'>
-        <button type='submit' className='buttonOutline'>
-          Add point
-        </button>
-      </div>
-      <div>
-        <button
-          type='button'
-          className='buttonOutline'
-          onClick={generateRandomPoints}
-        >
-          10 random points
-        </button>
-      </div>
-    </form>
+      </form>
+    </>
   )
 }
 

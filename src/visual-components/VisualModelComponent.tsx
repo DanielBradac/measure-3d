@@ -43,7 +43,7 @@ const VisualModel = ({ elements }: VisualModelProps) => {
     ''
   )
   return (
-    <div className='visual-model'>
+    <>
       <label htmlFor='drawer' className='drawer-button'>
         <BsFillGearFill className='text-secondary m-2 clickable' size={32} />
       </label>
@@ -55,7 +55,7 @@ const VisualModel = ({ elements }: VisualModelProps) => {
           {toRender}
         </Canvas>
       </div>
-    </div>
+    </>
   )
 }
 
