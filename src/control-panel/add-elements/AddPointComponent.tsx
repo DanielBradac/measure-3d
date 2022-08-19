@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModelContext } from '../../App'
-import Alert from '../../common-components/AlertComponent'
 import { getLayerSelection } from '../../common/Selections'
-import { AlertMes, AlertType } from '../../common/Types'
 import { indexOf } from '../../data-model/Interfaces'
 import { Point } from '../../data-model/Point'
 
