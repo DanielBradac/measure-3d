@@ -16,6 +16,7 @@ export const SettingsContext = React.createContext(new Settings())
 export const ModelContext = React.createContext(new Model())
 
 const App = () => {
+  const alertDuration = 4000
   // Data model - all entities are stored here
   const [model, setModel] = useState<Model>(
     new Model(
@@ -35,11 +36,12 @@ const App = () => {
 
   // Alerts
   const [alert, setAlert] = useState<AlertMes | null>(null)
-  // Clear alert after 3 sec
+
+  // Clear alert after set duration
   useEffect(() => {
     const timer = setTimeout(() => {
       setAlert(null)
-    }, 5000)
+    }, alertDuration)
     // To keep only one timeout running
     return () => {
       clearTimeout(timer)
@@ -50,10 +52,20 @@ const App = () => {
     try {
       return setter()
     } catch (e: unknown) {
-      setAlert({
-        type: AlertType.ERROR,
-        message: e instanceof Error ? e.message : 'Unknown error occured',
-      })
+      if (alert === null) {
+        setAlert({
+          type: AlertType.ERROR,
+          message: e instanceof Error ? e.message : 'Unknown error occured',
+        })
+      } else {
+        setAlert({
+          type: AlertType.ERROR,
+          message:
+            alert.message +
+            '\n' +
+            (e instanceof Error ? e.message : 'Unknown error occured'),
+        })
+      }
       return prevModel
     }
   }
@@ -144,8 +156,14 @@ const App = () => {
                   onAddPoint={onAddPoint}
                   onAddVector={onAddVecor}
                 />
-                <div className='ml-3'>
-                  {alert && <Alert type={alert.type} message={alert.message} />}
+                <div className='ml-3 '>
+                  {alert && (
+                    <Alert
+                      type={alert.type}
+                      message={alert.message}
+                      duration={alertDuration}
+                    />
+                  )}
                 </div>
               </div>
             </div>

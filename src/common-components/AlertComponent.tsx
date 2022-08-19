@@ -1,12 +1,27 @@
+import { useEffect, useState } from 'react'
 import { AlertType } from '../common/Types'
 
 interface AlertProps {
   type: string
   message: string
+  duration: number
 }
 
-const Alert = ({ type, message }: AlertProps) => {
+const Alert = ({ type, message, duration }: AlertProps) => {
   const className = `w-fit p-3 alert shadow-lg ${type}`
+
+  const [animation, setAnimation] = useState<string>('animate-fade-in-down')
+
+  console.log(`I rendered with animation: ${animation}`)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimation('animate-fade-out-up')
+    }, duration - 500)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [])
 
   let svgPath = 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
   if (type === AlertType.SUCCESS) {
@@ -21,7 +36,7 @@ const Alert = ({ type, message }: AlertProps) => {
 
   // Render
   return (
-    <div className={className}>
+    <div className={`${className} ${animation}`}>
       <div>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -36,7 +51,7 @@ const Alert = ({ type, message }: AlertProps) => {
             d={svgPath}
           />
         </svg>
-        <span>{message}</span>
+        <div>{message}</div>
       </div>
     </div>
   )
