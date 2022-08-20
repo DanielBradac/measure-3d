@@ -1,5 +1,6 @@
 setModel běh se po tom, co to failne duplikuje, nevím proč
     má to co dělat s tím, že jsou tam nested setState
+    obecně pokaždé běží 2 rendery, nejspíš zbytečně, možná to s tím souvisí
 
 když dám addVector a spadne to, tak to háže exception
 

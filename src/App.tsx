@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AlertBlock from './common-components/AlertComponent'
 import { AlertMes, AlertType } from './common/Types'
 import { Model } from './context/Model'
@@ -37,6 +37,7 @@ const App = () => {
   // Alerts
   const [alerts, setAlerts] = useState<AlertMes[]>([])
   // Clear alert after set duration - if new alert arrives we renew the timer
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (alerts.length > 0) {
@@ -50,7 +51,6 @@ const App = () => {
 
   // Change model - exception may occure, so we catch them and put them in alerts
   const runModelChange = (prevModel: Model, setter: () => Model) => {
-    console.log('Run model run')
     try {
       return setter()
     } catch (e: unknown) {
@@ -132,35 +132,37 @@ const App = () => {
   return (
     <SettingsContext.Provider value={settings}>
       <ModelContext.Provider value={model}>
-        <div className='page'>
-          <h1 className='header'>Measure 3D</h1>
+        <React.StrictMode>
+          <div className='page'>
+            <h1 className='header'>Measure 3D</h1>
 
-          <DrawerPage
-            toggleAxis={toggleAxis}
-            handleAxisChange={handleAxisChange}
-            toggleTags={toggleTags}
-            handleTagSizeChange={handleTagSizeChange}
-            handlePointSizeChange={handlePointSizeChange}
-          >
-            <div className='pageContent'>
-              <div className='leftSide'>
-                <VisualModel elements={elements} />
-              </div>
+            <DrawerPage
+              toggleAxis={toggleAxis}
+              handleAxisChange={handleAxisChange}
+              toggleTags={toggleTags}
+              handleTagSizeChange={handleTagSizeChange}
+              handlePointSizeChange={handlePointSizeChange}
+            >
+              <div className='pageContent'>
+                <div className='leftSide'>
+                  <VisualModel elements={elements} />
+                </div>
 
-              <div className='rightSide'>
-                <ControlPanel
-                  onAddPoint={onAddPoint}
-                  onAddVector={onAddVecor}
-                />
-                <div className='ml-3 '>
-                  {alerts.length > 0 && (
-                    <AlertBlock alerts={alerts} duration={alertDuration} />
-                  )}
+                <div className='rightSide'>
+                  <ControlPanel
+                    onAddPoint={onAddPoint}
+                    onAddVector={onAddVecor}
+                  />
+                  <div className='ml-3 '>
+                    {alerts.length > 0 && (
+                      <AlertBlock alerts={alerts} duration={alertDuration} />
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </DrawerPage>
-        </div>
+            </DrawerPage>
+          </div>
+        </React.StrictMode>
       </ModelContext.Provider>
     </SettingsContext.Provider>
   )
