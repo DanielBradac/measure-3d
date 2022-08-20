@@ -33,12 +33,6 @@ const Alert = ({ type, messages, duration }: AlertProps) => {
       'M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
   }
 
-  const renderMessages = messages.map(message => {
-    // eslint-disable-next-line @typescript-eslint/no-extra-semi
-    ;<div>{message}</div>
-    console.log(`Message ${message}`)
-  })
-
   // Render
   return (
     <div className={`${className} ${animation}`}>
