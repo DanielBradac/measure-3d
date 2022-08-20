@@ -1,5 +1,11 @@
-udět chybovou hlášku tak, aby jich tam mohlo vyskočit několik
-    message bude pole a každá položka se zobrazí na nové lajně
+setModel běh se po tom, co to failne duplikuje, nevím proč
+    má to co dělat s tím, že jsou tam nested setState
+
+když dám addVector a spadne to, tak to háže exception
+
+addVector bude potřeba upravit vzhledem k tomu, že při přidávání bodu to může spadnout
+
+udělat chybovou hlášku tak, aby jich tam mohlo vyskočit několik
     když bude něco stejného typu, tak se to jenom přidá, když bude různého, tak se vyrobí nový alert pod ten původní
 
 pokusit se fixnout ten problém s animací - moc ale nevím jak - možná když to bude řídit jen jeden timeout? nevím. Nebo nějak resetovat ten timeout za kdy to má zmizet

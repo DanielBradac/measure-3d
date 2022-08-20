@@ -1,26 +1,14 @@
 import { useEffect, useState } from 'react'
-import { AlertType } from '../common/Types'
+import { AlertMes, AlertType } from '../common/Types'
 
 interface AlertProps {
   type: string
   messages: string[]
-  duration: number
 }
 
-const Alert = ({ type, messages, duration }: AlertProps) => {
-  const className = `w-fit p-3 alert shadow-lg ${type}`
-
-  const [animation, setAnimation] = useState<string>('animate-fade-in-down')
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimation('animate-fade-out-up')
-    }, duration - 500)
-
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [])
+// Component for one single alert
+const Alert = ({ type, messages }: AlertProps) => {
+  const className = `animate-fade-in-down w-fit p-3 alert shadow-lg ${type}`
 
   let svgPath = 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
   if (type === AlertType.SUCCESS) {
@@ -35,7 +23,7 @@ const Alert = ({ type, messages, duration }: AlertProps) => {
 
   // Render
   return (
-    <div className={`${className} ${animation}`}>
+    <div className={`${className}`}>
       <>
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -60,4 +48,38 @@ const Alert = ({ type, messages, duration }: AlertProps) => {
   )
 }
 
-export default Alert
+interface AlertBlockProps {
+  alerts: AlertMes[]
+  duration: number
+}
+
+// Component for and array of alerts
+const AlertBlock = ({ alerts, duration }: AlertBlockProps) => {
+  const [animation, setAnimation] = useState<string>('')
+
+  // Fadeout 0,5 s before time runs out - we must use stringify to reset timer if message changes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAnimation('animate-fade-out-up')
+    }, duration - 500)
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [alerts.length])
+
+  // Render
+  return (
+    <div className={animation}>
+      {alerts.length > 0 &&
+        alerts.map((alert, index) => {
+          return (
+            <div key={`Alert ${index}`} className='mb-2'>
+              <Alert type={alert.type} messages={alert.messages} />
+            </div>
+          )
+        })}
+    </div>
+  )
+}
+
+export default AlertBlock

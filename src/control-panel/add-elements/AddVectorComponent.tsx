@@ -68,6 +68,7 @@ const AddVector = ({ onAddVector, onAddPoint }: AddVectorProps) => {
   }
 
   // From point is 'to' point of last added vector by default
+  // TODO nestačilo by tu reagovat jen na vectors?
   useEffect(() => {
     if (vectors.length > 0) {
       const point = vectors[vectors.length - 1].to

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import Alert from './common-components/AlertComponent'
+import React, { useCallback, useEffect, useState } from 'react'
+import AlertBlock from './common-components/AlertComponent'
 import { AlertMes, AlertType } from './common/Types'
 import { Model } from './context/Model'
 import Settings from './context/Settings'
@@ -35,42 +35,38 @@ const App = () => {
   const elements: Drawable[] = [...model.points, ...model.vectors]
 
   // Alerts
-  const [alert, setAlert] = useState<AlertMes | null>(null)
-
-  // Clear alert after set duration
+  const [alerts, setAlerts] = useState<AlertMes[]>([])
+  // Clear alert after set duration - if new alert arrives we renew the timer
   useEffect(() => {
     const timer = setTimeout(() => {
-      setAlert(null)
+      if (alerts.length > 0) {
+        setAlerts([])
+      }
     }, alertDuration)
-    // To keep only one timeout running
     return () => {
       clearTimeout(timer)
     }
-  }, [alert])
+  }, [alerts.length])
 
+  // Change model - exception may occure, so we catch them and put them in alerts
   const runModelChange = (prevModel: Model, setter: () => Model) => {
+    console.log('Run model run')
     try {
       return setter()
     } catch (e: unknown) {
-      if (alert === null) {
-        setAlert({
-          type: AlertType.ERROR,
-          messages: [e instanceof Error ? e.message : 'Unknown error occured'],
-        })
-      } else {
-        setAlert({
-          type: AlertType.ERROR,
-          messages: [
-            ...alert.messages,
-            e instanceof Error ? e.message : 'Unknown error occured',
-          ],
-        })
-      }
+      setAlerts(prevAlerts => {
+        return [
+          ...prevAlerts,
+          {
+            type: AlertType.ERROR,
+            messages: [e instanceof Error ? e.message : 'Unkown error occured'],
+          },
+        ]
+      })
       return prevModel
     }
   }
 
-  // TODO chytat exceptiony a dát to do nějaké hezké chybové hlášky
   const onAddPoint = (newPoints: Point[]) => {
     setModel((prevModel: Model) => {
       return runModelChange(prevModel, () => prevModel.addPoints(newPoints))
@@ -157,12 +153,8 @@ const App = () => {
                   onAddVector={onAddVecor}
                 />
                 <div className='ml-3 '>
-                  {alert && (
-                    <Alert
-                      type={alert.type}
-                      messages={alert.messages}
-                      duration={alertDuration}
-                    />
+                  {alerts.length > 0 && (
+                    <AlertBlock alerts={alerts} duration={alertDuration} />
                   )}
                 </div>
               </div>
