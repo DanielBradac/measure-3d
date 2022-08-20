@@ -3,6 +3,7 @@ import { Layer } from './Layer'
 
 // Interface for objects that can be drawn on the canvas
 export interface Drawable {
+  // Key is for htmlKey - it gives warning in console if not included
   draw(key: number, ctx?: Settings): JSX.Element
   layer: Layer
 }

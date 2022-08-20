@@ -3,16 +3,15 @@ import { AlertType } from '../common/Types'
 
 interface AlertProps {
   type: string
-  message: string
+  messages: string[]
   duration: number
 }
 
-const Alert = ({ type, message, duration }: AlertProps) => {
+const Alert = ({ type, messages, duration }: AlertProps) => {
   const className = `w-fit p-3 alert shadow-lg ${type}`
 
   const [animation, setAnimation] = useState<string>('animate-fade-in-down')
 
-  console.log(`I rendered with animation: ${animation}`)
   useEffect(() => {
     const timer = setTimeout(() => {
       setAnimation('animate-fade-out-up')
@@ -34,10 +33,16 @@ const Alert = ({ type, message, duration }: AlertProps) => {
       'M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
   }
 
+  const renderMessages = messages.map(message => {
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
+    ;<div>{message}</div>
+    console.log(`Message ${message}`)
+  })
+
   // Render
   return (
     <div className={`${className} ${animation}`}>
-      <div>
+      <>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='stroke-current flex-shrink-0 h-6 w-6'
@@ -51,8 +56,12 @@ const Alert = ({ type, message, duration }: AlertProps) => {
             d={svgPath}
           />
         </svg>
-        <div>{message}</div>
-      </div>
+        <div className='flex flex-col'>
+          {messages.map((message, index) => (
+            <div key={`Message ${index}`}>{message}</div>
+          ))}
+        </div>
+      </>
     </div>
   )
 }

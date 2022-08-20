@@ -55,15 +55,15 @@ const App = () => {
       if (alert === null) {
         setAlert({
           type: AlertType.ERROR,
-          message: e instanceof Error ? e.message : 'Unknown error occured',
+          messages: [e instanceof Error ? e.message : 'Unknown error occured'],
         })
       } else {
         setAlert({
           type: AlertType.ERROR,
-          message:
-            alert.message +
-            '\n' +
-            (e instanceof Error ? e.message : 'Unknown error occured'),
+          messages: [
+            ...alert.messages,
+            e instanceof Error ? e.message : 'Unknown error occured',
+          ],
         })
       }
       return prevModel
@@ -160,7 +160,7 @@ const App = () => {
                   {alert && (
                     <Alert
                       type={alert.type}
-                      message={alert.message}
+                      messages={alert.messages}
                       duration={alertDuration}
                     />
                   )}

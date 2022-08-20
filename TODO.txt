@@ -1,4 +1,9 @@
-udělat fajnovou chybovou hlášku, když se pokusíme přidat to stejné
+udět chybovou hlášku tak, aby jich tam mohlo vyskočit několik
+    message bude pole a každá položka se zobrazí na nové lajně
+    když bude něco stejného typu, tak se to jenom přidá, když bude různého, tak se vyrobí nový alert pod ten původní
+
+pokusit se fixnout ten problém s animací - moc ale nevím jak - možná když to bude řídit jen jeden timeout? nevím. Nebo nějak resetovat ten timeout za kdy to má zmizet
+    možná si ten timeout uložit jako stav
 
 uprava dat. modelu
     points budou mít set layers - výpočty budou probíhat pouze v rámci jedné layer, ale bude snadné layers přidávat

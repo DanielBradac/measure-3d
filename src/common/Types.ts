@@ -12,5 +12,5 @@ export enum AlertType {
 
 export type AlertMes = {
   type: AlertType
-  message: string
+  messages: string[]
 }
