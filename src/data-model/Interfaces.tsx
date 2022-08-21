@@ -28,6 +28,5 @@ export const indexOf = (
       return index
     }
   }
-
   return -1
 }

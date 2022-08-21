@@ -1,10 +1,25 @@
-setModel běh se po tom, co to failne duplikuje, nevím proč
-    má to co dělat s tím, že jsou tam nested setState
-    obecně pokaždé běží 2 rendery, nejspíš zbytečně, možná to s tím souvisí
+možná se v css zbavit toho měření podle scrrenu...např. když se errory rozjedou moc dolů, tak už to tam nedodáhne - šlo by předělat na 100%
 
-když dám addVector a spadne to, tak to háže exception
-
-addVector bude potřeba upravit vzhledem k tomu, že při přidávání bodu to může spadnout
+otestovat addVector
+    existující bod do existujícího
+        vektor má stejné body - spadne
+        vektor už existuje - spadne
+        vektor ještě neexisuje - vytvoří se
+    nový bod do existujícího
+        vektor má stejné body - spadne
+        vektor už existuje - spadne
+        vektor ještě neexisuje - vytvoří se vektor i bod
+        nový bod je už existující bod - vektor se vytvoří a nepřidá se nový bod
+    existující bod do nového
+        vektor má stejné body - spadne
+        vektor už existuje - spadne
+        vektor ještě neexisuje a bod taky ne - vytvoří se vektor i bod
+        nový bod je už existující bod - vektor se vytvoří a nepřidá se nový bod
+    nový bod do nového
+        vektor má stejné body - spadne
+        vektor už existuje - spadne
+        oba body jsou nové - přidají se jak body tak vektor
+        oba body už existují - přidá se jenom vektor
 
 udělat chybovou hlášku tak, aby jich tam mohlo vyskočit několik
     když bude něco stejného typu, tak se to jenom přidá, když bude různého, tak se vyrobí nový alert pod ten původní

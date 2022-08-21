@@ -1,3 +1,4 @@
+import { isConstructorDeclaration } from 'typescript'
 import { indexOf } from '../data-model/Interfaces'
 import { Layer } from '../data-model/Layer'
 import { Point } from '../data-model/Point'
@@ -38,7 +39,7 @@ export class Model implements Context {
       if (index === -1) {
         newPoints.push(point)
       } else {
-        error += `\n Point ${point.toString()} already exists!`
+        error += `\n Point ${this.points[index]} already exists!`
       }
     })
 
@@ -56,16 +57,44 @@ export class Model implements Context {
     return clone
   }
 
+  // Add new points if we don't already have them, replace with existing points otherwise
+  private modifyVectorPoints(vector: Vector): Vector {
+    const fromIndex = indexOf(this.points, vector.from)
+    if (fromIndex === -1) {
+      this._points.push(vector.from)
+    } else {
+      vector.from = this._points[fromIndex]
+    }
+
+    const toIndex = indexOf(this.points, vector.to)
+    if (toIndex === -1) {
+      this._points.push(vector.to)
+    } else {
+      vector.to = this._points[toIndex]
+    }
+
+    return vector
+  }
+
   public addVectors(vectors: Vector[]): Model {
     let error = ''
     const newVectors: Vector[] = []
 
     vectors.forEach(vector => {
-      const index = indexOf(this.vectors, vector)
-      if (index === -1) {
-        newVectors.push(vector)
+      if (vector.from.compareTo(vector.to) === 0) {
+        error += `\n Vector ${vector.toString()} cannot have two same points!`
       } else {
-        error += `\n Vector ${vector.toString()} already exists!`
+        const index = indexOf(this.vectors, vector)
+        if (index === -1) {
+          // First we add points - if they don't exist already
+          vector = this.modifyVectorPoints(vector)
+          // Then we add vector
+          newVectors.push(vector)
+          vector.from.addVector(vector)
+          vector.to.addVector(vector)
+        } else {
+          error += `\n Vector ${this.vectors[index]} already exists!`
+        }
       }
     })
 
@@ -92,7 +121,7 @@ export class Model implements Context {
       if (index === -1) {
         newLayers.push(layer)
       } else {
-        error += `\n Layer ${layer.toString()} already exists!`
+        error += `\n Layer ${this.layers[index]} already exists!`
       }
     })
 

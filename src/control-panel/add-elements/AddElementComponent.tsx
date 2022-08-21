@@ -20,7 +20,7 @@ const AddElement = ({ onAddPoint, onAddVector }: AddElementProps) => {
     if (currentPanel === 'Point') {
       return <AddPoint onAddPoint={onAddPoint} />
     }
-    return <AddVector onAddPoint={onAddPoint} onAddVector={onAddVector} />
+    return <AddVector onAddVector={onAddVector} />
   }
 
   // Render

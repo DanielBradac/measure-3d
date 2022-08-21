@@ -35,8 +35,16 @@ export class Vector implements Drawable, Comparable {
     return this._from
   }
 
+  set from(value: Point) {
+    this._from = value
+  }
+
   get to(): Point {
     return this._to
+  }
+
+  set to(value: Point) {
+    this._to = value
   }
 
   // Returns vector cooridinates
@@ -68,7 +76,6 @@ export class Vector implements Drawable, Comparable {
   }
 
   toString(): string {
-    const coor = this.vecCoor()
-    return `(${coor[0]}, ${coor[1]}, ${coor[2]})`
+    return `(${this.from} -> ${this.to})`
   }
 }

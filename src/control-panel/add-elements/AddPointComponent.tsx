@@ -30,7 +30,13 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
 
   const addPoint = handleSubmit(data => {
     onAddPoint([
-      new Point(data.x, data.y, data.z, data.tag, layers[data.layerIndex]),
+      new Point(
+        Number(data.x),
+        Number(data.y),
+        Number(data.z),
+        data.tag,
+        layers[data.layerIndex]
+      ),
     ])
     reset()
   })

@@ -36,8 +36,8 @@ const App = () => {
 
   // Alerts
   const [alerts, setAlerts] = useState<AlertMes[]>([])
-  // Clear alert after set duration - if new alert arrives we renew the timer
 
+  // Clear alert after set duration - if new alert arrives we renew the timer
   useEffect(() => {
     const timer = setTimeout(() => {
       if (alerts.length > 0) {

@@ -23,7 +23,9 @@ export class Point implements Drawable, Comparable {
       return 0
     }
 
-    if (this.x !== other.x) return this.x - other.x
+    if (this.x !== other.x) {
+      return this.x - other.x
+    }
     if (this.y !== other.y) return this.y - other.y
     return this.z - other.z
   }

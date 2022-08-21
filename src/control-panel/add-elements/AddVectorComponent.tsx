@@ -3,16 +3,14 @@ import { useForm } from 'react-hook-form'
 import { ModelContext } from '../../App'
 import { getLayerSelection, getPointSelection } from '../../common/Selections'
 import { indexOf } from '../../data-model/Interfaces'
-import { Layer } from '../../data-model/Layer'
 import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
 
 interface AddVectorProps {
   onAddVector: (newVector: Vector[]) => void
-  onAddPoint: (newVPoint: Point[]) => void
 }
 
-const AddVector = ({ onAddVector, onAddPoint }: AddVectorProps) => {
+const AddVector = ({ onAddVector }: AddVectorProps) => {
   const { register, handleSubmit, setValue, resetField, reset } = useForm({
     defaultValues: {
       xFrom: 0,
@@ -40,8 +38,6 @@ const AddVector = ({ onAddVector, onAddPoint }: AddVectorProps) => {
   // Create new vector, add it to point's vector set and let parent know
   const createVector = (from: Point, to: Point) => {
     const newVector = new Vector(from, to)
-    from.addVector(newVector)
-    to.addVector(newVector)
     onAddVector([newVector])
   }
 
@@ -82,9 +78,10 @@ const AddVector = ({ onAddVector, onAddPoint }: AddVectorProps) => {
     const from =
       data.pointFrom === 'new'
         ? new Point(
-            data.xFrom,
-            data.yFrom,
-            data.zFrom,
+            // There must be a conversion tu number, because otherwise it passes string and typescript is for some reason ok with it
+            Number(data.xFrom),
+            Number(data.yFrom),
+            Number(data.zFrom),
             data.tagFrom,
             layers[data.layerIndexFrom]
           )
@@ -93,25 +90,16 @@ const AddVector = ({ onAddVector, onAddPoint }: AddVectorProps) => {
     const to =
       data.pointTo === 'new'
         ? new Point(
-            data.xTo,
-            data.yTo,
-            data.zTo,
+            Number(data.xTo),
+            Number(data.yTo),
+            Number(data.zTo),
             data.tagTo,
             layers[data.layerIndexTo]
           )
         : points[parseInt(data.pointTo)]
 
-    const newPoints: Point[] = []
-    if (data.pointFrom === 'new') {
-      newPoints.push(from)
-    }
-    if (data.pointTo === 'new') {
-      newPoints.push(to)
-    }
-    // Create new points and new vector, if there aren't any, rerender will not be called
-    onAddPoint(newPoints)
+    // Create new Vector
     createVector(from, to)
-
     // Reset the form
     reset()
     setToDisabled(false)
