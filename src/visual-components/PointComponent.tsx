@@ -28,7 +28,7 @@ const PointComp = ({
       {showTag && (
         <Html distanceFactor={5} position={[0.1, 0.1, 0]}>
           <div
-            className='tag'
+            className='font-tag'
             style={{
               fontSize: tagSize,
               color: color,

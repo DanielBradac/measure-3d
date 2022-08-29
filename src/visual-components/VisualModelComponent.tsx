@@ -45,7 +45,10 @@ const VisualModel = ({ elements }: VisualModelProps) => {
   return (
     <>
       <label htmlFor='drawer' className='drawer-button'>
-        <BsFillGearFill className='text-secondary m-2 clickable' size={32} />
+        <BsFillGearFill
+          className='text-secondary m-2 cursor-pointer'
+          size={32}
+        />
       </label>
 
       <div className='canvas'>

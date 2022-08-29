@@ -10,8 +10,6 @@ uprava dat. modelu
 
 Zakomponovat nějak směr vektoru do vzhledu?
 
-Když jsem na tagu bodu, tak nejde scrollovat
-
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty
 

@@ -11,12 +11,6 @@
     .header {
         @apply bg-slate-500 flex justify-center text-white font-main text-3xl p-6 border-b-2 border-gray-400;
     }
-    .clickable {
-        @apply cursor-pointer;
-    }
-    .tag {
-        @apply font-tag;
-    }
     .canvas {
         @apply bg-gray-500 w-halfScreen h-4/6 min-h-canvas min-w-canvas max-w-canvas max-h-canvas resize overflow-auto;
     }
