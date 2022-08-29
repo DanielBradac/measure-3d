@@ -71,7 +71,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
       setFromPoint(point)
       setValue('pointFrom', points.indexOf(point).toString())
     }
-  }, [points, vectors])
+  }, [vectors])
 
   const submitVector = handleSubmit(data => {
     // Do we have selected existing points or a new ones?
