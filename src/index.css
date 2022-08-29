@@ -15,7 +15,7 @@
         @apply cursor-pointer;
     }
     .tag {
-        @apply font-tag select-none;
+        @apply font-tag;
     }
     .canvas {
         @apply bg-gray-500 w-halfScreen h-4/6 min-h-canvas min-w-canvas max-w-canvas max-h-canvas resize overflow-auto;

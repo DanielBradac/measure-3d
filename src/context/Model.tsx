@@ -1,4 +1,3 @@
-import { isConstructorDeclaration } from 'typescript'
 import { indexOf } from '../data-model/Interfaces'
 import { Layer } from '../data-model/Layer'
 import { Point } from '../data-model/Point'

@@ -8,8 +8,6 @@ uprava dat. modelu
     vector nebude mít layers - jeho layers budou sjednocením layers jeho bodů
     bude potřeba upravit i v tříde Model, aby se s tím počítalo, když se naměří stejný drawable jen v jiné layer - k existujícímu drawable se pak přidá layer
 
-udělat TODOčka v kódu - udělat errory pro přidávání již existujících nebo jinak chybných elementů
-
 Zakomponovat nějak směr vektoru do vzhledu?
 
 Když jsem na tagu bodu, tak nejde scrollovat
