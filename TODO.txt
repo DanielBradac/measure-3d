@@ -1,31 +1,7 @@
-možná se v css zbavit toho měření podle scrrenu...např. když se errory rozjedou moc dolů, tak už to tam nedodáhne - šlo by předělat na 100%
+možná se v css zbavit toho měření podle screenu...např. když se errory rozjedou moc dolů, tak už to tam nedodáhne - šlo by předělat na 100%
 
-otestovat addVector
-    existující bod do existujícího
-        vektor má stejné body - spadne
-        vektor už existuje - spadne
-        vektor ještě neexisuje - vytvoří se
-    nový bod do existujícího
-        vektor má stejné body - spadne
-        vektor už existuje - spadne
-        vektor ještě neexisuje - vytvoří se vektor i bod
-        nový bod je už existující bod - vektor se vytvoří a nepřidá se nový bod
-    existující bod do nového
-        vektor má stejné body - spadne
-        vektor už existuje - spadne
-        vektor ještě neexisuje a bod taky ne - vytvoří se vektor i bod
-        nový bod je už existující bod - vektor se vytvoří a nepřidá se nový bod
-    nový bod do nového
-        vektor má stejné body - spadne
-        vektor už existuje - spadne
-        oba body jsou nové - přidají se jak body tak vektor
-        oba body už existují - přidá se jenom vektor
-
-udělat chybovou hlášku tak, aby jich tam mohlo vyskočit několik
-    když bude něco stejného typu, tak se to jenom přidá, když bude různého, tak se vyrobí nový alert pod ten původní
-
-pokusit se fixnout ten problém s animací - moc ale nevím jak - možná když to bude řídit jen jeden timeout? nevím. Nebo nějak resetovat ten timeout za kdy to má zmizet
-    možná si ten timeout uložit jako stav
+nový bod do existujícího/existující bod do nového
+    tady by to možná chtělo info, že se nepřidal nový bod, ale využil se již existující??
 
 uprava dat. modelu
     points budou mít set layers - výpočty budou probíhat pouze v rámci jedné layer, ale bude snadné layers přidávat
@@ -33,6 +9,10 @@ uprava dat. modelu
     bude potřeba upravit i v tříde Model, aby se s tím počítalo, když se naměří stejný drawable jen v jiné layer - k existujícímu drawable se pak přidá layer
 
 udělat TODOčka v kódu - udělat errory pro přidávání již existujících nebo jinak chybných elementů
+
+Zakomponovat nějak směr vektoru do vzhledu?
+
+Když jsem na tagu bodu, tak nejde scrollovat
 
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty
