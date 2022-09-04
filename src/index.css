@@ -36,7 +36,7 @@
         @apply text-xl;
     }
     .itemLabel {
-        @apply pr-4;
+        @apply pr-4 align-text-top;
     }
     .noLabelSelect {
         @apply pl-2 pr-6;
@@ -68,5 +68,9 @@
     }
     .submitButton {
         @apply pl-3 py-4 w-full;
+    }
+    /* Multiselect classes */
+    .multiSelectContainer {
+        @apply rounded-lg bg-white;
     }
 }

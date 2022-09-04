@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
+import Multiselect from 'multiselect-react-dropdown'
 import { ModelContext } from '../../App'
 import { getLayerSelection } from '../../common/Selections'
 import { indexOf } from '../../data-model/Interfaces'
@@ -21,7 +22,6 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
       y: 0,
       z: 0,
       tag: '',
-
       layerIndex: 0,
     },
   })
@@ -116,6 +116,33 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
             >
               {getLayerSelection(layers)}
             </select>
+          </div>
+
+          <div className='table-row'>
+            <label className='table-cell itemLabel align-top'>Layers:</label>
+            <div className='table-cell mt-10'>
+              <Multiselect
+                onKeyPressFn={function noRefCheck() {}}
+                onRemove={function noRefCheck() {}}
+                onSearch={function noRefCheck() {}}
+                onSelect={function noRefCheck() {}}
+                placeholder=''
+                options={layers}
+                displayValue='name'
+                emptyRecordMsg='No layers available'
+                className='multiSelectContainer'
+                style={{
+                  color: 'red',
+                  chips: {
+                    background: '#2563EB',
+                  },
+                  searchBox: {
+                    border: 'none',
+                    padding: '0 1rem',
+                  },
+                }}
+              />
+            </div>
           </div>
         </div>
 
