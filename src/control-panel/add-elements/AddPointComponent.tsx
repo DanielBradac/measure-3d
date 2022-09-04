@@ -1,16 +1,19 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Multiselect from 'multiselect-react-dropdown'
 import { ModelContext } from '../../App'
-import { getLayerSelection } from '../../common/Selections'
 import { indexOf } from '../../data-model/Interfaces'
 import { Point } from '../../data-model/Point'
+import { Layer } from '../../data-model/Layer'
+import MultiSelectComponent from '../../common/MultiSelectComponent'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
 }
 
 const AddPoint = ({ onAddPoint }: AddPointProps) => {
+  const { layers, points } = useContext(ModelContext)
+
   const {
     register,
     handleSubmit,
@@ -26,7 +29,8 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
     },
   })
 
-  const { layers, points } = useContext(ModelContext)
+  // Multiselect is not supported by useForm - we have layers separately
+  const [selectedLayers, setSelectedLayers] = useState<Layer[]>([])
 
   const addPoint = handleSubmit(data => {
     onAddPoint([
@@ -35,10 +39,11 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
         Number(data.y),
         Number(data.z),
         data.tag,
-        layers[data.layerIndex]
+        selectedLayers
       ),
     ])
     reset()
+    setSelectedLayers([])
   })
 
   const generateRandomPoints = () => {
@@ -49,7 +54,7 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
         Math.floor(Math.random() * 20),
         Math.floor(Math.random() * 20),
         x.toString(),
-        layers[0]
+        [layers[0]]
       )
       if (indexOf(points, newPoint) === -1) {
         newPoints.push(newPoint)
@@ -108,39 +113,21 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
           </div>
 
           <div className='table-row'>
-            <label className='table-cell itemLabel'>Layer:</label>
-
-            <select
-              className='table-cell select select-bordered select-sm'
-              {...register('layerIndex')}
-            >
-              {getLayerSelection(layers)}
-            </select>
-          </div>
-
-          <div className='table-row'>
             <label className='table-cell itemLabel align-top'>Layers:</label>
             <div className='table-cell mt-10'>
-              <Multiselect
-                onKeyPressFn={function noRefCheck() {}}
-                onRemove={function noRefCheck() {}}
-                onSearch={function noRefCheck() {}}
-                onSelect={function noRefCheck() {}}
-                placeholder=''
+              <MultiSelectComponent
+                onRemove={(selectedList: Layer[]) =>
+                  setSelectedLayers(selectedList)
+                }
+                onSelect={(selectedList: Layer[]) =>
+                  setSelectedLayers(selectedList)
+                }
+                placeholder='Select layers...'
+                selectedValues={selectedLayers}
+                // this is here bacause of a bug on resetting selectedLayers
                 options={layers}
                 displayValue='name'
                 emptyRecordMsg='No layers available'
-                className='multiSelectContainer'
-                style={{
-                  color: 'red',
-                  chips: {
-                    background: '#2563EB',
-                  },
-                  searchBox: {
-                    border: 'none',
-                    padding: '0 1rem',
-                  },
-                }}
               />
             </div>
           </div>

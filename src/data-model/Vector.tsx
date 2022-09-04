@@ -27,8 +27,8 @@ export class Vector implements Drawable, Comparable {
     return -1
   }
 
-  get layer(): Layer {
-    return this._from.layer
+  get layers(): Layer[] {
+    return [...this._from.layers, ...this._to.layers]
   }
 
   get from(): Point {
@@ -69,7 +69,7 @@ export class Vector implements Drawable, Comparable {
       <LineComp
         start={[this._from.x, this._from.y, this._from.z]}
         end={[this._to.x, this._to.y, this._to.z]}
-        color={this._color || this.layer.color}
+        color={this._color || this.layers[0].color}
         key={key}
       />
     )

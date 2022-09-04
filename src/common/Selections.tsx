@@ -1,4 +1,3 @@
-import { Layer } from '../data-model/Layer'
 import { Point } from '../data-model/Point'
 import { SelectOption } from './Types'
 
@@ -14,15 +13,4 @@ export function getPointSelection(points: Point[]): JSX.Element[] {
       {label}
     </option>
   ))
-}
-
-// Values for selection are indeces in given layers array
-export function getLayerSelection(layers: Layer[]): JSX.Element[] {
-  return layers.map((layer, index) => {
-    return (
-      <option key={layer.name} value={index}>
-        {layer.name}
-      </option>
-    )
-  })
 }

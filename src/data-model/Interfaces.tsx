@@ -5,7 +5,8 @@ import { Layer } from './Layer'
 export interface Drawable {
   // Key is for htmlKey - it gives warning in console if not included
   draw(key: number, ctx?: Settings): JSX.Element
-  layer: Layer
+  // Drawable has multiple layers in which it can be included
+  layers: Layer[]
 }
 
 // Interface for objects that can be compared to each other - standard Java compareTo pattern

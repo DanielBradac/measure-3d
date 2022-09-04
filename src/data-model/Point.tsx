@@ -10,9 +10,13 @@ export class Point implements Drawable, Comparable {
     private _y: number,
     private _z: number,
     private _tag: string,
-    private _layer: Layer,
+    private _layers: Layer[],
     private _color?: string
-  ) {}
+  ) {
+    if (_layers.length === 0) {
+      throw Error('Point must have at least one layer!')
+    }
+  }
 
   compareTo(other: Comparable): number {
     if (!(other instanceof Point)) {
@@ -32,12 +36,12 @@ export class Point implements Drawable, Comparable {
 
   private _vectors: Set<Vector> = new Set<Vector>()
 
-  get layer() {
-    return this._layer
+  get layers() {
+    return this._layers
   }
 
-  set layer(value: Layer) {
-    this._layer = value
+  set layers(value: Layer[]) {
+    this._layers = value
   }
 
   get x(): number {
@@ -75,7 +79,7 @@ export class Point implements Drawable, Comparable {
       <PointComp
         center={[this._x, this._y, this._z]}
         radius={pointSize}
-        color={this._color || this.layer.color}
+        color={this._color || this.layers[0].color}
         key={key}
         tag={this._tag}
         showTag={pointTagsToggled}

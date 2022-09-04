@@ -1,8 +1,10 @@
+import Multiselect from 'multiselect-react-dropdown'
 import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModelContext } from '../../App'
-import { getLayerSelection, getPointSelection } from '../../common/Selections'
-import { indexOf } from '../../data-model/Interfaces'
+import MultiSelectComponent from '../../common/MultiSelectComponent'
+import { getPointSelection } from '../../common/Selections'
+import { Layer } from '../../data-model/Layer'
 import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
 
@@ -11,26 +13,28 @@ interface AddVectorProps {
 }
 
 const AddVector = ({ onAddVector }: AddVectorProps) => {
+  const { points, layers, vectors } = useContext(ModelContext)
+
   const { register, handleSubmit, setValue, resetField, reset } = useForm({
     defaultValues: {
       xFrom: 0,
       yFrom: 0,
       zFrom: 0,
       tagFrom: '',
-      layerIndexFrom: 0,
 
       xTo: 0,
       yTo: 0,
       zTo: 0,
       tagTo: '',
-      layerIndexTo: 0,
 
       pointFrom: 'new',
       pointTo: 'new',
     },
   })
 
-  const { points, layers, vectors } = useContext(ModelContext)
+  // Multiselect is not supported by useForm - we have layers separately
+  const [selectedLayersFrom, setSelectedLayersFrom] = useState<Layer[]>([])
+  const [selectedLayersTo, setSelectedLayersTo] = useState<Layer[]>([])
 
   const [fromDisabled, setFromDisabled] = useState<boolean>(false)
   const [toDisabled, setToDisabled] = useState<boolean>(false)
@@ -48,8 +52,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
     setValue('yFrom', blueprint.y)
     setValue('zFrom', blueprint.z)
     setValue('tagFrom', blueprint.tag)
-    const layerIndex = indexOf(layers, blueprint.layer)
-    setValue('layerIndexFrom', layerIndex === -1 ? 0 : layerIndex)
+    setSelectedLayersFrom(blueprint.layers)
   }
 
   // Set TO point values form an existing point
@@ -59,8 +62,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
     setValue('yTo', blueprint.y)
     setValue('zTo', blueprint.z)
     setValue('tagTo', blueprint.tag)
-    const layerIndex = indexOf(layers, blueprint.layer)
-    setValue('layerIndexTo', layerIndex === -1 ? 0 : layerIndex)
+    setSelectedLayersTo(blueprint.layers)
   }
 
   // From point is 'to' point of last added vector by default
@@ -82,7 +84,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             Number(data.yFrom),
             Number(data.zFrom),
             data.tagFrom,
-            layers[data.layerIndexFrom]
+            selectedLayersFrom
           )
         : points[parseInt(data.pointFrom)]
 
@@ -93,14 +95,17 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             Number(data.yTo),
             Number(data.zTo),
             data.tagTo,
-            layers[data.layerIndexTo]
+            selectedLayersTo
           )
         : points[parseInt(data.pointTo)]
 
     // Create new Vector
     createVector(from, to)
+
     // Reset the form
     reset()
+    setSelectedLayersFrom([])
+    setSelectedLayersTo([])
     setToDisabled(false)
     setFromDisabled(false)
   })
@@ -115,7 +120,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
       resetField('yFrom')
       resetField('zFrom')
       resetField('tagFrom')
-      resetField('layerIndexFrom')
+      setSelectedLayersFrom([])
     }
   }
 
@@ -129,6 +134,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
       resetField('yTo')
       resetField('zTo')
       resetField('tagTo')
+      setSelectedLayersTo([])
     }
   }
 
@@ -190,14 +196,23 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             />
           </div>
           <div className='table-row'>
-            <label className='table-cell itemLabel'>Layer:</label>
-            <select
-              className='table-cell select select-bordered select-sm'
-              {...register('layerIndexFrom')}
-              disabled={fromDisabled}
-            >
-              {getLayerSelection(layers)}
-            </select>
+            <label className='table-cell itemLabel align-top'>Layers:</label>
+            <div className='table-cell mt-10'>
+              <MultiSelectComponent
+                onRemove={(selectedList: Layer[]) =>
+                  setSelectedLayersFrom(selectedList)
+                }
+                onSelect={(selectedList: Layer[]) =>
+                  setSelectedLayersFrom(selectedList)
+                }
+                placeholder='Select layers...'
+                selectedValues={selectedLayersFrom}
+                // this is here bacause of a bug on resetting selectedLayers
+                options={layers}
+                displayValue='name'
+                emptyRecordMsg='No layers available'
+              />
+            </div>
           </div>
         </div>
 
@@ -255,14 +270,23 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             />
           </div>
           <div className='table-row'>
-            <label className='table-cell itemLabel'>Layer:</label>
-            <select
-              className='table-cell select select-bordered select-sm'
-              {...register('layerIndexTo')}
-              disabled={toDisabled}
-            >
-              {getLayerSelection(layers)}
-            </select>
+            <label className='table-cell itemLabel align-top'>Layers:</label>
+            <div className='table-cell mt-10'>
+              <MultiSelectComponent
+                onRemove={(selectedList: Layer[]) =>
+                  setSelectedLayersTo(selectedList)
+                }
+                onSelect={(selectedList: Layer[]) =>
+                  setSelectedLayersTo(selectedList)
+                }
+                placeholder='Select layers...'
+                selectedValues={selectedLayersTo}
+                // this is here bacause of a bug on resetting selectedLayers
+                options={layers}
+                displayValue='name'
+                emptyRecordMsg='No layers available'
+              />
+            </div>
           </div>
         </div>
 
