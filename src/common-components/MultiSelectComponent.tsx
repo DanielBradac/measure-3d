@@ -1,39 +1,39 @@
 import Multiselect from 'multiselect-react-dropdown'
+import React, { LegacyRef } from 'react'
 import { Layer } from '../data-model/Layer'
 
-// TODO try to make this general
+// TODO try to make this general - remove Layer type
 interface MultiSelectComponentProps {
-  onRemove: (selectedList: Layer[]) => void
-  onSelect: (selectedList: Layer[]) => void
   placeholder: string
-  selectedValues: Layer[]
+  preSelectedValues?: Layer[]
   options: Layer[]
   displayValue: string
   emptyRecordMsg: string
+  multiSelect: LegacyRef<Multiselect>
+  disabled?: boolean
 }
 
 const MultiSelectComponent = ({
-  onRemove,
-  onSelect,
   placeholder,
-  selectedValues,
   options,
   displayValue,
+  multiSelect,
+  preSelectedValues,
+  disabled,
 }: MultiSelectComponentProps) => {
   // Render
   return (
     <Multiselect
-      onRemove={onRemove}
-      onSelect={onSelect}
+      selectedValues={preSelectedValues}
       hidePlaceholder={true}
       placeholder={placeholder}
-      selectedValues={selectedValues}
-      // this is here bacause of a bug on resetting selectedValues
-      options={[...options, ...selectedValues]}
+      options={options}
       avoidHighlightFirstOption={true}
       displayValue={displayValue}
-      emptyRecordMsg='No layers available'
+      emptyRecordMsg=''
+      ref={multiSelect}
       className='multiSelectContainer'
+      disable={disabled}
       style={{
         chips: {
           background: '#2563EB',

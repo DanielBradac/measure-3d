@@ -1,11 +1,12 @@
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModelContext } from '../../App'
 import { indexOf } from '../../data-model/Interfaces'
 import { Point } from '../../data-model/Point'
 import { Layer } from '../../data-model/Layer'
-import MultiSelectComponent from '../../common/MultiSelectComponent'
 import { prevEnterSub } from '../../common/FormFunctions'
+import MultiSelectComponent from '../../common-components/MultiSelectComponent'
+import Multiselect from 'multiselect-react-dropdown'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
@@ -29,8 +30,8 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
     },
   })
 
-  // Multiselect is not supported by useForm - we have layers separately
-  const [selectedLayers, setSelectedLayers] = useState<Layer[]>([])
+  // Multiselect ref - needed for getting data and reseting multiselect
+  const multiSelect = useRef<Multiselect>(null)
 
   const addPoint = handleSubmit(data => {
     onAddPoint([
@@ -39,11 +40,13 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
         Number(data.y),
         Number(data.z),
         data.tag,
-        selectedLayers
+        multiSelect.current?.getSelectedItems()
       ),
     ])
+
+    // Reset form and multiselect
     reset()
-    setSelectedLayers([])
+    multiSelect.current?.resetSelectedValues()
   })
 
   const generateRandomPoints = () => {
@@ -119,18 +122,11 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
           <label className='table-cell itemLabel align-top'>Layers:</label>
           <div className='table-cell mt-10'>
             <MultiSelectComponent
-              onRemove={(selectedList: Layer[]) =>
-                setSelectedLayers(selectedList)
-              }
-              onSelect={(selectedList: Layer[]) =>
-                setSelectedLayers(selectedList)
-              }
               placeholder='Select layers...'
-              selectedValues={selectedLayers}
-              // this is here bacause of a bug on resetting selectedLayers
               options={layers}
               displayValue='name'
               emptyRecordMsg='No layers available'
+              multiSelect={multiSelect}
             />
           </div>
         </div>

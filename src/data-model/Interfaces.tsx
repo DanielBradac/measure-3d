@@ -31,3 +31,8 @@ export const indexOf = (
   }
   return -1
 }
+
+// Interface for objects that can be displayed in Selects (Mainly used for multiselects)
+export interface Selectable {
+  displayedItem: string
+}

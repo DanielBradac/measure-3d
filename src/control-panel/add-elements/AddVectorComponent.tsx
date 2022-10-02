@@ -1,9 +1,9 @@
 import Multiselect from 'multiselect-react-dropdown'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModelContext } from '../../App'
+import MultiSelectComponent from '../../common-components/MultiSelectComponent'
 import { prevEnterSub } from '../../common/FormFunctions'
-import MultiSelectComponent from '../../common/MultiSelectComponent'
 import { getPointSelection } from '../../common/Selections'
 import { Layer } from '../../data-model/Layer'
 import { Point } from '../../data-model/Point'
@@ -36,6 +36,8 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
   // Multiselect is not supported by useForm - we have layers separately
   const [selectedLayersFrom, setSelectedLayersFrom] = useState<Layer[]>([])
   const [selectedLayersTo, setSelectedLayersTo] = useState<Layer[]>([])
+  const multiSelectFrom = useRef<Multiselect>(null)
+  const multiSelectTo = useRef<Multiselect>(null)
 
   const [fromDisabled, setFromDisabled] = useState<boolean>(false)
   const [toDisabled, setToDisabled] = useState<boolean>(false)
@@ -85,7 +87,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             Number(data.yFrom),
             Number(data.zFrom),
             data.tagFrom,
-            selectedLayersFrom
+            multiSelectFrom.current?.getSelectedItems()
           )
         : points[parseInt(data.pointFrom)]
 
@@ -96,7 +98,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             Number(data.yTo),
             Number(data.zTo),
             data.tagTo,
-            selectedLayersTo
+            multiSelectTo.current?.getSelectedItems()
           )
         : points[parseInt(data.pointTo)]
 
@@ -109,6 +111,8 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
     setSelectedLayersTo([])
     setToDisabled(false)
     setFromDisabled(false)
+    multiSelectFrom.current?.resetSelectedValues()
+    multiSelectTo.current?.resetSelectedValues()
   })
 
   // From point selection changed
@@ -122,6 +126,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
       resetField('zFrom')
       resetField('tagFrom')
       setSelectedLayersFrom([])
+      multiSelectFrom.current?.resetSelectedValues()
     }
   }
 
@@ -136,6 +141,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
       resetField('zTo')
       resetField('tagTo')
       setSelectedLayersTo([])
+      multiSelectTo.current?.resetSelectedValues()
     }
   }
 
@@ -204,18 +210,13 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             <label className='table-cell itemLabel align-top'>Layers:</label>
             <div className='table-cell mt-10'>
               <MultiSelectComponent
-                onRemove={(selectedList: Layer[]) =>
-                  setSelectedLayersFrom(selectedList)
-                }
-                onSelect={(selectedList: Layer[]) =>
-                  setSelectedLayersFrom(selectedList)
-                }
+                preSelectedValues={selectedLayersFrom}
+                disabled={fromDisabled}
                 placeholder='Select layers...'
-                selectedValues={selectedLayersFrom}
-                // this is here bacause of a bug on resetting selectedLayers
                 options={layers}
                 displayValue='name'
                 emptyRecordMsg='No layers available'
+                multiSelect={multiSelectFrom}
               />
             </div>
           </div>
@@ -278,18 +279,13 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             <label className='table-cell itemLabel align-top'>Layers:</label>
             <div className='table-cell mt-10'>
               <MultiSelectComponent
-                onRemove={(selectedList: Layer[]) =>
-                  setSelectedLayersTo(selectedList)
-                }
-                onSelect={(selectedList: Layer[]) =>
-                  setSelectedLayersTo(selectedList)
-                }
+                disabled={toDisabled}
+                preSelectedValues={selectedLayersTo}
                 placeholder='Select layers...'
-                selectedValues={selectedLayersTo}
-                // this is here bacause of a bug on resetting selectedLayers
                 options={layers}
                 displayValue='name'
                 emptyRecordMsg='No layers available'
+                multiSelect={multiSelectTo}
               />
             </div>
           </div>
