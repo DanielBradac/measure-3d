@@ -2,6 +2,7 @@ import Multiselect from 'multiselect-react-dropdown'
 import { useContext, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ModelContext } from '../../App'
+import { prevEnterSub } from '../../common/FormFunctions'
 import MultiSelectComponent from '../../common/MultiSelectComponent'
 import { getPointSelection } from '../../common/Selections'
 import { Layer } from '../../data-model/Layer'
@@ -141,7 +142,11 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
   // Render
   return (
     <>
-      <form onSubmit={submitVector} className='inputForm'>
+      <form
+        onSubmit={submitVector}
+        className='inputForm'
+        onKeyDown={e => prevEnterSub(e)}
+      >
         <div className='table-column inputBlock mr-8'>
           <span className='table-row formHeader'>Point from</span>
           <select
