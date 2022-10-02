@@ -33,9 +33,10 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
     },
   })
 
-  // Multiselect is not supported by useForm - we have layers separately
-  const [selectedLayersFrom, setSelectedLayersFrom] = useState<Layer[]>([])
-  const [selectedLayersTo, setSelectedLayersTo] = useState<Layer[]>([])
+  // Preselected layers of possible point preselection
+  const [preSelectLayersFrom, setPreSelectLayersFrom] = useState<Layer[]>([])
+  const [preSelectLayersTo, setPreSelectLayersTo] = useState<Layer[]>([])
+  // Multiselect ref - needed for getting data and reseting multiselect
   const multiSelectFrom = useRef<Multiselect>(null)
   const multiSelectTo = useRef<Multiselect>(null)
 
@@ -55,7 +56,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
     setValue('yFrom', blueprint.y)
     setValue('zFrom', blueprint.z)
     setValue('tagFrom', blueprint.tag)
-    setSelectedLayersFrom(blueprint.layers)
+    setPreSelectLayersFrom(blueprint.layers)
   }
 
   // Set TO point values form an existing point
@@ -65,7 +66,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
     setValue('yTo', blueprint.y)
     setValue('zTo', blueprint.z)
     setValue('tagTo', blueprint.tag)
-    setSelectedLayersTo(blueprint.layers)
+    setPreSelectLayersTo(blueprint.layers)
   }
 
   // From point is 'to' point of last added vector by default
@@ -77,6 +78,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
     }
   }, [vectors])
 
+  // Vector submitted
   const submitVector = handleSubmit(data => {
     // Do we have selected existing points or a new ones?
     const from =
@@ -107,8 +109,8 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
 
     // Reset the form
     reset()
-    setSelectedLayersFrom([])
-    setSelectedLayersTo([])
+    setPreSelectLayersFrom([])
+    setPreSelectLayersTo([])
     setToDisabled(false)
     setFromDisabled(false)
     multiSelectFrom.current?.resetSelectedValues()
@@ -125,7 +127,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
       resetField('yFrom')
       resetField('zFrom')
       resetField('tagFrom')
-      setSelectedLayersFrom([])
+      setPreSelectLayersFrom([])
       multiSelectFrom.current?.resetSelectedValues()
     }
   }
@@ -140,7 +142,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
       resetField('yTo')
       resetField('zTo')
       resetField('tagTo')
-      setSelectedLayersTo([])
+      setPreSelectLayersTo([])
       multiSelectTo.current?.resetSelectedValues()
     }
   }
@@ -210,7 +212,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             <label className='table-cell itemLabel align-top'>Layers:</label>
             <div className='table-cell mt-10'>
               <MultiSelectComponent
-                preSelectedValues={selectedLayersFrom}
+                preSelectedValues={preSelectLayersFrom}
                 disabled={fromDisabled}
                 placeholder='Select layers...'
                 options={layers}
@@ -280,7 +282,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             <div className='table-cell mt-10'>
               <MultiSelectComponent
                 disabled={toDisabled}
-                preSelectedValues={selectedLayersTo}
+                preSelectedValues={preSelectLayersTo}
                 placeholder='Select layers...'
                 options={layers}
                 displayValue='name'
