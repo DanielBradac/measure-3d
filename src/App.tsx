@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AlertBlock from './common-components/AlertComponent'
 import { AlertMessage, ErrorMessage } from './common/AlertMessageTypes'
-import { AlertStack } from './context/AlertStack'
 import { Model } from './context/Model'
 import Settings from './context/Settings'
 import ControlPanel from './control-panel/ControlPanelComponent'
@@ -15,12 +14,11 @@ import VisualModel from './visual-components/VisualModelComponent'
 // Context
 export const SettingsContext = React.createContext(new Settings())
 export const ModelContext = React.createContext(new Model())
-export const AlertStackContext = React.createContext({
-  stack: new AlertStack(),
+export const AlertStackContext = React.createContext(
   // We can create alert from anywhere using this callback
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  throwMessage: (message: AlertMessage) => {},
-})
+  (message: AlertMessage) => {}
+)
 
 const App = () => {
   const alertDuration = 4000
@@ -42,24 +40,25 @@ const App = () => {
   const elements: Drawable[] = [...model.points, ...model.vectors]
 
   // Alerts
-  const [alertStack, setAlertStack] = useState<AlertStack>(new AlertStack())
+  const [alertStack, setAlertStack] = useState<AlertMessage[]>([])
   const throwMessage = (message: AlertMessage) => {
-    setAlertStack(alertStack.addMessage(message))
+    setAlertStack((prevStack: AlertMessage[]) => {
+      return [message, ...prevStack]
+    })
   }
-  const ctxValue = { stack: alertStack, throwMessage: throwMessage }
 
   // Clear alert after set duration - if new alert arrives we renew the timer
   useEffect(() => {
     console.log('Stack changed')
     const timer = setTimeout(() => {
-      if (alertStack.messages.length > 0) {
-        setAlertStack(new AlertStack())
+      if (alertStack.length > 0) {
+        setAlertStack([])
       }
     }, alertDuration)
     return () => {
       clearTimeout(timer)
     }
-  }, [alertStack.messages.length])
+  }, [alertStack.length])
 
   // Change model - exception may occure, so we catch them and put them in alerts
   const runModelChange = (prevModel: Model, setter: () => Model) => {
@@ -140,7 +139,7 @@ const App = () => {
   return (
     <SettingsContext.Provider value={settings}>
       <ModelContext.Provider value={model}>
-        <AlertStackContext.Provider value={ctxValue}>
+        <AlertStackContext.Provider value={throwMessage}>
           <React.StrictMode>
             <div className='page'>
               <h1 className='header'>Measure 3D</h1>
@@ -163,9 +162,9 @@ const App = () => {
                       onAddVector={onAddVecor}
                     />
                     <div className='ml-3 '>
-                      {alertStack.messages.length > 0 && (
+                      {alertStack.length > 0 && (
                         <AlertBlock
-                          alerts={alertStack.messages}
+                          alerts={alertStack}
                           duration={alertDuration}
                         />
                       )}
