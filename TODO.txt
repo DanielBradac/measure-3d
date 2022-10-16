@@ -7,10 +7,7 @@ multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou bar
 velké komponenty rozdělit na smart a dumb
     hlavně AddVectorComponent zaslouží refactor
 
-u add vector layers FROM bodu odtlačí TO bod
-
-zkusit vymyslet nějaký obecný error handler, do kterého se budou moct z try catch poslat zprávy odkudkoliv
-    v rootu na to udělat nějaký stav a funkci, kterou si může použít každý potomek
+u add vector layers FROM bodu odtlačí TO bod - asi nějak omezit kam až ty layers můžou tlačit
 
 možná se v css zbavit toho měření podle screenu...např. když se errory rozjedou moc dolů, tak už to tam nedodáhne - šlo by předělat na 100%?
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AlertBlock from './common-components/AlertComponent'
-import { AlertMes, AlertType } from './common/Types'
+import { AlertMessage, ErrorMessage } from './common/AlertMessageTypes'
+import { AlertStack } from './context/AlertStack'
 import { Model } from './context/Model'
 import Settings from './context/Settings'
 import ControlPanel from './control-panel/ControlPanelComponent'
@@ -14,6 +15,12 @@ import VisualModel from './visual-components/VisualModelComponent'
 // Context
 export const SettingsContext = React.createContext(new Settings())
 export const ModelContext = React.createContext(new Model())
+export const AlertStackContext = React.createContext({
+  stack: new AlertStack(),
+  // We can create alert from anywhere using this callback
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  throwMessage: (message: AlertMessage) => {},
+})
 
 const App = () => {
   const alertDuration = 4000
@@ -35,34 +42,35 @@ const App = () => {
   const elements: Drawable[] = [...model.points, ...model.vectors]
 
   // Alerts
-  const [alerts, setAlerts] = useState<AlertMes[]>([])
+  const [alertStack, setAlertStack] = useState<AlertStack>(new AlertStack())
+  const throwMessage = (message: AlertMessage) => {
+    setAlertStack(alertStack.addMessage(message))
+  }
+  const ctxValue = { stack: alertStack, throwMessage: throwMessage }
 
   // Clear alert after set duration - if new alert arrives we renew the timer
   useEffect(() => {
+    console.log('Stack changed')
     const timer = setTimeout(() => {
-      if (alerts.length > 0) {
-        setAlerts([])
+      if (alertStack.messages.length > 0) {
+        setAlertStack(new AlertStack())
       }
     }, alertDuration)
     return () => {
       clearTimeout(timer)
     }
-  }, [alerts.length])
+  }, [alertStack.messages.length])
 
   // Change model - exception may occure, so we catch them and put them in alerts
   const runModelChange = (prevModel: Model, setter: () => Model) => {
     try {
       return setter()
     } catch (e: unknown) {
-      setAlerts(prevAlerts => {
-        return [
-          ...prevAlerts,
-          {
-            type: AlertType.ERROR,
-            messages: [e instanceof Error ? e.message : 'Unkown error occured'],
-          },
-        ]
-      })
+      throwMessage(
+        new ErrorMessage(
+          e instanceof Error ? e.message : 'Unkown error occured'
+        )
+      )
       return prevModel
     }
   }
@@ -132,37 +140,42 @@ const App = () => {
   return (
     <SettingsContext.Provider value={settings}>
       <ModelContext.Provider value={model}>
-        <React.StrictMode>
-          <div className='page'>
-            <h1 className='header'>Measure 3D</h1>
+        <AlertStackContext.Provider value={ctxValue}>
+          <React.StrictMode>
+            <div className='page'>
+              <h1 className='header'>Measure 3D</h1>
 
-            <DrawerPage
-              toggleAxis={toggleAxis}
-              handleAxisChange={handleAxisChange}
-              toggleTags={toggleTags}
-              handleTagSizeChange={handleTagSizeChange}
-              handlePointSizeChange={handlePointSizeChange}
-            >
-              <div className='pageContent'>
-                <div className='leftSide'>
-                  <VisualModel elements={elements} />
-                </div>
+              <DrawerPage
+                toggleAxis={toggleAxis}
+                handleAxisChange={handleAxisChange}
+                toggleTags={toggleTags}
+                handleTagSizeChange={handleTagSizeChange}
+                handlePointSizeChange={handlePointSizeChange}
+              >
+                <div className='pageContent'>
+                  <div className='leftSide'>
+                    <VisualModel elements={elements} />
+                  </div>
 
-                <div className='rightSide'>
-                  <ControlPanel
-                    onAddPoint={onAddPoint}
-                    onAddVector={onAddVecor}
-                  />
-                  <div className='ml-3 '>
-                    {alerts.length > 0 && (
-                      <AlertBlock alerts={alerts} duration={alertDuration} />
-                    )}
+                  <div className='rightSide'>
+                    <ControlPanel
+                      onAddPoint={onAddPoint}
+                      onAddVector={onAddVecor}
+                    />
+                    <div className='ml-3 '>
+                      {alertStack.messages.length > 0 && (
+                        <AlertBlock
+                          alerts={alertStack.messages}
+                          duration={alertDuration}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </DrawerPage>
-          </div>
-        </React.StrictMode>
+              </DrawerPage>
+            </div>
+          </React.StrictMode>
+        </AlertStackContext.Provider>
       </ModelContext.Provider>
     </SettingsContext.Provider>
   )

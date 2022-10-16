@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { AlertMes, AlertType } from '../common/Types'
+import { AlertMessage, AlertType } from '../common/AlertMessageTypes'
 
 interface AlertProps {
-  type: string
-  messages: string[]
+  type: AlertType
+  message: string
 }
 
 // Component for one single alert
-const Alert = ({ type, messages }: AlertProps) => {
+const Alert = ({ type, message }: AlertProps) => {
   const className = `animate-fade-in-down w-fit p-3 alert shadow-lg ${type}`
 
   let svgPath = 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
@@ -38,18 +38,14 @@ const Alert = ({ type, messages }: AlertProps) => {
             d={svgPath}
           />
         </svg>
-        <div className='flex flex-col'>
-          {messages.map((message, index) => (
-            <div key={`Message ${index}`}>{message}</div>
-          ))}
-        </div>
+        <div className='flex flex-col'>{message}</div>
       </>
     </div>
   )
 }
 
 interface AlertBlockProps {
-  alerts: AlertMes[]
+  alerts: AlertMessage[]
   duration: number
 }
 
@@ -74,7 +70,7 @@ const AlertBlock = ({ alerts, duration }: AlertBlockProps) => {
         alerts.map((alert, index) => {
           return (
             <div key={`Alert ${index}`} className='mb-2'>
-              <Alert type={alert.type} messages={alert.messages} />
+              <Alert type={alert.type} message={alert.message} />
             </div>
           )
         })}
