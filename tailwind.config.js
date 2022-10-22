@@ -31,20 +31,17 @@ module.exports = {
                 'main': ["'Roboto Mono', monospace"],
                 'tag': ["'Courier New', Courier, monospace"]
             },
-            width: {
-                'halfScreen': '50vw'
-            },
             minWidth: {
-                'canvas': '25vw'
+                'leftSide': '30%'
             },
             maxWidth: {
-                'canvas': '75vw'
+                'leftSide': '70%'
             },
             minHeight: {
-                'canvas': '35vh'
+                'canvas': '35%'
             },
             maxHeight: {
-                'canvas': '86vh'
+                'canvas': '95%'
             },
             alignItems: {
                 'top': 'top'

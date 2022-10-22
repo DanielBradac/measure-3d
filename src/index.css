@@ -3,22 +3,22 @@
 @tailwind utilities;
 @layer components {
     .page {
-        @apply flex flex-col h-screen;
+        @apply flex flex-col h-full;
     }
     .pageContent {
-        @apply flex flex-row align-top text-black bg-slate-600 font-main text-lg;
+        @apply h-full flex flex-row align-top text-black bg-slate-600 font-main text-lg;
     }
     .header {
         @apply bg-slate-500 flex justify-center text-white font-main text-3xl p-6 border-b-2 border-gray-400;
     }
     .canvas {
-        @apply bg-gray-500 w-halfScreen h-4/6 min-h-canvas min-w-canvas max-w-canvas max-h-canvas resize overflow-auto;
+        @apply bg-gray-500 h-4/6 min-h-canvas max-h-canvas w-full min-w-full resize overflow-auto;
     }
     .rightSide {
-        @apply align-text-top flex flex-col w-full h-screen bg-slate-500 border-gray-400 border-l-2;
+        @apply align-text-top bg-slate-500 border-gray-400 border-l-2 grow;
     }
     .leftSide {
-        @apply flex flex-col items-start;
+        @apply max-w-leftSide min-w-leftSide;
     }
     .tabContent {
         @apply p-3 text-black;

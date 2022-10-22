@@ -5,7 +5,7 @@ velké komponenty rozdělit na smart a dumb
 
 u add vector layers FROM bod odtlačí TO bod - asi nějak omezit kam až ty layers můžou tlačit
 
-možná se v css zbavit toho měření podle screenu...např. když se errory rozjedou moc dolů, tak už to tam nedodáhne - šlo by předělat na 100%?
+css - zkusit nějak udělat default půl na půl, ale nevím jestli to půjde
 
 nový bod do existujícího/existující bod do nového
     tady by to možná chtělo info, že se nepřidal nový bod, ale využil se již existující?? Pomocí throw message
