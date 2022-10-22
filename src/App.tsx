@@ -14,10 +14,10 @@ import VisualModel from './visual-components/VisualModelComponent'
 // Context
 export const SettingsContext = React.createContext(new Settings())
 export const ModelContext = React.createContext(new Model())
-export const AlertStackContext = React.createContext(
+export const AlertContext = React.createContext(
   // We can create alert from anywhere using this callback
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  (message: AlertMessage) => {}
+  (throwMessage: AlertMessage) => {}
 )
 
 const App = () => {
@@ -139,7 +139,7 @@ const App = () => {
   return (
     <SettingsContext.Provider value={settings}>
       <ModelContext.Provider value={model}>
-        <AlertStackContext.Provider value={throwMessage}>
+        <AlertContext.Provider value={throwMessage}>
           <React.StrictMode>
             <div className='page'>
               <h1 className='header'>Measure 3D</h1>
@@ -174,7 +174,7 @@ const App = () => {
               </DrawerPage>
             </div>
           </React.StrictMode>
-        </AlertStackContext.Provider>
+        </AlertContext.Provider>
       </ModelContext.Provider>
     </SettingsContext.Provider>
   )

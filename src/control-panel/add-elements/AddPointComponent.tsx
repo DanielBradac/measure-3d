@@ -1,11 +1,12 @@
 import { useContext, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import { ModelContext } from '../../App'
+import { AlertContext, ModelContext } from '../../App'
 import { indexOf } from '../../data-model/Interfaces'
 import { Point } from '../../data-model/Point'
 import { prevEnterSub } from '../../common/FormFunctions'
 import MultiSelectComponent from '../../common-components/MultiSelectComponent'
 import Multiselect from 'multiselect-react-dropdown'
+import { ErrorMessage } from '../../common/AlertMessageTypes'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
@@ -13,6 +14,7 @@ interface AddPointProps {
 
 const AddPoint = ({ onAddPoint }: AddPointProps) => {
   const { layers, points } = useContext(ModelContext)
+  const throwMessage = useContext(AlertContext)
 
   const {
     register,
@@ -33,19 +35,26 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
   const multiSelect = useRef<Multiselect>(null)
 
   const addPoint = handleSubmit(data => {
-    onAddPoint([
-      new Point(
-        Number(data.x),
-        Number(data.y),
-        Number(data.z),
-        data.tag,
-        multiSelect.current?.getSelectedItems()
-      ),
-    ])
-
-    // Reset form and multiselect
-    reset()
-    multiSelect.current?.resetSelectedValues()
+    try {
+      onAddPoint([
+        new Point(
+          Number(data.x),
+          Number(data.y),
+          Number(data.z),
+          data.tag,
+          multiSelect.current?.getSelectedItems()
+        ),
+      ])
+      // Reset form and multiselect
+      reset()
+      multiSelect.current?.resetSelectedValues()
+    } catch (e: unknown) {
+      throwMessage(
+        new ErrorMessage(
+          e instanceof Error ? e.message : 'Unkown error occured'
+        )
+      )
+    }
   })
 
   const generateRandomPoints = () => {

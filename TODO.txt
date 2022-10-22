@@ -1,4 +1,5 @@
 vektor i bod musí mít minimálně jednu layer - vyjímka z konstruktoru mi vypadne, ale nikde se neormálně nechytí
+    využijeme throwMessage
 
 udělat MultiSelectComponentProps nějak obecně (pomocí Type, možná?)
 
@@ -7,12 +8,12 @@ multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou bar
 velké komponenty rozdělit na smart a dumb
     hlavně AddVectorComponent zaslouží refactor
 
-u add vector layers FROM bodu odtlačí TO bod - asi nějak omezit kam až ty layers můžou tlačit
+u add vector layers FROM bod odtlačí TO bod - asi nějak omezit kam až ty layers můžou tlačit
 
 možná se v css zbavit toho měření podle screenu...např. když se errory rozjedou moc dolů, tak už to tam nedodáhne - šlo by předělat na 100%?
 
 nový bod do existujícího/existující bod do nového
-    tady by to možná chtělo info, že se nepřidal nový bod, ale využil se již existující??
+    tady by to možná chtělo info, že se nepřidal nový bod, ale využil se již existující?? Pomocí throw message
 
 uprava dat. modelu
     points budou mít set layers - výpočty budou probíhat pouze v rámci jedné layer, ale bude snadné layers přidávat
@@ -41,3 +42,6 @@ začít s measure
             
         3D - minimálníé objekt je jehlan
             část 3D objektu musí sdílet právě 2 body - vytvoří tím roh dvou stěn
+
+zlepšit error handeling na formulářích
+    knihovna @hookform/error-message
