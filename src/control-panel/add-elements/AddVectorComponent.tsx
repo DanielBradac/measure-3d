@@ -1,5 +1,5 @@
 import Multiselect from 'multiselect-react-dropdown'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AlertContext, ModelContext } from '../../App'
 import MultiSelectComponent from '../../common-components/MultiSelectComponent'
@@ -128,7 +128,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
   })
 
   // From point selection changed
-  const handleChangeFrom = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChangeFrom = (event: ChangeEvent<HTMLSelectElement>) => {
     if (event.currentTarget.value !== 'new') {
       setFromPoint(points[parseInt(event.currentTarget.value)])
     } else {
@@ -143,7 +143,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
   }
 
   // To point selection changed
-  const handleChangeTo = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChangeTo = (event: ChangeEvent<HTMLSelectElement>) => {
     if (event.currentTarget.value !== 'new') {
       setToPoint(points[parseInt(event.currentTarget.value)])
     } else {

@@ -1,4 +1,10 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  FormEvent,
+  StrictMode,
+  useEffect,
+  useState,
+} from 'react'
 import AlertBlock from './common-components/AlertComponent'
 import { AlertMessage, ErrorMessage } from './common/AlertMessageTypes'
 import { Model } from './context/Model'
@@ -94,7 +100,7 @@ const App = () => {
 
   // Left menu settings
   const [settings, setSettings] = useState<Settings>(new Settings())
-  const handleAxisChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleAxisChange = (event: FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
         return prevSettings.updateAxisSize(event.currentTarget.valueAsNumber)
@@ -109,7 +115,7 @@ const App = () => {
     })
   }
 
-  const handleTagSizeChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleTagSizeChange = (event: FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
         return prevSettings.updatePointTagsSize(
@@ -126,7 +132,7 @@ const App = () => {
     })
   }
 
-  const handlePointSizeChange = (event: React.FormEvent<HTMLInputElement>) => {
+  const handlePointSizeChange = (event: FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
         return prevSettings.updatePointSize(event.currentTarget.valueAsNumber)
@@ -140,7 +146,7 @@ const App = () => {
     <SettingsContext.Provider value={settings}>
       <ModelContext.Provider value={model}>
         <AlertContext.Provider value={throwMessage}>
-          <React.StrictMode>
+          <StrictMode>
             <div className='page'>
               <h1 className='header'>Measure 3D</h1>
 
@@ -173,7 +179,7 @@ const App = () => {
                 </div>
               </DrawerPage>
             </div>
-          </React.StrictMode>
+          </StrictMode>
         </AlertContext.Provider>
       </ModelContext.Provider>
     </SettingsContext.Provider>

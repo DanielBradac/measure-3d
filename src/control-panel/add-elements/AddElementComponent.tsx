@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
 import AddPoint from './AddPointComponent'
@@ -12,7 +12,7 @@ interface AddElementProps {
 const AddElement = ({ onAddPoint, onAddVector }: AddElementProps) => {
   const [currentPanel, setCurrentPanel] = useState<string>('Point')
 
-  const onChangeElement = (event: React.FormEvent<HTMLSelectElement>) => {
+  const onChangeElement = (event: FormEvent<HTMLSelectElement>) => {
     setCurrentPanel(event.currentTarget.value)
   }
 

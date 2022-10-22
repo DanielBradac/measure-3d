@@ -1,13 +1,13 @@
-import { useContext } from 'react'
+import { FormEvent, ReactNode, useContext } from 'react'
 import { SettingsContext } from '../App'
 
 interface DrawerPageProps {
   toggleAxis: () => void
-  handleAxisChange: (event: React.FormEvent<HTMLInputElement>) => void
+  handleAxisChange: (event: FormEvent<HTMLInputElement>) => void
   toggleTags: () => void
-  handleTagSizeChange: (event: React.FormEvent<HTMLInputElement>) => void
-  handlePointSizeChange: (event: React.FormEvent<HTMLInputElement>) => void
-  children?: React.ReactNode
+  handleTagSizeChange: (event: FormEvent<HTMLInputElement>) => void
+  handlePointSizeChange: (event: FormEvent<HTMLInputElement>) => void
+  children?: ReactNode
 }
 
 const DrawerPage = ({
