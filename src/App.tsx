@@ -148,8 +148,6 @@ const App = () => {
         <AlertContext.Provider value={throwMessage}>
           <StrictMode>
             <div className='page'>
-              <h1 className='header'>Measure 3D</h1>
-
               <DrawerPage
                 toggleAxis={toggleAxis}
                 handleAxisChange={handleAxisChange}

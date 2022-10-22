@@ -8,17 +8,14 @@
     .pageContent {
         @apply h-full flex flex-row align-top text-black bg-slate-600 font-main text-lg;
     }
-    .header {
-        @apply bg-slate-500 flex justify-center text-white font-main text-3xl p-6 border-b-2 border-gray-400;
-    }
     .canvas {
         @apply bg-gray-500 h-4/6 min-h-canvas max-h-canvas w-full min-w-full resize overflow-auto;
     }
     .rightSide {
-        @apply align-text-top bg-slate-500 border-gray-400 border-l-2 grow overflow-auto;
+        @apply align-text-top bg-slate-500 border-gray-400 border-l-2 border-t-2 grow overflow-auto;
     }
     .leftSide {
-        @apply max-w-leftSide min-w-leftSide;
+        @apply max-w-leftSide min-w-leftSide border-gray-400 border-t-2;
     }
     .tabContent {
         @apply p-3 text-black;
