@@ -1,11 +1,11 @@
-multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou barvou
+css - zkusit nějak udělat default půl na půl, ale nevím jestli to půjde
+
+multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou barvou - nějaká ikonka?
 
 velké komponenty rozdělit na smart a dumb
     hlavně AddVectorComponent zaslouží refactor
 
 u add vector layers FROM bod odtlačí TO bod - asi nějak omezit kam až ty layers můžou tlačit
-
-css - zkusit nějak udělat default půl na půl, ale nevím jestli to půjde
 
 nový bod do existujícího/existující bod do nového
     tady by to možná chtělo info, že se nepřidal nový bod, ale využil se již existující?? Pomocí throw message

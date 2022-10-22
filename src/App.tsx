@@ -27,7 +27,7 @@ export const AlertContext = createContext(
 )
 
 const App = () => {
-  const alertDuration = 60000
+  const alertDuration = 4000
   // Data model - all entities are stored here
   const [model, setModel] = useState<Model>(
     new Model(
