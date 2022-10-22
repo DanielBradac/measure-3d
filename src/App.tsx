@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import AlertBlock from './common-components/AlertComponent'
 import { AlertMessage, ErrorMessage } from './common/AlertMessageTypes'
 import { Model } from './context/Model'
@@ -12,9 +12,9 @@ import DrawerPage from './drawer/DrawerPageComponent'
 import VisualModel from './visual-components/VisualModelComponent'
 
 // Context
-export const SettingsContext = React.createContext(new Settings())
-export const ModelContext = React.createContext(new Model())
-export const AlertContext = React.createContext(
+export const SettingsContext = createContext(new Settings())
+export const ModelContext = createContext(new Model())
+export const AlertContext = createContext(
   // We can create alert from anywhere using this callback
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (throwMessage: AlertMessage) => {}

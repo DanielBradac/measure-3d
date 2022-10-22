@@ -1,5 +1,5 @@
 import Multiselect from 'multiselect-react-dropdown'
-import React, { LegacyRef } from 'react'
+import { LegacyRef } from 'react'
 import { Layer } from '../data-model/Layer'
 
 // TODO try to make this general - remove Layer type
