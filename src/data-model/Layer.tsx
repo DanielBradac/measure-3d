@@ -27,7 +27,7 @@ export class Layer implements Comparable {
     this._name = value
   }
 
-  toString(): string {
-    return this._name
+  static get selectDisplayValue(): string {
+    return 'name'
   }
 }

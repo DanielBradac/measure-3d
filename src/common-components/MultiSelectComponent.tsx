@@ -1,12 +1,10 @@
 import Multiselect from 'multiselect-react-dropdown'
 import { LegacyRef } from 'react'
-import { Layer } from '../data-model/Layer'
 
-// TODO try to make this general - remove Layer type
-interface MultiSelectComponentProps {
+interface MultiSelectComponentProps<T> {
   placeholder: string
-  preSelectedValues?: Layer[]
-  options: Layer[]
+  preSelectedValues?: T[]
+  options: T[]
   displayValue: string
   emptyRecordMsg: string
   multiSelect: LegacyRef<Multiselect>
@@ -16,11 +14,11 @@ interface MultiSelectComponentProps {
 const MultiSelectComponent = ({
   placeholder,
   options,
-  displayValue,
   multiSelect,
   preSelectedValues,
   disabled,
-}: MultiSelectComponentProps) => {
+  displayValue,
+}: MultiSelectComponentProps<unknown>) => {
   // Render
   return (
     <Multiselect

@@ -226,7 +226,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
                 disabled={fromDisabled}
                 placeholder='Select layers...'
                 options={layers}
-                displayValue='name'
+                displayValue={Layer.selectDisplayValue}
                 emptyRecordMsg='No layers available'
                 multiSelect={multiSelectFrom}
               />
@@ -295,7 +295,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
                 preSelectedValues={preSelectLayersTo}
                 placeholder='Select layers...'
                 options={layers}
-                displayValue='name'
+                displayValue={Layer.selectDisplayValue}
                 emptyRecordMsg='No layers available'
                 multiSelect={multiSelectTo}
               />

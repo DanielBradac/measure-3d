@@ -7,6 +7,8 @@ import { prevEnterSub } from '../../common/FormFunctions'
 import MultiSelectComponent from '../../common-components/MultiSelectComponent'
 import Multiselect from 'multiselect-react-dropdown'
 import { ErrorMessage } from '../../common/AlertMessageTypes'
+import LayerManager from '../layer-manager/LayermanagerComponent'
+import { Layer } from '../../data-model/Layer'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
@@ -132,7 +134,7 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
             <MultiSelectComponent
               placeholder='Select layers...'
               options={layers}
-              displayValue='name'
+              displayValue={Layer.selectDisplayValue}
               emptyRecordMsg='No layers available'
               multiSelect={multiSelect}
             />
