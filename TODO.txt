@@ -1,3 +1,6 @@
+Zakomponovat nějak směr vektoru do vzhledu
+    udělat pro to settings tak jak to mají body
+
 multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou barvou - nějaká ikonka?
 
 velké komponenty rozdělit na smart a dumb
@@ -12,8 +15,6 @@ uprava dat. modelu
     points budou mít set layers - výpočty budou probíhat pouze v rámci jedné layer, ale bude snadné layers přidávat
     vector nebude mít layers - jeho layers budou sjednocením layers jeho bodů
     bude potřeba upravit i v tříde Model, aby se s tím počítalo, když se vyrobí stejný drawable jen v jiné layer - k existujícímu drawable se pak přidá layer
-
-Zakomponovat nějak směr vektoru do vzhledu?
 
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty

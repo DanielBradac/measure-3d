@@ -18,8 +18,6 @@ const PointComp = ({
   showTag,
   tagSize,
 }: PointCompProps) => {
-  // [0,0,0] behaves differently, so this workaround is needed
-
   return (
     // Render
     <mesh position={new THREE.Vector3(...center)}>

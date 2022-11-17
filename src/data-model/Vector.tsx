@@ -71,6 +71,8 @@ export class Vector implements Drawable, Comparable {
         end={[this._to.x, this._to.y, this._to.z]}
         color={this._color || this.layers[0].color}
         key={key}
+        showArrow={true}
+        arrowSize={1}
       />
     )
   }

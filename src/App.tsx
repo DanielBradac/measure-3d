@@ -55,7 +55,6 @@ const App = () => {
 
   // Clear alert after set duration - if new alert arrives we renew the timer
   useEffect(() => {
-    console.log('Stack changed')
     const timer = setTimeout(() => {
       if (alertStack.length > 0) {
         setAlertStack([])
