@@ -43,6 +43,9 @@ module.exports = {
             maxHeight: {
                 'canvas': '95%'
             },
+            width: {
+                'halfScreen': '50vw'
+            },
             alignItems: {
                 'top': 'top'
             },

@@ -165,7 +165,7 @@ const App = () => {
                       onAddPoint={onAddPoint}
                       onAddVector={onAddVecor}
                     />
-                    <div className='ml-3 '>
+                    <div className='ml-3'>
                       {alertStack.length > 0 && (
                         <AlertBlock
                           alerts={alertStack}
