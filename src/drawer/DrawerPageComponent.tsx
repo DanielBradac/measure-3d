@@ -1,4 +1,5 @@
 import { FormEvent, ReactNode, useContext } from 'react'
+import FadeInFadeOutComp from '../animation-components/FadeInFadeOutComp'
 import { SettingsContext } from '../App'
 
 interface DrawerPageProps {
@@ -6,6 +7,7 @@ interface DrawerPageProps {
   handleAxisChange: (event: FormEvent<HTMLInputElement>) => void
   toggleTags: () => void
   handleTagSizeChange: (event: FormEvent<HTMLInputElement>) => void
+  togglePoints: () => void
   handlePointSizeChange: (event: FormEvent<HTMLInputElement>) => void
   children?: ReactNode
 }
@@ -15,12 +17,19 @@ const DrawerPage = ({
   handleAxisChange,
   toggleTags,
   handleTagSizeChange,
+  togglePoints,
   handlePointSizeChange,
   children,
 }: DrawerPageProps) => {
   // Import global settings
-  const { axisToggled, pointTagsToggled, pointSize, axisSize, pointTagsSize } =
-    useContext(SettingsContext)
+  const {
+    axisToggled,
+    pointTagsToggled,
+    pointSize,
+    axisSize,
+    pointTagsSize,
+    pointsToggled,
+  } = useContext(SettingsContext)
   // Render
   return (
     <div className='drawer'>
@@ -46,7 +55,7 @@ const DrawerPage = ({
               </div>
             </div>
 
-            <div className='table-row'>
+            <FadeInFadeOutComp show={axisToggled} className='table-row'>
               <label className='itemLabel table-cell align-middle'>
                 Axis size:
               </label>
@@ -59,7 +68,7 @@ const DrawerPage = ({
                 step='0.1'
                 className='table-cell align-middle'
               />
-            </div>
+            </FadeInFadeOutComp>
 
             <div className='table-row'>
               <label className='itemLabel table-cell align-middle'>
@@ -75,7 +84,7 @@ const DrawerPage = ({
               </div>
             </div>
 
-            <div className='table-row'>
+            <FadeInFadeOutComp show={pointTagsToggled} className='table-row'>
               <label className='itemLabel table-cell align-middle'>
                 Point tags size:
               </label>
@@ -88,9 +97,23 @@ const DrawerPage = ({
                 step='0.5'
                 className='table-cell align-middle'
               />
-            </div>
+            </FadeInFadeOutComp>
 
             <div className='table-row'>
+              <label className='itemLabel table-cell align-middle'>
+                Show points:
+              </label>
+              <div className='table-cell'>
+                <input
+                  type='checkbox'
+                  className='settingsToggle align-middle'
+                  checked={pointsToggled}
+                  onChange={togglePoints}
+                />
+              </div>
+            </div>
+
+            <FadeInFadeOutComp show={pointsToggled} className='table-row'>
               <label className='itemLabel table-cell align-middle'>
                 Point size:
               </label>
@@ -103,7 +126,7 @@ const DrawerPage = ({
                 step='0.005'
                 className='table-cell align-middle'
               />
-            </div>
+            </FadeInFadeOutComp>
           </div>
         </div>
       </div>

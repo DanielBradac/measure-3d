@@ -74,7 +74,7 @@ export class Point implements Drawable, Comparable {
 
   draw(key: number, ctx: Settings): JSX.Element {
     // Import global settings
-    const { pointTagsToggled, pointTagsSize, pointSize } = ctx
+    const { pointTagsToggled, pointTagsSize, pointSize, pointsToggled } = ctx
     return (
       <PointComp
         center={[this._x, this._y, this._z]}
@@ -84,6 +84,7 @@ export class Point implements Drawable, Comparable {
         tag={this._tag}
         showTag={pointTagsToggled}
         tagSize={pointTagsSize}
+        showPoint={pointsToggled}
       />
     )
   }

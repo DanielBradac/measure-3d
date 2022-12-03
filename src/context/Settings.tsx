@@ -6,6 +6,7 @@ export default class Settings implements Context {
     private _axisSize: number = 3,
     private _pointTagsToggled: boolean = true,
     private _pointTagsSize: number = 30,
+    private _pointsToggled: boolean = true,
     private _pointSize: number = 0.05
   ) {}
 
@@ -15,6 +16,7 @@ export default class Settings implements Context {
       this._axisSize,
       this._pointTagsToggled,
       this._pointTagsSize,
+      this._pointsToggled,
       this._pointSize
     )
   }
@@ -57,6 +59,16 @@ export default class Settings implements Context {
   updatePointTagsSize(value: number): Settings {
     const clone = this.copy()
     clone._pointTagsSize = value
+    return clone
+  }
+
+  get pointsToggled(): boolean {
+    return this._pointsToggled
+  }
+
+  updatePointsToggled(value: boolean): Settings {
+    const clone = this.copy()
+    clone._pointsToggled = value
     return clone
   }
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import FadeInFadeOutComp from '../animation-components/FadeInFadeOutComp'
 import { AlertMessage, AlertType } from '../common/AlertMessageTypes'
 
 interface AlertProps {
@@ -51,13 +52,14 @@ interface AlertBlockProps {
 
 // Component for and array of alerts
 const AlertBlock = ({ alerts, duration }: AlertBlockProps) => {
-  const [animation, setAnimation] = useState<string>('')
+  const fadeoutDuration = 450
+  const [alertsVisible, setAlertsVisible] = useState<boolean>(true)
 
-  // Fadeout 0,5 s before time runs out - we must use stringify to reset timer if message changes
+  // Trigger fadeout animation fadeoutDuration before alerts get removed
   useEffect(() => {
     const timer = setTimeout(() => {
-      setAnimation('animate-fade-out-up')
-    }, duration - 500)
+      setAlertsVisible(false)
+    }, duration - fadeoutDuration)
     return () => {
       clearTimeout(timer)
     }
@@ -65,16 +67,15 @@ const AlertBlock = ({ alerts, duration }: AlertBlockProps) => {
 
   // Render
   return (
-    <div className={animation}>
-      {alerts.length > 0 &&
-        alerts.map((alert, index) => {
-          return (
-            <div key={`Alert ${index}`} className='mb-2'>
-              <Alert type={alert.type} message={alert.message} />
-            </div>
-          )
-        })}
-    </div>
+    <FadeInFadeOutComp show={alertsVisible}>
+      {alerts.map((alert, index) => {
+        return (
+          <div key={`Alert ${index}`} className='mb-2'>
+            <Alert type={alert.type} message={alert.message} />
+          </div>
+        )
+      })}
+    </FadeInFadeOutComp>
   )
 }
 

@@ -131,6 +131,12 @@ const App = () => {
     })
   }
 
+  const togglePoints = () => {
+    setSettings((prevSettings: Settings) => {
+      return prevSettings.updatePointsToggled(!prevSettings.pointsToggled)
+    })
+  }
+
   const handlePointSizeChange = (event: FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
@@ -153,6 +159,7 @@ const App = () => {
                 toggleTags={toggleTags}
                 handleTagSizeChange={handleTagSizeChange}
                 handlePointSizeChange={handlePointSizeChange}
+                togglePoints={togglePoints}
               >
                 <div className='pageContent'>
                   <div className='leftSide'>
