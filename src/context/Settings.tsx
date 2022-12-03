@@ -7,7 +7,9 @@ export default class Settings implements Context {
     private _pointTagsToggled: boolean = true,
     private _pointTagsSize: number = 30,
     private _pointsToggled: boolean = true,
-    private _pointSize: number = 0.05
+    private _pointSize: number = 0.05,
+    private _arrowsToggled: boolean = true,
+    private _arrowsSize: number = 5
   ) {}
 
   copy(): Settings {
@@ -17,7 +19,9 @@ export default class Settings implements Context {
       this._pointTagsToggled,
       this._pointTagsSize,
       this._pointsToggled,
-      this._pointSize
+      this._pointSize,
+      this._arrowsToggled,
+      this._arrowsSize
     )
   }
 
@@ -79,6 +83,26 @@ export default class Settings implements Context {
   updatePointSize(value: number): Settings {
     const clone = this.copy()
     clone._pointSize = value
+    return clone
+  }
+
+  get arrowsToggled(): boolean {
+    return this._arrowsToggled
+  }
+
+  updateArrowsToggled(value: boolean): Settings {
+    const clone = this.copy()
+    clone._arrowsToggled = value
+    return clone
+  }
+
+  get arrowSize(): number {
+    return this._arrowsSize
+  }
+
+  updateArrowSize(value: number): Settings {
+    const clone = this.copy()
+    clone._arrowsSize = value
     return clone
   }
 }

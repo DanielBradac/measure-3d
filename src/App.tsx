@@ -146,6 +146,21 @@ const App = () => {
     })
   }
 
+  const toggleArrows = () => {
+    setSettings((prevSettings: Settings) => {
+      return prevSettings.updateArrowsToggled(!prevSettings.arrowsToggled)
+    })
+  }
+
+  const handleArrowSizeChange = (event: FormEvent<HTMLInputElement>) => {
+    setSettings((prevSettings: Settings) => {
+      if (event.currentTarget) {
+        return prevSettings.updateArrowSize(event.currentTarget.valueAsNumber)
+      }
+      return prevSettings
+    })
+  }
+
   // Render
   return (
     <SettingsContext.Provider value={settings}>
@@ -160,6 +175,8 @@ const App = () => {
                 handleTagSizeChange={handleTagSizeChange}
                 handlePointSizeChange={handlePointSizeChange}
                 togglePoints={togglePoints}
+                toggleArrows={toggleArrows}
+                handleArrowSizeChange={handleArrowSizeChange}
               >
                 <div className='pageContent'>
                   <div className='leftSide'>

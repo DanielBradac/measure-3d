@@ -9,6 +9,8 @@ interface DrawerPageProps {
   handleTagSizeChange: (event: FormEvent<HTMLInputElement>) => void
   togglePoints: () => void
   handlePointSizeChange: (event: FormEvent<HTMLInputElement>) => void
+  toggleArrows: () => void
+  handleArrowSizeChange: (event: FormEvent<HTMLInputElement>) => void
   children?: ReactNode
 }
 
@@ -19,6 +21,8 @@ const DrawerPage = ({
   handleTagSizeChange,
   togglePoints,
   handlePointSizeChange,
+  toggleArrows,
+  handleArrowSizeChange,
   children,
 }: DrawerPageProps) => {
   // Import global settings
@@ -29,6 +33,8 @@ const DrawerPage = ({
     axisSize,
     pointTagsSize,
     pointsToggled,
+    arrowSize,
+    arrowsToggled,
   } = useContext(SettingsContext)
   // Render
   return (
@@ -123,6 +129,35 @@ const DrawerPage = ({
                 max='0.5'
                 defaultValue={pointSize}
                 onChange={handlePointSizeChange}
+                step='0.005'
+                className='table-cell align-middle'
+              />
+            </FadeInFadeOutComp>
+
+            <div className='table-row'>
+              <label className='itemLabel table-cell align-middle'>
+                Show vector arrows:
+              </label>
+              <div className='table-cell'>
+                <input
+                  type='checkbox'
+                  className='settingsToggle align-middle'
+                  checked={arrowsToggled}
+                  onChange={toggleArrows}
+                />
+              </div>
+            </div>
+
+            <FadeInFadeOutComp show={arrowsToggled} className='table-row'>
+              <label className='itemLabel table-cell align-middle'>
+                Vector arrows size:
+              </label>
+              <input
+                type='range'
+                min='1'
+                max='50'
+                defaultValue={arrowSize}
+                onChange={handleArrowSizeChange}
                 step='0.005'
                 className='table-cell align-middle'
               />

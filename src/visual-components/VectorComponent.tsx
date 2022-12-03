@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { useLayoutEffect, useRef } from 'react'
 import { Color, Mesh } from 'three'
 
-interface LineProps {
+interface VectorProps {
   start: number[]
   end: number[]
   color: string | Color
@@ -10,7 +10,13 @@ interface LineProps {
   arrowSize: number
 }
 
-const LineComp = ({ start, end, color }: LineProps) => {
+const VectorComp = ({
+  start,
+  end,
+  color,
+  showArrow,
+  arrowSize,
+}: VectorProps) => {
   const line = useRef<THREE.Line>(null)
 
   useLayoutEffect(() => {
@@ -32,9 +38,8 @@ const LineComp = ({ start, end, color }: LineProps) => {
     THREE.Object3D.DefaultUp,
     dirVector.clone().normalize()
   )
-
-  const radius = 0.02
-  const height = 0.07
+  const radius = 0.02 * arrowSize
+  const height = 0.07 * arrowSize
 
   const startVec = new THREE.Vector3(...start)
   const endVec = new THREE.Vector3(...end)
@@ -52,13 +57,14 @@ const LineComp = ({ start, end, color }: LineProps) => {
         <bufferGeometry />
         <lineBasicMaterial color={color} />
       </line_>
-
-      <mesh position={arrPosition} quaternion={quat}>
-        <coneBufferGeometry args={[radius, height, 64]} />
-        <meshBasicMaterial color={color} />
-      </mesh>
+      {showArrow && (
+        <mesh position={arrPosition} quaternion={quat}>
+          <coneBufferGeometry args={[radius, height, 64]} />
+          <meshBasicMaterial color={color} />
+        </mesh>
+      )}
     </>
   )
 }
 
-export default LineComp
+export default VectorComp

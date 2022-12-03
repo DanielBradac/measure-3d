@@ -1,6 +1,3 @@
-Zakomponovat nějak směr vektoru do vzhledu
-    udělat pro to settings tak jak to mají body
-
 multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou barvou - nějaká ikonka?
 
 velké komponenty rozdělit na smart a dumb

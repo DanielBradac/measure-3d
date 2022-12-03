@@ -1,4 +1,5 @@
-import LineComp from '../visual-components/LineComponent'
+import Settings from '../context/Settings'
+import VectorComp from '../visual-components/VectorComponent'
 import { Comparable, Drawable } from './Interfaces'
 import { Layer } from './Layer'
 import { Point } from './Point'
@@ -64,15 +65,17 @@ export class Vector implements Drawable, Comparable {
     )
   }
 
-  draw(key: number): JSX.Element {
+  draw(key: number, ctx: Settings): JSX.Element {
+    const { arrowsToggled, arrowSize } = ctx
+
     return (
-      <LineComp
+      <VectorComp
         start={[this._from.x, this._from.y, this._from.z]}
         end={[this._to.x, this._to.y, this._to.z]}
         color={this._color || this.layers[0].color}
         key={key}
-        showArrow={true}
-        arrowSize={1}
+        showArrow={arrowsToggled}
+        arrowSize={arrowSize}
       />
     )
   }
