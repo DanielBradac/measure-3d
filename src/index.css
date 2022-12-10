@@ -68,7 +68,7 @@
     }
     /* Multiselect classes */
     .multiSelectContainer {
-        @apply rounded-lg bg-white p-1;
+        @apply rounded-lg bg-white pt-1 pb-1;
     }
     /* Closeicon in chip in multiselect */
     .closeIcon {
