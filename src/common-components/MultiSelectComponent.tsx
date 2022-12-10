@@ -32,9 +32,12 @@ const MultiSelectComponent = ({
       ref={multiSelect}
       className='multiSelectContainer'
       disable={disabled}
+      closeIcon='cancel'
       style={{
         chips: {
           background: '#2563EB',
+          display: 'list-item',
+          textAlign: 'justify',
         },
         searchBox: {
           border: 'none',

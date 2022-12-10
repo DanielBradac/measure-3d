@@ -4,6 +4,8 @@ velké komponenty rozdělit na smart a dumb
     hlavně AddVectorComponent zaslouží refactor
 
 u add vector layers FROM bod odtlačí TO bod - asi nějak omezit kam až ty layers můžou tlačit
+    celkově je problém s tím, že ten multiselect pushuje doprava - nešlo by nějak udělat, aby to rostlo jen dolů?
+        Ty jednotlivý položky jsou inline-flex...nějak změnit?
 
 nový bod do existujícího/existující bod do nového
     tady by to možná chtělo info, že se nepřidal nový bod, ale využil se již existující?? Pomocí throw message
