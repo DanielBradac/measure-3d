@@ -102,7 +102,8 @@ const App = () => {
   const handleAxisChange = (event: FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
-        return prevSettings.updateAxisSize(event.currentTarget.valueAsNumber)
+        const value = event.currentTarget.valueAsNumber
+        return prevSettings.update('axisSize', value)
       }
       return prevSettings
     })
@@ -110,16 +111,16 @@ const App = () => {
 
   const toggleAxis = () => {
     setSettings((prevSettings: Settings) => {
-      return prevSettings.updateAxisToggled(!prevSettings.axisToggled)
+      const value = !prevSettings.axisToggled
+      return prevSettings.update('axisToggled', value)
     })
   }
 
   const handleTagSizeChange = (event: FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
-        return prevSettings.updatePointTagsSize(
-          event.currentTarget.valueAsNumber
-        )
+        const value = event.currentTarget.valueAsNumber
+        return prevSettings.update('pointTagsSize', value)
       }
       return prevSettings
     })
@@ -127,20 +128,23 @@ const App = () => {
 
   const toggleTags = () => {
     setSettings((prevSettings: Settings) => {
-      return prevSettings.updatePointTagsToggled(!prevSettings.pointTagsToggled)
+      const value = !prevSettings.pointTagsToggled
+      return prevSettings.update('pointTagsToggled', value)
     })
   }
 
   const togglePoints = () => {
     setSettings((prevSettings: Settings) => {
-      return prevSettings.updatePointsToggled(!prevSettings.pointsToggled)
+      const value = !prevSettings.pointsToggled
+      return prevSettings.update('pointsToggled', value)
     })
   }
 
   const handlePointSizeChange = (event: FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
-        return prevSettings.updatePointSize(event.currentTarget.valueAsNumber)
+        const value = event.currentTarget.valueAsNumber
+        return prevSettings.update('pointSize', value)
       }
       return prevSettings
     })
@@ -148,14 +152,16 @@ const App = () => {
 
   const toggleArrows = () => {
     setSettings((prevSettings: Settings) => {
-      return prevSettings.updateArrowsToggled(!prevSettings.arrowsToggled)
+      const value = !prevSettings.arrowsToggled
+      return prevSettings.update('arrowsToggled', value)
     })
   }
 
   const handleArrowSizeChange = (event: FormEvent<HTMLInputElement>) => {
     setSettings((prevSettings: Settings) => {
       if (event.currentTarget) {
-        return prevSettings.updateArrowSize(event.currentTarget.valueAsNumber)
+        const value = event.currentTarget.valueAsNumber
+        return prevSettings.update('arrowSize', value)
       }
       return prevSettings
     })

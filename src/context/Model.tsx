@@ -2,18 +2,16 @@ import { indexOf } from '../data-model/Interfaces'
 import { Layer } from '../data-model/Layer'
 import { Point } from '../data-model/Point'
 import { Vector } from '../data-model/Vector'
-import { Context } from './Context'
+import { Clonable } from './Clonable'
 
 // TODO hodně metod je tu stejných - nějak refaktorovat do jedné
-export class Model implements Context {
+export class Model extends Clonable {
   constructor(
     private _points: Point[] = [],
     private _vectors: Vector[] = [],
     private _layers: Layer[] = []
-  ) {}
-
-  copy(): Model {
-    return new Model(this._points, this._vectors, this._layers)
+  ) {
+    super()
   }
 
   public get points(): Point[] {
@@ -43,7 +41,7 @@ export class Model implements Context {
     })
 
     if (error.length === 0) {
-      const clone = this.copy()
+      const clone = this.clone() as Model
       clone._points = [...clone._points, ...newPoints]
       return clone
     }
@@ -51,7 +49,7 @@ export class Model implements Context {
   }
 
   public removePoints(points: Point[]): Model {
-    const clone = this.copy()
+    const clone = this.clone() as Model
     points.forEach(point => clone._points.filter(item => item !== point))
     return clone
   }
@@ -98,7 +96,7 @@ export class Model implements Context {
     })
 
     if (error.length === 0) {
-      const clone = this.copy()
+      const clone = this.clone() as Model
       clone._vectors = [...clone._vectors, ...newVectors]
       return clone
     }
@@ -106,7 +104,7 @@ export class Model implements Context {
   }
 
   public removeVectors(vectors: Vector[]): Model {
-    const clone = this.copy()
+    const clone = this.clone() as Model
     vectors.forEach(vector => clone._vectors.filter(item => item !== vector))
     return clone
   }
@@ -125,7 +123,7 @@ export class Model implements Context {
     })
 
     if (error.length === 0) {
-      const clone = this.copy()
+      const clone = this.clone() as Model
       clone._layers = [...clone._layers, ...newLayers]
       return clone
     }
@@ -133,7 +131,7 @@ export class Model implements Context {
   }
 
   public removeLayer(layers: Layer[]): Model {
-    const clone = this.copy()
+    const clone = this.clone() as Model
     layers.forEach(layer => clone._layers.filter(item => item !== layer))
     return clone
   }
