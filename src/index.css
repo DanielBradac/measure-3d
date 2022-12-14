@@ -33,10 +33,10 @@
         @apply text-xl;
     }
     .itemLabel {
-        @apply pr-4 align-text-top;
+        @apply pr-4 align-middle;
     }
     .noLabelSelect {
-        @apply pl-2 pr-6;
+        @apply pl-3 pr-6;
     }
     .settings {
         @apply menu overflow-y-auto bg-base-100 text-base-content w-fit p-4 font-main;

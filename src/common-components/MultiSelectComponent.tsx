@@ -37,12 +37,14 @@ const MultiSelectComponent = ({
         chips: {
           background: '#2563EB',
           display: 'list-item',
-          textAlign: 'justify',
+          marginRight: '0px',
         },
         searchBox: {
           border: 'none',
-          padding: '0 1rem',
+          padding: '0 0.75rem',
+          listStyleType: 'none',
         },
+        multiselectContainer: {},
       }}
     />
   )

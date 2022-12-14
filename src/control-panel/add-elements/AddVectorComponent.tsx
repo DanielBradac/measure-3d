@@ -219,7 +219,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             />
           </div>
           <div className='table-row'>
-            <label className='table-cell itemLabel align-top'>Layers:</label>
+            <label className='table-cell itemLabel'>Layers:</label>
             <div className='table-cell mt-10'>
               <MultiSelectComponent
                 preSelectedValues={preSelectLayersFrom}
@@ -288,7 +288,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
             />
           </div>
           <div className='table-row'>
-            <label className='table-cell itemLabel align-top'>Layers:</label>
+            <label className='table-cell itemLabel'>Layers:</label>
             <div className='table-cell mt-10'>
               <MultiSelectComponent
                 disabled={toDisabled}

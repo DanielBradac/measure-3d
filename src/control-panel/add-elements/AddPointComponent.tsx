@@ -129,7 +129,7 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
         </div>
 
         <div className='table-row'>
-          <label className='table-cell itemLabel align-top'>Layers:</label>
+          <label className='table-cell itemLabel'>Layers:</label>
           <div className='table-cell mt-10'>
             <MultiSelectComponent
               placeholder='Select layers...'
