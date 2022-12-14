@@ -9,6 +9,7 @@ import { getPointSelection } from '../../common/Selections'
 import { Layer } from '../../data-model/Layer'
 import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
+import { addVectorDefault } from './FormDefaultValues'
 
 interface AddVectorProps {
   onAddVector: (newVector: Vector[]) => void
@@ -19,20 +20,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
   const throwMessage = useContext(AlertContext)
 
   const { register, handleSubmit, setValue, resetField, reset } = useForm({
-    defaultValues: {
-      xFrom: 0,
-      yFrom: 0,
-      zFrom: 0,
-      tagFrom: '',
-
-      xTo: 0,
-      yTo: 0,
-      zTo: 0,
-      tagTo: '',
-
-      pointFrom: 'new',
-      pointTo: 'new',
-    },
+    defaultValues: addVectorDefault,
   })
 
   // Preselected layers of possible point preselection
@@ -279,13 +267,15 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
           </div>
           <div className='table-row'>
             <label className='table-cell itemLabel'>Tag:</label>
-            <input
-              {...register('tagTo')}
-              type='string'
-              id='tag'
-              disabled={toDisabled}
-              className='table-cell input input-bordered input-sm'
-            />
+            <div>
+              <input
+                {...register('tagTo')}
+                type='string'
+                id='tag'
+                disabled={toDisabled}
+                className='table-cell input input-bordered input-sm'
+              />
+            </div>
           </div>
           <div className='table-row'>
             <label className='table-cell itemLabel'>Layers:</label>

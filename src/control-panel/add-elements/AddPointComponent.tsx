@@ -7,8 +7,8 @@ import { prevEnterSub } from '../../common/FormFunctions'
 import MultiSelectComponent from '../../common-components/MultiSelectComponent'
 import Multiselect from 'multiselect-react-dropdown'
 import { ErrorMessage } from '../../common/AlertMessageTypes'
-import LayerManager from '../layer-manager/LayermanagerComponent'
 import { Layer } from '../../data-model/Layer'
+import { addPointDefault } from './FormDefaultValues'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
@@ -18,19 +18,8 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
   const { layers, points } = useContext(ModelContext)
   const throwMessage = useContext(AlertContext)
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      x: 0,
-      y: 0,
-      z: 0,
-      tag: '',
-      layerIndex: 0,
-    },
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: addPointDefault,
   })
 
   // Multiselect ref - needed for getting data and reseting multiselect

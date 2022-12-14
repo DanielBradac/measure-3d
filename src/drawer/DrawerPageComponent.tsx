@@ -1,6 +1,6 @@
 import { FormEvent, ReactNode, useContext } from 'react'
-import FadeInFadeOutComp from '../animation-components/FadeInFadeOutComp'
 import { SettingsContext } from '../App'
+import ToggleSliderSetting from './ToggleSliderSettingComponent'
 
 interface DrawerPageProps {
   toggleAxis: () => void
@@ -47,121 +47,50 @@ const DrawerPage = ({
         <div className='settings'>
           <h2 className='settingsHeader'>Settings</h2>
           <div className='settingsContent'>
-            <div className='table-row'>
-              <label className='itemLabel table-cell align-middle'>
-                Show axis:
-              </label>
-              <div className='table-cell'>
-                <input
-                  type='checkbox'
-                  className='settingsToggle align-middle'
-                  checked={axisToggled}
-                  onChange={toggleAxis}
-                />
-              </div>
-            </div>
-
-            <FadeInFadeOutComp show={axisToggled} className='table-row'>
-              <label className='itemLabel table-cell align-middle'>
-                Axis size:
-              </label>
-              <input
-                type='range'
-                min='0'
-                max='50'
-                defaultValue={axisSize}
-                onChange={handleAxisChange}
-                step='0.1'
-                className='table-cell align-middle'
-              />
-            </FadeInFadeOutComp>
-
-            <div className='table-row'>
-              <label className='itemLabel table-cell align-middle'>
-                Show point tags:
-              </label>
-              <div className='table-cell'>
-                <input
-                  type='checkbox'
-                  className='settingsToggle align-middle'
-                  checked={pointTagsToggled}
-                  onChange={toggleTags}
-                />
-              </div>
-            </div>
-
-            <FadeInFadeOutComp show={pointTagsToggled} className='table-row'>
-              <label className='itemLabel table-cell align-middle'>
-                Point tags size:
-              </label>
-              <input
-                type='range'
-                min='1'
-                max='300'
-                defaultValue={pointTagsSize}
-                onChange={handleTagSizeChange}
-                step='0.5'
-                className='table-cell align-middle'
-              />
-            </FadeInFadeOutComp>
-
-            <div className='table-row'>
-              <label className='itemLabel table-cell align-middle'>
-                Show points:
-              </label>
-              <div className='table-cell'>
-                <input
-                  type='checkbox'
-                  className='settingsToggle align-middle'
-                  checked={pointsToggled}
-                  onChange={togglePoints}
-                />
-              </div>
-            </div>
-
-            <FadeInFadeOutComp show={pointsToggled} className='table-row'>
-              <label className='itemLabel table-cell align-middle'>
-                Point size:
-              </label>
-              <input
-                type='range'
-                min='0.00001'
-                max='0.5'
-                defaultValue={pointSize}
-                onChange={handlePointSizeChange}
-                step='0.005'
-                className='table-cell align-middle'
-              />
-            </FadeInFadeOutComp>
-
-            <div className='table-row'>
-              <label className='itemLabel table-cell align-middle'>
-                Show vector arrows:
-              </label>
-              <div className='table-cell'>
-                <input
-                  type='checkbox'
-                  className='settingsToggle align-middle'
-                  checked={arrowsToggled}
-                  onChange={toggleArrows}
-                />
-              </div>
-            </div>
-
-            <FadeInFadeOutComp show={arrowsToggled} className='table-row'>
-              <label className='itemLabel table-cell align-middle'>
-                Vector arrows size:
-              </label>
-              <input
-                type='range'
-                min='1'
-                max='50'
-                defaultValue={arrowSize}
-                onChange={handleArrowSizeChange}
-                step='0.005'
-                className='table-cell align-middle'
-              />
-            </FadeInFadeOutComp>
+            <ToggleSliderSetting
+              toggleLabel='Show axis'
+              sliderLabel='Axis size'
+              settingToggled={axisToggled}
+              hanndleToggleChange={toggleAxis}
+              handleSliderChange={handleAxisChange}
+              sliderMin='0'
+              sliderMax='50'
+              sliderDefault={axisSize}
+              sliderStep='0.1'
+            />
+            <ToggleSliderSetting
+              toggleLabel='Show point tags'
+              sliderLabel='Point tags size'
+              settingToggled={pointTagsToggled}
+              hanndleToggleChange={toggleTags}
+              handleSliderChange={handleTagSizeChange}
+              sliderMin='1'
+              sliderMax='300'
+              sliderDefault={pointTagsSize}
+              sliderStep='0.5'
+            />
+            <ToggleSliderSetting
+              toggleLabel='Show points'
+              sliderLabel='Point size'
+              settingToggled={pointsToggled}
+              hanndleToggleChange={togglePoints}
+              handleSliderChange={handlePointSizeChange}
+              sliderMin='0.00001'
+              sliderMax='0.5'
+              sliderDefault={pointSize}
+              sliderStep='0.005'
+            />
+            <ToggleSliderSetting
+              toggleLabel='Show vector arrows'
+              sliderLabel='Vector arrows size'
+              settingToggled={arrowsToggled}
+              hanndleToggleChange={toggleArrows}
+              handleSliderChange={handleArrowSizeChange}
+              sliderMin='1'
+              sliderMax='50'
+              sliderDefault={arrowSize}
+              sliderStep='0.005'
+            />
           </div>
         </div>
       </div>
