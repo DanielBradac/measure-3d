@@ -5,6 +5,8 @@ import * as THREE from 'three'
 import { BsFillGearFill } from 'react-icons/bs'
 import { SettingsContext } from '../App'
 import { Drawable } from '../data-model/Interfaces'
+import SurfaceComp from './SurfaceComponent'
+import { Vector3 } from 'three'
 
 interface VisualModelProps {
   elements: Drawable[]
@@ -36,6 +38,8 @@ const VisualModel = ({ elements }: VisualModelProps) => {
   const toRender = elements.map((currElement, index) =>
     currElement.draw(index, settings)
   )
+  // Test
+  toRender.push(<SurfaceComp vectors={[new Vector3(1, 2, 3)]} />)
 
   const axis = settings.axisToggled ? (
     <primitive object={new THREE.AxesHelper(settings.axisSize)} />

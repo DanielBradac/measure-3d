@@ -1,3 +1,9 @@
+vykreslování 2D povrchu
+    polygon se musí rozsekat na trojúhelníky - problém se nazývá "triangulate polygon"
+    threeJS má metodu triangulate, ale nevím jak se používá
+        https://threejs.org/docs/#api/en/extras/Earcut
+        bude to chtít dostudovat https://www.youtube.com/watch?v=d9tytAQbpXM
+
 multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou barvou - nějaká ikonka?
 
 nový bod do existujícího/existující bod do nového

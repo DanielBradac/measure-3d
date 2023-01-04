@@ -1,5 +1,6 @@
 import Multiselect from 'multiselect-react-dropdown'
 import { LegacyRef } from 'react'
+import { randInt } from 'three/src/math/MathUtils'
 
 interface MultiSelectComponentProps<T> {
   placeholder: string
