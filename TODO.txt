@@ -1,6 +1,8 @@
 Kalkulačka
     mám základ, teď nějak přidat klikání na vektory
     asi k tomu udělat nějakou nápovědu, co se může a co se nemůže používat
+        nápovědu schovat pod něaký tab z daisyui
+        zmínit, že tam bude max 16 desetinných míst a pak se to zaokrouhlí
 
 Zkusit dát settings doprava?
 
@@ -29,7 +31,7 @@ Udělat layers tab (CRUD operace s layers)
 zlepšit error handeling na formulářích
     knihovna @hookform/error-message
 
-
+Lokalizace
 
 
 
