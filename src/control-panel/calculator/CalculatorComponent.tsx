@@ -6,7 +6,12 @@ const Calculator = () => {
 
   const onChangeExpr = (expression: string) => {
     try {
-      setResult(evaluate(expression).toString())
+      let res: string = evaluate(expression).toString()
+      // Workaround for weird text results
+      if (res.startsWith('fun')) {
+        res = ''
+      }
+      setResult(res)
     } catch (e: unknown) {
       setResult('')
     }
