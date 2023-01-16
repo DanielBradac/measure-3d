@@ -1,10 +1,17 @@
-vykreslování 2D povrchu
-    polygon se musí rozsekat na trojúhelníky - problém se nazývá "triangulate polygon"
-    threeJS má metodu triangulate, ale nevím jak se používá
-        https://threejs.org/docs/#api/en/extras/Earcut
-        bude to chtít dostudovat https://www.youtube.com/watch?v=d9tytAQbpXM
+Kalkulačka
+
+Zkusit dát settings doprava?
+
+Reagovat na kliknutí na vektor - nějaký onclick event umíme poslouchat?
+
+zkusit udělat settings ikonku klikatelnou s animací
+
+Na Chromu je rozbité roztahování obrazovky
 
 multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou barvou - nějaká ikonka?
+
+U elements - na jedné stránce bude i "Add Element" i "Existing elements" využijeme collapse z daisyUI pro schování
+    v daisyUI jsou taky hezký tabulky se zaškrtávátkama - pro zobrazení existujících prvků
 
 nový bod do existujícího/existující bod do nového
     tady by to možná chtělo info, že se nepřidal nový bod, ale využil se již existující?? Pomocí throw message
@@ -17,23 +24,47 @@ uprava dat. modelu
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty
 
-začít s measure
-    nějakým způsobem umět vykreslit uzavřené 2D a 3D objekty - existuje v teorii lineárních modelů nějaký algoritmus na identifikaci?
-        2D - návrh algoritmu:
-            1. najít všechny kružnice v neorientovaném grafu
-            2. zjistit jestli leží kružnice v jedné rovině pomocí normálového vektoru
-            To bude relativně náročný algoritmus, možná to půjde optimalizovat tak, že se ten normálový vektor stanový už při nalezení prvních dvou vektorů
-            
-            při každém přidání vektoru se zjistí jestli se neutvořila nová 2D plocha
-                najdou se všechny vektory, po kterých se dá jít z nového vektoru
-                pokud vzniknout nějaké kružnice, tak se zkontroluje, že jsou v jedné rovině
-                přidá se nová 2D plocha pokud ještě neexistuje
-                pokud se větší 2D plocha rozdělila na menší, tak se nechá větší a vytvoří se k ní ty menší - necháváme všechny, aby se s nimi dalo potom počítat
-            
-            při každém přidání/oddělání 2D plochy se musí řešit 3D plochy
-            
-        3D - minimálníé objekt je jehlan
-            část 3D objektu musí sdílet právě 2 body - vytvoří tím roh dvou stěn
-
 zlepšit error handeling na formulářích
     knihovna @hookform/error-message
+
+
+
+
+
+
+
+
+NEPRIORITNÍ:
+
+vykreslování 2D povrchu
+    polygon se musí rozsekat na trojúhelníky - problém se nazývá "triangulate polygon"
+    threeJS má metodu triangulate, ale nevím jak se používá
+        https://threejs.org/docs/#api/en/extras/Earcut
+        bude to chtít dostudovat https://www.youtube.com/watch?v=d9tytAQbpXM
+        https://github.com/mapbox/earcut
+
+        nejdřív je potřeba transformovat 3d vektorové souřadnice na 2D v rovině, ve které se plocha nachází
+            na to je potřeba normálový vektor našehom polygonu, to by mělo umět threeJS
+            pak je potřeba získat transformní matici - možná by taky mohlo umět threejs
+            potom se transportují body
+            v transportovaných bodech se udělá triangulace
+            potom se to namapuje zpátky
+
+nějakým způsobem umět vykreslit uzavřené 2D a 3D objekty - existuje v teorii lineárních modelů nějaký algoritmus na identifikaci?
+    2D - návrh algoritmu:
+        1. najít všechny kružnice v neorientovaném grafu
+        2. zjistit jestli leží kružnice v jedné rovině pomocí normálového vektoru
+        To bude relativně náročný algoritmus, možná to půjde optimalizovat tak, že se ten normálový vektor stanový už při nalezení prvních dvou vektorů
+        
+        při každém přidání vektoru se zjistí jestli se neutvořila nová 2D plocha
+            najdou se všechny vektory, po kterých se dá jít z nového vektoru
+            pokud vzniknout nějaké kružnice, tak se zkontroluje, že jsou v jedné rovině
+            přidá se nová 2D plocha pokud ještě neexistuje
+            pokud se větší 2D plocha rozdělila na menší, tak se nechá větší a vytvoří se k ní ty menší - necháváme všechny, aby se s nimi dalo potom počítat
+        
+        při každém přidání/oddělání 2D plochy se musí řešit 3D plochy
+        
+    3D - minimálníé objekt je jehlan
+        část 3D objektu musí sdílet právě 2 body - vytvoří tím roh dvou stěn
+
+

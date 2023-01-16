@@ -18,7 +18,7 @@
         @apply max-w-leftSide min-w-leftSide border-gray-400 border-t-2;
     }
     .tabContent {
-        @apply p-3 text-black;
+        @apply text-black m-4 border-2 border-secondary p-4 rounded-lg;
     }
     .tabs {
         @apply bg-slate-600 py-2 px-3 rounded-none;
@@ -58,7 +58,7 @@
         @apply bg-primary border-blue-800;
     }
     .inputForm {
-        @apply border-2 border-secondary p-4 rounded-lg mt-5 flex flex-wrap;
+        @apply mt-5 flex flex-wrap;
     }
     .inputBlock {
         @apply border-spacing-3;

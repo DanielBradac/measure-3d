@@ -52,7 +52,7 @@ const ToggleSliderSetting = ({
           defaultValue={sliderDefault}
           onChange={handleSliderChange}
           step={sliderStep}
-          className='table-cell align-middle'
+          className='table-cell align-middle range range-primary'
         />
       </FadeInFadeOutComp>
     </>

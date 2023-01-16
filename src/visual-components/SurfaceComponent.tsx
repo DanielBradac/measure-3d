@@ -1,5 +1,4 @@
 import { Vector3 } from 'three'
-import * as THREE from 'three'
 import { Earcut } from 'three/src/extras/Earcut'
 
 interface SurfaceProps {
@@ -10,7 +9,6 @@ const SurfaceComp = ({ vectors }: SurfaceProps) => {
   const vertices = [1, 1, 0, 1, 3, 0, 3, 1, 0, 3, 3, 0]
 
   Earcut.triangulate(vertices, [], 3)
-  console.log(Earcut.triangulate(vertices, [], 3))
 
   // Render
   return (

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Point } from '../data-model/Point'
 import { Vector } from '../data-model/Vector'
 import AddElement from './add-elements/AddElementComponent'
+import Calculator from './calculator/CalculatorComponent'
 
 interface ControlPanelProps {
   onAddPoint: (newPoint: Point[]) => void
@@ -19,6 +20,9 @@ const ControlPanel = ({ onAddPoint, onAddVector }: ControlPanelProps) => {
     switch (tabValue) {
       case 0: {
         return <AddElement onAddPoint={onAddPoint} onAddVector={onAddVector} />
+      }
+      case 1: {
+        return <Calculator />
       }
       default: {
         return <>Coming soon...</>
@@ -44,7 +48,7 @@ const ControlPanel = ({ onAddPoint, onAddVector }: ControlPanelProps) => {
             setTabValue(1)
           }}
         >
-          Layers
+          Calculator
         </a>
         <a
           className={getClasses(2)}
@@ -52,7 +56,15 @@ const ControlPanel = ({ onAddPoint, onAddVector }: ControlPanelProps) => {
             setTabValue(2)
           }}
         >
-          Measure
+          Import
+        </a>
+        <a
+          className={getClasses(3)}
+          onClick={() => {
+            setTabValue(3)
+          }}
+        >
+          Export
         </a>
       </div>
       <div className='tabContent'>{getTabContent()}</div>

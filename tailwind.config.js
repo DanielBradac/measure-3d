@@ -35,7 +35,8 @@ module.exports = {
                 'leftSide': '30%'
             },
             maxWidth: {
-                'leftSide': '70%'
+                'leftSide': '70%',
+                'calculatorInput': 'inherit'
             },
             minHeight: {
                 'canvas': '35%'
