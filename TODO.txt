@@ -1,4 +1,6 @@
 Kalkulačka
+    mám základ, teď nějak přidat klikání na vektory
+    asi k tomu udělat nějakou nápovědu, co se může a co se nemůže používat
 
 Zkusit dát settings doprava?
 

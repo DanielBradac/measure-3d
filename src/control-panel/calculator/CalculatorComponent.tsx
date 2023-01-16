@@ -1,19 +1,18 @@
 import { useState } from 'react'
-import { evaluate } from 'mathjs'
+import { formula } from 'exact-math'
 
 const Calculator = () => {
-  const [result, setResult] = useState<string>('')
+  const [result, setResult] = useState<number | null>(null)
 
   const onChangeExpr = (expression: string) => {
     try {
-      let res: string = evaluate(expression).toString()
-      // Workaround for weird text results
-      if (res.startsWith('fun')) {
-        res = ''
+      let res: number | null = Number(formula(expression))
+      if (isNaN(res)) {
+        res = null
       }
       setResult(res)
     } catch (e: unknown) {
-      setResult('')
+      setResult(null)
     }
   }
   // Render
@@ -27,7 +26,7 @@ const Calculator = () => {
 
       <div className='mt-2 ml-1'>
         <label>=</label>
-        <span className='ml-2'>{result}</span>
+        <span className='ml-2'>{result?.toString()}</span>
       </div>
     </div>
   )
