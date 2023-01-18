@@ -1,8 +1,16 @@
+Eventy na threeJS komponentách
+    https://discourse.threejs.org/t/how-can-i-use-raycaster-with-react-three-fiber/38308
+        možná bude potřeba nějak upravit range - chyta to hrozně moc
+
+        doubleclick - přidat do vzorce - jen vektor
+        click - označit a vypsat info - bod i vektor
+
 Kalkulačka
     mám základ, teď nějak přidat klikání na vektory
     asi k tomu udělat nějakou nápovědu, co se může a co se nemůže používat
         nápovědu schovat pod něaký tab z daisyui
-        zmínit, že tam bude max 16 desetinných míst a pak se to zaokrouhlí
+            zmínit, že tam bude max 16 desetinných míst a pak se to zaokrouhlí
+            zmínit jak se pracuje s vektory
 
 Zkusit dát settings doprava?
 

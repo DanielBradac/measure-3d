@@ -14,11 +14,9 @@ const VisualModel = ({ elements }: VisualModelProps) => {
   const Controls = () => {
     const controls = useRef<OrbitControls>(null)
     const { camera, gl } = useThree()
-
     useFrame(() => {
       controls.current?.update()
     })
-
     extend({ OrbitControls })
     // Render
     return (
@@ -28,20 +26,22 @@ const VisualModel = ({ elements }: VisualModelProps) => {
       ></orbitControls>
     )
   }
-
   // Import global settings
   const settings = useContext(SettingsContext)
 
-  // Render
+  // Draw elements from model
   const toRender = elements.map((currElement, index) =>
     currElement.draw(index, settings)
   )
 
+  // Are axis visible?
   const axis = settings.axisToggled ? (
     <primitive object={new THREE.AxesHelper(settings.axisSize)} />
   ) : (
     ''
   )
+
+  // Render
   return (
     <>
       <label htmlFor='drawer' className='drawer-button'>

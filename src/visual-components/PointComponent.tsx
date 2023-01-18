@@ -22,7 +22,11 @@ const PointComp = ({
 }: PointCompProps) => {
   return (
     // Render
-    <mesh position={new THREE.Vector3(...center)}>
+    <mesh
+      position={new THREE.Vector3(...center)}
+      onDoubleClick={() => console.log('doubleclick... ')}
+      onClick={() => console.log('click...')}
+    >
       {showPoint && <sphereBufferGeometry args={[radius, 50, 50]} />}
       <meshBasicMaterial color={color} />
       {showTag && (

@@ -26,7 +26,7 @@ export default class Settings extends Clonable {
     return this._axisToggled
   }
 
-  set axisToggled(value: boolean) {
+  private set axisToggled(value: boolean) {
     this._axisToggled = value
   }
 
