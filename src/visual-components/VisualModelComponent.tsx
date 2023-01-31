@@ -46,7 +46,7 @@ const VisualModel = ({ elements }: VisualModelProps) => {
     <>
       <label htmlFor='drawer' className='drawer-button'>
         <BsFillGearFill
-          className='text-secondary m-2 cursor-pointer'
+          className='text-secondary m-2 cursor-pointer hover:animate-rotate-180 active:animate-click'
           size={32}
         />
       </label>

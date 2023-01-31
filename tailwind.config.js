@@ -50,11 +50,12 @@ module.exports = {
             alignItems: {
                 'top': 'top'
             },
+
             keyframes: {
                 'fade-in-down': {
                     'from': {
                         opacity: '0',
-                        transform: 'translateY(-10px)',
+                        transform: 'translateY(-15px)',
                         display: 'none'
                     },
                     'to': {
@@ -69,14 +70,26 @@ module.exports = {
                     },
                     'to': {
                         opacity: '0',
-                        transform: 'translateY(-10px)',
+                        transform: 'translateY(-15px)',
                         display: 'none'
                     },
+                },
+                'rotate-180': {
+                    'to': {
+                        transform: 'rotate(180deg)'
+                    },
+                },
+                'click': {
+                    'to': {
+                        transform: 'translateY(4px)'
+                    }
                 }
             },
             animation: {
-                'fade-in-down': 'fade-in-down 0.5s',
-                'fade-out-up': 'fade-out-up 0.5s'
+                'fade-in-down': 'fade-in-down 0.5s forwards',
+                'fade-out-up': 'fade-out-up 0.5s forwards',
+                'rotate-180': 'rotate-180 0.7s',
+                'click': 'click 0.2s forwards'
             }
         }
     }
