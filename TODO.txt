@@ -13,8 +13,8 @@ Kalkulačka
 
 animace
     napady https://alvarotrigo.com/blog/html-css-tabs/
-    hover na tab - povyjede kousek nahoru
     změna tabu - fade-in/fade-out obsahu
+        při změně tabu se musí nějak resetovat animace
                - hezký by byl přejezd mezi taby
                 
 

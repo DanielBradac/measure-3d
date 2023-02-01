@@ -13,7 +13,9 @@ const ControlPanel = ({ onAddPoint, onAddVector }: ControlPanelProps) => {
   const [tabValue, setTabValue] = useState<number>(0)
 
   const getClasses = (tabIndex: number): string => {
-    return tabValue === tabIndex ? 'tab tab-active' : 'tab'
+    return tabValue === tabIndex
+      ? 'tab tab-active hover:animate-tabHover'
+      : 'tab hover:animate-tabHover'
   }
 
   const getTabContent = (): JSX.Element => {

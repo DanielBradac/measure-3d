@@ -52,6 +52,24 @@ module.exports = {
             },
 
             keyframes: {
+                'fade-in': {
+                    'from': {
+                        opacity: '0',
+
+                    },
+                    'to': {
+                        opacity: '1',
+                    },
+                },
+                'fade-out': {
+                    'from': {
+                        opacity: '1',
+
+                    },
+                    'to': {
+                        opacity: '0',
+                    },
+                },
                 'fade-in-down': {
                     'from': {
                         opacity: '0',
@@ -83,13 +101,23 @@ module.exports = {
                     'to': {
                         transform: 'translateY(4px)'
                     }
+                },
+                'tabHover': {
+                    'to': {
+                        //borderColor: '#2563EB',
+                        color: 'white'
+                    }
                 }
+
             },
             animation: {
                 'fade-in-down': 'fade-in-down 0.5s forwards',
                 'fade-out-up': 'fade-out-up 0.5s forwards',
-                'rotate-180': 'rotate-180 0.7s',
-                'click': 'click 0.2s forwards'
+                'rotate-180': 'rotate-180 0.7s forwards',
+                'click': 'click 0.2s forwards',
+                'tabHover': 'tabHover 0.6s forwards',
+                'fade-in': 'fade-in 0.7s forwards',
+                'fade-out': 'fade-out 0.7s forwards'
             }
         }
     }
