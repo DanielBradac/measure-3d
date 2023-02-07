@@ -1,31 +1,33 @@
 import * as THREE from 'three'
 import { Html } from '@react-three/drei'
+import { Point } from '../data-model/Point'
+import { InteractionCtx } from '../common/Types'
 
 interface PointCompProps {
-  center: number[]
+  point: Point
   radius: number
-  color: string
-  tag: string
   showTag: boolean
   tagSize: number
   showPoint: boolean
+  interactions: InteractionCtx
 }
 
 const PointComp = ({
-  center,
+  point,
   radius,
-  color,
-  tag,
   showTag,
   tagSize,
   showPoint,
+  interactions,
 }: PointCompProps) => {
+  const color = point.color || point.layers[0].color
+  const center = [point.x, point.y, point.z]
+
   return (
     // Render
     <mesh
       position={new THREE.Vector3(...center)}
-      onDoubleClick={() => console.log('doubleclick... ')}
-      onClick={() => console.log('click...')}
+      onClick={() => interactions.interact('clicked', point)}
     >
       {showPoint && <sphereBufferGeometry args={[radius, 50, 50]} />}
       <meshBasicMaterial color={color} />
@@ -39,7 +41,7 @@ const PointComp = ({
               padding: radius * 200,
             }}
           >
-            {tag}
+            {point.tag}
           </div>
         </Html>
       )}

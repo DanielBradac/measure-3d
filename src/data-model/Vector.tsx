@@ -1,3 +1,4 @@
+import { InteractionCtx } from '../common/Types'
 import Settings from '../context/Settings'
 import VectorComp from '../visual-components/VectorComponent'
 import { Comparable, Drawable } from './Interfaces'
@@ -8,7 +9,7 @@ export class Vector implements Drawable, Comparable {
   constructor(
     private _from: Point,
     private _to: Point,
-    private _color?: string
+    private _color: string | null = null
   ) {}
 
   compareTo(other: Comparable): number {
@@ -48,6 +49,10 @@ export class Vector implements Drawable, Comparable {
     this._to = value
   }
 
+  get color(): string | null {
+    return this._color
+  }
+
   // Returns vector cooridinates
   vecCoor(): number[] {
     return [
@@ -65,17 +70,20 @@ export class Vector implements Drawable, Comparable {
     )
   }
 
-  draw(key: number, ctx: Settings): JSX.Element {
-    const { arrowsToggled, arrowSize } = ctx
+  draw(
+    key: number,
+    settingCtx: Settings,
+    interactionCtx: InteractionCtx
+  ): JSX.Element {
+    const { arrowsToggled, arrowSize } = settingCtx
 
     return (
       <VectorComp
-        start={[this._from.x, this._from.y, this._from.z]}
-        end={[this._to.x, this._to.y, this._to.z]}
-        color={this._color || this.layers[0].color}
+        vector={this}
         key={key}
         showArrow={arrowsToggled}
         arrowSize={arrowSize}
+        interactions={interactionCtx}
       />
     )
   }

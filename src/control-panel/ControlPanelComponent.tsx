@@ -14,7 +14,7 @@ const ControlPanel = ({ onAddPoint, onAddVector }: ControlPanelProps) => {
 
   const getClasses = (tabIndex: number): string => {
     return tabValue === tabIndex
-      ? 'tab tab-active hover:animate-tabHover'
+      ? 'tab tab-active'
       : 'tab hover:animate-tabHover'
   }
 

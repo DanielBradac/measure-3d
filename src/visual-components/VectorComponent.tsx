@@ -1,24 +1,28 @@
 import * as THREE from 'three'
 import { useLayoutEffect, useRef } from 'react'
-import { Color, Mesh } from 'three'
+import { Mesh } from 'three'
+import { InteractionCtx } from '../common/Types'
+import { Vector } from '../data-model/Vector'
 
 interface VectorProps {
-  start: number[]
-  end: number[]
-  color: string | Color
+  vector: Vector
   showArrow: boolean
   arrowSize: number
+  interactions: InteractionCtx
 }
 
 const VectorComp = ({
-  start,
-  end,
-  color,
+  vector,
   showArrow,
   arrowSize,
+  interactions,
 }: VectorProps) => {
-  const line = useRef<THREE.Line>(null)
+  const start = [vector.from.x, vector.from.y, vector.from.z]
+  const end = [vector.to.x, vector.to.y, vector.to.z]
+  const color = vector.color || vector.layers[0].color
 
+  // Drawing line
+  const line = useRef<THREE.Line>(null)
   useLayoutEffect(() => {
     if (line.current) {
       line.current.geometry.setFromPoints(
@@ -53,10 +57,14 @@ const VectorComp = ({
   // Render
   return (
     <>
-      <line_ ref={line}>
+      <line_
+        ref={line}
+        //onClick={() => interactions.interact('clicked', vector)}
+      >
         <bufferGeometry />
         <lineBasicMaterial color={color} />
       </line_>
+
       {showArrow && (
         <mesh position={arrPosition} quaternion={quat}>
           <coneBufferGeometry args={[radius, height, 64]} />

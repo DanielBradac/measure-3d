@@ -1,10 +1,18 @@
-import { Canvas, extend, useThree, useFrame } from '@react-three/fiber'
+import {
+  Canvas,
+  extend,
+  useThree,
+  useFrame,
+  // eslint-disable-next-line import/named
+  ThreeEvent,
+} from '@react-three/fiber'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { useContext, useRef } from 'react'
 import * as THREE from 'three'
 import { BsFillGearFill } from 'react-icons/bs'
-import { SettingsContext } from '../App'
+import { InteractionContext, SettingsContext } from '../App'
 import { Drawable } from '../data-model/Interfaces'
+import { BufferGeometry, Mesh, Scene } from 'three'
 
 interface VisualModelProps {
   elements: Drawable[]
@@ -26,13 +34,9 @@ const VisualModel = ({ elements }: VisualModelProps) => {
       ></orbitControls>
     )
   }
-  // Import global settings
+  // Import context needed for drawing elements
   const settings = useContext(SettingsContext)
-
-  // Draw elements from model
-  const toRender = elements.map((currElement, index) =>
-    currElement.draw(index, settings)
-  )
+  const interactions = useContext(InteractionContext)
 
   // Are axis visible?
   const axis = settings.axisToggled ? (
@@ -40,6 +44,31 @@ const VisualModel = ({ elements }: VisualModelProps) => {
   ) : (
     ''
   )
+
+  /// TODO je tu potřeba nějak mít refs na mash a s každou mash mít prolinkovany Drawable - nějak přes mapu?
+  const meshes = useRef<(Mesh | null)[]>([])
+  //const meshMap = useRef<Map<Mesh | null, Drawable>(new Map()[])
+
+  const clicked = (e: ThreeEvent<MouseEvent>) => {
+    console.log(e.eventObject)
+    const ref = meshes.current.filter(elem => elem?.uuid === e.eventObject.uuid)
+    console.log(ref.length)
+  }
+
+  // Draw elements from model
+  const toRender = elements.map((currElement, index) => {
+    const mesh = (
+      <mesh
+        onClick={e => clicked(e)}
+        key={`mesh_${index}`}
+        ref={element => meshes.current?.push(element)}
+      >
+        {currElement.draw(index, settings, interactions)}
+      </mesh>
+    )
+
+    return mesh
+  })
 
   // Render
   return (

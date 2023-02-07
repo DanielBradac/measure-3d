@@ -1,3 +1,4 @@
+import { InteractionCtx } from '../common/Types'
 import Settings from '../context/Settings'
 import PointComp from '../visual-components/PointComponent'
 import { Comparable, Drawable } from './Interfaces'
@@ -11,7 +12,7 @@ export class Point implements Drawable, Comparable {
     private _z: number,
     private _tag: string,
     private _layers: Layer[],
-    private _color?: string
+    private _color: string | null = null
   ) {
     if (_layers.length === 0) {
       throw Error('Point must have at least one layer!')
@@ -60,6 +61,10 @@ export class Point implements Drawable, Comparable {
     return this._tag
   }
 
+  get color(): string | null {
+    return this._color
+  }
+
   get vectors(): Set<Vector> {
     return this._vectors
   }
@@ -72,19 +77,23 @@ export class Point implements Drawable, Comparable {
     this._vectors.delete(toRemove)
   }
 
-  draw(key: number, ctx: Settings): JSX.Element {
+  draw(
+    key: number,
+    settingCtx: Settings,
+    interactionCtx: InteractionCtx
+  ): JSX.Element {
     // Import global settings
-    const { pointTagsToggled, pointTagsSize, pointSize, pointsToggled } = ctx
+    const { pointTagsToggled, pointTagsSize, pointSize, pointsToggled } =
+      settingCtx
     return (
       <PointComp
-        center={[this._x, this._y, this._z]}
+        point={this}
         radius={pointSize}
-        color={this._color || this.layers[0].color}
         key={key}
-        tag={this._tag}
         showTag={pointTagsToggled}
         tagSize={pointTagsSize}
         showPoint={pointsToggled}
+        interactions={interactionCtx}
       />
     )
   }
