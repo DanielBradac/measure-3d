@@ -1,3 +1,5 @@
+Udělat si nějaký testovací tlačítka na vytvoření testovacích objektů
+
 Eventy na threeJS komponentách
 
         Eventy se budou řešit už na urovni komponenty VisualModel

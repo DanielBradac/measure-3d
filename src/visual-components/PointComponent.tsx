@@ -25,10 +25,7 @@ const PointComp = ({
 
   return (
     // Render
-    <mesh
-      position={new THREE.Vector3(...center)}
-      onClick={() => interactions.interact('clicked', point)}
-    >
+    <mesh position={new THREE.Vector3(...center)}>
       {showPoint && <sphereBufferGeometry args={[radius, 50, 50]} />}
       <meshBasicMaterial color={color} />
       {showTag && (

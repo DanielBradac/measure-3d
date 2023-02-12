@@ -57,10 +57,7 @@ const VectorComp = ({
   // Render
   return (
     <>
-      <line_
-        ref={line}
-        //onClick={() => interactions.interact('clicked', vector)}
-      >
+      <line_ ref={line}>
         <bufferGeometry />
         <lineBasicMaterial color={color} />
       </line_>

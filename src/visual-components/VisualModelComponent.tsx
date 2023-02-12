@@ -12,13 +12,17 @@ import * as THREE from 'three'
 import { BsFillGearFill } from 'react-icons/bs'
 import { InteractionContext, SettingsContext } from '../App'
 import { Drawable } from '../data-model/Interfaces'
-import { BufferGeometry, Mesh, Scene } from 'three'
 
 interface VisualModelProps {
   elements: Drawable[]
 }
 
 const VisualModel = ({ elements }: VisualModelProps) => {
+  // Import context needed for drawing elements, interactions and messages for user
+  const settings = useContext(SettingsContext)
+  const interactions = useContext(InteractionContext)
+
+  // Setup orbit controls
   const Controls = () => {
     const controls = useRef<OrbitControls>(null)
     const { camera, gl } = useThree()
@@ -34,9 +38,58 @@ const VisualModel = ({ elements }: VisualModelProps) => {
       ></orbitControls>
     )
   }
-  // Import context needed for drawing elements
-  const settings = useContext(SettingsContext)
-  const interactions = useContext(InteractionContext)
+
+  // Setup canvas content from elements: Drawable[]
+  const CanvasContent = () => {
+    const { camera, mouse, scene } = useThree()
+    // Existing drwables mapped on mesh nodes. Key = mesh.UUID, value = corresponding drawable
+    const meshDrawableMap = useRef<Map<string | null, Drawable>>(
+      new Map<string | null, Drawable>()
+    )
+
+    const clicked = (e: ThreeEvent<MouseEvent>) => {
+      // Raycaster is setup to determine which clicked object is closest to the camera
+      const raycaster = new THREE.Raycaster()
+      raycaster.setFromCamera(mouse, camera)
+      const intersects = raycaster.intersectObject(scene)
+
+      if (intersects.length > 0) {
+        // Closest object to camera determined by raycaster
+        const closestObject = intersects[0].object
+        // Clicked object from event - if the closestObject is among event children, we have the one
+        const clickedObject = e.eventObject.children.filter(
+          child => child.uuid === closestObject.uuid
+        )
+
+        if (clickedObject.length === 1) {
+          const clickedDrawable = meshDrawableMap.current.get(
+            e.eventObject.uuid
+          )
+          // TODO - clicked drawable nahrát do kontextu, nějak
+          console.log(clickedDrawable)
+        }
+      }
+    }
+
+    // Draw elements from model
+    const toRender = elements.map((currElement, index) => {
+      const mesh = (
+        <mesh
+          onClick={e => clicked(e)}
+          key={`mesh_${index}`}
+          ref={node => {
+            const key = (node && node.uuid) || null
+            meshDrawableMap.current?.set(key, currElement)
+          }}
+        >
+          {currElement.draw(index, settings, interactions)}
+        </mesh>
+      )
+      return mesh
+    })
+
+    return <>{toRender}</>
+  }
 
   // Are axis visible?
   const axis = settings.axisToggled ? (
@@ -44,31 +97,6 @@ const VisualModel = ({ elements }: VisualModelProps) => {
   ) : (
     ''
   )
-
-  /// TODO je tu potřeba nějak mít refs na mash a s každou mash mít prolinkovany Drawable - nějak přes mapu?
-  const meshes = useRef<(Mesh | null)[]>([])
-  //const meshMap = useRef<Map<Mesh | null, Drawable>(new Map()[])
-
-  const clicked = (e: ThreeEvent<MouseEvent>) => {
-    console.log(e.eventObject)
-    const ref = meshes.current.filter(elem => elem?.uuid === e.eventObject.uuid)
-    console.log(ref.length)
-  }
-
-  // Draw elements from model
-  const toRender = elements.map((currElement, index) => {
-    const mesh = (
-      <mesh
-        onClick={e => clicked(e)}
-        key={`mesh_${index}`}
-        ref={element => meshes.current?.push(element)}
-      >
-        {currElement.draw(index, settings, interactions)}
-      </mesh>
-    )
-
-    return mesh
-  })
 
   // Render
   return (
@@ -84,7 +112,7 @@ const VisualModel = ({ elements }: VisualModelProps) => {
         <Canvas>
           {axis}
           <Controls />
-          {toRender}
+          <CanvasContent />
         </Canvas>
       </div>
     </>
