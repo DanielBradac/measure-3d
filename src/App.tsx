@@ -1,13 +1,6 @@
-import {
-  createContext,
-  FormEvent,
-  StrictMode,
-  useEffect,
-  useState,
-} from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import AlertBlock from './common-components/AlertComponent'
 import { AlertMessage, ErrorMessage } from './common/AlertMessageTypes'
-import { InteractionCtx } from './common/Types'
 import ContextComponent from './context/ContextComponent'
 import InteractionModel from './context/InteractionModel'
 import { Model } from './context/Model'
@@ -18,26 +11,16 @@ import { Layer } from './data-model/Layer'
 import { Point } from './data-model/Point'
 import { Vector } from './data-model/Vector'
 import DrawerPage from './drawer/DrawerPageComponent'
+import { getDeafaultModel } from './test-data/TestData'
 import VisualModel from './visual-components/VisualModelComponent'
 
 const App = () => {
+  // For how long is message for user visible
   const alertDuration = 4000
   // Data model - all entities are stored here
-  const [model, setModel] = useState<Model>(
-    new Model(
-      [],
-      [],
-      [
-        new Layer('BaseLayer', 'white'),
-        new Layer('RedLayer', 'red'),
-        new Layer('GreenLayer', 'green'),
-        new Layer('BlackLayer', 'black'),
-        new Layer('OrangeLayer', 'orange'),
-      ]
-    )
-  )
+  const [model, setModel] = useState<Model>(getDeafaultModel())
 
-  // Interaction model providing - keeps track of how user interacts with elements (clicks, doubleclicks, etc.)
+  // Interaction model - keeps track of how user interacts with elements (clicks, doubleclicks, etc.)
   const [interModel, setInterModel] = useState<InteractionModel>(
     new InteractionModel()
   )
@@ -50,7 +33,7 @@ const App = () => {
     })
   }
 
-  // Alerts context providing - throw message enables show messages across all components
+  // Alerts - throw message enables show messages across all components
   const [alertStack, setAlertStack] = useState<AlertMessage[]>([])
   const throwMessage = (message: AlertMessage) => {
     setAlertStack((prevStack: AlertMessage[]) => {

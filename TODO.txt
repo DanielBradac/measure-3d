@@ -21,8 +21,6 @@ animace
                - hezký by byl přejezd mezi taby
                 
 
-App.tsx nějak rozdělit - ty kontexty by se mohli řešit bokem
-
 Na Chromu je rozbité roztahování obrazovky
 
 multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou barvou - nějaká ikonka?

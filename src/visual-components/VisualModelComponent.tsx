@@ -7,7 +7,7 @@ import {
   ThreeEvent,
 } from '@react-three/fiber'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useRef } from 'react'
 import * as THREE from 'three'
 import { BsFillGearFill } from 'react-icons/bs'
 import { Drawable } from '../data-model/Interfaces'
