@@ -7,11 +7,14 @@ import {
   ThreeEvent,
 } from '@react-three/fiber'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { useContext, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { BsFillGearFill } from 'react-icons/bs'
-import { InteractionContext, SettingsContext } from '../App'
 import { Drawable } from '../data-model/Interfaces'
+import {
+  InteractionContext,
+  SettingsContext,
+} from '../context/ContextComponent'
 
 interface VisualModelProps {
   elements: Drawable[]
@@ -47,6 +50,11 @@ const VisualModel = ({ elements }: VisualModelProps) => {
       new Map<string | null, Drawable>()
     )
 
+    // Pointer over clickable elements
+    const setHovered = (hovered: boolean) => {
+      document.body.style.cursor = hovered ? 'pointer' : 'auto'
+    }
+
     const clicked = (e: ThreeEvent<MouseEvent>) => {
       // Raycaster is setup to determine which clicked object is closest to the camera
       const raycaster = new THREE.Raycaster()
@@ -65,8 +73,10 @@ const VisualModel = ({ elements }: VisualModelProps) => {
           const clickedDrawable = meshDrawableMap.current.get(
             e.eventObject.uuid
           )
-          // TODO - clicked drawable nahrát do kontextu, nějak
-          console.log(clickedDrawable)
+          // Record clicked drawable to context
+          if (clickedDrawable) {
+            interactions.interact('clicked', clickedDrawable)
+          }
         }
       }
     }
@@ -75,6 +85,8 @@ const VisualModel = ({ elements }: VisualModelProps) => {
     const toRender = elements.map((currElement, index) => {
       const mesh = (
         <mesh
+          onPointerOver={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}
           onClick={e => clicked(e)}
           key={`mesh_${index}`}
           ref={node => {

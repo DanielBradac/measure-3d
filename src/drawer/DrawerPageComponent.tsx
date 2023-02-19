@@ -1,5 +1,5 @@
 import { FormEvent, ReactNode, useContext } from 'react'
-import { SettingsContext } from '../App'
+import { SettingsContext } from '../context/ContextComponent'
 import ToggleSliderSetting from './ToggleSliderSettingComponent'
 
 interface DrawerPageProps {

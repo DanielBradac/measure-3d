@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { Html } from '@react-three/drei'
 import { Point } from '../data-model/Point'
 import { InteractionCtx } from '../common/Types'
+import { getElementColor } from './VisualModelFunctions'
 
 interface PointCompProps {
   point: Point
@@ -20,9 +21,8 @@ const PointComp = ({
   showPoint,
   interactions,
 }: PointCompProps) => {
-  const color = point.color || point.layers[0].color
+  const color = getElementColor(point, interactions.interModel.clicked)
   const center = [point.x, point.y, point.z]
-
   return (
     // Render
     <mesh position={new THREE.Vector3(...center)}>

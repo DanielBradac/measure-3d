@@ -12,6 +12,8 @@ export interface Drawable {
   ): JSX.Element
   // Drawable has multiple layers in which it can be included
   layers: Layer[]
+  // Drawable can have custom color
+  color: string | null
 }
 
 // Interface for objects that can be compared to each other - standard Java compareTo pattern

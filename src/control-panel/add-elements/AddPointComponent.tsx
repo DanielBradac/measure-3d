@@ -1,6 +1,5 @@
 import { useContext, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import { AlertContext, ModelContext } from '../../App'
 import { indexOf } from '../../data-model/Interfaces'
 import { Point } from '../../data-model/Point'
 import { prevEnterSub } from '../../common/FormFunctions'
@@ -9,6 +8,7 @@ import Multiselect from 'multiselect-react-dropdown'
 import { ErrorMessage } from '../../common/AlertMessageTypes'
 import { Layer } from '../../data-model/Layer'
 import { addPointDefault } from './FormDefaultValues'
+import { AlertContext, ModelContext } from '../../context/ContextComponent'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void

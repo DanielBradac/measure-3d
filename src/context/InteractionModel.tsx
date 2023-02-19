@@ -19,6 +19,6 @@ export default class InteractionModel extends Clonable {
   }
 
   private set clicked(value: Drawable | null) {
-    this.clicked = value
+    this._clicked = value
   }
 }

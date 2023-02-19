@@ -3,6 +3,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { Mesh } from 'three'
 import { InteractionCtx } from '../common/Types'
 import { Vector } from '../data-model/Vector'
+import { getElementColor } from './VisualModelFunctions'
 
 interface VectorProps {
   vector: Vector
@@ -19,7 +20,7 @@ const VectorComp = ({
 }: VectorProps) => {
   const start = [vector.from.x, vector.from.y, vector.from.z]
   const end = [vector.to.x, vector.to.y, vector.to.z]
-  const color = vector.color || vector.layers[0].color
+  const color = getElementColor(vector, interactions.interModel.clicked)
 
   // Drawing line
   const line = useRef<THREE.Line>(null)

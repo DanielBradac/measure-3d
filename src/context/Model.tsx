@@ -4,7 +4,6 @@ import { Point } from '../data-model/Point'
 import { Vector } from '../data-model/Vector'
 import { Clonable } from './Clonable'
 
-// TODO hodně metod je tu stejných - nějak refaktorovat do jedné
 export class Model extends Clonable {
   constructor(
     private _points: Point[] = [],

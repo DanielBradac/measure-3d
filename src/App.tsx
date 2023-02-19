@@ -8,6 +8,7 @@ import {
 import AlertBlock from './common-components/AlertComponent'
 import { AlertMessage, ErrorMessage } from './common/AlertMessageTypes'
 import { InteractionCtx } from './common/Types'
+import ContextComponent from './context/ContextComponent'
 import InteractionModel from './context/InteractionModel'
 import { Model } from './context/Model'
 import Settings from './context/Settings'
@@ -18,21 +19,6 @@ import { Point } from './data-model/Point'
 import { Vector } from './data-model/Vector'
 import DrawerPage from './drawer/DrawerPageComponent'
 import VisualModel from './visual-components/VisualModelComponent'
-
-// Context
-export const SettingsContext = createContext(new Settings())
-export const ModelContext = createContext(new Model())
-export const InteractionContext = createContext<InteractionCtx>({
-  // We provide a function to record interacion with element and model to check the record
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interact: (attrName: keyof InteractionModel, value: Drawable) => {},
-  interModel: new InteractionModel(),
-})
-export const AlertContext = createContext(
-  // We can create alert from anywhere using this callback
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  (_: AlertMessage) => {}
-)
 
 const App = () => {
   const alertDuration = 4000
@@ -50,6 +36,7 @@ const App = () => {
       ]
     )
   )
+
   // Interaction model providing - keeps track of how user interacts with elements (clicks, doubleclicks, etc.)
   const [interModel, setInterModel] = useState<InteractionModel>(
     new InteractionModel()
@@ -58,13 +45,9 @@ const App = () => {
     interactionType: keyof InteractionModel,
     element: Drawable | null
   ) => {
-    console.log(`Clicked: ${element}`)
-
-    /* This fucks it up, for some reason
     setInterModel((prevModel: InteractionModel) => {
       return prevModel.update(interactionType, element)
     })
-    */
   }
 
   // Alerts context providing - throw message enables show messages across all components
@@ -191,53 +174,43 @@ const App = () => {
 
   // Render
   return (
-    <SettingsContext.Provider value={settings}>
-      <ModelContext.Provider value={model}>
-        <InteractionContext.Provider
-          value={{ interact: interactWithElement, interModel: interModel }}
+    <ContextComponent
+      settingsProv={settings}
+      modelProv={model}
+      interactionProv={{
+        interact: interactWithElement,
+        interModel: interModel,
+      }}
+      alertProv={throwMessage}
+    >
+      <div className='page'>
+        <DrawerPage
+          toggleAxis={toggleAxis}
+          handleAxisChange={handleAxisChange}
+          toggleTags={toggleTags}
+          handleTagSizeChange={handleTagSizeChange}
+          handlePointSizeChange={handlePointSizeChange}
+          togglePoints={togglePoints}
+          toggleArrows={toggleArrows}
+          handleArrowSizeChange={handleArrowSizeChange}
         >
-          <AlertContext.Provider value={throwMessage}>
-            <StrictMode>
-              <div className='page'>
-                <DrawerPage
-                  toggleAxis={toggleAxis}
-                  handleAxisChange={handleAxisChange}
-                  toggleTags={toggleTags}
-                  handleTagSizeChange={handleTagSizeChange}
-                  handlePointSizeChange={handlePointSizeChange}
-                  togglePoints={togglePoints}
-                  toggleArrows={toggleArrows}
-                  handleArrowSizeChange={handleArrowSizeChange}
-                >
-                  <div className='pageContent'>
-                    <div className='leftSide'>
-                      <VisualModel
-                        elements={[...model.points, ...model.vectors]}
-                      />
-                    </div>
+          <div className='pageContent'>
+            <div className='leftSide'>
+              <VisualModel elements={[...model.points, ...model.vectors]} />
+            </div>
 
-                    <div className='rightSide'>
-                      <ControlPanel
-                        onAddPoint={onAddPoint}
-                        onAddVector={onAddVecor}
-                      />
-                      <div className='ml-3'>
-                        {alertStack.length > 0 && (
-                          <AlertBlock
-                            alerts={alertStack}
-                            duration={alertDuration}
-                          />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </DrawerPage>
+            <div className='rightSide'>
+              <ControlPanel onAddPoint={onAddPoint} onAddVector={onAddVecor} />
+              <div className='ml-3'>
+                {alertStack.length > 0 && (
+                  <AlertBlock alerts={alertStack} duration={alertDuration} />
+                )}
               </div>
-            </StrictMode>
-          </AlertContext.Provider>
-        </InteractionContext.Provider>
-      </ModelContext.Provider>
-    </SettingsContext.Provider>
+            </div>
+          </div>
+        </DrawerPage>
+      </div>
+    </ContextComponent>
   )
 }
 

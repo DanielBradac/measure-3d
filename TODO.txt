@@ -2,16 +2,10 @@ Udělat si nějaký testovací tlačítka na vytvoření testovacích objektů
 
 Eventy na threeJS komponentách
 
-        Eventy se budou řešit už na urovni komponenty VisualModel
-            každý Drawable bude mít svoji Mesh, která se bude uchovávat pomocí useRef hooku
-                - je potřeba umět nějak mapovat rendrovanou mesh na Drawable
-
-        možná bude potřeba nějak upravit range - chyta to hrozně moc
+        snížit range vektoru - chyta to hrozně moc okolo
 
         click - označit a vypsat info - bod i vektor
         opětovný click - přidat do vzorce
-
-        body a vektory se mohou překrývat - udělat zvlášť interakce pro body a vektory?
 
 Kalkulačka
     mám základ, teď nějak přidat klikání na vektory
