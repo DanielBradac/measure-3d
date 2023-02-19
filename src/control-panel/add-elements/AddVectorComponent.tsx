@@ -5,7 +5,10 @@ import MultiSelectComponent from '../../common-components/MultiSelectComponent'
 import { ErrorMessage } from '../../common/AlertMessageTypes'
 import { prevEnterSub } from '../../common/FormFunctions'
 import { getPointSelection } from '../../common/Selections'
-import { AlertContext, ModelContext } from '../../context/ContextComponent'
+import {
+  AlertContext,
+  ModelContext,
+} from '../../context/GlobalContextComponent'
 import { Layer } from '../../data-model/Layer'
 import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'

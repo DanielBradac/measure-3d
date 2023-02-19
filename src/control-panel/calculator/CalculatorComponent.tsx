@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { formula } from 'exact-math'
 
 const Calculator = () => {
   const [result, setResult] = useState<number | null>(null)
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const onChangeExpr = (expression: string) => {
     try {
@@ -19,6 +21,10 @@ const Calculator = () => {
   return (
     <div className='flex flex-col'>
       <textarea
+        ref={textareaRef}
+        onSelectCapture={() =>
+          textareaRef.current && console.log(textareaRef.current.selectionStart)
+        }
         className='textarea textarea-bordered w-full'
         placeholder='Input expression...'
         onChange={e => onChangeExpr(e.target.value)}

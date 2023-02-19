@@ -21,7 +21,7 @@ export const AlertContext = createContext(
   (_: AlertMessage) => {}
 )
 
-interface ContextComponentProps {
+interface GlobalContextComponentProps {
   settingsProv: Settings
   modelProv: Model
   interactionProv: InteractionCtx
@@ -29,13 +29,13 @@ interface ContextComponentProps {
   children: ReactNode
 }
 
-const ContextComponent = ({
+const GlobalContextComponent = ({
   settingsProv,
   modelProv,
   interactionProv,
   alertProv,
   children,
-}: ContextComponentProps) => {
+}: GlobalContextComponentProps) => {
   // Render
   return (
     <SettingsContext.Provider value={settingsProv}>
@@ -50,4 +50,4 @@ const ContextComponent = ({
   )
 }
 
-export default ContextComponent
+export default GlobalContextComponent

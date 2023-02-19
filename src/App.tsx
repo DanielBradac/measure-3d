@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import AlertBlock from './common-components/AlertComponent'
 import { AlertMessage, ErrorMessage } from './common/AlertMessageTypes'
-import ContextComponent from './context/ContextComponent'
+import GlobalContextComponent from './context/GlobalContextComponent'
 import InteractionModel from './context/InteractionModel'
 import { Model } from './context/Model'
 import Settings from './context/Settings'
@@ -157,7 +157,7 @@ const App = () => {
 
   // Render
   return (
-    <ContextComponent
+    <GlobalContextComponent
       settingsProv={settings}
       modelProv={model}
       interactionProv={{
@@ -193,7 +193,7 @@ const App = () => {
           </div>
         </DrawerPage>
       </div>
-    </ContextComponent>
+    </GlobalContextComponent>
   )
 }
 

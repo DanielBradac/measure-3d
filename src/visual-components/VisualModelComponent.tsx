@@ -14,7 +14,7 @@ import { Drawable } from '../data-model/Interfaces'
 import {
   InteractionContext,
   SettingsContext,
-} from '../context/ContextComponent'
+} from '../context/GlobalContextComponent'
 
 interface VisualModelProps {
   elements: Drawable[]

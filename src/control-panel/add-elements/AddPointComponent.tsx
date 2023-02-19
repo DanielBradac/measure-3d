@@ -8,7 +8,10 @@ import Multiselect from 'multiselect-react-dropdown'
 import { ErrorMessage } from '../../common/AlertMessageTypes'
 import { Layer } from '../../data-model/Layer'
 import { addPointDefault } from './FormDefaultValues'
-import { AlertContext, ModelContext } from '../../context/ContextComponent'
+import {
+  AlertContext,
+  ModelContext,
+} from '../../context/GlobalContextComponent'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
