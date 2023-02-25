@@ -14,6 +14,8 @@ export interface Drawable {
   layers: Layer[]
   // Drawable can have custom color
   color: string | null
+  // Drawable has to have string representation
+  toString(): string
 }
 
 // Interface for objects that can be compared to each other - standard Java compareTo pattern
@@ -37,4 +39,18 @@ export const indexOf = (
     }
   }
   return -1
+}
+
+// Removes duplicites from array based on compareTo method
+export const removeDuplicites = (
+  arr: Comparable[] | undefined
+): Comparable[] => {
+  if (!arr) {
+    return []
+  }
+
+  return arr.filter(
+    (value, index, self) =>
+      index === self.findIndex(t => t.compareTo(value) === 0)
+  )
 }

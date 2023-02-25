@@ -1,11 +1,13 @@
 Udělat si nějaký testovací tlačítka na vytvoření testovacích objektů
 
+nějak gitově přejmenovat některé složky a fily
+    drawer -> settings-panel
+    visual-cpmponents -> graphical-panel
+
 Eventy na threeJS komponentách
 
-        snížit range vektoru - chyta to hrozně moc okolo
-
         click - označit a vypsat info - bod i vektor
-        opětovný click - přidat do vzorce
+        enter - přidat selektnutý vektor do aktuální pozice ve vzorci
 
 Kalkulačka
     mám základ, teď nějak přidat klikání na vektory
@@ -20,6 +22,13 @@ animace
         při změně tabu se musí nějak resetovat animace
                - hezký by byl přejezd mezi taby
                 
+
+práce s jednotkami
+    někam hodit přepínač jednotek, o kterých se bavíme - bude to potřebovat kalkulačka a ElementInfoComponent
+    bude enum jednotek - cm, dm, m, km 
+    defaultní jednotka bude metr - při inputu se všechno překládá do metrů
+
+daisyUI má fajn třídu tooltip - zkusit někde využít
 
 Na Chromu je rozbité roztahování obrazovky
 
@@ -38,9 +47,7 @@ nový bod do existujícího/existující bod do nového
     tady by to možná chtělo info, že se nepřidal nový bod, ale využil se již existující?? Pomocí throw message
 
 uprava dat. modelu
-    points budou mít set layers - výpočty budou probíhat pouze v rámci jedné layer, ale bude snadné layers přidávat
-    vector nebude mít layers - jeho layers budou sjednocením layers jeho bodů
-    bude potřeba upravit i v tříde Model, aby se s tím počítalo, když se vyrobí stejný drawable jen v jiné layer - k existujícímu drawable se pak přidá layer
+    minimalizovat - už nepotřebujeme, aby bod znal své vektory, atd..
 
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty
