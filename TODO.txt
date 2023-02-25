@@ -25,8 +25,11 @@ Na Chromu je rozbité roztahování obrazovky
 
 multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou barvou - nějaká ikonka?
 
-U některých stavů bude potřeba si je schovávat, aby přežily refresh - nějaký Storage Context, který to bude řešit
+U některých stavů bude potřeba si je schovávat, aby přežily refresh - bude potřeba asi nějak využít local storage
     Kalkulačka si bude pamatovat input a pozici kurzoru
+    Měli bychom si pamatovat celý model i settings, aby to přežilo f5
+    Interaction Context by bylo taky dobré si nějak pamatovat
+
 
 U elements - na jedné stránce bude i "Add Element" i "Existing elements" využijeme collapse z daisyUI pro schování
     v daisyUI jsou taky hezký tabulky se zaškrtávátkama - pro zobrazení existujících prvků
