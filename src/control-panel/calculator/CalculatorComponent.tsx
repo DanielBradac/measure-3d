@@ -2,11 +2,14 @@ import { useContext, useRef, useState } from 'react'
 import { formula, round } from 'exact-math'
 import ElementInfo from '../ElementInfoComponent'
 import { InteractionContext } from '../../context/GlobalContextComponent'
+import { Vector } from '../../data-model/Vector'
 
 const Calculator = () => {
+  // Interaction context
   const interactions = useContext(InteractionContext)
+
   const [result, setResult] = useState<number | null>(null)
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const onChangeExpr = (expression: string) => {
     try {
@@ -19,16 +22,34 @@ const Calculator = () => {
       setResult(null)
     }
   }
+
+  // Selected vector is added to the formula
+  const addVectorLen = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const vec = interactions.interModel.clicked
+
+    if (textAreaRef.current && e.key === 'Insert' && vec instanceof Vector) {
+      const currentStart = textAreaRef.current.selectionStart
+      const currentEnd = textAreaRef.current.selectionEnd
+      const areaText = textAreaRef.current.value
+
+      const newText = round(vec.length(), -3).toString()
+
+      textAreaRef.current.value =
+        areaText.slice(0, currentStart) + newText + areaText.slice(currentEnd)
+
+      // Set the new cursor position
+      const newCurPosition = currentStart + newText.length
+      textAreaRef.current.setSelectionRange(newCurPosition, newCurPosition)
+      onChangeExpr(textAreaRef.current.value)
+    }
+  }
+
   // Render
   return (
     <div className='flex flex-col'>
       <textarea
-        ref={textareaRef}
-        /*
-        onSelectCapture={() =>
-          textareaRef.current && console.log(textareaRef.current.selectionStart)
-        }
-        */
+        ref={textAreaRef}
+        onKeyDown={addVectorLen}
         className='textarea textarea-bordered w-full'
         placeholder='Input expression...'
         onChange={e => onChangeExpr(e.target.value)}
