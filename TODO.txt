@@ -37,8 +37,6 @@ práce s jednotkami
 
 daisyUI má fajn třídu tooltip - zkusit někde využít
 
-Na Chromu je rozbité roztahování obrazovky
-
 multiselect layers - nějak to vymyslet jak to budeme dělat se zobrazovanou barvou - nějaká ikonka?
 
 U některých stavů bude potřeba si je schovávat, aby přežily refresh - bude potřeba asi nějak využít local storage

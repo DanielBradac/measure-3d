@@ -13,6 +13,9 @@ import { Vector } from './data-model/Vector'
 import DrawerPage from './drawer/DrawerPageComponent'
 import { getDeafaultModel } from './test-data/TestData'
 import VisualModel from './visual-components/VisualModelComponent'
+// eslint-disable-next-line import/namespace
+import { Allotment } from 'allotment'
+import 'allotment/dist/style.css'
 
 const App = () => {
   // For how long is message for user visible
@@ -178,18 +181,27 @@ const App = () => {
           handleArrowSizeChange={handleArrowSizeChange}
         >
           <div className='h-full w-full flex flex-row'>
-            <div className='leftSide'>
-              <VisualModel elements={[...model.points, ...model.vectors]} />
-            </div>
-
-            <div className='rightSide'>
-              <ControlPanel onAddPoint={onAddPoint} onAddVector={onAddVecor} />
-              <div className='ml-3'>
-                {alertStack.length > 0 && (
-                  <AlertBlock alerts={alertStack} duration={alertDuration} />
-                )}
-              </div>
-            </div>
+            <Allotment>
+              <Allotment.Pane minSize={500}>
+                <VisualModel elements={[...model.points, ...model.vectors]} />
+              </Allotment.Pane>
+              <Allotment.Pane minSize={500}>
+                <div className='rightSide'>
+                  <ControlPanel
+                    onAddPoint={onAddPoint}
+                    onAddVector={onAddVecor}
+                  />
+                  <div className='ml-3'>
+                    {alertStack.length > 0 && (
+                      <AlertBlock
+                        alerts={alertStack}
+                        duration={alertDuration}
+                      />
+                    )}
+                  </div>
+                </div>
+              </Allotment.Pane>
+            </Allotment>
           </div>
         </DrawerPage>
       </div>

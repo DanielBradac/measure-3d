@@ -4,6 +4,9 @@ import ElementInfo from '../ElementInfoComponent'
 import { InteractionContext } from '../../context/GlobalContextComponent'
 import { Vector } from '../../data-model/Vector'
 import { FiHelpCircle } from 'react-icons/fi'
+// eslint-disable-next-line import/namespace
+import { Allotment } from 'allotment'
+import 'allotment/dist/style.css'
 
 const Calculator = () => {
   // Interaction context
@@ -71,11 +74,9 @@ const Calculator = () => {
           <span>
             <FiHelpCircle className='inline pr-1 pb-1' size={22} />
           </span>
-          Help
+          Hint
         </div>
-        <div className='collapse-content pl-10'>
-          <p>hello</p>
-        </div>
+        <div className='collapse-content pl-10'>Hello hint</div>
       </div>
     </div>
   )
