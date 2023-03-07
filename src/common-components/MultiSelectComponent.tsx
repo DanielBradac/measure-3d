@@ -1,6 +1,5 @@
 import Multiselect from 'multiselect-react-dropdown'
 import { LegacyRef } from 'react'
-import { randInt } from 'three/src/math/MathUtils'
 
 interface MultiSelectComponentProps<T> {
   placeholder: string
@@ -31,7 +30,7 @@ const MultiSelectComponent = ({
       displayValue={displayValue}
       emptyRecordMsg=''
       ref={multiSelect}
-      className='multiSelectContainer'
+      className='rounded-lg bg-white pt-1 pb-1'
       disable={disabled}
       closeIcon='cancel'
       style={{

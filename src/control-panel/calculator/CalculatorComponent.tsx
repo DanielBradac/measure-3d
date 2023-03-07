@@ -3,6 +3,7 @@ import { formula, round } from 'exact-math'
 import ElementInfo from '../ElementInfoComponent'
 import { InteractionContext } from '../../context/GlobalContextComponent'
 import { Vector } from '../../data-model/Vector'
+import { FiHelpCircle } from 'react-icons/fi'
 
 const Calculator = () => {
   // Interaction context
@@ -57,11 +58,24 @@ const Calculator = () => {
 
       <div className='mt-2 ml-1'>
         <label>=</label>
-        <span className='ml-2'>{result?.toString()}</span>
+        <span className='ml-2 font-semibold'>{result?.toString()}</span>
       </div>
 
       <div className='mt-10 border-secondary border-t-2 px-5 py-3'>
         <ElementInfo element={interactions.interModel.clicked} />
+      </div>
+
+      <div className='collapse collapse-arrow bg-white rounded-lg mt-7 px-1 w-2/3'>
+        <input type='checkbox' />
+        <div className='collapse-title'>
+          <span>
+            <FiHelpCircle className='inline pr-1 pb-1' size={22} />
+          </span>
+          Help
+        </div>
+        <div className='collapse-content pl-10'>
+          <p>hello</p>
+        </div>
       </div>
     </div>
   )

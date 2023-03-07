@@ -1,3 +1,10 @@
+Nápověda
+    nešla by ta pitomá šipka nějak hodit doleva?
+    Obecná sekce pro nápovědu zavedená na úrovni ControlPanelu
+    bude mít content na základě selectnutého tabu
+    udělat na to nějakou help componentu a funkci, která dostane identifikátor tabu a vrátí pole vět nápovědy
+    nápověda bude mít animaci, že se jí změní bg color z none na bílou, aby to při zavření neotravovalo
+
 Udělat si nějaký testovací tlačítka na vytvoření testovacích objektů
 
 nějak gitově přejmenovat některé složky a fily

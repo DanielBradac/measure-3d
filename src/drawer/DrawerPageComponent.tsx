@@ -45,7 +45,7 @@ const DrawerPage = ({
       <div className='drawer-side'>
         <label htmlFor='drawer' className='drawer-overlay' />
         <div className='settings'>
-          <h2 className='settingsHeader'>Settings</h2>
+          <h2 className='text-2xl mb-2 ml-1'>Settings</h2>
           <div className='settingsContent'>
             <ToggleSliderSetting
               toggleLabel='Show axis'

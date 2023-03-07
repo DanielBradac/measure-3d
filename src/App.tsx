@@ -166,7 +166,7 @@ const App = () => {
       }}
       alertProv={throwMessage}
     >
-      <div className='page'>
+      <div className='h-screen w-screen text-black bg-slate-600 font-main text-lg'>
         <DrawerPage
           toggleAxis={toggleAxis}
           handleAxisChange={handleAxisChange}
@@ -177,7 +177,7 @@ const App = () => {
           toggleArrows={toggleArrows}
           handleArrowSizeChange={handleArrowSizeChange}
         >
-          <div className='pageContent'>
+          <div className='h-full w-full flex flex-row'>
             <div className='leftSide'>
               <VisualModel elements={[...model.points, ...model.vectors]} />
             </div>

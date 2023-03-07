@@ -2,20 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 @layer components {
-  .page {
-    @apply flex flex-col h-screen;
-  }
-  .pageContent {
-    @apply h-full flex flex-row align-top text-black bg-slate-600 font-main text-lg;
-  }
-  .canvas {
-    @apply bg-gray-500 h-2/3 min-h-canvas max-h-canvas max-w-full min-w-full resize overflow-auto w-halfScreen;
-  }
   .rightSide {
     @apply align-text-top bg-slate-500 border-gray-400 border-l-2 border-t-2 grow overflow-auto;
   }
   .leftSide {
-    @apply max-w-leftSide min-w-leftSide border-gray-400 border-t-2;
+    @apply min-w-leftSide max-w-leftSide border-gray-400 border-t-2;
+  }
+  .canvas {
+    @apply bg-gray-500 h-2/3 min-h-canvas max-h-canvas min-w-full max-w-full resize overflow-auto w-halfScreen;
   }
   .tabContent {
     @apply text-black m-4 border-2 border-secondary p-4 rounded-lg;
@@ -41,14 +35,8 @@
   .settings {
     @apply menu overflow-y-auto bg-base-100 text-base-content w-fit p-4 font-main;
   }
-  .settingsHeader {
-    @apply text-2xl mb-2 ml-1;
-  }
   .settingsContent {
     @apply border-t-2 border-secondary pt-2 text-lg flex flex-col table border-spacing-x-1 border-spacing-y-5;
-  }
-  .settingsToggle {
-    @apply toggle toggle-primary;
   }
   .buttonOutline {
     @apply btn btn-sm btn-outline text-blue-800 border-2;
@@ -65,13 +53,5 @@
   }
   .submitButton {
     @apply pl-3 py-4 w-full;
-  }
-  /* Multiselect classes */
-  .multiSelectContainer {
-    @apply rounded-lg bg-white pt-1 pb-1;
-  }
-  /* Closeicon in chip in multiselect */
-  .closeIcon {
-    @apply m-1;
   }
 }

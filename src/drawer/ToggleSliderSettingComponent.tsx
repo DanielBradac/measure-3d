@@ -34,7 +34,7 @@ const ToggleSliderSetting = ({
         <div className='table-cell'>
           <input
             type='checkbox'
-            className='settingsToggle align-middle'
+            className='toggle toggle-primary align-middle'
             checked={settingToggled}
             onChange={hanndleToggleChange}
           />
