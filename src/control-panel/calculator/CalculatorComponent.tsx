@@ -4,8 +4,6 @@ import ElementInfo from '../ElementInfoComponent'
 import { InteractionContext } from '../../context/GlobalContextComponent'
 import { Vector } from '../../data-model/Vector'
 import { FiHelpCircle } from 'react-icons/fi'
-// eslint-disable-next-line import/namespace
-import { Allotment } from 'allotment'
 import 'allotment/dist/style.css'
 
 const Calculator = () => {
@@ -66,17 +64,6 @@ const Calculator = () => {
 
       <div className='mt-10 border-secondary border-t-2 px-5 py-3'>
         <ElementInfo element={interactions.interModel.clicked} />
-      </div>
-
-      <div className='collapse collapse-arrow bg-white rounded-lg mt-7 px-1 w-2/3'>
-        <input type='checkbox' />
-        <div className='collapse-title'>
-          <span>
-            <FiHelpCircle className='inline pr-1 pb-1' size={22} />
-          </span>
-          Hint
-        </div>
-        <div className='collapse-content pl-10'>Hello hint</div>
       </div>
     </div>
   )

@@ -3,13 +3,16 @@
 @tailwind utilities;
 @layer components {
   .rightSide {
-    @apply bg-slate-500 grow overflow-auto h-full border-gray-400 border-l-2;
+    @apply bg-slate-500 grow overflow-auto h-full border-gray-400 border-l-2 flex flex-col;
   }
   .canvas {
     @apply bg-gray-500 min-h-canvas max-h-canvas h-1/2 w-full resize-y overflow-auto;
   }
   .tabContent {
     @apply text-black m-4 border-2 border-secondary p-4 rounded-lg;
+  }
+  .hint {
+    @apply text-black m-4 rounded-lg collapse collapse-arrow bg-white mt-auto;
   }
   .tabs {
     @apply bg-slate-600 py-2 px-3 rounded-none;

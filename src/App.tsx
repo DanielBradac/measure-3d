@@ -1,5 +1,4 @@
 import { FormEvent, useEffect, useState } from 'react'
-import AlertBlock from './common-components/AlertComponent'
 import { AlertMessage, ErrorMessage } from './common/AlertMessageTypes'
 import GlobalContextComponent from './context/GlobalContextComponent'
 import InteractionModel from './context/InteractionModel'
@@ -16,10 +15,9 @@ import VisualModel from './visual-components/VisualModelComponent'
 // eslint-disable-next-line import/namespace
 import { Allotment } from 'allotment'
 import 'allotment/dist/style.css'
+import { alertDuration } from './common/GlobalConstants'
 
 const App = () => {
-  // For how long is message for user visible
-  const alertDuration = 4000
   // Data model - all entities are stored here
   const [model, setModel] = useState<Model>(getDeafaultModel())
 
@@ -190,15 +188,8 @@ const App = () => {
                   <ControlPanel
                     onAddPoint={onAddPoint}
                     onAddVector={onAddVecor}
+                    alertStack={alertStack}
                   />
-                  <div className='ml-3'>
-                    {alertStack.length > 0 && (
-                      <AlertBlock
-                        alerts={alertStack}
-                        duration={alertDuration}
-                      />
-                    )}
-                  </div>
                 </div>
               </Allotment.Pane>
             </Allotment>

@@ -1,29 +1,39 @@
 import { useState } from 'react'
+import AlertBlock from '../common-components/AlertComponent'
+import { AlertMessage } from '../common/AlertMessageTypes'
+import { alertDuration } from '../common/GlobalConstants'
+import { Tab } from '../common/Types'
 import { Point } from '../data-model/Point'
 import { Vector } from '../data-model/Vector'
 import AddElement from './add-elements/AddElementComponent'
 import Calculator from './calculator/CalculatorComponent'
+import Hint from './HintComponent'
 
 interface ControlPanelProps {
   onAddPoint: (newPoint: Point[]) => void
   onAddVector: (newVector: Vector[]) => void
+  alertStack: AlertMessage[]
 }
 
-const ControlPanel = ({ onAddPoint, onAddVector }: ControlPanelProps) => {
-  const [tabValue, setTabValue] = useState<number>(0)
+const ControlPanel = ({
+  onAddPoint,
+  onAddVector,
+  alertStack,
+}: ControlPanelProps) => {
+  const [selectedTab, setSelectedTab] = useState<Tab>(Tab.ELEMENTS)
 
-  const getClasses = (tabIndex: number): string => {
-    return tabValue === tabIndex
+  const getClasses = (tabIndex: Tab): string => {
+    return selectedTab === tabIndex
       ? 'tab tab-active'
       : 'tab hover:animate-tabHover'
   }
 
   const getTabContent = (): JSX.Element => {
-    switch (tabValue) {
-      case 0: {
+    switch (selectedTab) {
+      case Tab.ELEMENTS: {
         return <AddElement onAddPoint={onAddPoint} onAddVector={onAddVector} />
       }
-      case 1: {
+      case Tab.CALCULATOR: {
         return <Calculator />
       }
       default: {
@@ -35,41 +45,51 @@ const ControlPanel = ({ onAddPoint, onAddVector }: ControlPanelProps) => {
   // Render
   return (
     <>
-      <div className='tabs tabs-boxed'>
-        <a
-          className={getClasses(0)}
-          onClick={() => {
-            setTabValue(0)
-          }}
-        >
-          Elements
-        </a>
-        <a
-          className={getClasses(1)}
-          onClick={() => {
-            setTabValue(1)
-          }}
-        >
-          Calculator
-        </a>
-        <a
-          className={getClasses(2)}
-          onClick={() => {
-            setTabValue(2)
-          }}
-        >
-          Import
-        </a>
-        <a
-          className={getClasses(3)}
-          onClick={() => {
-            setTabValue(3)
-          }}
-        >
-          Export
-        </a>
+      <div className='flex flex-col overflow-auto h-full'>
+        <div>
+          <div className='tabs tabs-boxed'>
+            <a
+              className={getClasses(Tab.ELEMENTS)}
+              onClick={() => {
+                setSelectedTab(Tab.ELEMENTS)
+              }}
+            >
+              Elements
+            </a>
+            <a
+              className={getClasses(Tab.CALCULATOR)}
+              onClick={() => {
+                setSelectedTab(Tab.CALCULATOR)
+              }}
+            >
+              Calculator
+            </a>
+            <a
+              className={getClasses(Tab.IMPORT)}
+              onClick={() => {
+                setSelectedTab(Tab.IMPORT)
+              }}
+            >
+              Import
+            </a>
+            <a
+              className={getClasses(Tab.EXPORT)}
+              onClick={() => {
+                setSelectedTab(Tab.EXPORT)
+              }}
+            >
+              Export
+            </a>
+          </div>
+          <div className='tabContent'>{getTabContent()}</div>
+        </div>
+        <div className='ml-4'>
+          {alertStack.length > 0 && (
+            <AlertBlock alerts={alertStack} duration={alertDuration} />
+          )}
+        </div>
       </div>
-      <div className='tabContent'>{getTabContent()}</div>
+      <Hint selectedTab={selectedTab} />
     </>
   )
 }
