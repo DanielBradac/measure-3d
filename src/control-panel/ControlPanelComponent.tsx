@@ -20,7 +20,7 @@ const ControlPanel = ({
   onAddVector,
   alertStack,
 }: ControlPanelProps) => {
-  const [selectedTab, setSelectedTab] = useState<Tab>(Tab.ELEMENTS)
+  const [selectedTab, setSelectedTab] = useState<Tab>(Tab.ADD_ELEMENTS)
 
   const getClasses = (tabIndex: Tab): string => {
     return selectedTab === tabIndex
@@ -30,7 +30,7 @@ const ControlPanel = ({
 
   const getTabContent = (): JSX.Element => {
     switch (selectedTab) {
-      case Tab.ELEMENTS: {
+      case Tab.ADD_ELEMENTS: {
         return <AddElement onAddPoint={onAddPoint} onAddVector={onAddVector} />
       }
       case Tab.CALCULATOR: {
@@ -49,12 +49,20 @@ const ControlPanel = ({
         <div>
           <div className='tabs tabs-boxed'>
             <a
-              className={getClasses(Tab.ELEMENTS)}
+              className={getClasses(Tab.ADD_ELEMENTS)}
               onClick={() => {
-                setSelectedTab(Tab.ELEMENTS)
+                setSelectedTab(Tab.ADD_ELEMENTS)
               }}
             >
-              Elements
+              Add Elements
+            </a>
+            <a
+              className={getClasses(Tab.EDIT)}
+              onClick={() => {
+                setSelectedTab(Tab.EDIT)
+              }}
+            >
+              Editor
             </a>
             <a
               className={getClasses(Tab.CALCULATOR)}

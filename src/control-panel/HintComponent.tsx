@@ -9,8 +9,11 @@ interface HintProps {
 const Hint = ({ selectedTab }: HintProps) => {
   const getHintContent = (): ReactNode => {
     switch (selectedTab) {
-      case Tab.ELEMENTS: {
+      case Tab.ADD_ELEMENTS: {
         return <div>Elements hint</div>
+      }
+      case Tab.EDIT: {
+        return <div>Editor hint</div>
       }
       case Tab.CALCULATOR: {
         return <div>Calculator hint</div>

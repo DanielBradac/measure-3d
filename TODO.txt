@@ -1,10 +1,13 @@
 editace
-    předělat taby na add elements a edit elements
     výběr elementu k editaci bude kliknutím
+    zkusit udělat zvlášť komponenty pro editaci bodu a vektoru a tyto komponenty používat jak pro přidávání tak pro editaci
     
 Nápověda
     nápověda bude mít animaci, že se jí změní bg color z none na bílou, aby to při zavření neotravovalo
     Udělat obsah nápovědy
+
+Point tagy resetují velikost při např. submitu nového vektoru a způsobují problikávání
+    asi bude potřeba jiná componenta pro tagy? 
 
 Udělat si nějaký testovací tlačítka na vytvoření testovacích objektů
 
@@ -15,7 +18,7 @@ Kalkulačka
     asi k tomu udělat nějakou nápovědu, co se může a co se nemůže používat
         nápovědu schovat pod něaký tab z daisyui
             zmínit, že tam bude max 16 desetinných míst a pak se to zaokrouhlí
-            zmínit jak se pracuje s vektory
+            zmínit jak se pracuje s vektory (přidání délky vektoru insertem)
 
 animace
     napady https://alvarotrigo.com/blog/html-css-tabs/

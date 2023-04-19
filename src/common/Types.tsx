@@ -12,8 +12,9 @@ export type InteractionCtx = {
 }
 
 export enum Tab {
-  ELEMENTS = 0,
-  CALCULATOR = 1,
-  IMPORT = 2,
-  EXPORT = 3,
+  ADD_ELEMENTS = 0,
+  EDIT = 1,
+  CALCULATOR = 2,
+  IMPORT = 3,
+  EXPORT = 4,
 }
