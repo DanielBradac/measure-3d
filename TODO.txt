@@ -1,3 +1,7 @@
+editace
+    předělat taby na add elements a edit elements
+    výběr elementu k editaci bude kliknutím
+
 Nápověda
     nápověda bude mít animaci, že se jí změní bg color z none na bílou, aby to při zavření neotravovalo
     Udělat obsah nápovědy
@@ -8,13 +12,10 @@ nějak gitově přejmenovat některé složky a fily
     drawer -> settings-panel
     visual-cpmponents -> graphical-panel
 
-Eventy na threeJS komponentách
-
-        click - označit a vypsat info - bod i vektor
-        enter - přidat selektnutý vektor do aktuální pozice ve vzorci
+redesign zakládání vektorů
+    body mezi kterými se bude dělat vektor se budou moct vybírat klikáním
 
 Kalkulačka
-    mám základ, teď nějak přidat klikání na vektory
     asi k tomu udělat nějakou nápovědu, co se může a co se nemůže používat
         nápovědu schovat pod něaký tab z daisyui
             zmínit, že tam bude max 16 desetinných míst a pak se to zaokrouhlí
