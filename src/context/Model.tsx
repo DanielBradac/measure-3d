@@ -86,8 +86,6 @@ export class Model extends Clonable {
           vector = this.modifyVectorPoints(vector)
           // Then we add vector
           newVectors.push(vector)
-          vector.from.addVector(vector)
-          vector.to.addVector(vector)
         } else {
           error += `\n Vector ${this.vectors[index]} already exists!`
         }

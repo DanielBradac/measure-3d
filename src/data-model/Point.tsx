@@ -1,9 +1,8 @@
 import { InteractionCtx } from '../common/Types'
 import Settings from '../context/Settings'
-import PointComp from '../visual-components/PointComponent'
+import PointComp from '../graphical-panel/PointComponent'
 import { Comparable, Drawable } from './Interfaces'
 import { Layer } from './Layer'
-import { Vector } from './Vector'
 
 export class Point implements Drawable, Comparable {
   constructor(
@@ -35,8 +34,6 @@ export class Point implements Drawable, Comparable {
     return this.z - other.z
   }
 
-  private _vectors: Set<Vector> = new Set<Vector>()
-
   get layers() {
     return this._layers
   }
@@ -63,18 +60,6 @@ export class Point implements Drawable, Comparable {
 
   get color(): string | null {
     return this._color
-  }
-
-  get vectors(): Set<Vector> {
-    return this._vectors
-  }
-
-  addVector(newVector: Vector) {
-    this._vectors.add(newVector)
-  }
-
-  removeVector(toRemove: Vector) {
-    this._vectors.delete(toRemove)
   }
 
   draw(

@@ -1,6 +1,6 @@
 import { InteractionCtx } from '../common/Types'
 import Settings from '../context/Settings'
-import VectorComp from '../visual-components/VectorComponent'
+import VectorComp from '../graphical-panel/VectorComponent'
 import { Comparable, Drawable } from './Interfaces'
 import { Layer } from './Layer'
 import { Point } from './Point'

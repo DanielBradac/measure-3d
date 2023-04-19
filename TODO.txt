@@ -1,16 +1,12 @@
 editace
     předělat taby na add elements a edit elements
     výběr elementu k editaci bude kliknutím
-
+    
 Nápověda
     nápověda bude mít animaci, že se jí změní bg color z none na bílou, aby to při zavření neotravovalo
     Udělat obsah nápovědy
 
 Udělat si nějaký testovací tlačítka na vytvoření testovacích objektů
-
-nějak gitově přejmenovat některé složky a fily
-    drawer -> settings-panel
-    visual-cpmponents -> graphical-panel
 
 redesign zakládání vektorů
     body mezi kterými se bude dělat vektor se budou moct vybírat klikáním
@@ -48,9 +44,6 @@ U elements - na jedné stránce bude i "Add Element" i "Existing elements" využ
 
 nový bod do existujícího/existující bod do nového
     tady by to možná chtělo info, že se nepřidal nový bod, ale využil se již existující?? Pomocí throw message
-
-uprava dat. modelu
-    minimalizovat - už nepotřebujeme, aby bod znal své vektory, atd..
 
 Udělat layers tab (CRUD operace s layers)
     Při odinstalování layer tam musí být warning, když pod sebou layer má nějaké objekty
