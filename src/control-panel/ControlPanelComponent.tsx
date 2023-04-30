@@ -42,7 +42,7 @@ const ControlPanel = ({
         return <Editor />
       }
       case Tab.TEST: {
-        return <TestComp />
+        return <TestComp onAddPoint={onAddPoint} />
       }
       default: {
         return <>Coming soon...</>

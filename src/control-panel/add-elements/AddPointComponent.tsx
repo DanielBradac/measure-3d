@@ -1,6 +1,5 @@
 import { useContext, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import { indexOf } from '../../data-model/Interfaces'
 import { Point } from '../../data-model/Point'
 import { prevEnterSub } from '../../common/FormFunctions'
 import MultiSelectComponent from '../../common-components/MultiSelectComponent'
@@ -50,23 +49,6 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
       )
     }
   })
-
-  const generateRandomPoints = () => {
-    const newPoints: Point[] = []
-    for (let x = 0; x < 10; x++) {
-      const newPoint = new Point(
-        Math.floor(Math.random() * 20),
-        Math.floor(Math.random() * 20),
-        Math.floor(Math.random() * 20),
-        x.toString(),
-        [layers[0]]
-      )
-      if (indexOf(points, newPoint) === -1) {
-        newPoints.push(newPoint)
-      }
-    }
-    onAddPoint(newPoints)
-  }
 
   // Render
   return (
@@ -137,15 +119,6 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
       <div className='submitButton'>
         <button type='submit' className='buttonOutline'>
           Add point
-        </button>
-      </div>
-      <div>
-        <button
-          type='button'
-          className='buttonOutline'
-          onClick={generateRandomPoints}
-        >
-          10 random points
         </button>
       </div>
     </form>
