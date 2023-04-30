@@ -8,6 +8,7 @@ Nápověda
 
 Point tagy resetují velikost při např. submitu nového vektoru a způsobují problikávání
     asi bude potřeba jiná componenta pro tagy? 
+        mohla by pomoct komponenta Text a billboard
 
 Udělat si nějaký testovací tlačítka na vytvoření testovacích objektů
 

@@ -3,7 +3,6 @@ import { formula, round } from 'exact-math'
 import ElementInfo from '../ElementInfoComponent'
 import { InteractionContext } from '../../context/GlobalContextComponent'
 import { Vector } from '../../data-model/Vector'
-import { FiHelpCircle } from 'react-icons/fi'
 import 'allotment/dist/style.css'
 
 const Calculator = () => {

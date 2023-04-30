@@ -2,12 +2,14 @@ import { useState } from 'react'
 import AlertBlock from '../common-components/AlertComponent'
 import { AlertMessage } from '../common/AlertMessageTypes'
 import { alertDuration } from '../common/GlobalConstants'
-import { Tab } from '../common/Types'
+import { getTabName, Tab } from '../common/Types'
 import { Point } from '../data-model/Point'
 import { Vector } from '../data-model/Vector'
 import AddElement from './add-elements/AddElementComponent'
 import Calculator from './calculator/CalculatorComponent'
+import Editor from './editor/EditorComponent'
 import Hint from './HintComponent'
+import TestComp from './test/TestComponent'
 
 interface ControlPanelProps {
   onAddPoint: (newPoint: Point[]) => void
@@ -22,7 +24,7 @@ const ControlPanel = ({
 }: ControlPanelProps) => {
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.ADD_ELEMENTS)
 
-  const getClasses = (tabIndex: Tab): string => {
+  const getTabClass = (tabIndex: Tab): string => {
     return selectedTab === tabIndex
       ? 'tab tab-active'
       : 'tab hover:animate-tabHover'
@@ -36,10 +38,32 @@ const ControlPanel = ({
       case Tab.CALCULATOR: {
         return <Calculator />
       }
+      case Tab.EDIT: {
+        return <Editor />
+      }
+      case Tab.TEST: {
+        return <TestComp />
+      }
       default: {
         return <>Coming soon...</>
       }
     }
+  }
+
+  interface TabProps {
+    tab: Tab
+  }
+  const TabItem = ({ tab }: TabProps) => {
+    return (
+      <a
+        className={getTabClass(tab)}
+        onClick={() => {
+          setSelectedTab(tab)
+        }}
+      >
+        {getTabName(tab)}
+      </a>
+    )
   }
 
   // Render
@@ -48,46 +72,12 @@ const ControlPanel = ({
       <div className='flex flex-col overflow-auto h-full'>
         <div>
           <div className='tabs tabs-boxed'>
-            <a
-              className={getClasses(Tab.ADD_ELEMENTS)}
-              onClick={() => {
-                setSelectedTab(Tab.ADD_ELEMENTS)
-              }}
-            >
-              Add Elements
-            </a>
-            <a
-              className={getClasses(Tab.EDIT)}
-              onClick={() => {
-                setSelectedTab(Tab.EDIT)
-              }}
-            >
-              Editor
-            </a>
-            <a
-              className={getClasses(Tab.CALCULATOR)}
-              onClick={() => {
-                setSelectedTab(Tab.CALCULATOR)
-              }}
-            >
-              Calculator
-            </a>
-            <a
-              className={getClasses(Tab.IMPORT)}
-              onClick={() => {
-                setSelectedTab(Tab.IMPORT)
-              }}
-            >
-              Import
-            </a>
-            <a
-              className={getClasses(Tab.EXPORT)}
-              onClick={() => {
-                setSelectedTab(Tab.EXPORT)
-              }}
-            >
-              Export
-            </a>
+            <TabItem tab={Tab.ADD_ELEMENTS} />
+            <TabItem tab={Tab.EDIT} />
+            <TabItem tab={Tab.CALCULATOR} />
+            <TabItem tab={Tab.IMPORT} />
+            <TabItem tab={Tab.EXPORT} />
+            <TabItem tab={Tab.TEST} />
           </div>
           <div className='tabContent'>{getTabContent()}</div>
         </div>
