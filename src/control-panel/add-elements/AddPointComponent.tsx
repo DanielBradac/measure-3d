@@ -2,22 +2,21 @@ import { useContext, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { Point } from '../../data-model/Point'
 import { prevEnterSub } from '../../common/FormFunctions'
-import MultiSelectComponent from '../../common-components/MultiSelectComponent'
 import Multiselect from 'multiselect-react-dropdown'
 import { ErrorMessage } from '../../common/AlertMessageTypes'
-import { Layer } from '../../data-model/Layer'
 import { addPointDefault } from './FormDefaultValues'
 import {
   AlertContext,
   ModelContext,
 } from '../../context/GlobalContextComponent'
+import PointForm from '../element-forms/PointForm'
 
 interface AddPointProps {
   onAddPoint: (newPoint: Point[]) => void
 }
 
 const AddPoint = ({ onAddPoint }: AddPointProps) => {
-  const { layers, points } = useContext(ModelContext)
+  const { layers } = useContext(ModelContext)
   const throwMessage = useContext(AlertContext)
 
   const { register, handleSubmit, reset } = useForm({
@@ -57,64 +56,11 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
       className='inputForm'
       onKeyDown={e => prevEnterSub(e)}
     >
-      <div className='table-column inputBlock'>
-        <div className='table-row'>
-          <label className='table-cell itemLabel'>X:</label>
-          <input
-            {...register('x', { required: true })}
-            type='number'
-            id='x'
-            step='0.001'
-            className='table-cell input input-bordered input-sm'
-          />
-        </div>
-
-        <div className='table-row'>
-          <label className='table-cell itemLabel'>Y:</label>
-          <input
-            {...register('y', { required: true })}
-            type='number'
-            id='y'
-            step='0.001'
-            className='table-cell input input-bordered input-sm'
-          />
-        </div>
-
-        <div className='table-row'>
-          <label className='table-cell itemLabel'>Z:</label>
-          <input
-            {...register('z', { required: true })}
-            type='number'
-            id='x'
-            step='0.001'
-            className='table-cell input input-bordered input-sm'
-          />
-        </div>
-
-        <div className='table-row'>
-          <label className='table-cell itemLabel'>Tag:</label>
-
-          <input
-            {...register('tag')}
-            type='string'
-            id='tag'
-            className='table-cell input input-bordered input-sm'
-          />
-        </div>
-
-        <div className='table-row'>
-          <label className='table-cell itemLabel'>Layers:</label>
-          <div className='table-cell mt-10'>
-            <MultiSelectComponent
-              placeholder='Select layers...'
-              options={layers}
-              displayValue={Layer.selectDisplayValue}
-              emptyRecordMsg='No layers available'
-              multiSelect={multiSelect}
-            />
-          </div>
-        </div>
-      </div>
+      <PointForm
+        layers={layers}
+        multiSelectRef={multiSelect}
+        register={register}
+      />
 
       <div className='submitButton'>
         <button type='submit' className='buttonOutline'>
