@@ -1,7 +1,6 @@
 import Multiselect from 'multiselect-react-dropdown'
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import MultiSelectComponent from '../../common-components/MultiSelectComponent'
 import { ErrorMessage } from '../../common/AlertMessageTypes'
 import { prevEnterSub } from '../../common/FormFunctions'
 import { getPointSelection } from '../../common/Selections'
@@ -9,10 +8,10 @@ import {
   AlertContext,
   ModelContext,
 } from '../../context/GlobalContextComponent'
-import { Layer } from '../../data-model/Layer'
 import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
-import { addVectorDefault } from './FormDefaultValues'
+import PointForm from '../element-forms/PointForm'
+import { indexOf } from '../../data-model/Interfaces'
 
 interface AddVectorProps {
   onAddVector: (newVector: Vector[]) => void
@@ -22,19 +21,15 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
   const { points, layers, vectors } = useContext(ModelContext)
   const throwMessage = useContext(AlertContext)
 
-  const { register, handleSubmit, setValue, resetField, reset } = useForm({
-    defaultValues: addVectorDefault,
-  })
+  const { register, handleSubmit, setValue, reset } = useForm({})
 
-  // Preselected layers of possible point preselection
-  const [preSelectLayersFrom, setPreSelectLayersFrom] = useState<Layer[]>([])
-  const [preSelectLayersTo, setPreSelectLayersTo] = useState<Layer[]>([])
   // Multiselect ref - needed for getting data and reseting multiselect
   const multiSelectFrom = useRef<Multiselect>(null)
   const multiSelectTo = useRef<Multiselect>(null)
 
-  const [fromDisabled, setFromDisabled] = useState<boolean>(false)
-  const [toDisabled, setToDisabled] = useState<boolean>(false)
+  // Existing points in selections
+  const [fromSelect, setFromSelect] = useState<string>('new')
+  const [toSelect, setToSelect] = useState<string>('new')
 
   // Create new vector, add it to point's vector set and let parent know
   const createVector = (from: Point, to: Point) => {
@@ -42,32 +37,11 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
     onAddVector([newVector])
   }
 
-  // Set FROM point values form an existing point
-  const setFromPoint = (blueprint: Point) => {
-    setFromDisabled(true)
-    setValue('xFrom', blueprint.x)
-    setValue('yFrom', blueprint.y)
-    setValue('zFrom', blueprint.z)
-    setValue('tagFrom', blueprint.tag)
-    setPreSelectLayersFrom(blueprint.layers)
-  }
-
-  // Set TO point values form an existing point
-  const setToPoint = (blueprint: Point) => {
-    setToDisabled(true)
-    setValue('xTo', blueprint.x)
-    setValue('yTo', blueprint.y)
-    setValue('zTo', blueprint.z)
-    setValue('tagTo', blueprint.tag)
-    setPreSelectLayersTo(blueprint.layers)
-  }
-
   // From point is 'to' point of last added vector by default
   useEffect(() => {
     if (vectors.length > 0) {
-      const point = vectors[vectors.length - 1].to
-      setFromPoint(point)
-      setValue('pointFrom', points.indexOf(point).toString())
+      const toPoint = vectors[vectors.length - 1].to
+      setFromSelect(indexOf(points, toPoint).toString())
     }
   }, [vectors])
 
@@ -103,10 +77,8 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
 
       // Reset the form
       reset()
-      setPreSelectLayersFrom([])
-      setPreSelectLayersTo([])
-      setToDisabled(false)
-      setFromDisabled(false)
+      setFromSelect('new')
+      setToSelect('new')
       multiSelectFrom.current?.resetSelectedValues()
       multiSelectTo.current?.resetSelectedValues()
     } catch (e: unknown) {
@@ -117,36 +89,6 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
       )
     }
   })
-
-  // From point selection changed
-  const handleChangeFrom = (event: ChangeEvent<HTMLSelectElement>) => {
-    if (event.currentTarget.value !== 'new') {
-      setFromPoint(points[parseInt(event.currentTarget.value)])
-    } else {
-      setFromDisabled(false)
-      resetField('xFrom')
-      resetField('yFrom')
-      resetField('zFrom')
-      resetField('tagFrom')
-      setPreSelectLayersFrom([])
-      multiSelectFrom.current?.resetSelectedValues()
-    }
-  }
-
-  // To point selection changed
-  const handleChangeTo = (event: ChangeEvent<HTMLSelectElement>) => {
-    if (event.currentTarget.value !== 'new') {
-      setToPoint(points[parseInt(event.currentTarget.value)])
-    } else {
-      setToDisabled(false)
-      resetField('xTo')
-      resetField('yTo')
-      resetField('zTo')
-      resetField('tagTo')
-      setPreSelectLayersTo([])
-      multiSelectTo.current?.resetSelectedValues()
-    }
-  }
 
   // Render
   return (
@@ -161,68 +103,22 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
           <select
             className='table-row select select-bordered select-sm noLabelSelect'
             {...register('pointFrom')}
-            onChange={handleChangeFrom}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              setFromSelect(e.currentTarget.value)
+            }
+            value={fromSelect}
           >
             {getPointSelection(points)}
           </select>
-
-          <div className='table-row'>
-            <label className='table-cell itemLabel'>X:</label>
-            <input
-              {...register('xFrom')}
-              type='number'
-              id='xFrom'
-              step='0.001'
-              disabled={fromDisabled}
-              className='table-cell input input-bordered input-sm'
-            />
-          </div>
-          <div className='table-row'>
-            <label className='table-cell itemLabel'>Y:</label>
-            <input
-              {...register('yFrom')}
-              type='number'
-              id='yFrom'
-              step='0.001'
-              disabled={fromDisabled}
-              className='table-cell input input-bordered input-sm'
-            />
-          </div>
-          <div className='table-row'>
-            <label className='table-cell itemLabel'>Z:</label>
-            <input
-              {...register('zFrom')}
-              type='number'
-              id='zFrom'
-              step='0.001'
-              disabled={fromDisabled}
-              className='table-cell input input-bordered input-sm'
-            />
-          </div>
-          <div className='table-row'>
-            <label className='table-cell itemLabel'>Tag:</label>
-            <input
-              {...register('tagFrom')}
-              type='string'
-              id='tagFrom'
-              disabled={fromDisabled}
-              className='table-cell input input-bordered input-sm'
-            />
-          </div>
-          <div className='table-row'>
-            <label className='table-cell itemLabel'>Layers:</label>
-            <div className='table-cell mt-10'>
-              <MultiSelectComponent
-                preSelectedValues={preSelectLayersFrom}
-                disabled={fromDisabled}
-                placeholder='Select layers...'
-                options={layers}
-                displayValue={Layer.selectDisplayValue}
-                emptyRecordMsg='No layers available'
-                multiSelect={multiSelectFrom}
-              />
-            </div>
-          </div>
+          <PointForm
+            layers={layers}
+            multiSelectRef={multiSelectFrom}
+            disabled={fromSelect !== 'new'}
+            register={register}
+            formSuffix='From'
+            point={fromSelect === 'new' ? null : points[parseInt(fromSelect)]}
+            setValue={setValue}
+          />
         </div>
 
         <div className='table-column inputBlock'>
@@ -230,70 +126,22 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
           <select
             className='table-row select select-bordered select-sm noLabelSelect'
             {...register('pointTo')}
-            onChange={handleChangeTo}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              setToSelect(e.currentTarget.value)
+            }
           >
             {getPointSelection(points)}
           </select>
 
-          <div className='table-row'>
-            <label className='table-cell itemLabel'>X:</label>
-            <input
-              {...register('xTo')}
-              type='number'
-              id='x'
-              step='0.001'
-              disabled={toDisabled}
-              className='table-cell input input-bordered input-sm'
-            />
-          </div>
-          <div className='table-row'>
-            <label className='table-cell itemLabel'>Y:</label>
-            <input
-              {...register('yTo')}
-              type='number'
-              id='y'
-              step='0.001'
-              disabled={toDisabled}
-              className='table-cell input input-bordered input-sm'
-            />
-          </div>
-          <div className='table-row'>
-            <label className='table-cell itemLabel'>Z:</label>
-            <input
-              {...register('zTo')}
-              type='number'
-              id='z'
-              step='0.001'
-              disabled={toDisabled}
-              className='table-cell input input-bordered input-sm'
-            />
-          </div>
-          <div className='table-row'>
-            <label className='table-cell itemLabel'>Tag:</label>
-            <div>
-              <input
-                {...register('tagTo')}
-                type='string'
-                id='tag'
-                disabled={toDisabled}
-                className='table-cell input input-bordered input-sm'
-              />
-            </div>
-          </div>
-          <div className='table-row'>
-            <label className='table-cell itemLabel'>Layers:</label>
-            <div className='table-cell mt-10'>
-              <MultiSelectComponent
-                disabled={toDisabled}
-                preSelectedValues={preSelectLayersTo}
-                placeholder='Select layers...'
-                options={layers}
-                displayValue={Layer.selectDisplayValue}
-                emptyRecordMsg='No layers available'
-                multiSelect={multiSelectTo}
-              />
-            </div>
-          </div>
+          <PointForm
+            layers={layers}
+            multiSelectRef={multiSelectTo}
+            disabled={toSelect !== 'new'}
+            register={register}
+            formSuffix='To'
+            point={toSelect === 'new' ? null : points[parseInt(toSelect)]}
+            setValue={setValue}
+          />
         </div>
 
         <div className='submitButton'>

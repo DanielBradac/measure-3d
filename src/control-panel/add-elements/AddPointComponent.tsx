@@ -4,7 +4,6 @@ import { Point } from '../../data-model/Point'
 import { prevEnterSub } from '../../common/FormFunctions'
 import Multiselect from 'multiselect-react-dropdown'
 import { ErrorMessage } from '../../common/AlertMessageTypes'
-import { addPointDefault } from './FormDefaultValues'
 import {
   AlertContext,
   ModelContext,
@@ -19,9 +18,7 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
   const { layers } = useContext(ModelContext)
   const throwMessage = useContext(AlertContext)
 
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: addPointDefault,
-  })
+  const { register, handleSubmit, reset, setValue } = useForm({})
 
   // Multiselect ref - needed for getting data and reseting multiselect
   const multiSelect = useRef<Multiselect>(null)
@@ -56,11 +53,15 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
       className='inputForm'
       onKeyDown={e => prevEnterSub(e)}
     >
-      <PointForm
-        layers={layers}
-        multiSelectRef={multiSelect}
-        register={register}
-      />
+      <div className='table-column inputBlock'>
+        <PointForm
+          layers={layers}
+          multiSelectRef={multiSelect}
+          disabled={false}
+          register={register}
+          setValue={setValue}
+        />
+      </div>
 
       <div className='submitButton'>
         <button type='submit' className='buttonOutline'>

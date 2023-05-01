@@ -1,6 +1,5 @@
 editace
     výběr elementu k editaci bude kliknutím
-    zkusit udělat zvlášť komponenty pro editaci bodu a vektoru a tyto komponenty používat jak pro přidávání tak pro editaci
     
 Nápověda
     nápověda bude mít animaci, že se jí změní bg color z none na bílou, aby to při zavření neotravovalo
