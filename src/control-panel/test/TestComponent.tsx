@@ -31,7 +31,7 @@ const TestComp = ({ onAddPoint }: TestCompProps) => {
     <div>
       <button
         type='button'
-        className='buttonOutline'
+        className='buttonPrimary'
         onClick={generateRandomPoints}
       >
         10 random points

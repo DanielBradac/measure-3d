@@ -63,8 +63,8 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
         />
       </div>
 
-      <div className='submitButton'>
-        <button type='submit' className='buttonOutline'>
+      <div className='pl-3 py-4 w-full'>
+        <button type='submit' className='buttonPrimary'>
           Add point
         </button>
       </div>

@@ -38,20 +38,24 @@
   .settingsContent {
     @apply border-t-2 border-secondary pt-2 text-lg flex flex-col table border-spacing-x-1 border-spacing-y-5;
   }
-  .buttonOutline {
+  .buttonPrimary {
     @apply btn btn-sm btn-outline text-blue-800 border-2;
   }
-  .buttonOutline:hover,
-  .buttonOutline-active {
+  .buttonPrimary:hover,
+  .buttonPrimary-active {
     @apply bg-primary border-blue-800;
+  }
+  .buttonError {
+    @apply btn btn-sm btn-outline text-red-600 border-2;
+  }
+  .buttonError:hover,
+  .buttonError-active {
+    @apply bg-error border-red-600;
   }
   .inputForm {
     @apply mt-5 flex flex-wrap;
   }
   .inputBlock {
     @apply border-spacing-3;
-  }
-  .submitButton {
-    @apply pl-3 py-4 w-full;
   }
 }
