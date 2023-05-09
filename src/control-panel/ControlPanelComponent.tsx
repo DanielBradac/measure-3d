@@ -14,12 +14,14 @@ import TestComp from './test/TestComponent'
 interface ControlPanelProps {
   onAddPoint: (newPoint: Point[]) => void
   onAddVector: (newVector: Vector[]) => void
+  onDeletePoint: (deletedPoint: Point[]) => void
   alertStack: AlertMessage[]
 }
 
 const ControlPanel = ({
   onAddPoint,
   onAddVector,
+  onDeletePoint,
   alertStack,
 }: ControlPanelProps) => {
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.ADD_ELEMENTS)
@@ -39,7 +41,7 @@ const ControlPanel = ({
         return <Calculator />
       }
       case Tab.EDIT: {
-        return <Editor />
+        return <Editor onDeletePoint={onDeletePoint} />
       }
       case Tab.TEST: {
         return <TestComp onAddPoint={onAddPoint} />

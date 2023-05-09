@@ -49,7 +49,13 @@ export class Model extends Clonable {
 
   public removePoints(points: Point[]): Model {
     const clone = this.clone() as Model
-    points.forEach(point => clone._points.filter(item => item !== point))
+    points.forEach(point => {
+      const index = clone.points.indexOf(point)
+      if (index === -1) {
+        throw Error(`Point ${point.toString()} not found`)
+      }
+      clone.points.splice(index, 1)
+    })
     return clone
   }
 
@@ -102,7 +108,13 @@ export class Model extends Clonable {
 
   public removeVectors(vectors: Vector[]): Model {
     const clone = this.clone() as Model
-    vectors.forEach(vector => clone._vectors.filter(item => item !== vector))
+    vectors.forEach(vector => {
+      const index = clone.vectors.indexOf(vector)
+      if (index === -1) {
+        throw Error(`Vector ${vector.toString()} not found`)
+      }
+      clone.points.splice(index, 1)
+    })
     return clone
   }
 

@@ -6,7 +6,11 @@ import PointEditor from './PointEditor'
 import { Vector } from '../../data-model/Vector'
 import VectorEditor from './VectorEditor'
 
-const Editor = () => {
+interface EditorProps {
+  onDeletePoint: (deletedPoint: Point[]) => void
+}
+
+const Editor = ({ onDeletePoint }: EditorProps) => {
   // Interaction context
   const interactions = useContext(InteractionContext)
 
@@ -18,7 +22,12 @@ const Editor = () => {
 
     switch (clickedElement.constructor) {
       case Point:
-        return <PointEditor point={clickedElement as Point} />
+        return (
+          <PointEditor
+            point={clickedElement as Point}
+            onDeletePoint={onDeletePoint}
+          />
+        )
       case Vector:
         return <VectorEditor vector={clickedElement as Vector} />
     }
