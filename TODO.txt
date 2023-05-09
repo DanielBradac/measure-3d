@@ -1,6 +1,9 @@
 editace
     výběr elementu k editaci bude kliknutím
     problém, že při překliku na jiný bod se neresetují vrstvy
+
+mazání
+    udělat modální okno před mazáním
     
 Nápověda
     nápověda bude mít animaci, že se jí změní bg color z none na bílou, aby to při zavření neotravovalo
