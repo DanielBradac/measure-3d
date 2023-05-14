@@ -46,16 +46,32 @@ export class Point implements Drawable, Comparable {
     return this._x
   }
 
+  set x(value: number) {
+    this._x = value
+  }
+
   get y(): number {
     return this._y
+  }
+
+  set y(value: number) {
+    this._y = value
   }
 
   get z(): number {
     return this._z
   }
 
+  set z(value: number) {
+    this._z = value
+  }
+
   get tag(): string {
     return this._tag
+  }
+
+  set tag(value: string) {
+    this._tag = value
   }
 
   get color(): string | null {

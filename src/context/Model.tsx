@@ -47,16 +47,45 @@ export class Model extends Clonable {
     throw Error(error)
   }
 
+  public editPoint(existingPoint: Point, newPoint: Point): Model {
+    let error = ''
+    this.points.forEach(point => {
+      if (
+        point.compareTo(newPoint) === 0 &&
+        point.compareTo(existingPoint) !== 0
+      ) {
+        error += `Coordinates already occupied by: ${point}`
+      }
+    })
+
+    if (error.length === 0) {
+      existingPoint.x = newPoint.x
+      existingPoint.y = newPoint.y
+      existingPoint.z = newPoint.z
+      existingPoint.layers = newPoint.layers
+      existingPoint.tag = newPoint.tag
+      return this.clone() as Model
+    }
+
+    throw Error(error)
+  }
+
   public removePoints(points: Point[]): Model {
     const clone = this.clone() as Model
+    let error = ''
     points.forEach(point => {
       const index = clone.points.indexOf(point)
       if (index === -1) {
-        throw Error(`Point ${point.toString()} not found`)
+        error += `Point ${point.toString()} not found`
+      } else {
+        clone.points.splice(index, 1)
       }
-      clone.points.splice(index, 1)
     })
-    return clone
+
+    if (error.length === 0) {
+      return clone
+    }
+    throw Error(error)
   }
 
   // Add new points if we don't already have them, replace with existing points otherwise
@@ -108,14 +137,21 @@ export class Model extends Clonable {
 
   public removeVectors(vectors: Vector[]): Model {
     const clone = this.clone() as Model
+    let error = ''
+
     vectors.forEach(vector => {
       const index = clone.vectors.indexOf(vector)
       if (index === -1) {
-        throw Error(`Vector ${vector.toString()} not found`)
+        error += `Vector ${vector.toString()} not found`
+      } else {
+        clone.points.splice(index, 1)
       }
-      clone.points.splice(index, 1)
     })
-    return clone
+
+    if (error.length === 0) {
+      return clone
+    }
+    throw Error(error)
   }
 
   public addLayer(layers: Layer[]): Model {

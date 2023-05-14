@@ -13,9 +13,14 @@ import { ErrorMessage } from '../../common/AlertMessageTypes'
 interface PointEditorProps {
   point: Point
   onDeletePoint: (deletedPoint: Point[]) => void
+  onEditPoint: (existingPoint: Point, newPoint: Point) => void
 }
 
-const PointEditor = ({ point, onDeletePoint }: PointEditorProps) => {
+const PointEditor = ({
+  point,
+  onDeletePoint,
+  onEditPoint,
+}: PointEditorProps) => {
   const { layers } = useContext(ModelContext)
   const throwMessage = useContext(AlertContext)
   const { register, handleSubmit, reset, setValue } = useForm({})
@@ -28,6 +33,27 @@ const PointEditor = ({ point, onDeletePoint }: PointEditorProps) => {
       // Reset form and multiselect
       reset()
       multiSelect.current?.resetSelectedValues()
+    } catch (e: unknown) {
+      throwMessage(
+        new ErrorMessage(
+          e instanceof Error ? e.message : 'Unkown error occured'
+        )
+      )
+    }
+  })
+
+  const editPoint = handleSubmit(data => {
+    try {
+      onEditPoint(
+        point,
+        new Point(
+          data.x,
+          data.y,
+          data.z,
+          data.tag,
+          multiSelect.current?.getSelectedItems()
+        )
+      )
     } catch (e: unknown) {
       throwMessage(
         new ErrorMessage(
@@ -53,8 +79,8 @@ const PointEditor = ({ point, onDeletePoint }: PointEditorProps) => {
         </div>
 
         <div className='pl-3 py-2 w-full'>
-          <button type='submit' className='buttonPrimary'>
-            Apply changes
+          <button type='submit' className='buttonPrimary' onClick={editPoint}>
+            Save changes
           </button>
         </div>
       </form>

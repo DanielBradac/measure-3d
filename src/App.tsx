@@ -74,6 +74,14 @@ const App = () => {
     })
   }
 
+  const onEditPoint = (existingPoint: Point, newPoint: Point) => {
+    setModel((prevModel: Model) => {
+      return runModelChange(prevModel, () =>
+        prevModel.editPoint(existingPoint, newPoint)
+      )
+    })
+  }
+
   const onDeletePoint = (deletedPoints: Point[]) => {
     interactWithElement('clicked', null)
     setModel((prevModel: Model) => {
@@ -196,6 +204,7 @@ const App = () => {
                 <div className='rightSide'>
                   <ControlPanel
                     onAddPoint={onAddPoint}
+                    onEditPoint={onEditPoint}
                     onAddVector={onAddVecor}
                     onDeletePoint={onDeletePoint}
                     alertStack={alertStack}

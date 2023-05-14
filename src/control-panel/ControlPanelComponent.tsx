@@ -15,6 +15,7 @@ interface ControlPanelProps {
   onAddPoint: (newPoint: Point[]) => void
   onAddVector: (newVector: Vector[]) => void
   onDeletePoint: (deletedPoint: Point[]) => void
+  onEditPoint: (existingPoint: Point, newPoint: Point) => void
   alertStack: AlertMessage[]
 }
 
@@ -22,6 +23,7 @@ const ControlPanel = ({
   onAddPoint,
   onAddVector,
   onDeletePoint,
+  onEditPoint,
   alertStack,
 }: ControlPanelProps) => {
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.ADD_ELEMENTS)
@@ -41,7 +43,9 @@ const ControlPanel = ({
         return <Calculator />
       }
       case Tab.EDIT: {
-        return <Editor onDeletePoint={onDeletePoint} />
+        return (
+          <Editor onDeletePoint={onDeletePoint} onEditPoint={onEditPoint} />
+        )
       }
       case Tab.TEST: {
         return <TestComp onAddPoint={onAddPoint} />

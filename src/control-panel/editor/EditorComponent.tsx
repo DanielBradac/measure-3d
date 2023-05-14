@@ -8,9 +8,10 @@ import VectorEditor from './VectorEditor'
 
 interface EditorProps {
   onDeletePoint: (deletedPoint: Point[]) => void
+  onEditPoint: (existingPoint: Point, newPoint: Point) => void
 }
 
-const Editor = ({ onDeletePoint }: EditorProps) => {
+const Editor = ({ onDeletePoint, onEditPoint }: EditorProps) => {
   // Interaction context
   const interactions = useContext(InteractionContext)
 
@@ -26,6 +27,7 @@ const Editor = ({ onDeletePoint }: EditorProps) => {
           <PointEditor
             point={clickedElement as Point}
             onDeletePoint={onDeletePoint}
+            onEditPoint={onEditPoint}
           />
         )
       case Vector:

@@ -1,9 +1,12 @@
-editace
-    výběr elementu k editaci bude kliknutím
-    problém, že při překliku na jiný bod se neresetují vrstvy
+editace se chová divně vzhledem k vrstvám
+    když se oddělají a přidávají layers, tak se tam někdy dostane null do layers bodu
+    je možný, že už to tam není, zkusit
 
-mazání
-    udělat modální okno před mazáním
+problém, že při překliku na jiný bod se neresetují vrstvy
+
+editace vectoru
+    bude tam jenom možnost prohodit from a to
+    bude tam možnost smazat vector
     
 Nápověda
     nápověda bude mít animaci, že se jí změní bg color z none na bílou, aby to při zavření neotravovalo
