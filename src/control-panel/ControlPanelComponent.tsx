@@ -48,7 +48,7 @@ const ControlPanel = ({
         )
       }
       case Tab.TEST: {
-        return <TestComp onAddPoint={onAddPoint} />
+        return <TestComp onAddPoint={onAddPoint} onAddVector={onAddVector} />
       }
       default: {
         return <>Coming soon...</>

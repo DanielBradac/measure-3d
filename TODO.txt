@@ -7,7 +7,10 @@ problém, že při překliku na jiný bod se neresetují vrstvy
 editace vectoru
     bude tam jenom možnost prohodit from a to
     bude tam možnost smazat vector
-    
+
+přidat možnost back a forward
+    model si bude udržovat verze, třeba tak 20 kroků zpět
+
 Nápověda
     nápověda bude mít animaci, že se jí změní bg color z none na bílou, aby to při zavření neotravovalo
     Udělat obsah nápovědy
