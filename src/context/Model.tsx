@@ -144,7 +144,7 @@ export class Model extends Clonable {
       if (index === -1) {
         error += `Vector ${vector.toString()} not found`
       } else {
-        clone.points.splice(index, 1)
+        clone.vectors.splice(index, 1)
       }
     })
 
@@ -152,6 +152,14 @@ export class Model extends Clonable {
       return clone
     }
     throw Error(error)
+  }
+
+  public swapDirection(vector: Vector): Model {
+    console.log(vector)
+    const tempFrom = vector.from
+    vector.from = vector.to
+    vector.to = tempFrom
+    return this.clone() as Model
   }
 
   public addLayer(layers: Layer[]): Model {

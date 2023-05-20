@@ -78,14 +78,14 @@ const PointEditor = ({
           />
         </div>
 
-        <div className='pl-3 py-2 w-full'>
+        <div className='pl-2 py-2 w-full'>
           <button type='submit' className='buttonPrimary' onClick={editPoint}>
             Save changes
           </button>
         </div>
       </form>
 
-      <div className='pl-3 w-full'>
+      <div className='pl-2 w-full'>
         <button className='buttonError' onClick={deletePoint}>
           Delete point
         </button>

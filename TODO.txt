@@ -1,8 +1,10 @@
+nesmí jít smazat point, když k němu existuje nějaký vector
+
 editace se chová divně vzhledem k vrstvám
     když se oddělají a přidávají layers, tak se tam někdy dostane null do layers bodu
     je možný, že už to tam není, zkusit
 
-problém, že při překliku na jiný bod se neresetují vrstvy
+problém, že při překliku na jiný bod se neresetují vrstvy v editoru
 
 editace vectoru
     bude tam jenom možnost prohodit from a to

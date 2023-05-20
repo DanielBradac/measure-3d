@@ -15,6 +15,8 @@ interface ControlPanelProps {
   onAddPoint: (newPoint: Point[]) => void
   onAddVector: (newVector: Vector[]) => void
   onDeletePoint: (deletedPoint: Point[]) => void
+  onDeleteVector: (deletedVector: Vector[]) => void
+  onSwapDirection: (vector: Vector) => void
   onEditPoint: (existingPoint: Point, newPoint: Point) => void
   alertStack: AlertMessage[]
 }
@@ -23,6 +25,8 @@ const ControlPanel = ({
   onAddPoint,
   onAddVector,
   onDeletePoint,
+  onDeleteVector,
+  onSwapDirection,
   onEditPoint,
   alertStack,
 }: ControlPanelProps) => {
@@ -44,7 +48,12 @@ const ControlPanel = ({
       }
       case Tab.EDIT: {
         return (
-          <Editor onDeletePoint={onDeletePoint} onEditPoint={onEditPoint} />
+          <Editor
+            onDeletePoint={onDeletePoint}
+            onEditPoint={onEditPoint}
+            onDeleteVector={onDeleteVector}
+            onSwapDirection={onSwapDirection}
+          />
         )
       }
       case Tab.TEST: {

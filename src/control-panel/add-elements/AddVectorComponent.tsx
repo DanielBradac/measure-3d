@@ -144,7 +144,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
           />
         </div>
 
-        <div className='pl-3 py-4 w-full'>
+        <div className='pl-2 py-4 w-full'>
           <button type='submit' className='buttonPrimary'>
             Add vector
           </button>

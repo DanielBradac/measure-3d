@@ -56,6 +56,6 @@
     @apply mt-5 flex flex-wrap;
   }
   .inputBlock {
-    @apply border-spacing-3;
+    @apply border-spacing-x-2 border-spacing-y-3;
   }
 }

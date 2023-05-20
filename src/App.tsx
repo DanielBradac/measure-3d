@@ -91,6 +91,21 @@ const App = () => {
     })
   }
 
+  const onDeleteVector = (deletedVectors: Vector[]) => {
+    interactWithElement('clicked', null)
+    setModel((prevModel: Model) => {
+      return runModelChange(prevModel, () =>
+        prevModel.removeVectors(deletedVectors)
+      )
+    })
+  }
+
+  const onSwapDirection = (vector: Vector) => {
+    setModel((prevModel: Model) => {
+      return runModelChange(prevModel, () => prevModel.swapDirection(vector))
+    })
+  }
+
   const onAddVecor = (newVector: Vector[]) => {
     setModel((prevModel: Model) => {
       return runModelChange(prevModel, () => prevModel.addVectors(newVector))
@@ -207,6 +222,8 @@ const App = () => {
                     onEditPoint={onEditPoint}
                     onAddVector={onAddVecor}
                     onDeletePoint={onDeletePoint}
+                    onDeleteVector={onDeleteVector}
+                    onSwapDirection={onSwapDirection}
                     alertStack={alertStack}
                   />
                 </div>
