@@ -102,10 +102,24 @@ module.exports = {
                         transform: 'translateY(4px)'
                     }
                 },
-                'tabHover': {
+                'clickPrimaryBg': {
+                    'from': {
+                        backgroundColor: '#2563EB'
+                    },
                     'to': {
-                        //borderColor: '#2563EB',
+                        transform: 'translateY(4px)',
+                        backgroundColor: 'inherit'
+                    }
+                },
+                'toWhite': {
+                    'to': {
                         color: 'white'
+                    }
+                },
+                'bgToPrimary': {
+                    'to': {
+                        // primary
+                        backgroundColor: '#2563EB'
                     }
                 }
 
@@ -115,7 +129,9 @@ module.exports = {
                 'fade-out-up': 'fade-out-up 0.5s forwards',
                 'rotate-180': 'rotate-180 0.7s forwards',
                 'click': 'click 0.2s forwards',
-                'tabHover': 'tabHover 0.6s forwards',
+                'clickPrimaryBg': 'clickPrimaryBg 0.2s forwards',
+                'toWhite': 'toWhite 0.6s forwards',
+                'bgToPrimary': 'bgToPrimary 0.6s forwards',
                 'fade-in': 'fade-in 0.7s forwards',
                 'fade-out': 'fade-out 0.7s forwards'
             }

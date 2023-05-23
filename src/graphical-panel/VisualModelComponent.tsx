@@ -113,7 +113,7 @@ const VisualModel = ({ elements }: VisualModelProps) => {
   // Render
   return (
     <>
-      <div className=''>
+      <div className='w-fit'>
         <label htmlFor='drawer' className='drawer-button'>
           <BsFillGearFill
             className='text-secondary m-2 cursor-pointer hover:animate-rotate-180 active:animate-click'

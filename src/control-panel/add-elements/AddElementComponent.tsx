@@ -3,6 +3,7 @@ import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
 import AddPoint from './AddPointComponent'
 import AddVector from './AddVectorComponent'
+import ModelVersionNavigation from '../../common-components/ModelVersionNavigationComponent'
 
 interface AddElementProps {
   onAddPoint: (newPoint: Point[]) => void
@@ -26,6 +27,10 @@ const AddElement = ({ onAddPoint, onAddVector }: AddElementProps) => {
   // Render
   return (
     <>
+      <div className='pb-5'>
+        <ModelVersionNavigation />
+      </div>
+
       <select
         className='select select-bordered w-full max-w-xs'
         onChange={onChangeElement}

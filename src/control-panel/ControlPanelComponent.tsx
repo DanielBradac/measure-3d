@@ -35,7 +35,7 @@ const ControlPanel = ({
   const getTabClass = (tabIndex: Tab): string => {
     return selectedTab === tabIndex
       ? 'tab tab-active'
-      : 'tab hover:animate-tabHover'
+      : 'tab hover:animate-toWhite'
   }
 
   const getTabContent = (): JSX.Element => {

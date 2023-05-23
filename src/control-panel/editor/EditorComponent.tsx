@@ -5,6 +5,7 @@ import { Point } from '../../data-model/Point'
 import PointEditor from './PointEditor'
 import { Vector } from '../../data-model/Vector'
 import VectorEditor from './VectorEditor'
+import ModelVersionNavigation from '../../common-components/ModelVersionNavigationComponent'
 
 interface EditorProps {
   onDeletePoint: (deletedPoint: Point[]) => void
@@ -51,6 +52,9 @@ const Editor = ({
   // Render
   return (
     <div>
+      <div className='pb-4'>
+        <ModelVersionNavigation />
+      </div>
       <ElementInfo element={interactions.interModel.clicked} />
       <div>{getEditor()}</div>
     </div>
