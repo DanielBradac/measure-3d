@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from 'react'
 import { AlertMessage, ErrorMessage } from './common/AlertMessageTypes'
 import GlobalContextComponent from './context/GlobalContextComponent'
 import InteractionModel from './context/InteractionModel'
-import { Model } from './context/Model'
+import { Model, ModelManager } from './context/Model'
 import Settings from './context/Settings'
 import ControlPanel from './control-panel/ControlPanelComponent'
 import { Drawable } from './data-model/Interfaces'
@@ -10,7 +10,6 @@ import { Layer } from './data-model/Layer'
 import { Point } from './data-model/Point'
 import { Vector } from './data-model/Vector'
 import DrawerPage from './settings-panel/DrawerPageComponent'
-import { getDeafaultModel } from './test-data/TestData'
 import VisualModel from './graphical-panel/VisualModelComponent'
 // eslint-disable-next-line import/namespace
 import { Allotment } from 'allotment'
@@ -19,7 +18,8 @@ import { alertDuration } from './common/GlobalConstants'
 
 const App = () => {
   // Data model - all entities are stored here
-  const [model, setModel] = useState<Model>(getDeafaultModel())
+  //const [model, setModel] = useState<Model>(getDefaultModel())
+  const [model, setModel] = useState<ModelManager>(new ModelManager())
 
   // Interaction model - keeps track of how user interacts with elements (clicks, doubleclicks, etc.)
   const [interModel, setInterModel] = useState<InteractionModel>(
@@ -54,70 +54,63 @@ const App = () => {
     }
   }, [alertStack.length])
 
-  // Change model - exception may occure, so we catch them and put them in alerts
-  const runModelChange = (prevModel: Model, setter: () => Model) => {
+  // Model functions
+  const runModelChangeNew = (setter: () => Model): boolean => {
     try {
-      return setter()
+      const newVersion = setter()
+      model.addVersion(newVersion)
+      setModel(Object.create(model) as ModelManager)
+      return true
     } catch (e: unknown) {
       throwMessage(
         new ErrorMessage(
           e instanceof Error ? e.message : 'Unkown error occured'
         )
       )
-      return prevModel
+      return false
     }
   }
 
+  const onForward = () => {
+    model.forward()
+    setModel(Object.create(model) as ModelManager)
+  }
+
+  const onBackward = () => {
+    model.backward()
+    setModel(Object.create(model) as ModelManager)
+  }
+
   const onAddPoint = (newPoint: Point) => {
-    setModel((prevModel: Model) => {
-      return runModelChange(prevModel, () => prevModel.addPoint(newPoint))
-    })
+    return runModelChangeNew(() => model.currentModel().addPoint(newPoint))
   }
-
+  const onAddVector = (newVector: Vector) => {
+    return runModelChangeNew(() => model.currentModel().addVector(newVector))
+  }
   const onEditPoint = (existingPoint: Point, newPoint: Point) => {
-    setModel((prevModel: Model) => {
-      return runModelChange(prevModel, () =>
-        prevModel.editPoint(existingPoint, newPoint)
-      )
-    })
+    return runModelChangeNew(() =>
+      model.currentModel().editPoint(existingPoint, newPoint)
+    )
   }
-
-  const onDeletePoint = (deletedPoint: Point) => {
+  const onRemovePoint = (removedPoint: Point) => {
     // TODO, tady to být nemůže, protože to nechceme dělat v případě výjimky
     interactWithElement('clicked', null)
-    setModel((prevModel: Model) => {
-      return runModelChange(prevModel, () =>
-        prevModel.removePoint(deletedPoint)
-      )
-    })
+    return runModelChangeNew(() =>
+      model.currentModel().removePoint(removedPoint)
+    )
   }
-
-  const onDeleteVector = (deletedVector: Vector) => {
+  const onRemoveVector = (removedVector: Vector) => {
     // TODO, tady to být nemůže, protože to nechceme dělat v případě výjimky
     interactWithElement('clicked', null)
-    setModel((prevModel: Model) => {
-      return runModelChange(prevModel, () =>
-        prevModel.removeVectors(deletedVector)
-      )
-    })
+    return runModelChangeNew(() =>
+      model.currentModel().removeVector(removedVector)
+    )
   }
-
   const onSwapDirection = (vector: Vector) => {
-    setModel((prevModel: Model) => {
-      return runModelChange(prevModel, () => prevModel.swapDirection(vector))
-    })
+    return runModelChangeNew(() => model.currentModel().swapDirection(vector))
   }
-
-  const onAddVecor = (newVector: Vector) => {
-    setModel((prevModel: Model) => {
-      return runModelChange(prevModel, () => prevModel.addVector(newVector))
-    })
-  }
-
-  const onAddLayer = (newLayer: Layer) => {
-    setModel((prevModel: Model) => {
-      return runModelChange(prevModel, () => prevModel.addLayer(newLayer))
-    })
+  const onRemoveLayer = (layer: Layer) => {
+    return runModelChangeNew(() => model.currentModel().removeLayer(layer))
   }
 
   // Left menu settings
@@ -194,12 +187,23 @@ const App = () => {
   return (
     <GlobalContextComponent
       settingsProv={settings}
-      modelProv={model}
       interactionProv={{
         interact: interactWithElement,
         interModel: interModel,
       }}
       alertProv={throwMessage}
+      modelProv={{
+        model: model.currentModel(),
+        forward: onForward,
+        backward: onBackward,
+        addPoint: onAddPoint,
+        addVector: onAddVector,
+        editPoint: onEditPoint,
+        removePoint: onRemovePoint,
+        removeVector: onRemoveVector,
+        swapDirection: onSwapDirection,
+        removeLayer: onRemoveLayer,
+      }}
     >
       <div className='h-screen w-screen text-black bg-slate-600 font-main text-lg'>
         <DrawerPage
@@ -215,19 +219,11 @@ const App = () => {
           <div className='h-full w-full flex flex-row'>
             <Allotment>
               <Allotment.Pane minSize={500}>
-                <VisualModel elements={[...model.points, ...model.vectors]} />
+                <VisualModel />
               </Allotment.Pane>
               <Allotment.Pane minSize={500}>
                 <div className='rightSide'>
-                  <ControlPanel
-                    onAddPoint={onAddPoint}
-                    onEditPoint={onEditPoint}
-                    onAddVector={onAddVecor}
-                    onDeletePoint={onDeletePoint}
-                    onDeleteVector={onDeleteVector}
-                    onSwapDirection={onSwapDirection}
-                    alertStack={alertStack}
-                  />
+                  <ControlPanel alertStack={alertStack} />
                 </div>
               </Allotment.Pane>
             </Allotment>

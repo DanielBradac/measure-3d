@@ -12,32 +12,27 @@ import { ErrorMessage } from '../../common/AlertMessageTypes'
 
 interface PointEditorProps {
   point: Point
-  onDeletePoint: (deletedPoint: Point) => void
-  onEditPoint: (existingPoint: Point, newPoint: Point) => void
 }
 
-const PointEditor = ({
-  point,
-  onDeletePoint,
-  onEditPoint,
-}: PointEditorProps) => {
-  const { layers } = useContext(ModelContext)
+const PointEditor = ({ point }: PointEditorProps) => {
+  const { removePoint, editPoint, model } = useContext(ModelContext)
+  const { layers } = model
   const throwMessage = useContext(AlertContext)
 
   const { register, handleSubmit, reset, setValue } = useForm({})
   // Multiselect ref - needed for getting data and reseting multiselect
   const multiSelect = useRef<Multiselect>(null)
 
-  const deletePoint = handleSubmit(() => {
-    onDeletePoint(point)
+  const onRemovePoint = handleSubmit(() => {
+    removePoint(point)
     // Reset form and multiselect
     reset()
     multiSelect.current?.resetSelectedValues()
   })
 
-  const editPoint = handleSubmit(data => {
+  const onEditPoint = handleSubmit(data => {
     try {
-      onEditPoint(
+      editPoint(
         point,
         new Point(
           data.x,
@@ -72,14 +67,14 @@ const PointEditor = ({
         </div>
 
         <div className='pl-2 py-2 w-full'>
-          <button type='submit' className='buttonPrimary' onClick={editPoint}>
+          <button type='submit' className='buttonPrimary' onClick={onEditPoint}>
             Save changes
           </button>
         </div>
       </form>
 
       <div className='pl-2 w-full'>
-        <button className='buttonError' onClick={deletePoint}>
+        <button className='buttonError' onClick={onRemovePoint}>
           Delete point
         </button>
       </div>

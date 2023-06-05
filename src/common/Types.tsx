@@ -1,5 +1,9 @@
 import InteractionModel from '../context/InteractionModel'
+import { Model } from '../context/Model'
 import { Drawable } from '../data-model/Interfaces'
+import { Layer } from '../data-model/Layer'
+import { Point } from '../data-model/Point'
+import { Vector } from '../data-model/Vector'
 
 export type SelectOption = {
   value: string | number | readonly string[] | undefined
@@ -9,6 +13,19 @@ export type SelectOption = {
 export type InteractionCtx = {
   interact: (attrName: keyof InteractionModel, value: Drawable | null) => void
   interModel: InteractionModel
+}
+
+export type ModelCtx = {
+  model: Model
+  forward: () => void
+  backward: () => void
+  addPoint: (newPoint: Point) => boolean
+  addVector: (newVector: Vector) => boolean
+  editPoint: (existingPoint: Point, newPoint: Point) => boolean
+  removePoint: (point: Point) => boolean
+  removeVector: (vector: Vector) => boolean
+  swapDirection: (vector: Vector) => boolean
+  removeLayer: (layer: Layer) => boolean
 }
 
 // Number declares position on the tab menu

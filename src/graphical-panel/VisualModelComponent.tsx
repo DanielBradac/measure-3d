@@ -13,17 +13,17 @@ import { BsFillGearFill } from 'react-icons/bs'
 import { Drawable } from '../data-model/Interfaces'
 import {
   InteractionContext,
+  ModelContext,
   SettingsContext,
 } from '../context/GlobalContextComponent'
 
-interface VisualModelProps {
-  elements: Drawable[]
-}
-
-const VisualModel = ({ elements }: VisualModelProps) => {
+const VisualModel = () => {
   // Import context needed for drawing elements, interactions and messages for user
   const settings = useContext(SettingsContext)
   const interactions = useContext(InteractionContext)
+  const { model } = useContext(ModelContext)
+
+  const elements = [...model.points, ...model.vectors]
 
   // Setup orbit controls
   const Controls = () => {

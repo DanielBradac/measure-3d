@@ -1,24 +1,22 @@
 import { useContext } from 'react'
 import { Vector } from '../../data-model/Vector'
-import { AlertContext } from '../../context/GlobalContextComponent'
+import {
+  AlertContext,
+  ModelContext,
+} from '../../context/GlobalContextComponent'
 import { ErrorMessage } from '../../common/AlertMessageTypes'
 
 interface VectortEditorProps {
   vector: Vector
-  onDeleteVector: (deletedPoint: Vector) => void
-  onSwapDirection: (vector: Vector) => void
 }
 
-const VectorEditor = ({
-  vector,
-  onDeleteVector,
-  onSwapDirection,
-}: VectortEditorProps) => {
+const VectorEditor = ({ vector }: VectortEditorProps) => {
+  const { removeVector, swapDirection } = useContext(ModelContext)
   const throwMessage = useContext(AlertContext)
 
-  const deleteVector = () => {
+  const onRemoveVector = () => {
     try {
-      onDeleteVector(vector)
+      removeVector(vector)
     } catch (e: unknown) {
       throwMessage(
         new ErrorMessage(
@@ -35,14 +33,14 @@ const VectorEditor = ({
         <button
           type='submit'
           className='buttonPrimary'
-          onClick={() => onSwapDirection(vector)}
+          onClick={() => swapDirection(vector)}
         >
           Swap direction
         </button>
       </div>
 
       <div className='pl-2 w-full'>
-        <button className='buttonError' onClick={deleteVector}>
+        <button className='buttonError' onClick={onRemoveVector}>
           Delete vector
         </button>
       </div>

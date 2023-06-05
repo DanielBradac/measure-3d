@@ -3,8 +3,6 @@ import AlertBlock from '../common-components/AlertComponent'
 import { AlertMessage } from '../common/AlertMessageTypes'
 import { alertDuration } from '../common/GlobalConstants'
 import { getTabName, Tab } from '../common/Types'
-import { Point } from '../data-model/Point'
-import { Vector } from '../data-model/Vector'
 import AddElement from './add-elements/AddElementComponent'
 import Calculator from './calculator/CalculatorComponent'
 import Editor from './editor/EditorComponent'
@@ -12,24 +10,10 @@ import Hint from './HintComponent'
 import TestComp from './test/TestComponent'
 
 interface ControlPanelProps {
-  onAddPoint: (newPoint: Point) => void
-  onAddVector: (newVector: Vector) => void
-  onDeletePoint: (deletedPoint: Point) => void
-  onDeleteVector: (deletedVector: Vector) => void
-  onSwapDirection: (vector: Vector) => void
-  onEditPoint: (existingPoint: Point, newPoint: Point) => void
   alertStack: AlertMessage[]
 }
 
-const ControlPanel = ({
-  onAddPoint,
-  onAddVector,
-  onDeletePoint,
-  onDeleteVector,
-  onSwapDirection,
-  onEditPoint,
-  alertStack,
-}: ControlPanelProps) => {
+const ControlPanel = ({ alertStack }: ControlPanelProps) => {
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.ADD_ELEMENTS)
 
   const getTabClass = (tabIndex: Tab): string => {
@@ -41,23 +25,16 @@ const ControlPanel = ({
   const getTabContent = (): JSX.Element => {
     switch (selectedTab) {
       case Tab.ADD_ELEMENTS: {
-        return <AddElement onAddPoint={onAddPoint} onAddVector={onAddVector} />
+        return <AddElement />
       }
       case Tab.CALCULATOR: {
         return <Calculator />
       }
       case Tab.EDIT: {
-        return (
-          <Editor
-            onDeletePoint={onDeletePoint}
-            onEditPoint={onEditPoint}
-            onDeleteVector={onDeleteVector}
-            onSwapDirection={onSwapDirection}
-          />
-        )
+        return <Editor />
       }
       case Tab.TEST: {
-        return <TestComp onAddPoint={onAddPoint} onAddVector={onAddVector} />
+        return <TestComp />
       }
       default: {
         return <>Coming soon...</>

@@ -13,12 +13,9 @@ import { Vector } from '../../data-model/Vector'
 import PointForm from '../element-forms/PointForm'
 import { indexOf } from '../../data-model/Interfaces'
 
-interface AddVectorProps {
-  onAddVector: (newVector: Vector) => void
-}
-
-const AddVector = ({ onAddVector }: AddVectorProps) => {
-  const { points, layers, vectors } = useContext(ModelContext)
+const AddVector = () => {
+  const { model, addVector } = useContext(ModelContext)
+  const { points, layers, vectors } = model
   const throwMessage = useContext(AlertContext)
 
   const { register, handleSubmit, setValue, reset } = useForm({})
@@ -34,7 +31,7 @@ const AddVector = ({ onAddVector }: AddVectorProps) => {
   // Create new vector, add it to point's vector set and let parent know
   const createVector = (from: Point, to: Point) => {
     const newVector = new Vector(from, to)
-    onAddVector(newVector)
+    addVector(newVector)
   }
 
   // From point is 'to' point of last added vector by default

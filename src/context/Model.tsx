@@ -2,7 +2,46 @@ import { indexOf } from '../data-model/Interfaces'
 import { Layer } from '../data-model/Layer'
 import { Point } from '../data-model/Point'
 import { Vector } from '../data-model/Vector'
+import { getDefaultModel } from '../test-data/TestData'
 import { Clonable } from './Clonable'
+
+export class ModelManager extends Clonable {
+  constructor(
+    private versions: Model[] = [getDefaultModel()],
+    private currIndex: number = 0,
+    private maxVersions: number = 30
+  ) {
+    super()
+  }
+
+  public currentModel(): Model {
+    return this.versions[this.currIndex]
+  }
+
+  public forward() {
+    if (this.currIndex < this.versions.length - 1) {
+      this.currIndex++
+    }
+  }
+
+  public backward() {
+    if (this.currIndex > 0) {
+      this.currIndex--
+    }
+  }
+
+  public addVersion(newVersion: Model) {
+    if (this.currIndex === this.versions.length - 1) {
+      if (this.versions.length >= this.maxVersions) {
+        this.versions.shift()
+      }
+    } else {
+      this.versions.length = this.currIndex + 1
+    }
+    this.versions = [...this.versions, newVersion]
+    this.currIndex = this.versions.length - 1
+  }
+}
 
 export class Model extends Clonable {
   constructor(
@@ -107,7 +146,7 @@ export class Model extends Clonable {
     return clone
   }
 
-  public removeVectors(vector: Vector): Model {
+  public removeVector(vector: Vector): Model {
     const index = this.vectors.indexOf(vector)
     if (index === -1) {
       throw new Error(`Vector ${vector.toString()} not found`)

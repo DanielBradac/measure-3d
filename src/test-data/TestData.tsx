@@ -1,7 +1,7 @@
 import { Model } from '../context/Model'
 import { Layer } from '../data-model/Layer'
 
-export const getDeafaultModel = () => {
+export const getDefaultModel = () => {
   return new Model(
     [],
     [],

@@ -7,19 +7,7 @@ import { Vector } from '../../data-model/Vector'
 import VectorEditor from './VectorEditor'
 import ModelVersionNavigation from '../../common-components/ModelVersionNavigationComponent'
 
-interface EditorProps {
-  onDeletePoint: (deletedPoint: Point) => void
-  onDeleteVector: (deletedVector: Vector) => void
-  onEditPoint: (existingPoint: Point, newPoint: Point) => void
-  onSwapDirection: (vector: Vector) => void
-}
-
-const Editor = ({
-  onDeletePoint,
-  onEditPoint,
-  onDeleteVector,
-  onSwapDirection,
-}: EditorProps) => {
+const Editor = () => {
   // Interaction context
   const interactions = useContext(InteractionContext)
 
@@ -31,21 +19,9 @@ const Editor = ({
 
     switch (clickedElement.constructor) {
       case Point:
-        return (
-          <PointEditor
-            point={clickedElement as Point}
-            onDeletePoint={onDeletePoint}
-            onEditPoint={onEditPoint}
-          />
-        )
+        return <PointEditor point={clickedElement as Point} />
       case Vector:
-        return (
-          <VectorEditor
-            vector={clickedElement as Vector}
-            onDeleteVector={onDeleteVector}
-            onSwapDirection={onSwapDirection}
-          />
-        )
+        return <VectorEditor vector={clickedElement as Vector} />
     }
   }
 

@@ -4,26 +4,21 @@ import { indexOf } from '../../data-model/Interfaces'
 import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
 
-interface TestCompProps {
-  onAddPoint: (newPoint: Point) => void
-  onAddVector: (newVector: Vector) => void
-}
-
-const TestComp = ({ onAddPoint, onAddVector }: TestCompProps) => {
-  const { layers, points } = useContext(ModelContext)
+const TestComp = () => {
+  const { addPoint, addVector, model } = useContext(ModelContext)
+  const { layers, points } = model
 
   const generateRandomPoints = () => {
-    for (let x = 0; x < 10; x++) {
-      const newPoint = new Point(
-        Math.floor(Math.random() * 20),
-        Math.floor(Math.random() * 20),
-        Math.floor(Math.random() * 20),
-        x.toString(),
-        [layers[0]]
-      )
-      if (indexOf(points, newPoint) === -1) {
-        onAddPoint(newPoint)
-      }
+    const newPoint = new Point(
+      Math.floor(Math.random() * 20),
+      Math.floor(Math.random() * 20),
+      Math.floor(Math.random() * 20),
+      Math.floor(Math.random() * 2000).toString(),
+      [layers[0]]
+    )
+
+    if (indexOf(points, newPoint) === -1) {
+      addPoint(newPoint)
     }
   }
 
@@ -32,7 +27,7 @@ const TestComp = ({ onAddPoint, onAddVector }: TestCompProps) => {
       return
     }
     const firstInx = Math.floor(Math.random() * (points.length - 1)) + 1
-    onAddVector(new Vector(points[firstInx], points[firstInx - 1]))
+    addVector(new Vector(points[firstInx], points[firstInx - 1]))
   }
 
   // Render
@@ -43,7 +38,7 @@ const TestComp = ({ onAddPoint, onAddVector }: TestCompProps) => {
         className='buttonPrimary'
         onClick={generateRandomPoints}
       >
-        10 random points
+        Random point
       </button>
 
       <button

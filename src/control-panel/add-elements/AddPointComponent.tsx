@@ -10,12 +10,9 @@ import {
 } from '../../context/GlobalContextComponent'
 import PointForm from '../element-forms/PointForm'
 
-interface AddPointProps {
-  onAddPoint: (newPoint: Point) => void
-}
-
-const AddPoint = ({ onAddPoint }: AddPointProps) => {
-  const { layers } = useContext(ModelContext)
+const AddPoint = () => {
+  const { addPoint, model } = useContext(ModelContext)
+  const { layers } = model
   const throwMessage = useContext(AlertContext)
 
   const { register, handleSubmit, reset, setValue } = useForm({})
@@ -23,9 +20,9 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
   // Multiselect ref - needed for getting data and reseting multiselect
   const multiSelect = useRef<Multiselect>(null)
 
-  const addPoint = handleSubmit(data => {
+  const onAddPoint = handleSubmit(data => {
     try {
-      onAddPoint(
+      addPoint(
         new Point(
           Number(data.x),
           Number(data.y),
@@ -49,7 +46,7 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
   // Render
   return (
     <form
-      onSubmit={addPoint}
+      onSubmit={onAddPoint}
       className='inputForm'
       onKeyDown={e => prevEnterSub(e)}
     >
