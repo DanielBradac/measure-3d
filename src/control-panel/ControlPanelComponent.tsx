@@ -12,10 +12,10 @@ import Hint from './HintComponent'
 import TestComp from './test/TestComponent'
 
 interface ControlPanelProps {
-  onAddPoint: (newPoint: Point[]) => void
-  onAddVector: (newVector: Vector[]) => void
-  onDeletePoint: (deletedPoint: Point[]) => void
-  onDeleteVector: (deletedVector: Vector[]) => void
+  onAddPoint: (newPoint: Point) => void
+  onAddVector: (newVector: Vector) => void
+  onDeletePoint: (deletedPoint: Point) => void
+  onDeleteVector: (deletedVector: Vector) => void
   onSwapDirection: (vector: Vector) => void
   onEditPoint: (existingPoint: Point, newPoint: Point) => void
   alertStack: AlertMessage[]

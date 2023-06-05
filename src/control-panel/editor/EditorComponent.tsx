@@ -8,8 +8,8 @@ import VectorEditor from './VectorEditor'
 import ModelVersionNavigation from '../../common-components/ModelVersionNavigationComponent'
 
 interface EditorProps {
-  onDeletePoint: (deletedPoint: Point[]) => void
-  onDeleteVector: (deletedVector: Vector[]) => void
+  onDeletePoint: (deletedPoint: Point) => void
+  onDeleteVector: (deletedVector: Vector) => void
   onEditPoint: (existingPoint: Point, newPoint: Point) => void
   onSwapDirection: (vector: Vector) => void
 }

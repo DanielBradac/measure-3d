@@ -12,7 +12,7 @@ import { ErrorMessage } from '../../common/AlertMessageTypes'
 
 interface PointEditorProps {
   point: Point
-  onDeletePoint: (deletedPoint: Point[]) => void
+  onDeletePoint: (deletedPoint: Point) => void
   onEditPoint: (existingPoint: Point, newPoint: Point) => void
 }
 
@@ -23,23 +23,16 @@ const PointEditor = ({
 }: PointEditorProps) => {
   const { layers } = useContext(ModelContext)
   const throwMessage = useContext(AlertContext)
+
   const { register, handleSubmit, reset, setValue } = useForm({})
   // Multiselect ref - needed for getting data and reseting multiselect
   const multiSelect = useRef<Multiselect>(null)
 
   const deletePoint = handleSubmit(() => {
-    try {
-      onDeletePoint([point])
-      // Reset form and multiselect
-      reset()
-      multiSelect.current?.resetSelectedValues()
-    } catch (e: unknown) {
-      throwMessage(
-        new ErrorMessage(
-          e instanceof Error ? e.message : 'Unkown error occured'
-        )
-      )
-    }
+    onDeletePoint(point)
+    // Reset form and multiselect
+    reset()
+    multiSelect.current?.resetSelectedValues()
   })
 
   const editPoint = handleSubmit(data => {

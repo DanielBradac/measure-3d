@@ -7,7 +7,7 @@ export type SelectOption = {
 }
 
 export type InteractionCtx = {
-  interact: (attrName: keyof InteractionModel, value: Drawable) => void
+  interact: (attrName: keyof InteractionModel, value: Drawable | null) => void
   interModel: InteractionModel
 }
 

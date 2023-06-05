@@ -12,7 +12,7 @@ export const ModelContext = createContext(new Model())
 export const InteractionContext = createContext<InteractionCtx>({
   // We provide a function to record interacion with element and model to check the record
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interact: (attrName: keyof InteractionModel, value: Drawable) => {},
+  interact: (attrName: keyof InteractionModel, value: Drawable | null) => {},
   interModel: new InteractionModel(),
 })
 export const AlertContext = createContext(

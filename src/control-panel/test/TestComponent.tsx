@@ -5,15 +5,14 @@ import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
 
 interface TestCompProps {
-  onAddPoint: (newPoint: Point[]) => void
-  onAddVector: (newVector: Vector[]) => void
+  onAddPoint: (newPoint: Point) => void
+  onAddVector: (newVector: Vector) => void
 }
 
 const TestComp = ({ onAddPoint, onAddVector }: TestCompProps) => {
   const { layers, points } = useContext(ModelContext)
 
   const generateRandomPoints = () => {
-    const newPoints: Point[] = []
     for (let x = 0; x < 10; x++) {
       const newPoint = new Point(
         Math.floor(Math.random() * 20),
@@ -23,10 +22,9 @@ const TestComp = ({ onAddPoint, onAddVector }: TestCompProps) => {
         [layers[0]]
       )
       if (indexOf(points, newPoint) === -1) {
-        newPoints.push(newPoint)
+        onAddPoint(newPoint)
       }
     }
-    onAddPoint(newPoints)
   }
 
   const generateRandomVector = () => {
@@ -34,7 +32,7 @@ const TestComp = ({ onAddPoint, onAddVector }: TestCompProps) => {
       return
     }
     const firstInx = Math.floor(Math.random() * (points.length - 1)) + 1
-    onAddVector([new Vector(points[firstInx], points[firstInx - 1])])
+    onAddVector(new Vector(points[firstInx], points[firstInx - 1]))
   }
 
   // Render

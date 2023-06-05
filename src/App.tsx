@@ -68,9 +68,9 @@ const App = () => {
     }
   }
 
-  const onAddPoint = (newPoints: Point[]) => {
+  const onAddPoint = (newPoint: Point) => {
     setModel((prevModel: Model) => {
-      return runModelChange(prevModel, () => prevModel.addPoints(newPoints))
+      return runModelChange(prevModel, () => prevModel.addPoint(newPoint))
     })
   }
 
@@ -82,20 +82,22 @@ const App = () => {
     })
   }
 
-  const onDeletePoint = (deletedPoints: Point[]) => {
+  const onDeletePoint = (deletedPoint: Point) => {
+    // TODO, tady to být nemůže, protože to nechceme dělat v případě výjimky
     interactWithElement('clicked', null)
     setModel((prevModel: Model) => {
       return runModelChange(prevModel, () =>
-        prevModel.removePoints(deletedPoints)
+        prevModel.removePoint(deletedPoint)
       )
     })
   }
 
-  const onDeleteVector = (deletedVectors: Vector[]) => {
+  const onDeleteVector = (deletedVector: Vector) => {
+    // TODO, tady to být nemůže, protože to nechceme dělat v případě výjimky
     interactWithElement('clicked', null)
     setModel((prevModel: Model) => {
       return runModelChange(prevModel, () =>
-        prevModel.removeVectors(deletedVectors)
+        prevModel.removeVectors(deletedVector)
       )
     })
   }
@@ -106,13 +108,13 @@ const App = () => {
     })
   }
 
-  const onAddVecor = (newVector: Vector[]) => {
+  const onAddVecor = (newVector: Vector) => {
     setModel((prevModel: Model) => {
-      return runModelChange(prevModel, () => prevModel.addVectors(newVector))
+      return runModelChange(prevModel, () => prevModel.addVector(newVector))
     })
   }
 
-  const onAddLayer = (newLayer: Layer[]) => {
+  const onAddLayer = (newLayer: Layer) => {
     setModel((prevModel: Model) => {
       return runModelChange(prevModel, () => prevModel.addLayer(newLayer))
     })

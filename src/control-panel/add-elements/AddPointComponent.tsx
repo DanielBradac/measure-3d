@@ -11,7 +11,7 @@ import {
 import PointForm from '../element-forms/PointForm'
 
 interface AddPointProps {
-  onAddPoint: (newPoint: Point[]) => void
+  onAddPoint: (newPoint: Point) => void
 }
 
 const AddPoint = ({ onAddPoint }: AddPointProps) => {
@@ -25,15 +25,15 @@ const AddPoint = ({ onAddPoint }: AddPointProps) => {
 
   const addPoint = handleSubmit(data => {
     try {
-      onAddPoint([
+      onAddPoint(
         new Point(
           Number(data.x),
           Number(data.y),
           Number(data.z),
           data.tag,
           multiSelect.current?.getSelectedItems()
-        ),
-      ])
+        )
+      )
       // Reset form and multiselect
       reset()
       multiSelect.current?.resetSelectedValues()

@@ -5,7 +5,7 @@ import { ErrorMessage } from '../../common/AlertMessageTypes'
 
 interface VectortEditorProps {
   vector: Vector
-  onDeleteVector: (deletedPoint: Vector[]) => void
+  onDeleteVector: (deletedPoint: Vector) => void
   onSwapDirection: (vector: Vector) => void
 }
 
@@ -18,7 +18,7 @@ const VectorEditor = ({
 
   const deleteVector = () => {
     try {
-      onDeleteVector([vector])
+      onDeleteVector(vector)
     } catch (e: unknown) {
       throwMessage(
         new ErrorMessage(

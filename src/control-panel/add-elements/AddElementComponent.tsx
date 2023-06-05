@@ -6,8 +6,8 @@ import AddVector from './AddVectorComponent'
 import ModelVersionNavigation from '../../common-components/ModelVersionNavigationComponent'
 
 interface AddElementProps {
-  onAddPoint: (newPoint: Point[]) => void
-  onAddVector: (newVector: Vector[]) => void
+  onAddPoint: (newPoint: Point) => void
+  onAddVector: (newVector: Vector) => void
 }
 
 const AddElement = ({ onAddPoint, onAddVector }: AddElementProps) => {

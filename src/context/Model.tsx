@@ -25,71 +25,53 @@ export class Model extends Clonable {
     return this._layers
   }
 
-  // All methods work with arrays to avoid as much cloning as possible
-
-  public addPoints(points: Point[]): Model {
-    let error = ''
-    const newPoints: Point[] = []
-    points.forEach(point => {
-      const index = indexOf(this.points, point)
-      if (index === -1) {
-        newPoints.push(point)
-      } else {
-        error += `\n Point ${this.points[index]} already exists!`
-      }
-    })
-
-    if (error.length === 0) {
-      const clone = this.clone() as Model
-      clone._points = [...clone._points, ...newPoints]
-      return clone
+  public addPoint(point: Point): Model {
+    const index = indexOf(this.points, point)
+    if (index !== -1) {
+      throw new Error(`Point ${this.points[index]} already exists!`)
     }
-    throw Error(error)
+
+    const clone = this.clone() as Model
+    clone._points = [...clone._points, point]
+    return clone
   }
 
   public editPoint(existingPoint: Point, newPoint: Point): Model {
-    let error = ''
-    this.points.forEach(point => {
+    for (const point of this.points) {
       if (
         point.compareTo(newPoint) === 0 &&
         point.compareTo(existingPoint) !== 0
       ) {
-        error += `Coordinates already occupied by: ${point}`
+        throw new Error(`Coordinates already occupied by: ${point}`)
       }
-    })
-
-    if (error.length === 0) {
-      existingPoint.x = newPoint.x
-      existingPoint.y = newPoint.y
-      existingPoint.z = newPoint.z
-      existingPoint.layers = newPoint.layers
-      existingPoint.tag = newPoint.tag
-      return this.clone() as Model
     }
 
-    throw Error(error)
+    existingPoint.x = newPoint.x
+    existingPoint.y = newPoint.y
+    existingPoint.z = newPoint.z
+    existingPoint.layers = newPoint.layers
+    existingPoint.tag = newPoint.tag
+    return this.clone() as Model
   }
 
-  public removePoints(points: Point[]): Model {
-    const clone = this.clone() as Model
-    let error = ''
-    points.forEach(point => {
-      const index = clone.points.indexOf(point)
-      if (index === -1) {
-        error += `Point ${point.toString()} not found`
-      } else {
-        clone.points.splice(index, 1)
-      }
-    })
-
-    if (error.length === 0) {
-      return clone
+  public removePoint(point: Point): Model {
+    const index = this.points.indexOf(point)
+    if (index === -1) {
+      throw Error(`Point ${point.toString()} not found`)
     }
-    throw Error(error)
+    for (const vector of this.vectors) {
+      if (vector.from === point || vector.to === point) {
+        throw Error(`Point ${point.toString()} is part of a vector`)
+      }
+    }
+
+    const clone = this.clone() as Model
+    clone.points.splice(index, 1)
+    return clone
   }
 
   // Add new points if we don't already have them, replace with existing points otherwise
-  private modifyVectorPoints(vector: Vector): Vector {
+  private fillInVectorPoints(vector: Vector): Vector {
     const fromIndex = indexOf(this.points, vector.from)
     if (fromIndex === -1) {
       this._points.push(vector.from)
@@ -107,85 +89,61 @@ export class Model extends Clonable {
     return vector
   }
 
-  public addVectors(vectors: Vector[]): Model {
-    let error = ''
-    const newVectors: Vector[] = []
-
-    vectors.forEach(vector => {
-      if (vector.from.compareTo(vector.to) === 0) {
-        error += `\n Vector ${vector.toString()} cannot have two same points!`
-      } else {
-        const index = indexOf(this.vectors, vector)
-        if (index === -1) {
-          // First we add points - if they don't exist already
-          vector = this.modifyVectorPoints(vector)
-          // Then we add vector
-          newVectors.push(vector)
-        } else {
-          error += `\n Vector ${this.vectors[index]} already exists!`
-        }
-      }
-    })
-
-    if (error.length === 0) {
-      const clone = this.clone() as Model
-      clone._vectors = [...clone._vectors, ...newVectors]
-      return clone
+  public addVector(vector: Vector): Model {
+    if (vector.from.compareTo(vector.to) === 0) {
+      throw new Error(
+        `Vector ${vector.toString()} cannot have two same points!`
+      )
     }
-    throw Error(error)
+
+    const index = indexOf(this.vectors, vector)
+    if (index !== -1) {
+      throw new Error(`Vector ${this.vectors[index]} already exists!`)
+    }
+
+    const clone = this.clone() as Model
+    // First we add points - if they don't exist already, then we add vector
+    clone._vectors = [...clone._vectors, this.fillInVectorPoints(vector)]
+    return clone
   }
 
-  public removeVectors(vectors: Vector[]): Model {
-    const clone = this.clone() as Model
-    let error = ''
-
-    vectors.forEach(vector => {
-      const index = clone.vectors.indexOf(vector)
-      if (index === -1) {
-        error += `Vector ${vector.toString()} not found`
-      } else {
-        clone.vectors.splice(index, 1)
-      }
-    })
-
-    if (error.length === 0) {
-      return clone
+  public removeVectors(vector: Vector): Model {
+    const index = this.vectors.indexOf(vector)
+    if (index === -1) {
+      throw new Error(`Vector ${vector.toString()} not found`)
     }
-    throw Error(error)
+
+    const clone = this.clone() as Model
+    clone.vectors.splice(index, 1)
+    return clone
   }
 
   public swapDirection(vector: Vector): Model {
-    console.log(vector)
     const tempFrom = vector.from
     vector.from = vector.to
     vector.to = tempFrom
     return this.clone() as Model
   }
 
-  public addLayer(layers: Layer[]): Model {
-    let error = ''
-    const newLayers: Layer[] = []
-
-    layers.forEach(layer => {
-      const index = indexOf(this.layers, layer)
-      if (index === -1) {
-        newLayers.push(layer)
-      } else {
-        error += `\n Layer ${this.layers[index]} already exists!`
-      }
-    })
-
-    if (error.length === 0) {
-      const clone = this.clone() as Model
-      clone._layers = [...clone._layers, ...newLayers]
-      return clone
+  public addLayer(layer: Layer): Model {
+    const index = indexOf(this.layers, layer)
+    if (index !== -1) {
+      throw new Error(`Layer ${this.layers[index]} already exists!`)
     }
-    throw Error(error)
+
+    const clone = this.clone() as Model
+    clone._layers = [...clone._layers, layer]
+    return clone
   }
 
-  public removeLayer(layers: Layer[]): Model {
+  public removeLayer(layer: Layer): Model {
+    const index = this.layers.indexOf(layer)
+    if (index === -1) {
+      throw new Error(`Layer ${layer.toString()} not found`)
+    }
+
     const clone = this.clone() as Model
-    layers.forEach(layer => clone._layers.filter(item => item !== layer))
+    clone.layers.splice(index, 1)
     return clone
   }
 }

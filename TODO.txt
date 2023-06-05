@@ -1,4 +1,6 @@
-nesmí jít smazat point, když k němu existuje nějaký vector
+redesign error handelingu
+    většina throwMessage je zbytečná, protože se to chytí už v runModelChange - oddělat, otestovat
+    potřebujeme způsob, kterým budeme v child komponentách detekovat jestli ke změně modelu došlo něbo ne a podle toho resetovat fromuláře, zrušit kliknutí, atd..
 
 editace se chová divně vzhledem k vrstvám
     když se oddělají a přidávají layers, tak se tam někdy dostane null do layers bodu
