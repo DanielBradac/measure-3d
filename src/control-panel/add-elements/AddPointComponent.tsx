@@ -3,17 +3,12 @@ import { useForm } from 'react-hook-form'
 import { Point } from '../../data-model/Point'
 import { prevEnterSub } from '../../common/FormFunctions'
 import Multiselect from 'multiselect-react-dropdown'
-import { ErrorMessage } from '../../common/AlertMessageTypes'
-import {
-  AlertContext,
-  ModelContext,
-} from '../../context/GlobalContextComponent'
+import { ModelContext } from '../../context/GlobalContextComponent'
 import PointForm from '../element-forms/PointForm'
 
 const AddPoint = () => {
   const { addPoint, model } = useContext(ModelContext)
   const { layers } = model
-  const throwMessage = useContext(AlertContext)
 
   const { register, handleSubmit, reset, setValue } = useForm({})
 
@@ -21,26 +16,18 @@ const AddPoint = () => {
   const multiSelect = useRef<Multiselect>(null)
 
   const onAddPoint = handleSubmit(data => {
-    try {
-      addPoint(
-        new Point(
-          Number(data.x),
-          Number(data.y),
-          Number(data.z),
-          data.tag,
-          multiSelect.current?.getSelectedItems()
-        )
+    addPoint(
+      new Point(
+        Number(data.x),
+        Number(data.y),
+        Number(data.z),
+        data.tag,
+        multiSelect.current?.getSelectedItems()
       )
-      // Reset form and multiselect
-      reset()
-      multiSelect.current?.resetSelectedValues()
-    } catch (e: unknown) {
-      throwMessage(
-        new ErrorMessage(
-          e instanceof Error ? e.message : 'Unkown error occured'
-        )
-      )
-    }
+    )
+    // Reset form and multiselect
+    reset()
+    multiSelect.current?.resetSelectedValues()
   })
 
   // Render

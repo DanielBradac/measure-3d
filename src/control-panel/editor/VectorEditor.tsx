@@ -1,10 +1,6 @@
 import { useContext } from 'react'
 import { Vector } from '../../data-model/Vector'
-import {
-  AlertContext,
-  ModelContext,
-} from '../../context/GlobalContextComponent'
-import { ErrorMessage } from '../../common/AlertMessageTypes'
+import { ModelContext } from '../../context/GlobalContextComponent'
 
 interface VectortEditorProps {
   vector: Vector
@@ -12,18 +8,9 @@ interface VectortEditorProps {
 
 const VectorEditor = ({ vector }: VectortEditorProps) => {
   const { removeVector, swapDirection } = useContext(ModelContext)
-  const throwMessage = useContext(AlertContext)
 
   const onRemoveVector = () => {
-    try {
-      removeVector(vector)
-    } catch (e: unknown) {
-      throwMessage(
-        new ErrorMessage(
-          e instanceof Error ? e.message : 'Unkown error occured'
-        )
-      )
-    }
+    removeVector(vector)
   }
 
   // Render

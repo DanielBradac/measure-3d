@@ -38,7 +38,6 @@ export class ModelManager {
     }
     this.versions = [...this.versions, newVersion]
     this.currIndex = this.versions.length - 1
-    console.log(this.versions)
   }
 }
 

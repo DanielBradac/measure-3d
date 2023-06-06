@@ -1,14 +1,10 @@
 import { useContext, useRef } from 'react'
 import { Point } from '../../data-model/Point'
 import PointForm from '../element-forms/PointForm'
-import {
-  AlertContext,
-  ModelContext,
-} from '../../context/GlobalContextComponent'
+import { ModelContext } from '../../context/GlobalContextComponent'
 import { useForm } from 'react-hook-form'
 import Multiselect from 'multiselect-react-dropdown'
 import { prevEnterSub } from '../../common/FormFunctions'
-import { ErrorMessage } from '../../common/AlertMessageTypes'
 
 interface PointEditorProps {
   point: Point
@@ -17,7 +13,6 @@ interface PointEditorProps {
 const PointEditor = ({ point }: PointEditorProps) => {
   const { removePoint, editPoint, model } = useContext(ModelContext)
   const { layers } = model
-  const throwMessage = useContext(AlertContext)
 
   const { register, handleSubmit, reset, setValue } = useForm({})
   // Multiselect ref - needed for getting data and reseting multiselect
@@ -31,24 +26,16 @@ const PointEditor = ({ point }: PointEditorProps) => {
   })
 
   const onEditPoint = handleSubmit(data => {
-    try {
-      editPoint(
-        point,
-        new Point(
-          data.x,
-          data.y,
-          data.z,
-          data.tag,
-          multiSelect.current?.getSelectedItems()
-        )
+    editPoint(
+      point,
+      new Point(
+        data.x,
+        data.y,
+        data.z,
+        data.tag,
+        multiSelect.current?.getSelectedItems()
       )
-    } catch (e: unknown) {
-      throwMessage(
-        new ErrorMessage(
-          e instanceof Error ? e.message : 'Unkown error occured'
-        )
-      )
-    }
+    )
   })
 
   // Render

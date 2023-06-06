@@ -1,13 +1,9 @@
 import Multiselect from 'multiselect-react-dropdown'
 import { ChangeEvent, useContext, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { ErrorMessage } from '../../common/AlertMessageTypes'
 import { prevEnterSub } from '../../common/FormFunctions'
 import { getPointSelection } from '../../common/Selections'
-import {
-  AlertContext,
-  ModelContext,
-} from '../../context/GlobalContextComponent'
+import { ModelContext } from '../../context/GlobalContextComponent'
 import { Point } from '../../data-model/Point'
 import { Vector } from '../../data-model/Vector'
 import PointForm from '../element-forms/PointForm'
@@ -16,7 +12,6 @@ import { indexOf } from '../../data-model/Interfaces'
 const AddVector = () => {
   const { model, addVector } = useContext(ModelContext)
   const { points, layers, vectors } = model
-  const throwMessage = useContext(AlertContext)
 
   const { register, handleSubmit, setValue, reset } = useForm({})
 
@@ -44,47 +39,39 @@ const AddVector = () => {
 
   // Vector submitted
   const submitVector = handleSubmit(data => {
-    try {
-      const from =
-        // Do we have selected existing points or a new ones?
-        data.pointFrom === 'new'
-          ? new Point(
-              // There must be a conversion tu number, because otherwise it passes string and typescript is for some reason ok with it
-              Number(data.xFrom),
-              Number(data.yFrom),
-              Number(data.zFrom),
-              data.tagFrom,
-              multiSelectFrom.current?.getSelectedItems()
-            )
-          : points[parseInt(data.pointFrom)]
+    const from =
+      // Do we have selected existing points or a new ones?
+      data.pointFrom === 'new'
+        ? new Point(
+            // There must be a conversion tu number, because otherwise it passes string and typescript is for some reason ok with it
+            Number(data.xFrom),
+            Number(data.yFrom),
+            Number(data.zFrom),
+            data.tagFrom,
+            multiSelectFrom.current?.getSelectedItems()
+          )
+        : points[parseInt(data.pointFrom)]
 
-      const to =
-        data.pointTo === 'new'
-          ? new Point(
-              Number(data.xTo),
-              Number(data.yTo),
-              Number(data.zTo),
-              data.tagTo,
-              multiSelectTo.current?.getSelectedItems()
-            )
-          : points[parseInt(data.pointTo)]
+    const to =
+      data.pointTo === 'new'
+        ? new Point(
+            Number(data.xTo),
+            Number(data.yTo),
+            Number(data.zTo),
+            data.tagTo,
+            multiSelectTo.current?.getSelectedItems()
+          )
+        : points[parseInt(data.pointTo)]
 
-      // Create new Vector
-      createVector(from, to)
+    // Create new Vector
+    createVector(from, to)
 
-      // Reset the form
-      reset()
-      setFromSelect('new')
-      setToSelect('new')
-      multiSelectFrom.current?.resetSelectedValues()
-      multiSelectTo.current?.resetSelectedValues()
-    } catch (e: unknown) {
-      throwMessage(
-        new ErrorMessage(
-          e instanceof Error ? e.message : 'Unkown error occured'
-        )
-      )
-    }
+    // Reset the form
+    reset()
+    setFromSelect('new')
+    setToSelect('new')
+    multiSelectFrom.current?.resetSelectedValues()
+    multiSelectTo.current?.resetSelectedValues()
   })
 
   // Render

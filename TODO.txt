@@ -8,7 +8,6 @@ delete a swap direction rozbíjí verzování
     verzování bude muset dělat deep copy, protože když něco vymažu, tak to vymažu i z těch ostatních verzí
 
 redesign error handelingu
-    většina throwMessage je zbytečná, protože se to chytí už v runModelChange - oddělat, otestovat
     potřebujeme způsob, kterým budeme v child komponentách detekovat jestli ke změně modelu došlo něbo ne a podle toho resetovat fromuláře, zrušit kliknutí, atd..
         způsob už máme, mělo by to vracet boolean, jen se to musí zapojit, aby to s tím booleanem pracovalo
 
