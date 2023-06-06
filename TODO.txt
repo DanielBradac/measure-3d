@@ -1,6 +1,12 @@
+přejít na vite.js
+
+delete a swap direction rozbíjí verzování
+    verzování bude muset dělat deep copy, protože když něco vymažu, tak to vymažu i z těch ostatních verzí
+
 redesign error handelingu
     většina throwMessage je zbytečná, protože se to chytí už v runModelChange - oddělat, otestovat
     potřebujeme způsob, kterým budeme v child komponentách detekovat jestli ke změně modelu došlo něbo ne a podle toho resetovat fromuláře, zrušit kliknutí, atd..
+        způsob už máme, mělo by to vracet boolean, jen se to musí zapojit, aby to s tím booleanem pracovalo
 
 editace se chová divně vzhledem k vrstvám
     když se oddělají a přidávají layers, tak se tam někdy dostane null do layers bodu
@@ -8,22 +14,15 @@ editace se chová divně vzhledem k vrstvám
 
 problém, že při překliku na jiný bod se neresetují vrstvy v editoru
 
-editace vectoru
-    bude tam jenom možnost prohodit from a to
-    bude tam možnost smazat vector
-
-přidat možnost back a forward
-    model si bude udržovat verze, třeba tak 20 kroků zpět
+chrome na mě řve, že nemámam labely ve formulářích - asi by bylo fajn ty formuláře udělat s nějakým hezčím designem a s html labely
 
 Nápověda
     nápověda bude mít animaci, že se jí změní bg color z none na bílou, aby to při zavření neotravovalo
     Udělat obsah nápovědy
 
-Point tagy resetují velikost při např. submitu nového vektoru a způsobují problikávání
+Point tagy resetují velikost při např. submitu nového vektoru, způsobují problikávání a obecně jsou náročné na výkon
     asi bude potřeba jiná componenta pro tagy? 
         mohla by pomoct komponenta Text a billboard
-
-Udělat si nějaký testovací tlačítka na vytvoření testovacích objektů
 
 redesign zakládání vektorů
     body mezi kterými se bude dělat vektor se budou moct vybírat klikáním
