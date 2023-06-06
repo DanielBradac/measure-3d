@@ -1,5 +1,3 @@
-import { Clonable } from './Clonable'
-
 export default class Settings {
   constructor(
     private _axisToggled: boolean = true,

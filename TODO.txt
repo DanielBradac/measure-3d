@@ -1,11 +1,6 @@
-implementovat deep clone funkce u modelu
-    zkontrolovat implementace
-    často tam, kde se používá .clone() by stačila shallow copy
+když se vytváří vektor z nových bodů, taK to rozbije verzování
 
 přejít na vite.js
-
-delete a swap direction rozbíjí verzování
-    verzování bude muset dělat deep copy, protože když něco vymažu, tak to vymažu i z těch ostatních verzí
 
 redesign error handelingu
     potřebujeme způsob, kterým budeme v child komponentách detekovat jestli ke změně modelu došlo něbo ne a podle toho resetovat fromuláře, zrušit kliknutí, atd..
