@@ -1,7 +1,12 @@
+import { Clonable } from '../context/Clonable'
 import { Comparable } from './Interfaces'
 
-export class Layer implements Comparable {
+export class Layer implements Comparable, Clonable {
   constructor(private _name: string, private _color: string) {}
+
+  clone(): Clonable {
+    return new Layer(this._name, this._color)
+  }
 
   compareTo(other: Layer): number {
     if (!(other instanceof Layer)) {

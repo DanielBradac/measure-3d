@@ -5,14 +5,12 @@ import { Vector } from '../data-model/Vector'
 import { getDefaultModel } from '../test-data/TestData'
 import { Clonable } from './Clonable'
 
-export class ModelManager extends Clonable {
+export class ModelManager {
   constructor(
     private versions: Model[] = [getDefaultModel()],
     private currIndex: number = 0,
     private maxVersions: number = 30
-  ) {
-    super()
-  }
+  ) {}
 
   public currentModel(): Model {
     return this.versions[this.currIndex]
@@ -40,16 +38,23 @@ export class ModelManager extends Clonable {
     }
     this.versions = [...this.versions, newVersion]
     this.currIndex = this.versions.length - 1
+    console.log(this.versions)
   }
 }
 
-export class Model extends Clonable {
+export class Model implements Clonable {
   constructor(
     private _points: Point[] = [],
     private _vectors: Vector[] = [],
     private _layers: Layer[] = []
-  ) {
-    super()
+  ) {}
+
+  clone(): Clonable {
+    return new Model(
+      this._points.map(p => p.clone() as Point),
+      this._vectors.map(v => v.clone() as Vector),
+      this._layers.map(l => l.clone() as Layer)
+    )
   }
 
   public get points(): Point[] {
@@ -69,10 +74,9 @@ export class Model extends Clonable {
     if (index !== -1) {
       throw new Error(`Point ${this.points[index]} already exists!`)
     }
-
-    const clone = this.clone() as Model
-    clone._points = [...clone._points, point]
-    return clone
+    const newVersion = this.clone() as Model
+    newVersion._points = [...newVersion._points, point]
+    return newVersion
   }
 
   public editPoint(existingPoint: Point, newPoint: Point): Model {
@@ -85,12 +89,16 @@ export class Model extends Clonable {
       }
     }
 
-    existingPoint.x = newPoint.x
-    existingPoint.y = newPoint.y
-    existingPoint.z = newPoint.z
-    existingPoint.layers = newPoint.layers
-    existingPoint.tag = newPoint.tag
-    return this.clone() as Model
+    const newVersion = this.clone() as Model
+    const pointToChange =
+      newVersion.points[indexOf(newVersion.points, existingPoint)]
+
+    pointToChange.x = newPoint.x
+    pointToChange.y = newPoint.y
+    pointToChange.z = newPoint.z
+    pointToChange.layers = newPoint.layers
+    pointToChange.tag = newPoint.tag
+    return newVersion
   }
 
   public removePoint(point: Point): Model {
@@ -104,9 +112,9 @@ export class Model extends Clonable {
       }
     }
 
-    const clone = this.clone() as Model
-    clone.points.splice(index, 1)
-    return clone
+    const newVersion = this.clone() as Model
+    newVersion.points.splice(index, 1)
+    return newVersion
   }
 
   // Add new points if we don't already have them, replace with existing points otherwise
@@ -140,10 +148,13 @@ export class Model extends Clonable {
       throw new Error(`Vector ${this.vectors[index]} already exists!`)
     }
 
-    const clone = this.clone() as Model
+    const newVersion = this.clone() as Model
     // First we add points - if they don't exist already, then we add vector
-    clone._vectors = [...clone._vectors, this.fillInVectorPoints(vector)]
-    return clone
+    newVersion._vectors = [
+      ...newVersion._vectors,
+      this.fillInVectorPoints(vector),
+    ]
+    return newVersion
   }
 
   public removeVector(vector: Vector): Model {
@@ -152,16 +163,19 @@ export class Model extends Clonable {
       throw new Error(`Vector ${vector.toString()} not found`)
     }
 
-    const clone = this.clone() as Model
-    clone.vectors.splice(index, 1)
-    return clone
+    const newVersion = this.clone() as Model
+    newVersion.vectors.splice(index, 1)
+    return newVersion
   }
 
   public swapDirection(vector: Vector): Model {
-    const tempFrom = vector.from
-    vector.from = vector.to
-    vector.to = tempFrom
-    return this.clone() as Model
+    const newVersion = this.clone() as Model
+    const vectorToChange =
+      newVersion.vectors[indexOf(newVersion.vectors, vector)]
+    const tempFrom = vectorToChange.from
+    vectorToChange.from = vectorToChange.to
+    vectorToChange.to = tempFrom
+    return newVersion
   }
 
   public addLayer(layer: Layer): Model {
@@ -170,9 +184,9 @@ export class Model extends Clonable {
       throw new Error(`Layer ${this.layers[index]} already exists!`)
     }
 
-    const clone = this.clone() as Model
-    clone._layers = [...clone._layers, layer]
-    return clone
+    const newVersion = this.clone() as Model
+    newVersion._layers = [...newVersion._layers, layer]
+    return newVersion
   }
 
   public removeLayer(layer: Layer): Model {
@@ -181,8 +195,8 @@ export class Model extends Clonable {
       throw new Error(`Layer ${layer.toString()} not found`)
     }
 
-    const clone = this.clone() as Model
-    clone.layers.splice(index, 1)
-    return clone
+    const newVersion = this.clone() as Model
+    newVersion.layers.splice(index, 1)
+    return newVersion
   }
 }

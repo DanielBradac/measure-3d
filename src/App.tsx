@@ -18,7 +18,6 @@ import { alertDuration } from './common/GlobalConstants'
 
 const App = () => {
   // Data model - all entities are stored here
-  //const [model, setModel] = useState<Model>(getDefaultModel())
   const [model, setModel] = useState<ModelManager>(new ModelManager())
 
   // Interaction model - keeps track of how user interacts with elements (clicks, doubleclicks, etc.)
@@ -55,10 +54,11 @@ const App = () => {
   }, [alertStack.length])
 
   // Model functions
-  const runModelChangeNew = (setter: () => Model): boolean => {
+  const runModelChange = (setter: () => Model): boolean => {
     try {
       const newVersion = setter()
       model.addVersion(newVersion)
+      // Shallow copy is enough here
       setModel(Object.create(model) as ModelManager)
       return true
     } catch (e: unknown) {
@@ -82,35 +82,33 @@ const App = () => {
   }
 
   const onAddPoint = (newPoint: Point) => {
-    return runModelChangeNew(() => model.currentModel().addPoint(newPoint))
+    return runModelChange(() => model.currentModel().addPoint(newPoint))
   }
   const onAddVector = (newVector: Vector) => {
-    return runModelChangeNew(() => model.currentModel().addVector(newVector))
+    return runModelChange(() => model.currentModel().addVector(newVector))
   }
   const onEditPoint = (existingPoint: Point, newPoint: Point) => {
-    return runModelChangeNew(() =>
+    return runModelChange(() =>
       model.currentModel().editPoint(existingPoint, newPoint)
     )
   }
   const onRemovePoint = (removedPoint: Point) => {
     // TODO, tady to být nemůže, protože to nechceme dělat v případě výjimky
     interactWithElement('clicked', null)
-    return runModelChangeNew(() =>
-      model.currentModel().removePoint(removedPoint)
-    )
+    return runModelChange(() => model.currentModel().removePoint(removedPoint))
   }
   const onRemoveVector = (removedVector: Vector) => {
     // TODO, tady to být nemůže, protože to nechceme dělat v případě výjimky
     interactWithElement('clicked', null)
-    return runModelChangeNew(() =>
+    return runModelChange(() =>
       model.currentModel().removeVector(removedVector)
     )
   }
   const onSwapDirection = (vector: Vector) => {
-    return runModelChangeNew(() => model.currentModel().swapDirection(vector))
+    return runModelChange(() => model.currentModel().swapDirection(vector))
   }
   const onRemoveLayer = (layer: Layer) => {
-    return runModelChangeNew(() => model.currentModel().removeLayer(layer))
+    return runModelChange(() => model.currentModel().removeLayer(layer))
   }
 
   // Left menu settings

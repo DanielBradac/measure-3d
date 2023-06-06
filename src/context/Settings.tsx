@@ -1,6 +1,6 @@
 import { Clonable } from './Clonable'
 
-export default class Settings extends Clonable {
+export default class Settings implements Clonable {
   constructor(
     private _axisToggled: boolean = true,
     private _axisSize: number = 3,
@@ -10,8 +10,19 @@ export default class Settings extends Clonable {
     private _pointSize: number = 0.05,
     private _arrowsToggled: boolean = true,
     private _arrowSize: number = 5
-  ) {
-    super()
+  ) {}
+
+  clone(): Clonable {
+    return new Settings(
+      this._axisToggled,
+      this._axisSize,
+      this._pointTagsToggled,
+      this._pointTagsSize,
+      this._pointsToggled,
+      this._pointSize,
+      this._arrowsToggled,
+      this._arrowSize
+    )
   }
 
   // Updates need to clone, because it needs to rerender the component on change

@@ -1,16 +1,21 @@
 import { InteractionCtx } from '../common/Types'
+import { Clonable } from '../context/Clonable'
 import Settings from '../context/Settings'
 import VectorComp from '../graphical-panel/VectorComponent'
 import { Comparable, Drawable } from './Interfaces'
 import { Layer } from './Layer'
 import { Point } from './Point'
 
-export class Vector implements Drawable, Comparable {
+export class Vector implements Drawable, Comparable, Clonable {
   constructor(
     private _from: Point,
     private _to: Point,
     private _color: string | null = null
   ) {}
+
+  clone(): Clonable {
+    return new Vector(this._from, this._to, this._color)
+  }
 
   compareTo(other: Comparable): number {
     if (!(other instanceof Vector)) {

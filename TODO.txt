@@ -1,3 +1,7 @@
+implementovat deep clone funkce u modelu
+    zkontrolovat implementace
+    často tam, kde se používá .clone() by stačila shallow copy
+
 přejít na vite.js
 
 delete a swap direction rozbíjí verzování

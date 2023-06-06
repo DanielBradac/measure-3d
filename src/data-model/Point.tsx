@@ -1,10 +1,11 @@
 import { InteractionCtx } from '../common/Types'
+import { Clonable } from '../context/Clonable'
 import Settings from '../context/Settings'
 import PointComp from '../graphical-panel/PointComponent'
 import { Comparable, Drawable } from './Interfaces'
 import { Layer } from './Layer'
 
-export class Point implements Drawable, Comparable {
+export class Point implements Drawable, Comparable, Clonable {
   constructor(
     private _x: number,
     private _y: number,
@@ -16,6 +17,17 @@ export class Point implements Drawable, Comparable {
     if (_layers.length === 0) {
       throw Error('Point must have at least one layer!')
     }
+  }
+
+  clone(): Clonable {
+    return new Point(
+      this._x,
+      this._y,
+      this._z,
+      this._tag,
+      this._layers,
+      this._color
+    )
   }
 
   compareTo(other: Comparable): number {

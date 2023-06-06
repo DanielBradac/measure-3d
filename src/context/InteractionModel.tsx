@@ -1,9 +1,11 @@
 import { Drawable } from '../data-model/Interfaces'
 import { Clonable } from './Clonable'
 
-export default class InteractionModel extends Clonable {
-  constructor(private _clicked: Drawable | null = null) {
-    super()
+export default class InteractionModel implements Clonable {
+  constructor(private _clicked: Drawable | null = null) {}
+
+  clone(): Clonable {
+    return new InteractionModel(this._clicked)
   }
 
   // Updates need to clone, because it needs to rerender the component on change
