@@ -1,18 +1,13 @@
 import { Drawable } from '../data-model/Interfaces'
-import { Clonable } from './Clonable'
 
-export default class InteractionModel implements Clonable {
+export default class InteractionModel {
   constructor(private _clicked: Drawable | null = null) {}
-
-  clone(): Clonable {
-    return new InteractionModel(this._clicked)
-  }
 
   // Updates need to clone, because it needs to rerender the component on change
   update(interactionType: keyof InteractionModel, element: Drawable | null) {
-    const clone = this.clone() as InteractionModel
-    clone[interactionType] = element as never
-    return clone
+    this[interactionType] = element as never
+    // Shallow copy is enough here
+    return Object.create(this) as InteractionModel
   }
 
   // Getters and setters
