@@ -151,7 +151,7 @@ export class Model implements Clonable {
     // First we add points - if they don't exist already, then we add vector
     newVersion._vectors = [
       ...newVersion._vectors,
-      this.fillInVectorPoints(vector),
+      newVersion.fillInVectorPoints(vector),
     ]
     return newVersion
   }
