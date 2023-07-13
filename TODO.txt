@@ -2,6 +2,8 @@ když se vytváří vektor z nových bodů, taK to rozbije verzování
 
 přejít na vite.js
 
+zajímavý state management framework - jotai
+
 redesign error handelingu
     potřebujeme způsob, kterým budeme v child komponentách detekovat jestli ke změně modelu došlo něbo ne a podle toho resetovat fromuláře, zrušit kliknutí, atd..
         způsob už máme, mělo by to vracet boolean, jen se to musí zapojit, aby to s tím booleanem pracovalo
